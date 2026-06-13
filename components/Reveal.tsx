@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
@@ -9,6 +9,16 @@ type Props = {
 } & Omit<HTMLMotionProps<"div">, "children" | "className">;
 
 export function Reveal({ children, className, delay = 0, ...rest }: Props) {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return (
+      <div className={className} {...(rest as React.HTMLAttributes<HTMLDivElement>)}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 32 }}

@@ -6,7 +6,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="border-border-subtle border-t py-28 sm:py-36"
+      className="border-border-subtle scroll-mt-[4.25rem] border-t py-28 sm:py-36"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro

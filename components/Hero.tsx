@@ -1,9 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/lib/content";
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const motionProps = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 16 },
+        animate: { opacity: 1, y: 0 },
+      };
+
   return (
     <section
       id="top"
@@ -15,16 +23,14 @@ export function Hero() {
       />
       <div className="relative z-[1] mx-auto w-full max-w-6xl px-5 sm:px-8">
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...motionProps}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-accent mb-5 text-[11px] font-semibold tracking-[0.28em] uppercase"
         >
           Full-stack · Software engineering
         </motion.p>
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...(reduceMotion ? {} : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 } })}
           transition={{ duration: 0.55, delay: 0.18 }}
           className="text-text-primary max-w-4xl text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.06] font-extrabold tracking-[-0.02em]"
         >
@@ -34,24 +40,21 @@ export function Hero() {
           </span>
         </motion.h1>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...(reduceMotion ? {} : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } })}
           transition={{ duration: 0.55, delay: 0.28 }}
-          className="text-text-muted mt-7 max-w-2xl text-lg leading-relaxed sm:text-xl"
+          className="text-text-primary/90 mt-7 max-w-2xl text-lg leading-relaxed font-medium sm:text-xl"
         >
           {site.role}
         </motion.p>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...(reduceMotion ? {} : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } })}
           transition={{ duration: 0.55, delay: 0.36 }}
-          className="text-text-muted/95 mt-5 max-w-2xl text-base leading-[1.7] sm:text-[1.0625rem]"
+          className="text-text-muted mt-4 max-w-2xl text-base leading-[1.7] sm:text-[1.0625rem]"
         >
           {site.tagline}
         </motion.p>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...(reduceMotion ? {} : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } })}
           transition={{ duration: 0.55, delay: 0.44 }}
           className="mt-8 flex flex-wrap gap-2"
         >
@@ -63,38 +66,44 @@ export function Hero() {
           </span>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...(reduceMotion ? {} : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } })}
           transition={{ duration: 0.55, delay: 0.52 }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <a
             href="#contact"
-            className="bg-accent text-bg-deep focus-visible:ring-accent/50 rounded-xl px-7 py-3.5 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98]"
+            className="bg-accent text-bg-deep focus-visible:ring-accent/50 inline-flex min-h-11 items-center rounded-xl px-7 py-3.5 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98]"
           >
             Get in touch
           </a>
           <a
             href="#journey"
-            className="text-text-muted hover:text-accent text-sm font-semibold tracking-wide underline-offset-[6px] transition-colors hover:underline"
+            className="text-text-muted hover:text-accent inline-flex min-h-11 items-center text-sm font-semibold tracking-wide underline-offset-[6px] transition-colors hover:underline"
           >
             View journey →
           </a>
         </motion.div>
       </div>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={reduceMotion ? false : { opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 z-[1] hidden -translate-x-1/2 sm:block"
+        className="absolute bottom-8 left-1/2 z-[1] -translate-x-1/2"
         aria-hidden
       >
-        <div className="border-border-highlight flex h-10 w-6 justify-center rounded-full border pt-2">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="bg-accent h-2 w-1 rounded-full"
-          />
+        <p className="text-text-muted mb-2 text-center text-[10px] tracking-[0.2em] uppercase sm:sr-only">
+          Scroll
+        </p>
+        <div className="border-border-highlight mx-auto flex h-8 w-5 justify-center rounded-full border pt-1.5 sm:h-10 sm:w-6 sm:pt-2">
+          {reduceMotion ? (
+            <div className="bg-accent h-2 w-1 rounded-full" />
+          ) : (
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="bg-accent h-2 w-1 rounded-full"
+            />
+          )}
         </div>
       </motion.div>
     </section>

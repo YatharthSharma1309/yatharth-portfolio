@@ -6,7 +6,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="border-border-subtle relative overflow-hidden border-t py-28 sm:py-36"
+      className="border-border-subtle scroll-mt-[4.25rem] relative overflow-hidden border-t py-28 sm:py-36"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-35"
@@ -26,7 +26,7 @@ export function ContactSection() {
           <div className="mt-12 flex flex-col flex-wrap gap-4 sm:flex-row sm:items-center">
             <a
               href={`mailto:${site.email}`}
-              className="bg-accent text-bg-deep focus-visible:ring-accent/50 w-fit rounded-xl px-8 py-4 text-center text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98]"
+              className="bg-accent text-bg-deep focus-visible:ring-accent/50 w-full rounded-xl px-8 py-4 text-center text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98] sm:w-fit"
             >
               {site.email}
             </a>
@@ -34,7 +34,7 @@ export function ContactSection() {
               href={site.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-fit rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors"
+              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
             >
               Connect on LinkedIn
             </a>
@@ -42,7 +42,7 @@ export function ContactSection() {
               href={site.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-fit rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors"
+              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
             >
               GitHub
             </a>

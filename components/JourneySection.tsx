@@ -6,7 +6,7 @@ export function JourneySection() {
   return (
     <section
       id="journey"
-      className="border-border-subtle relative border-t py-28 sm:py-36"
+      className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-28 sm:py-36"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
