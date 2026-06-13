@@ -378,7 +378,7 @@ Copy [`.env.example`](.env.example) to `.env.local` in the project root (never c
 
 **Vercel production setup:**
 
-1. Push the repo to GitHub (`YatharthSharma1309/Site`)
+1. Push the repo to GitHub (`YatharthSharma1309/yatharth-portfolio`)
 2. Import the project on [vercel.com](https://vercel.com) → connect the `Site` repository
 3. **Settings → Environment Variables** → add `OPENROUTER_API_KEY` (same value as local) for **Production** and **Preview**
 4. Optionally set `NEXT_PUBLIC_SITE_URL` to your custom domain (e.g. `https://yoursite.vercel.app`)
