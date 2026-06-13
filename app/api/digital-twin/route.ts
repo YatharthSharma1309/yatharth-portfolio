@@ -4,6 +4,7 @@ import {
   education,
   journey,
   linkedInProfileSnapshot,
+  portfolioLinks,
   site,
   skillGroups,
 } from "@/lib/content";
@@ -13,9 +14,44 @@ type ChatMessage = {
   content: string;
 };
 
+const RATE_LIMIT_MAX = 20;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function getSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (fromEnv) return fromEnv.replace(/\/$/, "");
+  const vercel = process.env.VERCEL_URL?.trim();
+  if (vercel) return `https://${vercel}`;
+  return "http://localhost:3000";
+}
+
+function getClientIp(request: Request): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    request.headers.get("x-real-ip") ??
+    "unknown"
+  );
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitStore.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  if (entry.count >= RATE_LIMIT_MAX) return true;
+  entry.count += 1;
+  return false;
+}
+
 const CAREER_CONTEXT = `
 Name: ${site.name}
 Role: ${site.role}
+Availability: ${site.availability}
+Current employment: Not in a full-time role. ${site.availability}
+Most recent role: Software Engineer Trainee at Whilter.AI (Dec 2025 — Jun 2026, ended).
 Location: ${site.location}
 Email: ${site.email}
 LinkedIn: ${site.linkedin}
@@ -40,6 +76,15 @@ ${journey
   )
   .join("\n")}
 
+Portfolio projects:
+${portfolioLinks
+  .map(
+    (p) =>
+      `- ${p.title} (${p.status}): ${p.description}` +
+      (p.href !== "#" ? ` | Link: ${p.href}` : "")
+  )
+  .join("\n")}
+
 Education:
 ${education
   .map((e) => `- ${e.degree} at ${e.school} (${e.period})`)
@@ -61,6 +106,8 @@ You are Yatharth Sharma's "Digital Twin" for a portfolio website chat.
 Answer questions about his career, skills, projects, learning journey, and background.
 Rules:
 - Be accurate and grounded in the provided context.
+- Yatharth is NOT currently employed at Whilter.AI; that trainee role ended Jun 2026. He is open to full-time software engineering roles.
+- When asked about current role or employment, state his availability and professional focus — do not say he currently works at Whilter.AI.
 - If information is not available, clearly say that and suggest asking Yatharth directly.
 - Do not invent companies, achievements, or timelines.
 - If an item is only a title (for example LinkedIn achievement names), do not expand it with guessed descriptions.
@@ -70,6 +117,14 @@ Rules:
 
 export async function POST(request: Request) {
   try {
+    const clientIp = getClientIp(request);
+    if (isRateLimited(clientIp)) {
+      return Response.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const apiKey = process.env.OpenRouter_API_KEY ?? process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
       return Response.json(
@@ -100,7 +155,7 @@ export async function POST(request: Request) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": getSiteUrl(),
         "X-Title": `${site.name} Portfolio Digital Twin`,
       },
       body: JSON.stringify({

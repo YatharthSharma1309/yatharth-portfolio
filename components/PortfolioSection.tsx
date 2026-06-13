@@ -13,8 +13,8 @@ export function PortfolioSection() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Portfolio"
-          title="Work samples — staging next"
-          description="Curated case studies and builds will land here. Links below are wired for future updates; add your real repos and case study URLs when ready."
+          title="Selected builds"
+          description="Full-stack and AI products I've designed and built end-to-end — from RAG support platforms to multi-tenant CRMs. Source linked on each card where available."
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
@@ -25,7 +25,9 @@ export function PortfolioSection() {
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 onClick={
-                  item.href === "#" || item.status === "Coming soon"
+                  item.href === "#" ||
+                  item.status === "Coming soon" ||
+                  item.status === "Private"
                     ? (e) => e.preventDefault()
                     : undefined
                 }
@@ -47,8 +49,21 @@ export function PortfolioSection() {
                       ? "Configure link →"
                       : item.status === "Profile"
                         ? "View profile →"
-                        : "Open →"}
+                        : item.status === "Private"
+                          ? "Private project →"
+                          : "Open →"}
                 </span>
+                {item.demoUrl ? (
+                  <a
+                    href={item.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-text-muted hover:text-accent mt-2 text-xs font-medium underline-offset-2 hover:underline"
+                  >
+                    Live demo →
+                  </a>
+                ) : null}
               </a>
             </Reveal>
           ))}

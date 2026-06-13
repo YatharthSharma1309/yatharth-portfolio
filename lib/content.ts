@@ -2,7 +2,8 @@ export const site = {
   name: "Yatharth Sharma",
   role: "Software Engineer · Full-Stack & UI",
   tagline:
-    "Building precise, engaging web experiences — from design systems to production React. I ship across the full stack: REST API routes, LLM integrations, and backend services alongside polished, accessible UIs.",
+    "Building precise, engaging web experiences — from design systems to production React. Full-stack focused: REST API routes, LLM integrations, and backend services alongside polished, accessible UIs.",
+  availability: "Open to full-time software engineering roles",
   location: "Faridabad, Haryana, India",
   email: "yatharthsharma1309@gmail.com",
   linkedin: "https://www.linkedin.com/in/yatharth-sharma-32a1a1200",
@@ -11,7 +12,7 @@ export const site = {
 
 export const aboutParagraphs = [
   "I am a full-stack-leaning software engineer focused on shipping exceptional digital experiences: performance, accessibility, and craft at every layer.",
-  "My day-to-day stack is React, TypeScript, Next.js (App Router + API Routes), and Node.js. I build responsive, fast UIs and the backend services that power them — REST endpoints, request validation, LLM integrations — so I own more of the vertical slice and need fewer hand-offs between layers.",
+  "My stack centers on React, TypeScript, Next.js (App Router + API Routes), and Node.js. I build responsive, fast UIs and the backend services that power them — REST endpoints, request validation, LLM integrations — so I can own more of the vertical slice with fewer hand-offs between layers.",
   "I translate Figma into code with Tailwind CSS, Styled Components, and Framer Motion. I care about user-centered design, clean state management (Redux, Context), and interfaces that are beautiful, intuitive, and inclusive.",
 ];
 
@@ -38,7 +39,7 @@ export const skillGroups = {
 
 export const linkedInProfileSnapshot = {
   headline:
-    "Software Engineer — full-stack-leaning, shipping React/TypeScript UIs and backend REST APIs in production.",
+    "Software Engineer — full-stack-leaning; React/TypeScript UIs, REST APIs, and LLM integrations.",
   about:
     "Strong work ethic, adaptability, and interpersonal collaboration. Comfortable working independently across the stack — from UI components to API endpoints — learning quickly, and delivering end-to-end features.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
@@ -57,15 +58,14 @@ export type JourneyItem = {
 
 export const journey: JourneyItem[] = [
   {
-    title: "Software Engineer",
+    title: "Software Engineer Trainee",
     org: "Whilter.AI",
-    period: "Dec 2025 — Present",
+    period: "Dec 2025 — Jun 2026",
     location: "Gurugram, Haryana",
-    current: true,
     description: [
-      "Shipping production front-end features — React, TypeScript, component systems — in a fast-moving AI product environment.",
-      "Contributing to backend API development: building and maintaining REST endpoints, integrating third-party and LLM services.",
-      "Owning full-stack feature slices end-to-end, from UI through API contracts to data layer.",
+      "Shipped production front-end features — React, TypeScript, component systems — in a fast-moving AI product environment.",
+      "Built and maintained REST endpoints and integrated third-party and LLM services on the backend.",
+      "Owned full-stack feature slices end-to-end, from UI through API contracts to the data layer.",
     ],
   },
   {
@@ -124,32 +124,65 @@ export type PortfolioLink = {
   title: string;
   description: string;
   href: string;
-  status: "Coming soon" | "Add URL" | "Profile" | "Live";
+  status: "Coming soon" | "Add URL" | "Profile" | "Live" | "Private";
   external?: boolean;
+  demoUrl?: string;
 };
 
 export const portfolioLinks: PortfolioLink[] = [
   {
-    title: "Personal Portfolio & AI Digital Twin",
+    title: "AI Sales Assistant CRM",
     description:
-      "Full-stack Next.js portfolio site featuring an AI-powered chat interface (Digital Twin) that answers as me — built with TypeScript, Tailwind CSS, Framer Motion, and OpenRouter LLM API integration via server-side API routes.",
-    href: site.github,
-    status: "Live" as const,
+      "Multi-tenant B2B CRM with lead scoring, drag-and-drop pipeline, activity timelines, and AI-drafted follow-ups — plus OAuth integrations for HubSpot, Salesforce, Google Calendar, and Gmail. Monorepo: React SPA, Express API, Prisma, JWT auth with refresh rotation.",
+    href: "https://github.com/YatharthSharma1309/ai-sales-assistant-crm",
+    status: "Live",
     external: true,
   },
   {
-    title: "Case studies",
+    title: "SupportAI — Customer Support Platform",
     description:
-      "Deep dives into product work, metrics, and technical decisions.",
+      "Portfolio-grade support stack: document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget. Next.js 16, Prisma, PostgreSQL, OpenRouter.",
     href: "#",
-    status: "Coming soon" as const,
+    status: "Coming soon",
+  },
+  {
+    title: "RecruitAI — Smart Recruitment Assistant",
+    description:
+      "Recruiter dashboard for resume screening: upload PDF/DOCX, extract skills, score candidates against a job description, surface gaps, and generate interview questions. Next.js, Prisma, SQLite/Supabase, OpenRouter.",
+    href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
+    status: "Live",
+    external: true,
+  },
+  {
+    title: "TermLens",
+    description:
+      "Legal-tech SaaS that explains Terms, Privacy, and Refund policies in plain English with risk scores and clause flags. Monorepo: FastAPI backend, Chrome/Firefox extension, Tauri desktop app, Razorpay billing, team accounts. Source is private — code not publicly shareable.",
+    href: "https://github.com/YatharthSharma1309/TermLens",
+    status: "Private",
+    external: true,
+  },
+  {
+    title: "Teleport AI",
+    description:
+      "Upload a photo and composite yourself onto a Google Street View scene — background removed server-side via Remove.bg. Django + DRF backend; React Native (Expo) mobile client with draggable cutout overlay.",
+    href: "https://github.com/YatharthSharma1309/Teleport.AI",
+    status: "Live",
+    external: true,
+  },
+  {
+    title: "Arena Deathmatch",
+    description:
+      "Browser-based 3D first-person arena shooter — waves, dual weapons, minimap, difficulty tiers, and persistent high scores. Pure HTML/CSS/JS, no install required.",
+    href: "https://github.com/YatharthSharma1309/arena-deathmatch",
+    status: "Live",
+    external: true,
   },
   {
     title: "GitHub",
     description:
       "Repositories, forks, and experiments — code and activity in one place.",
     href: site.github,
-    status: "Profile" as const,
+    status: "Profile",
     external: true,
   },
 ];

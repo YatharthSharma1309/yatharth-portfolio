@@ -10,7 +10,7 @@ type ChatMessage = {
 };
 
 const STARTER_QUESTIONS = [
-  "What is your current role and focus?",
+  "What did you work on at Whilter.AI?",
   "How has your journey evolved from analytics to engineering?",
   "Which backend skills are you currently learning?",
 ];
@@ -20,7 +20,7 @@ export function DigitalTwinSection() {
     {
       role: "assistant",
       content:
-        "Hi, I am Yatharth's Digital Twin. Ask me about his career journey, skills, current role, or what he is learning next.",
+        "Hi, I am Yatharth's Digital Twin. Ask me about his career journey, Whilter.AI experience, skills, or what he is learning next.",
     },
   ]);
   const [input, setInput] = useState("");

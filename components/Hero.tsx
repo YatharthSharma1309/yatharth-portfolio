@@ -20,7 +20,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-accent mb-5 text-[11px] font-semibold tracking-[0.28em] uppercase"
         >
-          Front-end · UI engineering
+          Full-stack · Software engineering
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
@@ -59,7 +59,7 @@ export function Hero() {
             {site.location}
           </span>
           <span className="border-accent/25 text-text-primary/90 rounded-full border border-dashed bg-accent/[0.05] px-4 py-2 text-[11px] font-medium tracking-wide">
-            Also studying: APIs · SQL · server-side basics
+            {site.availability}
           </span>
         </motion.div>
         <motion.div

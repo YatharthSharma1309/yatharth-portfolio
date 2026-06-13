@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   site,
   journey,
@@ -55,7 +56,7 @@ export default function ResumePage() {
             alignItems: "center",
           }}
         >
-          <a
+          <Link
             href="/"
             style={{
               color: "#555",
@@ -65,7 +66,7 @@ export default function ResumePage() {
             }}
           >
             ← Back to site
-          </a>
+          </Link>
           <PrintButton />
         </div>
 

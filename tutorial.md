@@ -64,7 +64,7 @@ Site/
 │   └── content.ts         # Your text data: site info, journey, skills, LinkedIn snapshot
 ├── package.json           # Dependencies and npm scripts
 ├── next.config.ts         # Next.js configuration
-└── .env                   # Secrets (NOT committed to git): API keys, optional profile text
+└── .env.local             # Secrets (NOT committed): API keys, optional profile text — see .env.example
 ```
 
 **Beginner mental model:**
@@ -361,8 +361,30 @@ export async function POST(request: Request) {
 
 **Environment variables you should know:**
 
-- `OpenRouter_API_KEY` or `OPENROUTER_API_KEY` — required for chat.
-- `LINKEDIN_PROFILE_FULL_TEXT` — optional paste of a fuller LinkedIn profile for richer answers.
+Copy [`.env.example`](.env.example) to `.env.local` in the project root (never commit `.env.local`).
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `OPENROUTER_API_KEY` | Yes | OpenRouter API key for Digital Twin chat ([openrouter.ai/keys](https://openrouter.ai/keys)) |
+| `NEXT_PUBLIC_SITE_URL` | No | Public site URL for OpenRouter `HTTP-Referer` (auto-detected on Vercel via `VERCEL_URL` if unset) |
+| `LINKEDIN_PROFILE_FULL_TEXT` | No | Paste your full LinkedIn About/experience **text** — not a profile URL |
+
+**Local setup:**
+
+1. Copy `.env.example` → `.env.local`
+2. Set `OPENROUTER_API_KEY=sk-or-v1-...`
+3. Restart `npm run dev` after any `.env.local` change
+4. Test chat on the homepage `#digital-twin` section
+
+**Vercel production setup:**
+
+1. Push the repo to GitHub (`YatharthSharma1309/Site`)
+2. Import the project on [vercel.com](https://vercel.com) → connect the `Site` repository
+3. **Settings → Environment Variables** → add `OPENROUTER_API_KEY` (same value as local) for **Production** and **Preview**
+4. Optionally set `NEXT_PUBLIC_SITE_URL` to your custom domain (e.g. `https://yoursite.vercel.app`)
+5. Redeploy after adding env vars
+
+The API route also applies per-IP rate limiting (20 requests/hour) and includes portfolio projects in the AI context automatically from `lib/content.ts`.
 
 ---
 

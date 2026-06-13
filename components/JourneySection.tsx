@@ -12,7 +12,7 @@ export function JourneySection() {
         <SectionIntro
           eyebrow="Career journey"
           title="From analytics to engineering"
-          description="A path shaped by data literacy, internship grit, and a move into full-time software engineering — always with the user in frame."
+          description="A path shaped by data literacy, internship grit, and hands-on production engineering at an AI startup — always with the user in frame."
         />
 
         <div className="relative mt-20 max-w-3xl">
