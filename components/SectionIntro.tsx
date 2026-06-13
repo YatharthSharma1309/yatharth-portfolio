@@ -21,7 +21,7 @@ export function SectionIntro({
             className="from-accent h-px w-10 shrink-0 bg-gradient-to-r to-transparent"
             aria-hidden
           />
-          <p className="text-accent text-[11px] font-semibold tracking-[0.22em] uppercase">
+          <p className="font-mono text-accent text-[11px] font-semibold tracking-[0.22em] uppercase">
             {eyebrow}
           </p>
         </div>

@@ -1,18 +1,20 @@
 export const site = {
   name: "Yatharth Sharma",
-  role: "Software Engineer · Full-Stack & UI",
+  role: "AI-Focused Full-Stack Developer",
   tagline:
-    "Building precise, engaging web experiences — from design systems to production React. Full-stack focused: REST API routes, LLM integrations, and backend services alongside polished, accessible UIs.",
+    "Building intelligent web applications — OCR pipelines, RAG systems, and scalable APIs with React, TypeScript, Node.js, and Python. Full-stack focused: REST endpoints, LLM integrations, and polished, accessible UIs.",
   availability: "Open to full-time software engineering roles",
   location: "Faridabad, Haryana, India",
   email: "yatharthsharma1309@gmail.com",
+  phone: "+91 8802518567",
   linkedin: "https://www.linkedin.com/in/yatharth-sharma-32a1a1200",
   github: "https://github.com/YatharthSharma1309",
+  resumePdf: "/resume/yatharth-sharma-resume.pdf",
 };
 
 export const aboutParagraphs = [
-  "I am a full-stack-leaning software engineer focused on shipping exceptional digital experiences: performance, accessibility, and craft at every layer.",
-  "My stack centers on React, TypeScript, Next.js (App Router + API Routes), and Node.js. I build responsive, fast UIs and the backend services that power them — REST endpoints, request validation, LLM integrations — so I can own more of the vertical slice with fewer hand-offs between layers.",
+  "I am an AI-focused full-stack developer building intelligent web applications — OCR pipelines, RAG systems, semantic search, and scalable APIs — with strong emphasis on performance, accessibility, and craft.",
+  "My stack centers on React, TypeScript, Next.js (App Router + API Routes), Node.js, and Python. I build responsive UIs and the backend services that power them — REST endpoints, request validation, LLM integrations — so I can own more of the vertical slice with fewer hand-offs between layers.",
   "I translate Figma into code with Tailwind CSS, Styled Components, and Framer Motion. I care about user-centered design, clean state management (Redux, Context), and interfaces that are beautiful, intuitive, and inclusive.",
 ];
 
@@ -22,24 +24,27 @@ export const skillGroups = {
     "Next.js (App Router & API Routes)",
     "Node.js & REST API development",
     "LLM / OpenRouter API integration",
+    "Python & Django",
     "HTML5 / CSS3 / ES6+",
     "Tailwind · Styled Components",
     "Redux · Context API",
     "Framer Motion",
-    "Design systems · Figma to code",
   ],
   deepening: [
-    "SQL & relational modeling",
+    "RAG pipelines · OCR · semantic search",
+    "SQL & MySQL · relational modeling",
     "Auth patterns (sessions, JWT)",
     "Streaming APIs & real-time patterns",
-    "Infrastructure & deployment (Vercel, CI/CD)",
+    "CI/CD basics · infrastructure & deployment",
     "UI & UX design",
   ],
 } as const;
 
+export const languages = ["English", "Hindi", "French (Beginner)"] as const;
+
 export const linkedInProfileSnapshot = {
   headline:
-    "Software Engineer — full-stack-leaning; React/TypeScript UIs, REST APIs, and LLM integrations.",
+    "AI-Focused Full-Stack Developer — React/TypeScript, REST APIs, RAG, and LLM integrations.",
   about:
     "Strong work ethic, adaptability, and interpersonal collaboration. Comfortable working independently across the stack — from UI components to API endpoints — learning quickly, and delivering end-to-end features.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
@@ -69,12 +74,14 @@ export const journey: JourneyItem[] = [
     ],
   },
   {
-    title: "Student Intern",
+    title: "Data Analyst Intern",
     org: "Ernst & Young Global Consulting Services",
     period: "Feb 2025 — May 2025",
-    location: "Noida, Uttar Pradesh",
+    location: "Gurugram, Haryana",
     description: [
-      "Consulting exposure alongside engineering practices in a global delivery setup.",
+      "Worked with multi-source datasets for analysis and reporting.",
+      "Performed data validation and preprocessing to ensure accuracy and consistency.",
+      "Contributed to reporting and business insights for stakeholders.",
     ],
   },
   {
@@ -106,17 +113,19 @@ export const education = [
     period: "Aug 2023 — Jul 2025",
   },
   {
-    degree: "Bachelor of Computer Science",
-    school: "Manav Rachna International University, Faridabad",
+    degree: "Bachelor of Computer Applications (BCA)",
+    school: "Manav Rachna University, Faridabad",
     period: "2020 — 2023",
   },
 ];
 
 export const certifications = [
   "Microsoft Certified: Azure AI Fundamentals",
+  "Microsoft Certified: Azure Data Fundamentals",
+  "Microsoft Certified: Azure Fundamentals",
+  "Cisco Cybersecurity Essentials",
+  "Excellent Contributor Award — Alibaba Cloud Low Code Development Contest 2022",
   "Data Encryption using AWS KMS (UST)",
-  "Managing Your Personal Finances — Foundations",
-  "Foundations: Data, Data, Everywhere",
   "NPTEL — E-Business",
 ];
 
@@ -151,6 +160,22 @@ export const portfolioLinks: PortfolioLink[] = [
       "Recruiter dashboard for resume screening: upload PDF/DOCX, extract skills, score candidates against a job description, surface gaps, and generate interview questions. Next.js, Prisma, SQLite/Supabase, OpenRouter.",
     href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
     status: "Live",
+    external: true,
+  },
+  {
+    title: "EduTech — AI Document Processing",
+    description:
+      "AI-powered educational document processing: OCR-based Q&A extraction from PDFs, classification, Excel-ready output, and full-stack integration with Python backend plus React/Node frontend.",
+    href: "https://github.com/YatharthSharma1309/EduTech",
+    status: "Live",
+    external: true,
+  },
+  {
+    title: "IntelliRAG",
+    description:
+      "RAG platform for contextual querying and semantic search — document ingestion, chunking, embeddings, retrieval, and LLM response generation. Python, vector databases, REST APIs.",
+    href: "https://github.com/YatharthSharma1309/IntelliRAG-Deployed-Version",
+    status: "Private",
     external: true,
   },
   {

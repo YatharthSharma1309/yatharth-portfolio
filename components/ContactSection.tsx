@@ -20,7 +20,7 @@ export function ContactSection() {
         <SectionIntro
           eyebrow="Contact"
           title="Let's build something deliberate"
-          description="Open to front-end and UI engineering roles, collaborations where craft matters, and teams that appreciate a UI engineer who can speak the same language as backend and data folks."
+          description="Open to AI-focused full-stack roles, collaborations where craft matters, and teams building intelligent products with strong engineering fundamentals."
         />
         <Reveal delay={0.08}>
           <div className="mt-12 flex flex-col flex-wrap gap-4 sm:flex-row sm:items-center">
@@ -29,6 +29,19 @@ export function ContactSection() {
               className="bg-accent text-bg-deep focus-visible:ring-accent/50 w-full rounded-xl px-8 py-4 text-center text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98] sm:w-fit"
             >
               {site.email}
+            </a>
+            <a
+              href={`tel:${site.phone.replace(/\s/g, "")}`}
+              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
+            >
+              {site.phone}
+            </a>
+            <a
+              href={site.resumePdf}
+              download="Yatharth-Sharma-Resume.pdf"
+              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
+            >
+              Download resume
             </a>
             <a
               href={site.linkedin}

@@ -1,305 +1,113 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  site,
-  journey,
-  education,
-  certifications,
-  skillGroups,
-} from "@/lib/content";
-import { PrintButton } from "@/components/PrintButton";
+import { Navigation } from "@/components/Navigation";
+import { ResumeActions } from "@/components/ResumeActions";
+import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: `Resume — ${site.name}`,
-  description: `Professional resume of ${site.name}, ${site.role}.`,
+  description: `Resume of ${site.name}, ${site.role}. Download PDF or view online.`,
 };
 
-export default function ResumePage() {
-  const coreSkills = [...skillGroups.core].join(", ");
-  const deepeningSkills = [...skillGroups.deepening].join(", ");
-
-  return (
-    <>
-      {/* Print + screen overrides — scoped to this page */}
-      <style>{`
-        @media print {
-          .no-print   { display: none !important; }
-          .noise       { display: none !important; }
-          body         { background: white !important; }
-          *            { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          @page        { margin: 0.55in 0.65in; size: A4 portrait; }
-          #resume-shell { background: white !important; padding: 0 !important; min-height: 0 !important; }
-          #resume-paper { box-shadow: none !important; padding: 0 !important; max-width: none !important; }
-        }
-      `}</style>
-
-      {/* Full-page white shell to override the dark root layout on screen */}
-      <div
-        id="resume-shell"
-        style={{
-          position: "relative",
-          zIndex: 1,
-          minHeight: "100vh",
-          background: "#e9ecef",
-          padding: "40px 16px",
-          fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
-        }}
-      >
-        {/* Top bar — screen only */}
-        <div
-          className="no-print"
-          style={{
-            maxWidth: 800,
-            margin: "0 auto 20px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              color: "#555",
-              fontSize: 13,
-              textDecoration: "none",
-              fontWeight: 500,
-            }}
-          >
-            ← Back to site
-          </Link>
-          <PrintButton />
-        </div>
-
-        {/* ── Resume paper ── */}
-        <div
-          id="resume-paper"
-          style={{
-            maxWidth: 800,
-            margin: "0 auto",
-            background: "white",
-            color: "#111",
-            padding: "52px 60px",
-            boxShadow: "0 6px 48px rgba(0,0,0,0.14)",
-          }}
-        >
-          {/* Header */}
-          <header style={{ marginBottom: 18 }}>
-            <h1
-              style={{
-                margin: 0,
-                fontSize: 30,
-                fontWeight: 800,
-                letterSpacing: "-0.02em",
-                color: "#0a0a0a",
-              }}
-            >
-              {site.name}
-            </h1>
-            <p
-              style={{
-                margin: "4px 0 0",
-                fontSize: 14,
-                fontWeight: 600,
-                color: "#444",
-              }}
-            >
-              {site.role}
-            </p>
-            <p
-              style={{
-                margin: "6px 0 0",
-                fontSize: 12,
-                color: "#666",
-                lineHeight: 1.6,
-              }}
-            >
-              {site.email}&nbsp;&nbsp;·&nbsp;&nbsp;{site.location}
-              &nbsp;&nbsp;·&nbsp;&nbsp;linkedin.com/in/yatharth-sharma-32a1a1200
-              &nbsp;&nbsp;·&nbsp;&nbsp;github.com/YatharthSharma1309
-            </p>
-          </header>
-
-          <hr
-            style={{
-              border: "none",
-              borderTop: "2px solid #0a0a0a",
-              margin: "0 0 20px",
-            }}
-          />
-
-          {/* Summary */}
-          <ResumeSection label="Professional Summary">
-            <p
-              style={{ margin: 0, color: "#333", fontSize: 13, lineHeight: 1.7 }}
-            >
-              {site.tagline}
-            </p>
-          </ResumeSection>
-
-          {/* Experience */}
-          <ResumeSection label="Experience">
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {journey.map((item) => (
-                <div key={item.org + item.period}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      flexWrap: "wrap",
-                      gap: 4,
-                    }}
-                  >
-                    <div>
-                      <span style={{ fontWeight: 700, fontSize: 13 }}>
-                        {item.title}
-                      </span>
-                      <span style={{ color: "#333", fontSize: 13 }}>
-                        {" "}
-                        — {item.org}
-                      </span>
-                      {item.location !== "—" && (
-                        <span style={{ color: "#666", fontSize: 12 }}>
-                          {" "}
-                          · {item.location}
-                        </span>
-                      )}
-                    </div>
-                    <span
-                      style={{
-                        color: "#666",
-                        fontSize: 11.5,
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {item.period}
-                    </span>
-                  </div>
-                  {item.description && (
-                    <ul
-                      style={{
-                        margin: "5px 0 0",
-                        paddingLeft: 18,
-                        color: "#333",
-                        fontSize: 12.5,
-                        lineHeight: 1.65,
-                      }}
-                    >
-                      {item.description.map((line) => (
-                        <li key={line} style={{ marginBottom: 2 }}>
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          </ResumeSection>
-
-          {/* Skills */}
-          <ResumeSection label="Skills">
-            <p
-              style={{
-                margin: "0 0 5px",
-                fontSize: 13,
-                color: "#333",
-                lineHeight: 1.65,
-              }}
-            >
-              <strong>Core: </strong>
-              {coreSkills}
-            </p>
-            <p
-              style={{ margin: 0, fontSize: 13, color: "#333", lineHeight: 1.65 }}
-            >
-              <strong>Developing: </strong>
-              {deepeningSkills}
-            </p>
-          </ResumeSection>
-
-          {/* Education */}
-          <ResumeSection label="Education">
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {education.map((e) => (
-                <div
-                  key={e.school}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    flexWrap: "wrap",
-                    gap: 4,
-                  }}
-                >
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: 13 }}>
-                      {e.degree}
-                    </div>
-                    <div style={{ color: "#555", fontSize: 12 }}>{e.school}</div>
-                  </div>
-                  <span
-                    style={{
-                      color: "#666",
-                      fontSize: 11.5,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {e.period}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </ResumeSection>
-
-          {/* Certifications */}
-          <ResumeSection label="Certifications">
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: 18,
-                color: "#333",
-                fontSize: 12.5,
-                lineHeight: 1.65,
-              }}
-            >
-              {certifications.map((c) => (
-                <li key={c} style={{ marginBottom: 2 }}>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </ResumeSection>
-        </div>
-      </div>
-    </>
-  );
+function contactPath(url: string) {
+  try {
+    return new URL(url).pathname.replace(/^\//, "");
+  } catch {
+    return url;
+  }
 }
 
-function ResumeSection({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+export default function ResumePage() {
   return (
-    <section style={{ marginBottom: 22 }}>
-      <h2
-        style={{
-          margin: "0 0 10px",
-          fontSize: 9.5,
-          fontWeight: 800,
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          color: "#111",
-          borderBottom: "1px solid #ddd",
-          paddingBottom: 5,
-        }}
+    <div className="bg-bg-deep relative z-[1] min-h-full">
+      <a
+        href="#main"
+        className="focus:bg-accent focus:text-bg-deep sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:px-4 focus:py-2"
       >
-        {label}
-      </h2>
-      {children}
-    </section>
+        Skip to content
+      </a>
+      <div className="bg-grid pointer-events-none fixed inset-0 z-0" aria-hidden />
+      <Navigation />
+      <main id="main" className="scroll-mt-[4.25rem] pt-[4.25rem]">
+        <section className="border-border-subtle relative border-b py-16 sm:py-20">
+          <div
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(62,232,200,0.14), transparent 65%)",
+            }}
+            aria-hidden
+          />
+          <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+            <p className="font-mono text-accent mb-3 text-[11px] font-semibold tracking-[0.22em] uppercase">
+              Resume
+            </p>
+            <h1 className="font-display text-text-primary text-3xl font-bold tracking-tight sm:text-4xl">
+              {site.name}
+            </h1>
+            <p className="text-text-primary/90 mt-2 text-lg font-medium">{site.role}</p>
+            <p className="text-text-muted mt-3 max-w-2xl text-sm leading-relaxed">
+              {site.availability}. Official PDF below — same document shared with recruiters.
+            </p>
+            <p className="font-mono text-text-muted mt-4 text-xs leading-relaxed">
+              {site.email}
+              &nbsp;·&nbsp;
+              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-accent transition-colors">
+                {site.phone}
+              </a>
+              &nbsp;·&nbsp;
+              {site.location}
+              &nbsp;·&nbsp;
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                {contactPath(site.linkedin)}
+              </a>
+              &nbsp;·&nbsp;
+              <a href={site.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                {contactPath(site.github)}
+              </a>
+            </p>
+            <div className="mt-8">
+              <ResumeActions />
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12 sm:py-16">
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <div className="surface-card border-border-subtle hidden overflow-hidden rounded-2xl border md:block">
+              <iframe
+                src={site.resumePdf}
+                title={`${site.name} resume PDF`}
+                className="min-h-[80vh] w-full bg-white"
+              />
+            </div>
+            <div className="surface-card border-border-subtle rounded-2xl border p-8 text-center md:hidden">
+              <p className="text-text-muted text-sm leading-relaxed">
+                PDF preview works best on desktop. Use the buttons above to download or open the
+                resume on your device.
+              </p>
+              <a
+                href={site.resumePdf}
+                download="Yatharth-Sharma-Resume.pdf"
+                className="bg-accent text-bg-deep mt-6 inline-flex min-h-11 items-center rounded-xl px-6 py-3 text-sm font-bold"
+              >
+                Download PDF
+              </a>
+            </div>
+            <p className="text-text-muted mt-8 text-center text-xs leading-relaxed">
+              Prefer the interactive portfolio?{" "}
+              <Link href="/#journey" className="text-accent hover:underline">
+                View career journey
+              </Link>{" "}
+              or{" "}
+              <Link href="/#portfolio" className="text-accent hover:underline">
+                explore projects
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }

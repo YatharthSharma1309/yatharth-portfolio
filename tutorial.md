@@ -62,6 +62,9 @@ Site/
 ├── components/             # React UI pieces (Hero, sections, chat UI, …)
 ├── lib/
 │   └── content.ts         # Your text data: site info, journey, skills, LinkedIn snapshot
+├── public/
+│   └── resume/
+│       └── yatharth-sharma-resume.pdf   # Official PDF — download + /resume preview
 ├── package.json           # Dependencies and npm scripts
 ├── next.config.ts         # Next.js configuration
 └── .env.local             # Secrets (NOT committed): API keys, optional profile text — see .env.example
@@ -175,7 +178,9 @@ export default function Home() {
 
 ### 5.3 Central content (`lib/content.ts`)
 
-Instead of scattering your bio across many files, most **copy and structured resume data** live in one module. That makes updates safer and keeps the AI context aligned with the visible site.
+Instead of scattering your bio across many files, most **copy and structured career data** live in one module. That makes updates safer and keeps the AI context aligned with the visible site.
+
+**Resume PDF:** The official resume file lives at `public/resume/yatharth-sharma-resume.pdf`. `site.resumePdf` in `content.ts` points to it. The `/resume` page embeds the PDF (desktop) and offers download links; Hero and Contact also link to it. When you update your resume, replace that PDF file and redeploy.
 
 ```ts
 // lib/content.ts (illustrative excerpt)

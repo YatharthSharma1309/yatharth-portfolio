@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Syne } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/content";
 
@@ -15,16 +15,23 @@ const syne = Syne({
   weight: ["600", "700", "800"],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
   title: `${site.name} · ${site.role}`,
   description: site.tagline,
   keywords: [
-    "front-end",
+    "full-stack",
+    "AI",
+    "RAG",
     "React",
     "TypeScript",
-    "UI developer",
-    "UX",
-    "APIs",
+    "Python",
+    "LLM",
     "India",
   ],
   openGraph: {
@@ -48,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${syne.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${syne.variable} ${jetbrainsMono.variable} h-full antialiased`}
       style={{ colorScheme: "dark" }}
     >
       <body className="relative min-h-full overflow-x-hidden">

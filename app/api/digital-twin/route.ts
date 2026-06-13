@@ -3,6 +3,7 @@ import {
   certifications,
   education,
   journey,
+  languages,
   linkedInProfileSnapshot,
   portfolioLinks,
   site,
@@ -54,6 +55,7 @@ Current employment: Not in a full-time role. ${site.availability}
 Most recent role: Software Engineer Trainee at Whilter.AI (Dec 2025 — Jun 2026, ended).
 Location: ${site.location}
 Email: ${site.email}
+Phone: ${site.phone}
 LinkedIn: ${site.linkedin}
 GitHub: ${site.github}
 Tagline: ${site.tagline}
@@ -92,6 +94,9 @@ ${education
 
 Certifications:
 ${certifications.map((c) => `- ${c}`).join("\n")}
+
+Languages:
+${languages.map((l) => `- ${l}`).join("\n")}
 
 LinkedIn profile snapshot:
 - Headline: ${linkedInProfileSnapshot.headline}

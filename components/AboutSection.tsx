@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
-import { aboutParagraphs, skillGroups } from "@/lib/content";
+import { aboutParagraphs, languages, skillGroups } from "@/lib/content";
 
 export function AboutSection() {
   return (
@@ -73,6 +73,21 @@ export function AboutSection() {
                   is how I keep the narrative aligned with what I actually ship
                   today.
                 </p>
+                <div className="border-border-subtle border-t pt-6">
+                  <p className="text-text-primary mb-3 text-xs font-semibold tracking-[0.18em] uppercase">
+                    Languages
+                  </p>
+                  <ul className="flex flex-wrap gap-2">
+                    {languages.map((lang) => (
+                      <li
+                        key={lang}
+                        className="font-mono border-border-subtle text-text-muted rounded-lg border px-3 py-2 text-xs font-medium"
+                      >
+                        {lang}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </Reveal>

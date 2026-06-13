@@ -109,6 +109,14 @@ export function Navigation() {
             ))}
           </ul>
           <div className="mt-6 flex flex-col gap-2">
+            <a
+              href={site.resumePdf}
+              download="Yatharth-Sharma-Resume.pdf"
+              className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent rounded-xl border px-4 py-3 text-center text-sm font-semibold transition-colors"
+              onClick={() => setMenuOpen(false)}
+            >
+              Download resume
+            </a>
             <Link
               href={site.github}
               target="_blank"

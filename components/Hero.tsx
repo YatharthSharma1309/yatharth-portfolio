@@ -27,7 +27,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-accent mb-5 text-[11px] font-semibold tracking-[0.28em] uppercase"
         >
-          Full-stack · Software engineering
+          AI · Full-stack · RAG systems
         </motion.p>
         <motion.h1
           {...(reduceMotion ? {} : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 } })}
@@ -81,6 +81,13 @@ export function Hero() {
             className="text-text-muted hover:text-accent inline-flex min-h-11 items-center text-sm font-semibold tracking-wide underline-offset-[6px] transition-colors hover:underline"
           >
             View journey →
+          </a>
+          <a
+            href={site.resumePdf}
+            download="Yatharth-Sharma-Resume.pdf"
+            className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent inline-flex min-h-11 items-center rounded-xl border bg-[var(--bg-card)] px-6 py-3.5 text-sm font-semibold tracking-wide backdrop-blur-sm transition-colors"
+          >
+            Download resume
           </a>
         </motion.div>
       </div>

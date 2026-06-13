@@ -19,6 +19,7 @@
 @theme inline {
   --font-sans: var(--font-dm);
   --font-display: var(--font-syne);
+  --font-mono: var(--font-jetbrains);
   --color-bg-deep: var(--bg-deep);
   --color-bg-elevated: var(--bg-elevated);
   --color-border-subtle: var(--border-subtle);
