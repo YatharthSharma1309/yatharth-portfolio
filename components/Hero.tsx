@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { heroEyebrow, site } from "@/lib/content";
 
 export function Hero() {
@@ -13,21 +12,6 @@ export function Hero() {
       />
 
       <div className="relative z-[1] mx-auto w-full max-w-3xl px-5 text-center sm:px-8">
-        <div className="mx-auto mb-8 w-full max-w-[200px] sm:mb-10 sm:max-w-[240px]">
-          <div className="from-accent via-accent-warm to-accent relative aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-br p-[2px] shadow-[0_0_48px_-14px_var(--glow)]">
-            <div className="bg-bg-deep relative h-full w-full overflow-hidden rounded-[calc(1rem-2px)]">
-              <Image
-                src={site.profileImage}
-                alt={`${site.name} — professional portrait`}
-                fill
-                sizes="(max-width: 640px) 200px, 240px"
-                className="object-cover object-[center_15%]"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-
         <p className="text-accent mb-4 text-[10px] font-semibold tracking-[0.22em] uppercase sm:mb-5 sm:text-[11px] sm:tracking-[0.28em]">
           {heroEyebrow}
         </p>
