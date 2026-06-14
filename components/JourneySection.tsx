@@ -2,9 +2,15 @@ import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
 import { education, journey, sectionCopy } from "@/lib/content";
 
+const content = "mx-auto w-full max-w-3xl";
+const card = "surface-card border-border-subtle rounded-xl border p-5 sm:p-6 lg:p-7";
+
 export function JourneySection() {
   return (
-    <section id="journey" className="section-shell relative">
+    <section
+      id="journey"
+      className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28"
+    >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Career journey"
@@ -12,14 +18,14 @@ export function JourneySection() {
           description={sectionCopy.journey.description}
         />
 
-        <div className="relative mt-12 max-w-3xl sm:mt-16 lg:mt-20">
+        <div className={`${content} relative mt-10 sm:mt-14 lg:mt-16`}>
           <div
             className="from-accent/45 via-border-highlight absolute top-3 bottom-3 left-[9px] w-px bg-gradient-to-b to-transparent"
             aria-hidden
           />
-          <ol className="space-y-6">
+          <ol className="space-y-5 sm:space-y-6">
             {journey.map((item, i) => (
-              <li key={`${item.org}-${item.period}`} className="relative pl-12">
+              <li key={`${item.org}-${item.period}`} className="relative pl-11 sm:pl-12">
                 <div
                   className={`absolute top-2 left-0 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-[var(--border-highlight)] bg-[var(--bg-deep)] ${item.current ? "shadow-[0_0_14px_var(--glow)]" : ""}`}
                 >
@@ -28,16 +34,14 @@ export function JourneySection() {
                   />
                 </div>
                 <Reveal delay={Math.min(i * 0.06, 0.24)}>
-                  <div className="surface-card border-border-subtle group rounded-xl border p-6 transition-[border-color,box-shadow] duration-300 hover:border-border-highlight sm:p-7">
+                  <div className={card}>
                     <p className="text-accent text-[11px] font-semibold tracking-[0.14em] uppercase">
                       {item.period}
                     </p>
-                    <h3 className="font-display text-text-primary mt-2.5 text-xl font-bold tracking-tight">
+                    <h3 className="font-display text-text-primary mt-2 text-lg font-bold tracking-tight sm:mt-2.5 sm:text-xl">
                       {item.title}
                     </h3>
-                    <p className="text-text-primary/95 mt-1 font-medium">
-                      {item.org}
-                    </p>
+                    <p className="text-text-primary/95 mt-1 font-medium">{item.org}</p>
                     {item.location && item.location !== "—" ? (
                       <p className="text-text-muted mt-0.5 text-sm">{item.location}</p>
                     ) : null}
@@ -45,7 +49,10 @@ export function JourneySection() {
                       <ul className="text-text-muted mt-4 space-y-2.5 text-sm leading-relaxed">
                         {item.description.map((line) => (
                           <li key={line} className="flex gap-3">
-                            <span className="from-accent mt-2 h-px w-5 shrink-0 bg-gradient-to-r to-transparent" />
+                            <span
+                              className="from-accent mt-2 h-px w-5 shrink-0 bg-gradient-to-r to-transparent"
+                              aria-hidden
+                            />
                             <span>{line}</span>
                           </li>
                         ))}
@@ -58,9 +65,9 @@ export function JourneySection() {
           </ol>
         </div>
 
-        <Reveal>
-          <div className="surface-card border-border-subtle mt-16 rounded-2xl border p-6 sm:mt-20 sm:p-9 lg:mt-24 lg:p-11">
-            <div className="mb-8 flex items-center gap-3">
+        <Reveal delay={0.08}>
+          <div className={`surface-card border-border-subtle ${content} mt-10 rounded-2xl border p-5 sm:mt-14 sm:p-7 lg:p-8`}>
+            <div className="mb-6 flex items-center justify-center gap-3 sm:mb-8">
               <span
                 className="from-accent h-px w-10 shrink-0 bg-gradient-to-r to-transparent"
                 aria-hidden
@@ -69,20 +76,16 @@ export function JourneySection() {
                 Education
               </p>
             </div>
-            <ul className="space-y-8">
-              {education.map((e) => (
+            <ul className="space-y-6 sm:space-y-8">
+              {education.map((entry) => (
                 <li
-                  key={e.school + e.period}
-                  className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between"
+                  key={entry.school + entry.period}
+                  className="border-border-subtle border-b pb-6 text-center last:border-b-0 last:pb-0 sm:pb-8"
                 >
-                  <div>
-                    <p className="text-text-primary font-semibold leading-snug">
-                      {e.degree}
-                    </p>
-                    <p className="text-text-muted mt-1 text-sm">{e.school}</p>
-                  </div>
-                  <p className="text-text-muted font-mono text-xs tracking-wide sm:text-right">
-                    {e.period}
+                  <p className="text-text-primary font-semibold leading-snug">{entry.degree}</p>
+                  <p className="text-text-muted mt-1 text-sm">{entry.school}</p>
+                  <p className="text-text-muted mt-2 font-mono text-xs tracking-wide">
+                    {entry.period}
                   </p>
                 </li>
               ))}

@@ -189,7 +189,10 @@ export function PortfolioSection() {
   const { portfolio } = sectionCopy;
 
   return (
-    <section id="portfolio" className="section-shell">
+    <section
+      id="portfolio"
+      className="border-border-subtle scroll-mt-[4.25rem] border-t py-16 sm:py-24 lg:py-28"
+    >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Portfolio"
@@ -197,7 +200,7 @@ export function PortfolioSection() {
           description={portfolio.description}
         />
 
-        <div id="featured-work" className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div id="featured-work" className="mx-auto mt-10 flex max-w-3xl flex-col gap-5 sm:mt-14 sm:gap-6">
           {featuredPortfolioLinks.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
               <FeaturedProjectCard item={item} />
@@ -205,11 +208,11 @@ export function PortfolioSection() {
           ))}
         </div>
 
-        <h3 className="text-text-primary mt-12 text-base font-semibold tracking-tight sm:mt-16 sm:text-lg">
+        <h3 className="text-text-primary mx-auto mt-12 max-w-3xl text-center text-base font-semibold tracking-tight sm:mt-16 sm:text-lg">
           {portfolio.moreBuildsLabel}
         </h3>
 
-        <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
+        <div className="mx-auto mt-6 flex max-w-3xl flex-col gap-5 sm:mt-8 sm:gap-6">
           {morePortfolioLinks.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
               <PortfolioCard item={item} />

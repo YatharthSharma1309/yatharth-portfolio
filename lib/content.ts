@@ -5,7 +5,7 @@ export const site = {
   role: "AI-Focused Full-Stack Developer",
   tagline:
     "Software engineer with production experience shipping React/TypeScript UIs and REST APIs. I own features end to end: LLM integrations, RAG pipelines, document ingestion, and polished, accessible interfaces with strong attention to performance and craft.",
-  availability: "Seeking full-time software engineering roles",
+  availability: "Open to full-time roles",
   location: "Faridabad, Haryana, India",
   email: "yatharthsharma1309@gmail.com",
   linkedin: "https://www.linkedin.com/in/yatharthsharma-ai/",
@@ -106,7 +106,7 @@ export const sectionCopy = {
     recruiterBullets: [
       "Recent production React/TypeScript + REST APIs at Whilter.AI (Dec 2025 — Jun 2026)",
       "Shipped RAG, document ingestion, OAuth CRM, and recruiter tooling end to end",
-      "Open to full-time software engineering roles — India / remote-friendly",
+      "Open to full-time roles · India / remote-friendly",
     ],
     stackHelper:
       "Core stack I ship in production — React/TypeScript UIs, REST APIs, and LLM integrations.",
@@ -139,7 +139,7 @@ export const sectionCopy = {
   journey: {
     title: "From analytics to production full-stack AI engineering",
     description:
-      "Grounded in data work at EY and Honeywell, then into web development and production software — most recently full-stack AI features at Whilter.AI with React, TypeScript, REST APIs, and LLM/RAG integrations. Currently seeking full-time software engineering roles.",
+      "Grounded in data work at EY and Honeywell, then into web development and production software — most recently full-stack AI features at Whilter.AI with React, TypeScript, REST APIs, and LLM/RAG integrations.",
   },
   digitalTwin: {
     description:

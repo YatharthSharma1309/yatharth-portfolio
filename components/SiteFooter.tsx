@@ -62,9 +62,6 @@ export function SiteFooter() {
             <p className="text-text-muted mt-3 max-w-xs text-sm leading-relaxed line-clamp-3">
               {site.tagline}
             </p>
-            <p className="text-accent/90 mt-3 text-xs font-medium tracking-wide">
-              {site.availability}
-            </p>
             <p className="text-text-muted/80 mt-4 font-mono text-xs tracking-wide">
               {site.location}
             </p>
@@ -140,7 +137,7 @@ export function SiteFooter() {
               ))}
             </div>
             <p className="text-text-muted/75 font-mono text-center text-xs tracking-wide sm:text-right">
-              {site.availability} · {site.location}
+              {site.location}
             </p>
           </div>
         </div>

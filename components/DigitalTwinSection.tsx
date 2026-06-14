@@ -190,7 +190,7 @@ export function DigitalTwinSection() {
   }
 
   return (
-    <section id="digital-twin" className="section-shell relative">
+    <section id="digital-twin" className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28">
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{

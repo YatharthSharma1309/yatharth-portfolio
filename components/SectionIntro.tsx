@@ -15,8 +15,8 @@ export function SectionIntro({
 }: Props) {
   return (
     <Reveal className={className}>
-      <div className="max-w-3xl">
-        <div className="mb-4 flex items-center gap-3">
+      <div className="mx-auto max-w-3xl text-center">
+        <div className="mb-4 flex items-center justify-center gap-3">
           <span
             className="from-accent h-px w-10 shrink-0 bg-gradient-to-r to-transparent"
             aria-hidden
@@ -29,7 +29,7 @@ export function SectionIntro({
           {title}
         </h2>
         {description ? (
-          <p className="text-text-muted mt-4 max-w-2xl text-sm leading-relaxed sm:mt-5 sm:text-base lg:text-[1.0625rem]">
+          <p className="text-text-muted mx-auto mt-4 max-w-2xl text-sm leading-relaxed sm:mt-5 sm:text-base lg:text-[1.0625rem]">
             {description}
           </p>
         ) : null}
