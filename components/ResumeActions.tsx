@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { site } from "@/lib/content";
+import { trackEvent } from "@/lib/analytics";
 
 export function ResumeActions() {
   return (
@@ -7,6 +10,7 @@ export function ResumeActions() {
       <a
         href={site.resumePdf}
         download="Yatharth-Sharma-Resume.pdf"
+        onClick={() => trackEvent("resume_download", { source: "resume_page" })}
         className="bg-accent text-bg-deep focus-visible:ring-accent/50 inline-flex min-h-11 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)]"
       >
         Download PDF

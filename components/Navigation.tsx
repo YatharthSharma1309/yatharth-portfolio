@@ -2,20 +2,24 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Logo, MenuIcon } from "@/components/Logo";
+import { ConnectIcon } from "@/components/ConnectIcons";
+import { primaryNav, resolveNavHref } from "@/lib/navigation";
 import { site } from "@/lib/content";
+import { connectLinks } from "@/lib/connect";
 
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#journey", label: "Journey" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#digital-twin", label: "AI Twin" },
-  { href: "#contact", label: "Contact" },
-  { href: "/resume", label: "Resume" },
-];
+const navLinkClass =
+  "font-sans text-text-muted hover:text-text-primary block rounded-lg px-3 py-2.5 text-[0.9375rem] font-medium tracking-normal transition-colors md:py-2 md:text-sm";
+
+const externalBtnClass =
+  "font-sans border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors";
 
 export function Navigation() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const homeHref = pathname === "/" ? "#top" : "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -26,13 +30,16 @@ export function Navigation() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (menuOpen) {
+      document.body.dataset.mobileNavOpen = "true";
+    } else {
+      delete document.body.dataset.mobileNavOpen;
+    }
     return () => {
       document.body.style.overflow = "";
+      delete document.body.dataset.mobileNavOpen;
     };
   }, [menuOpen]);
-
-  const navLinkClass =
-    "text-text-muted hover:text-text-primary relative block px-3 py-2.5 text-sm font-medium tracking-wide transition-colors after:absolute after:bottom-1 after:left-3 after:h-px after:w-[calc(100%-1.5rem)] after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-200 hover:after:scale-x-100 md:inline-block md:px-3 md:py-2 md:text-[11px] md:tracking-[0.14em] md:uppercase";
 
   return (
     <header
@@ -44,53 +51,53 @@ export function Navigation() {
     >
       <nav
         className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8"
-        aria-label="Primary"
+        aria-label="Site"
       >
         <Link
-          href="#top"
-          className="font-display text-text-primary hover:text-accent text-lg font-bold tracking-tight transition-colors"
+          href={homeHref}
+          className="text-text-primary hover:text-accent group transition-colors"
           onClick={() => setMenuOpen(false)}
+          aria-label={`${site.name} — home`}
         >
-          YS<span className="text-accent">.</span>
+          <Logo />
         </Link>
 
-        <ul className="text-text-muted hidden items-center gap-1 md:flex">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link href={l.href} className={navLinkClass}>
-                {l.label}
+        <ul className="hidden items-center gap-0.5 md:flex">
+          {primaryNav.map((item) => (
+            <li key={item.href}>
+              <Link href={resolveNavHref(item.href, pathname)} className={navLinkClass}>
+                {item.label}
               </Link>
             </li>
           ))}
         </ul>
 
         <div className="hidden shrink-0 items-center gap-2 md:flex">
-          <Link
-            href={site.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent rounded-xl border px-4 py-2.5 text-xs font-semibold tracking-wide transition-colors"
-          >
-            GitHub
-          </Link>
-          <Link
-            href={site.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent rounded-xl border px-4 py-2.5 text-xs font-semibold tracking-wide transition-colors"
-          >
-            LinkedIn
-          </Link>
+          {connectLinks
+            .filter((item) => item.channel === "github" || item.channel === "linkedin")
+            .map((item) => (
+              <Link
+                key={item.channel}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={externalBtnClass}
+              >
+                <ConnectIcon channel={item.channel} size={16} />
+                {item.channel === "github" ? "GitHub" : "LinkedIn"}
+              </Link>
+            ))}
         </div>
 
         <button
           type="button"
-          className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 rounded-xl border px-3 py-2.5 text-xs font-semibold tracking-wide transition-colors md:hidden"
+          className={`${externalBtnClass} gap-2 md:hidden`}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? "Close" : "Menu"}
+          <MenuIcon open={menuOpen} />
+          <span>{menuOpen ? "Close" : "Navigation"}</span>
         </button>
       </nav>
 
@@ -99,42 +106,75 @@ export function Navigation() {
           id="mobile-nav"
           className="border-border-subtle border-t bg-bg-deep/95 px-5 py-6 backdrop-blur-xl md:hidden"
         >
-          <ul className="space-y-1">
-            {links.map((l) => (
-              <li key={l.href}>
-                <Link href={l.href} className={navLinkClass} onClick={() => setMenuOpen(false)}>
-                  {l.label}
+          <p className="font-mono text-accent mb-4 text-[11px] font-semibold tracking-[0.18em] uppercase">
+            Navigate
+          </p>
+          <ul className="space-y-0.5">
+            {primaryNav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={resolveNavHref(item.href, pathname)}
+                  className={navLinkClass}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-6 flex flex-col gap-2">
-            <a
-              href={site.resumePdf}
-              download="Yatharth-Sharma-Resume.pdf"
-              className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent rounded-xl border px-4 py-3 text-center text-sm font-semibold transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              Download resume
-            </a>
-            <Link
-              href={site.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent rounded-xl border px-4 py-3 text-center text-sm font-semibold transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              GitHub
-            </Link>
-            <Link
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent rounded-xl border px-4 py-3 text-center text-sm font-semibold transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              LinkedIn
-            </Link>
+            {connectLinks.map((item) => {
+              const content = (
+                <>
+                  <ConnectIcon channel={item.channel} size={16} />
+                  {item.channel === "github"
+                    ? "GitHub"
+                    : item.channel === "linkedin"
+                      ? "LinkedIn"
+                      : item.label}
+                </>
+              );
+
+              if (item.download) {
+                return (
+                  <a
+                    key={item.channel}
+                    href={item.href}
+                    download={item.download}
+                    className={externalBtnClass}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {content}
+                  </a>
+                );
+              }
+
+              if (item.external) {
+                return (
+                  <Link
+                    key={item.channel}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={externalBtnClass}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {content}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={item.channel}
+                  href={item.href}
+                  className={externalBtnClass}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {content}
+                </a>
+              );
+            })}
           </div>
         </div>
       ) : null}

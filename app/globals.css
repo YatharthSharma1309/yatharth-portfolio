@@ -17,9 +17,9 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-dm);
-  --font-display: var(--font-syne);
-  --font-mono: var(--font-jetbrains);
+  --font-sans: var(--font-dm), system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta), var(--font-dm), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --color-bg-deep: var(--bg-deep);
   --color-bg-elevated: var(--bg-elevated);
   --color-border-subtle: var(--border-subtle);
@@ -46,9 +46,11 @@ html {
 body {
   background: var(--bg-deep);
   color: var(--text-primary);
-  font-family: var(--font-dm), system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :focus-visible {
@@ -105,4 +107,81 @@ body {
     ),
     var(--bg-card);
   box-shadow: var(--shadow-card);
+}
+
+.chat-panel {
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02) 0%,
+      rgba(0, 0, 0, 0.22) 100%
+    ),
+    rgba(0, 0, 0, 0.28);
+  scrollbar-color: rgba(62, 232, 200, 0.35) transparent;
+  scrollbar-width: thin;
+}
+
+.chat-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-panel::-webkit-scrollbar-thumb {
+  background: rgba(62, 232, 200, 0.28);
+  border-radius: 999px;
+}
+
+.chat-typing-dot {
+  animation: chat-typing 1.2s ease-in-out infinite;
+}
+
+.chat-typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.chat-typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes chat-typing {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-typing-dot {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .twin-avatar-active::after {
+    animation: none !important;
+  }
+}
+
+.twin-avatar-active::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 1px solid rgba(62, 232, 200, 0.4);
+  animation: twin-pulse-ring 1.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes twin-pulse-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
 }

@@ -51,11 +51,9 @@ const CAREER_CONTEXT = `
 Name: ${site.name}
 Role: ${site.role}
 Availability: ${site.availability}
-Current employment: Not in a full-time role. ${site.availability}
-Most recent role: Software Engineer Trainee at Whilter.AI (Dec 2025 — Jun 2026, ended).
+Most recent role: ${journey[0].title} at ${journey[0].org} (${journey[0].period}).
 Location: ${site.location}
 Email: ${site.email}
-Phone: ${site.phone}
 LinkedIn: ${site.linkedin}
 GitHub: ${site.github}
 Tagline: ${site.tagline}
@@ -96,13 +94,12 @@ Certifications:
 ${certifications.map((c) => `- ${c}`).join("\n")}
 
 Languages:
-${languages.map((l) => `- ${l}`).join("\n")}
+${languages.map((l) => `- ${l.name} (${l.level})`).join("\n")}
 
 LinkedIn profile snapshot:
 - Headline: ${linkedInProfileSnapshot.headline}
 - About: ${linkedInProfileSnapshot.about}
 - Interests: ${linkedInProfileSnapshot.interests.join(", ")}
-- Currently learning: ${linkedInProfileSnapshot.currentlyLearning.join(", ")}
 - Achievements: ${linkedInProfileSnapshot.achievements.join(", ")}
 `.trim();
 
@@ -111,14 +108,18 @@ You are Yatharth Sharma's "Digital Twin" for a portfolio website chat.
 Answer questions about his career, skills, projects, learning journey, and background.
 Rules:
 - Be accurate and grounded in the provided context.
-- Yatharth is NOT currently employed at Whilter.AI; that trainee role ended Jun 2026. He is open to full-time software engineering roles.
-- When asked about current role or employment, state his availability and professional focus — do not say he currently works at Whilter.AI.
+- When asked about current role or employment, use the career journey and availability from context — do not invent companies, dates, or status.
 - If information is not available, clearly say that and suggest asking Yatharth directly.
 - Do not invent companies, achievements, or timelines.
 - If an item is only a title (for example LinkedIn achievement names), do not expand it with guessed descriptions.
 - Keep responses concise, helpful, and professional.
 - Use first person ("I") because this is a digital twin persona.
 `.trim();
+
+export async function GET() {
+  const apiKey = process.env.OpenRouter_API_KEY ?? process.env.OPENROUTER_API_KEY;
+  return Response.json({ ready: Boolean(apiKey?.trim()) });
+}
 
 export async function POST(request: Request) {
   try {

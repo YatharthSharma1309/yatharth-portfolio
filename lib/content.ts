@@ -2,45 +2,150 @@ export const site = {
   name: "Yatharth Sharma",
   role: "AI-Focused Full-Stack Developer",
   tagline:
-    "Building intelligent web applications — OCR pipelines, RAG systems, and scalable APIs with React, TypeScript, Node.js, and Python. Full-stack focused: REST endpoints, LLM integrations, and polished, accessible UIs.",
-  availability: "Open to full-time software engineering roles",
+    "Software engineer with production experience shipping React/TypeScript UIs and REST APIs. I own features end to end: LLM integrations, RAG pipelines, document ingestion, and polished, accessible interfaces with strong attention to performance and craft.",
+  availability: "Seeking full-time software engineering roles",
   location: "Faridabad, Haryana, India",
   email: "yatharthsharma1309@gmail.com",
-  phone: "+91 8802518567",
-  linkedin: "https://www.linkedin.com/in/yatharth-sharma-32a1a1200",
+  linkedin: "https://www.linkedin.com/in/yatharthsharma-ai/",
   github: "https://github.com/YatharthSharma1309",
   resumePdf: "/resume/yatharth-sharma-resume.pdf",
+  profileImage: "/profile-avatar.jpeg",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yatharthsharma1309.github.io",
 };
 
 export const aboutParagraphs = [
-  "I am an AI-focused full-stack developer building intelligent web applications — OCR pipelines, RAG systems, semantic search, and scalable APIs — with strong emphasis on performance, accessibility, and craft.",
+  "I am an AI-Focused full-stack developer shipping intelligent web applications — RAG pipelines, semantic search, streaming APIs, and scalable backends — with strong emphasis on performance, accessibility, and craft.",
   "My stack centers on React, TypeScript, Next.js (App Router + API Routes), Node.js, and Python. I build responsive UIs and the backend services that power them — REST endpoints, request validation, LLM integrations — so I can own more of the vertical slice with fewer hand-offs between layers.",
-  "I translate Figma into code with Tailwind CSS, Styled Components, and Framer Motion. I care about user-centered design, clean state management (Redux, Context), and interfaces that are beautiful, intuitive, and inclusive.",
+  "I translate Figma into code with Tailwind CSS and Styled Components. I care about user-centered design, responsive layouts, clean state management (Redux, Context), and interfaces that are beautiful, intuitive, and accessible.",
 ];
 
+export const skillCategories = [
+  {
+    label: "Frontend",
+    skills: [
+      "React & TypeScript",
+      "Next.js (App Router & API Routes)",
+      "Tailwind · Styled Components",
+      "Redux · Context API",
+      "Responsive UI & accessibility",
+      "HTML5 / CSS3 / ES6+",
+    ],
+  },
+  {
+    label: "Backend & APIs",
+    skills: [
+      "Node.js & REST API development",
+      "Express.js",
+      "Python & FastAPI",
+      "Prisma ORM",
+      "PostgreSQL",
+      "JWT & session auth",
+      "OAuth & third-party API integrations",
+      "LLM / OpenRouter API integration",
+      "RAG pipelines",
+      "Semantic search",
+      "Streaming APIs",
+    ],
+  },
+] as const;
+
+export const skillBuildingGroups = [
+  {
+    label: "Document & ingestion",
+    skills: ["OCR", "Document parsing (PDF/DOCX)"],
+  },
+  {
+    label: "Data & persistence",
+    skills: ["Advanced SQL & query optimization", "Schema design & relational modeling"],
+  },
+  {
+    label: "Delivery & craft",
+    skills: ["CI/CD & deployment", "UI & UX design"],
+  },
+] as const;
+
+export const skillBuilding = skillBuildingGroups.flatMap((group) => group.skills);
+
 export const skillGroups = {
-  core: [
-    "React & TypeScript",
-    "Next.js (App Router & API Routes)",
-    "Node.js & REST API development",
-    "LLM / OpenRouter API integration",
-    "Python & Django",
-    "HTML5 / CSS3 / ES6+",
-    "Tailwind · Styled Components",
-    "Redux · Context API",
-    "Framer Motion",
-  ],
-  deepening: [
-    "RAG pipelines · OCR · semantic search",
-    "SQL & MySQL · relational modeling",
-    "Auth patterns (sessions, JWT)",
-    "Streaming APIs & real-time patterns",
-    "CI/CD basics · infrastructure & deployment",
-    "UI & UX design",
-  ],
+  core: skillCategories.flatMap((category) => category.skills),
+  deepening: [...skillBuilding],
 } as const;
 
-export const languages = ["English", "Hindi", "French (Beginner)"] as const;
+export const heroEyebrow = "AI · React/TypeScript · RAG & APIs" as const;
+
+export const focusAreas = [
+  "React, TypeScript & Next.js",
+  "Node.js, Express & FastAPI",
+  "Prisma, PostgreSQL & REST APIs",
+  "LLM integrations, RAG & streaming APIs",
+] as const;
+
+export const twinStarterQuestions = [
+  "What did you work on at Whilter.AI?",
+  "Summarize my background for a hiring manager in 3 bullets.",
+  "Which skills are you actively building depth in?",
+] as const;
+
+export const twinWelcome =
+  "Hi — I'm Yatharth's career twin. Ask about my production experience, stack, projects, or hiring fit." as const;
+
+export const sectionCopy = {
+  about: {
+    title: "Production full-stack engineering with AI at the core",
+    recruiterBullets: [
+      "Recent production React/TypeScript + REST APIs at Whilter.AI (Dec 2025 — Jun 2026)",
+      "Shipped RAG, document ingestion, OAuth CRM, and recruiter tooling end to end",
+      "Open to full-time software engineering roles — India / remote-friendly",
+    ],
+    stackHelper:
+      "Core stack I ship in production — React/TypeScript UIs, REST APIs, and LLM integrations.",
+    buildingTitle: "Building depth in",
+    buildingHelper: "Focused growth areas — where I am actively leveling up.",
+    hirePrompt: "Hiring for full-stack + AI?",
+    hireAction: "Get in touch",
+  },
+  portfolio: {
+    title: "Featured full-stack & AI builds",
+    description:
+      "Three flagship projects — multi-tenant CRM, recruiter tooling, and production RAG — with problem, outcome, and stack at a glance. Live repos linked where available.",
+    moreBuildsLabel: "More builds",
+    footerPrompt: "Want to dig into how these were built?",
+    footerTwin: "Ask my career twin",
+    footerContact: "get in touch",
+  },
+  contact: {
+    title: "Open to full-time engineering roles",
+    description:
+      "Especially teams shipping React/TypeScript products with AI integrations — RAG, LLMs, and document ingestion. Email is fastest; resume and GitHub are one click below.",
+    responseTime: "I typically respond within 2 business days.",
+    emailLabel: "Email Yatharth",
+  },
+  certifications: {
+    title: "Certifications that back the stack",
+    description:
+      "Azure AI/Data credentials and cloud architecture training — aligned with the LLM, RAG, and API work in my projects.",
+  },
+  journey: {
+    title: "From analytics to production full-stack AI engineering",
+    description:
+      "Grounded in data work at EY and Honeywell, then into web development and production software — most recently full-stack AI features at Whilter.AI with React, TypeScript, REST APIs, and LLM/RAG integrations. Currently seeking full-time software engineering roles.",
+  },
+  digitalTwin: {
+    description:
+      "A conversational way to explore my background — roles, stack, and projects. Answers are based on this portfolio's career data.",
+    chatTitle: "Career Twin",
+    inputPlaceholder: "Ask about my React/TypeScript work, RAG projects, or full-time role search...",
+    formFooter: "Ready to talk? Email me or download my resume from the contact section.",
+  },
+} as const;
+
+export const languages = [
+  { name: "English", level: "Fluent" },
+  { name: "Hindi", level: "Native" },
+  { name: "French", level: "Beginner" },
+] as const;
+
+export const currentlyLearning = [...skillBuilding] as const;
 
 export const linkedInProfileSnapshot = {
   headline:
@@ -48,7 +153,7 @@ export const linkedInProfileSnapshot = {
   about:
     "Strong work ethic, adaptability, and interpersonal collaboration. Comfortable working independently across the stack — from UI components to API endpoints — learning quickly, and delivering end-to-end features.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
-  currentlyLearning: ["SQL & relational modeling", "Auth patterns (JWT, sessions)", "Streaming APIs & real-time patterns", "Infrastructure & deployment"],
+  currentlyLearning: [...currentlyLearning],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
 } as const;
 
@@ -68,9 +173,10 @@ export const journey: JourneyItem[] = [
     period: "Dec 2025 — Jun 2026",
     location: "Gurugram, Haryana",
     description: [
-      "Shipped production front-end features — React, TypeScript, component systems — in a fast-moving AI product environment.",
-      "Built and maintained REST endpoints and integrated third-party and LLM services on the backend.",
-      "Owned full-stack feature slices end-to-end, from UI through API contracts to the data layer.",
+      "Contributed to a production AI product stack — shipping React and TypeScript UI features, reusable component patterns, and interface polish in a fast-moving engineering environment.",
+      "Built and maintained REST endpoints on the backend, including request validation, service integration, and API contracts that supported live product workflows.",
+      "Integrated third-party services and LLM-powered capabilities into application flows — connecting external APIs to front-end experiences with clear error handling and predictable behavior.",
+      "Owned full-stack feature slices end to end: UI states, backend routes, data handling, and hand-off between layers so features could move from idea to production with fewer dependencies.",
     ],
   },
   {
@@ -79,9 +185,10 @@ export const journey: JourneyItem[] = [
     period: "Feb 2025 — May 2025",
     location: "Gurugram, Haryana",
     description: [
-      "Worked with multi-source datasets for analysis and reporting.",
-      "Performed data validation and preprocessing to ensure accuracy and consistency.",
-      "Contributed to reporting and business insights for stakeholders.",
+      "Supported consulting and reporting workstreams by working with multi-source datasets pulled from different business systems and formats.",
+      "Cleaned, validated, and preprocessed data to improve accuracy before analysis — catching inconsistencies, standardizing fields, and preparing datasets stakeholders could trust.",
+      "Helped turn raw data into structured reporting outputs that highlighted trends, exceptions, and business-relevant signals for review.",
+      "Collaborated in a professional services setting where attention to detail, documentation, and clear deliverables mattered as much as the analysis itself.",
     ],
   },
   {
@@ -90,8 +197,10 @@ export const journey: JourneyItem[] = [
     period: "Jan 2023",
     location: "—",
     description: [
-      "Analyzed customer feedback for product and service performance.",
-      "Worked cross-functionally on analytical solutions, dashboards, and market research.",
+      "Analyzed customer feedback data to assess product and service performance — identifying recurring themes, pain points, and areas where experience could improve.",
+      "Supported cross-functional analytical work by helping shape dashboards, summaries, and research inputs used in product and business discussions.",
+      "Contributed to market and customer insight work that connected qualitative feedback with structured reporting for easier decision-making.",
+      "Built early experience turning business questions into data-backed observations — the analytical foundation that later carried into engineering and product-focused roles.",
     ],
   },
   {
@@ -100,8 +209,10 @@ export const journey: JourneyItem[] = [
     period: "Jul 2022 — Sep 2022",
     location: "—",
     description: [
-      "Built and maintained responsive sites with HTML, CSS, and JavaScript.",
-      "Improved UX and performance using analytics; structured content with strong UI focus.",
+      "Built and maintained responsive marketing and content pages with HTML, CSS, and JavaScript — focusing on layout, readability, and mobile-friendly presentation.",
+      "Improved page structure and UI flow so content was easier to scan, navigate, and interact with across screen sizes.",
+      "Used analytics and performance observations to refine UX choices — reducing friction in key user paths and keeping pages lightweight where possible.",
+      "Gained hands-on experience translating design intent into front-end implementation, which became the base for later React, TypeScript, and full-stack work.",
     ],
   },
 ];
@@ -123,60 +234,82 @@ export const certifications = [
   "Microsoft Certified: Azure AI Fundamentals",
   "Microsoft Certified: Azure Data Fundamentals",
   "Microsoft Certified: Azure Fundamentals",
-  "Cisco Cybersecurity Essentials",
-  "Excellent Contributor Award — Alibaba Cloud Low Code Development Contest 2022",
+  "AWS S3 Project (Coursera)",
   "Data Encryption using AWS KMS (UST)",
-  "NPTEL — E-Business",
-];
+  "Cloud Architecture: Core Concepts",
+  "Cloud Architecture: Advanced Concepts",
+  "Excellent Contributor Award — Alibaba Cloud Low Code Development Contest 2022",
+  "Devtown Backend Web Development Bootcamp",
+  "Python & Data Science Essentials Bootcamp",
+  "Python and Machine Learning Bootcamp",
+  "Udemy — Agentic Engineer Course",
+] as const;
 
 export type PortfolioLink = {
   title: string;
   description: string;
   href: string;
-  status: "Coming soon" | "Add URL" | "Profile" | "Live" | "Private";
+  status: "Coming soon" | "In progress" | "Add URL" | "Profile" | "Live" | "Private";
   external?: boolean;
   demoUrl?: string;
+  featured?: boolean;
+  problem?: string;
+  result?: string;
+  stack?: string[];
 };
 
 export const portfolioLinks: PortfolioLink[] = [
   {
     title: "AI Sales Assistant CRM",
-    description:
-      "Multi-tenant B2B CRM with lead scoring, drag-and-drop pipeline, activity timelines, and AI-drafted follow-ups — plus OAuth integrations for HubSpot, Salesforce, Google Calendar, and Gmail. Monorepo: React SPA, Express API, Prisma, JWT auth with refresh rotation.",
+    description: "Multi-tenant B2B CRM with OAuth integrations and AI-drafted follow-ups.",
     href: "https://github.com/YatharthSharma1309/ai-sales-assistant-crm",
     status: "Live",
     external: true,
+    featured: true,
+    problem:
+      "Sales teams juggle leads across tools without a unified pipeline or AI-assisted follow-up workflow.",
+    result:
+      "Shipped a multi-tenant CRM with drag-and-drop pipeline, activity timelines, lead scoring, and OAuth sync for HubSpot, Salesforce, Google Calendar, and Gmail.",
+    stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth"],
+  },
+  {
+    title: "RecruitAI — Smart Recruitment Assistant",
+    description: "Recruiter dashboard for resume screening and candidate scoring.",
+    href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
+    status: "Live",
+    external: true,
+    featured: true,
+    problem:
+      "Manual resume screening is slow and inconsistent when matching candidates to job requirements.",
+    result:
+      "Built a dashboard that parses PDF/DOCX resumes, scores candidates against job descriptions, surfaces skill gaps, and generates interview questions.",
+    stack: ["Next.js", "Prisma", "SQLite", "OpenRouter", "PDF parsing"],
+  },
+  {
+    title: "IntelliRAG",
+    description: "Production RAG platform for contextual querying and semantic search.",
+    href: "",
+    status: "Private",
+    featured: true,
+    problem:
+      "Organisations need reliable semantic search over proprietary documents without exposing source code.",
+    result:
+      "Delivered end-to-end RAG — document ingestion, chunking, embeddings, retrieval, and LLM response generation — as private org infrastructure.",
+    stack: ["RAG", "Embeddings", "Semantic search", "LLM APIs", "Document ingestion"],
   },
   {
     title: "SupportAI — Customer Support Platform",
     description:
-      "Portfolio-grade support stack: document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget. Next.js 16, Prisma, PostgreSQL, OpenRouter.",
-    href: "#",
-    status: "Coming soon",
-  },
-  {
-    title: "RecruitAI — Smart Recruitment Assistant",
-    description:
-      "Recruiter dashboard for resume screening: upload PDF/DOCX, extract skills, score candidates against a job description, surface gaps, and generate interview questions. Next.js, Prisma, SQLite/Supabase, OpenRouter.",
-    href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
-    status: "Live",
-    external: true,
+      "Portfolio-grade support stack: document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget.",
+    href: "",
+    status: "In progress",
   },
   {
     title: "EduTech — AI Document Processing",
     description:
-      "AI-powered educational document processing: OCR-based Q&A extraction from PDFs, classification, Excel-ready output, and full-stack integration with Python backend plus React/Node frontend.",
-    href: "https://github.com/YatharthSharma1309/EduTech",
-    status: "Live",
-    external: true,
-  },
-  {
-    title: "IntelliRAG",
-    description:
-      "RAG platform for contextual querying and semantic search — document ingestion, chunking, embeddings, retrieval, and LLM response generation. Python, vector databases, REST APIs.",
-    href: "https://github.com/YatharthSharma1309/IntelliRAG-Deployed-Version",
+      "Early-phase exploration of AI-powered educational document processing — OCR-based Q&A extraction from PDFs, classification, and Excel-ready output. Official organisation repo; source is private and not publicly shareable.",
+    href: "",
     status: "Private",
-    external: true,
   },
   {
     title: "TermLens",
@@ -187,14 +320,6 @@ export const portfolioLinks: PortfolioLink[] = [
     external: true,
   },
   {
-    title: "Teleport AI",
-    description:
-      "Upload a photo and composite yourself onto a Google Street View scene — background removed server-side via Remove.bg. Django + DRF backend; React Native (Expo) mobile client with draggable cutout overlay.",
-    href: "https://github.com/YatharthSharma1309/Teleport.AI",
-    status: "Live",
-    external: true,
-  },
-  {
     title: "Arena Deathmatch",
     description:
       "Browser-based 3D first-person arena shooter — waves, dual weapons, minimap, difficulty tiers, and persistent high scores. Pure HTML/CSS/JS, no install required.",
@@ -202,12 +327,7 @@ export const portfolioLinks: PortfolioLink[] = [
     status: "Live",
     external: true,
   },
-  {
-    title: "GitHub",
-    description:
-      "Repositories, forks, and experiments — code and activity in one place.",
-    href: site.github,
-    status: "Profile",
-    external: true,
-  },
 ];
+
+export const featuredPortfolioLinks = portfolioLinks.filter((p) => p.featured);
+export const morePortfolioLinks = portfolioLinks.filter((p) => !p.featured);

@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
-import { portfolioLinks, type PortfolioLink } from "@/lib/content";
+import {
+  featuredPortfolioLinks,
+  morePortfolioLinks,
+  sectionCopy,
+  type PortfolioLink,
+} from "@/lib/content";
 
 function statusBadgeClass(status: PortfolioLink["status"]) {
   switch (status) {
@@ -11,6 +16,8 @@ function statusBadgeClass(status: PortfolioLink["status"]) {
       return "bg-accent/[0.12] text-accent";
     case "Coming soon":
       return "bg-[rgba(232,164,58,0.1)] text-accent-warm/95";
+    case "In progress":
+      return "bg-[rgba(232,164,58,0.08)] text-accent-warm/85 border border-accent-warm/20";
     case "Private":
       return "border-border-highlight text-text-muted border bg-transparent";
     case "Profile":
@@ -20,25 +27,123 @@ function statusBadgeClass(status: PortfolioLink["status"]) {
   }
 }
 
-function PortfolioCard({ item, featured }: { item: PortfolioLink; featured?: boolean }) {
-  const isInteractive =
-    item.status === "Live" || item.status === "Profile" || item.status === "Add URL";
+function hasInteractiveLink(item: PortfolioLink) {
+  return (
+    item.href &&
+    (item.status === "Live" || item.status === "Profile" || item.status === "Add URL")
+  );
+}
+
+function FeaturedProjectCard({ item }: { item: PortfolioLink }) {
+  const isInteractive = hasInteractiveLink(item);
+  const cardClass = `surface-card border-border-subtle from-bg-elevated/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b to-transparent p-7 transition-[border-color,box-shadow,transform] duration-300 ${
+    isInteractive
+      ? "hover:border-accent/30 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(62,232,200,0.12),0_20px_40px_-20px_rgba(0,0,0,0.5)]"
+      : "opacity-95"
+  }`;
+
+  return (
+    <article className={cardClass}>
+      <span
+        className={`mb-5 inline-flex w-fit rounded-md px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] uppercase ${statusBadgeClass(item.status)}`}
+      >
+        {item.status}
+      </span>
+      <h3 className="font-display text-text-primary text-lg font-bold tracking-tight">
+        {item.title}
+      </h3>
+      {item.description ? (
+        <p className="text-text-muted mt-2 text-sm leading-relaxed">{item.description}</p>
+      ) : null}
+
+      {item.problem ? (
+        <div className="mt-5">
+          <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+            Problem
+          </p>
+          <p className="text-text-muted mt-1.5 text-sm leading-relaxed">{item.problem}</p>
+        </div>
+      ) : null}
+
+      {item.result ? (
+        <div className="mt-4">
+          <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+            Result
+          </p>
+          <p className="text-text-muted mt-1.5 text-sm leading-relaxed">{item.result}</p>
+        </div>
+      ) : null}
+
+      {item.stack && item.stack.length > 0 ? (
+        <div className="mt-4">
+          <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+            Stack
+          </p>
+          <ul className="mt-2 flex flex-wrap gap-1.5">
+            {item.stack.map((tag) => (
+              <li
+                key={tag}
+                className="border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      <div className="mt-6 flex flex-wrap items-center gap-4">
+        {isInteractive ? (
+          <Link
+            href={item.href}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+            className="text-accent text-sm font-semibold opacity-85 transition-opacity hover:opacity-100"
+          >
+            {item.status === "Profile" ? "View profile →" : "View repo →"}
+          </Link>
+        ) : item.status === "Private" ? (
+          <>
+            <span className="text-text-muted text-sm font-semibold">Private org project</span>
+            <Link
+              href="#digital-twin"
+              className="text-accent text-sm font-semibold opacity-85 transition-opacity hover:opacity-100"
+            >
+              Ask career twin →
+            </Link>
+          </>
+        ) : null}
+        {item.demoUrl ? (
+          <Link
+            href={item.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-text-muted hover:text-accent text-sm font-medium underline-offset-2 hover:underline"
+          >
+            Live demo →
+          </Link>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
+function PortfolioCard({ item }: { item: PortfolioLink }) {
+  const isInteractive = hasInteractiveLink(item);
   const cardClass = `surface-card border-border-subtle from-bg-elevated/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b to-transparent p-7 transition-[border-color,box-shadow,transform] duration-300 ${
     isInteractive
       ? "hover:border-accent/30 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(62,232,200,0.12),0_20px_40px_-20px_rgba(0,0,0,0.5)]"
       : "opacity-90"
   }`;
 
-  const inner = (
-    <>
+  return (
+    <article className={cardClass}>
       <span
         className={`mb-5 inline-flex w-fit rounded-md px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] uppercase ${statusBadgeClass(item.status)}`}
       >
         {item.status}
       </span>
-      <h3
-        className={`font-display text-text-primary font-bold tracking-tight ${featured ? "text-xl" : "text-lg"}`}
-      >
+      <h3 className="font-display text-text-primary text-lg font-bold tracking-tight">
         {item.title}
       </h3>
       <p className="text-text-muted mt-3 flex-1 text-sm leading-relaxed">{item.description}</p>
@@ -58,7 +163,11 @@ function PortfolioCard({ item, featured }: { item: PortfolioLink; featured?: boo
           </Link>
         ) : (
           <span className="text-text-muted text-sm font-semibold">
-            {item.status === "Coming soon" ? "Reserved" : "Private project"}
+            {item.status === "In progress"
+              ? "Architecture in progress"
+              : item.status === "Coming soon"
+                ? "Reserved"
+                : "Private project"}
           </span>
         )}
         {item.demoUrl ? (
@@ -72,18 +181,12 @@ function PortfolioCard({ item, featured }: { item: PortfolioLink; featured?: boo
           </Link>
         ) : null}
       </div>
-    </>
+    </article>
   );
-
-  if (isInteractive) {
-    return <article className={cardClass}>{inner}</article>;
-  }
-
-  return <article className={cardClass}>{inner}</article>;
 }
 
 export function PortfolioSection() {
-  const featuredTitle = portfolioLinks.find((p) => p.status === "Live")?.title;
+  const { portfolio } = sectionCopy;
 
   return (
     <section
@@ -93,21 +196,41 @@ export function PortfolioSection() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Portfolio"
-          title="Selected builds"
-          description="Full-stack and AI products I've designed and built end-to-end — from RAG support platforms to multi-tenant CRMs. Source linked on each card where available."
+          title={portfolio.title}
+          description={portfolio.description}
         />
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {portfolioLinks.map((item, i) => (
-            <Reveal
-              key={item.title}
-              delay={i * 0.08}
-              className={item.title === featuredTitle ? "sm:col-span-2" : undefined}
-            >
-              <PortfolioCard item={item} featured={item.title === featuredTitle} />
+        <div id="featured-work" className="mt-14 grid gap-6 lg:grid-cols-3">
+          {featuredPortfolioLinks.map((item, i) => (
+            <Reveal key={item.title} delay={i * 0.08}>
+              <FeaturedProjectCard item={item} />
             </Reveal>
           ))}
         </div>
+
+        <h3 className="text-text-primary mt-16 text-lg font-semibold tracking-tight">
+          {portfolio.moreBuildsLabel}
+        </h3>
+
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          {morePortfolioLinks.map((item, i) => (
+            <Reveal key={item.title} delay={i * 0.08}>
+              <PortfolioCard item={item} />
+            </Reveal>
+          ))}
+        </div>
+
+        <p className="text-text-muted mt-12 text-center text-sm leading-relaxed">
+          {portfolio.footerPrompt}{" "}
+          <a href="#digital-twin" className="text-accent font-semibold hover:underline">
+            {portfolio.footerTwin}
+          </a>{" "}
+          or{" "}
+          <a href="#contact" className="text-accent font-semibold hover:underline">
+            {portfolio.footerContact}
+          </a>
+          .
+        </p>
       </div>
     </section>
   );

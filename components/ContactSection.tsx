@@ -1,8 +1,22 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
-import { site } from "@/lib/content";
+import { ConnectIcon } from "@/components/ConnectIcons";
+import { ContactForm } from "@/components/ContactForm";
+import { sectionCopy } from "@/lib/content";
+import { connectLinks } from "@/lib/connect";
+
+const contactButtonClass =
+  "border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent inline-flex min-h-11 w-full items-center justify-center gap-2.5 rounded-xl border bg-[var(--bg-card)] px-6 py-4 text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit";
 
 export function ContactSection() {
+  const { contact } = sectionCopy;
+
+  const email = connectLinks.find((item) => item.channel === "email");
+  const resume = connectLinks.find((item) => item.channel === "resume");
+  const social = connectLinks.filter(
+    (item) => item.channel !== "email" && item.channel !== "resume",
+  );
+
   return (
     <section
       id="contact"
@@ -19,48 +33,61 @@ export function ContactSection() {
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Contact"
-          title="Let's build something deliberate"
-          description="Open to AI-focused full-stack roles, collaborations where craft matters, and teams building intelligent products with strong engineering fundamentals."
+          title={contact.title}
+          description={`${contact.description} ${contact.responseTime}`}
         />
-        <Reveal delay={0.08}>
-          <div className="mt-12 flex flex-col flex-wrap gap-4 sm:flex-row sm:items-center">
-            <a
-              href={`mailto:${site.email}`}
-              className="bg-accent text-bg-deep focus-visible:ring-accent/50 w-full rounded-xl px-8 py-4 text-center text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98] sm:w-fit"
-            >
-              {site.email}
-            </a>
-            <a
-              href={`tel:${site.phone.replace(/\s/g, "")}`}
-              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
-            >
-              {site.phone}
-            </a>
-            <a
-              href={site.resumePdf}
-              download="Yatharth-Sharma-Resume.pdf"
-              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
-            >
-              Download resume
-            </a>
-            <a
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
-            >
-              Connect on LinkedIn
-            </a>
-            <a
-              href={site.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent w-full rounded-xl border bg-[var(--bg-card)] px-8 py-4 text-center text-sm font-semibold backdrop-blur-sm transition-colors sm:w-fit"
-            >
-              GitHub
-            </a>
-          </div>
-        </Reveal>
+
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <Reveal delay={0.06}>
+            <div>
+              <p className="text-text-primary mb-5 text-sm font-semibold">Send a message</p>
+              <ContactForm />
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div>
+              <p className="text-text-primary mb-5 text-sm font-semibold">Or reach me directly</p>
+              <div className="flex flex-col flex-wrap gap-4">
+                {email ? (
+                  <a href={email.href} className={contactButtonClass}>
+                    <ConnectIcon channel="email" size={17} />
+                    {contact.emailLabel}
+                  </a>
+                ) : null}
+
+                {resume ? (
+                  <a
+                    href={resume.href}
+                    download={resume.download}
+                    className={contactButtonClass}
+                  >
+                    <ConnectIcon channel="resume" size={17} />
+                    {resume.label}
+                  </a>
+                ) : null}
+
+                {social.map((item) => (
+                  <a
+                    key={item.channel}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={contactButtonClass}
+                  >
+                    <ConnectIcon channel={item.channel} size={17} />
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+
+              <p className="text-text-muted mt-6 text-sm leading-relaxed">
+                Prefer email? Use the button above — it opens your mail client with a pre-filled
+                subject line.
+              </p>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

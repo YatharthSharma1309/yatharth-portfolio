@@ -1,14 +1,17 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
-import { certifications } from "@/lib/content";
+import { certifications, sectionCopy } from "@/lib/content";
 
 export function CertificationsSection() {
+  const { certifications: copy } = sectionCopy;
+
   return (
     <section className="border-border-subtle border-t py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Certifications"
-          title="Continuous learning"
+          title={copy.title}
+          description={copy.description}
         />
         <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {certifications.map((c, i) => (

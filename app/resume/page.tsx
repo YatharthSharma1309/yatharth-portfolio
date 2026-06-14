@@ -3,19 +3,12 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { ResumeActions } from "@/components/ResumeActions";
 import { site } from "@/lib/content";
+import { formatExternalLabel } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: `Resume — ${site.name}`,
   description: `Resume of ${site.name}, ${site.role}. Download PDF or view online.`,
 };
-
-function contactPath(url: string) {
-  try {
-    return new URL(url).pathname.replace(/^\//, "");
-  } catch {
-    return url;
-  }
-}
 
 export default function ResumePage() {
   return (
@@ -47,23 +40,19 @@ export default function ResumePage() {
             </h1>
             <p className="text-text-primary/90 mt-2 text-lg font-medium">{site.role}</p>
             <p className="text-text-muted mt-3 max-w-2xl text-sm leading-relaxed">
-              {site.availability}. Official PDF below — same document shared with recruiters.
+              {site.availability}. PDF below is generated from this portfolio and stays in sync with the site.
             </p>
             <p className="font-mono text-text-muted mt-4 text-xs leading-relaxed">
               {site.email}
               &nbsp;·&nbsp;
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-accent transition-colors">
-                {site.phone}
-              </a>
-              &nbsp;·&nbsp;
               {site.location}
               &nbsp;·&nbsp;
               <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                {contactPath(site.linkedin)}
+                {formatExternalLabel(site.linkedin)}
               </a>
               &nbsp;·&nbsp;
               <a href={site.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                {contactPath(site.github)}
+                {formatExternalLabel(site.github)}
               </a>
             </p>
             <div className="mt-8">

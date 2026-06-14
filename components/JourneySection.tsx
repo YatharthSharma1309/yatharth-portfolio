@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
-import { education, journey } from "@/lib/content";
+import { education, journey, sectionCopy } from "@/lib/content";
 
 export function JourneySection() {
   return (
@@ -11,8 +11,8 @@ export function JourneySection() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Career journey"
-          title="From analytics to engineering"
-          description="A path shaped by data literacy, internship grit, and hands-on production engineering at an AI startup — always with the user in frame."
+          title={sectionCopy.journey.title}
+          description={sectionCopy.journey.description}
         />
 
         <div className="relative mt-20 max-w-3xl">
@@ -41,7 +41,9 @@ export function JourneySection() {
                     <p className="text-text-primary/95 mt-1 font-medium">
                       {item.org}
                     </p>
-                    <p className="text-text-muted mt-0.5 text-sm">{item.location}</p>
+                    {item.location && item.location !== "—" ? (
+                      <p className="text-text-muted mt-0.5 text-sm">{item.location}</p>
+                    ) : null}
                     {item.description ? (
                       <ul className="text-text-muted mt-4 space-y-2.5 text-sm leading-relaxed">
                         {item.description.map((line) => (

@@ -3,51 +3,158 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
+import { TwinAnimatedAvatar } from "@/components/TwinAnimatedAvatar";
+import { sectionCopy, site, twinStarterQuestions, twinWelcome } from "@/lib/content";
+import { isStaticExport } from "@/lib/contact-submit";
 
 type ChatMessage = {
   role: "user" | "assistant";
   content: string;
+  sentAt: number;
 };
 
-const STARTER_QUESTIONS = [
-  "What did you work on at Whilter.AI?",
-  "How has your journey evolved from analytics to engineering?",
-  "Which backend skills are you currently learning?",
-];
+const WELCOME_CONTENT = `${twinWelcome} ${site.availability}.`;
+
+function formatMessageTime(sentAt: number): string {
+  return new Date(sentAt).toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+function TypingIndicator() {
+  return (
+    <div className="flex items-start gap-3">
+      <TwinAnimatedAvatar active />
+      <div className="border-border-subtle bg-bg-card rounded-2xl rounded-tl-md border px-4 py-3">
+        <div className="flex items-center gap-1.5" aria-label="Career twin is thinking">
+          <span className="chat-typing-dot bg-accent/80 h-1.5 w-1.5 rounded-full" />
+          <span className="chat-typing-dot bg-accent/80 h-1.5 w-1.5 rounded-full" />
+          <span className="chat-typing-dot bg-accent/80 h-1.5 w-1.5 rounded-full" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MessageBubble({
+  message,
+  showTimes,
+}: {
+  message: ChatMessage;
+  showTimes: boolean;
+}) {
+  const isUser = message.role === "user";
+  const time =
+    showTimes && message.sentAt > 0 ? formatMessageTime(message.sentAt) : null;
+
+  if (isUser) {
+    return (
+      <div className="flex justify-end">
+        <div className="max-w-[min(88%,36rem)]">
+          <div className="text-text-muted mb-1.5 flex items-center justify-end gap-2 pr-1 text-[10px] font-semibold tracking-[0.14em] uppercase">
+            {time ? <span>{time}</span> : null}
+            <span>You</span>
+          </div>
+          <div className="bg-accent text-bg-deep rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(62,232,200,0.55)]">
+            {message.content}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-start gap-3">
+      <TwinAnimatedAvatar />
+      <div className="max-w-[min(88%,36rem)]">
+        <div className="text-accent/90 mb-1.5 flex items-center gap-2 text-[10px] font-semibold tracking-[0.14em] uppercase">
+          <span>Career Twin</span>
+          {time ? (
+            <span className="text-text-muted/70 font-normal normal-case tracking-normal">
+              {time}
+            </span>
+          ) : null}
+        </div>
+        <div className="border-border-subtle bg-bg-card text-text-primary rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(62,232,200,0.45)]">
+          {message.content}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function DigitalTwinSection() {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      role: "assistant",
-      content:
-        "Hi, I am Yatharth's Digital Twin. Ask me about his career journey, Whilter.AI experience, skills, or what he is learning next.",
-    },
+    { role: "assistant", content: WELCOME_CONTENT, sentAt: 0 },
   ]);
+  const [showTimes, setShowTimes] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [apiReady, setApiReady] = useState<boolean | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const canSend = useMemo(
-    () => input.trim().length > 0 && !isLoading,
-    [input, isLoading]
+  const hasUserMessages = useMemo(
+    () => messages.some((message) => message.role === "user"),
+    [messages]
   );
+
+  const canSend = useMemo(
+    () => input.trim().length > 0 && !isLoading && apiReady !== false,
+    [input, isLoading, apiReady]
+  );
+
+  useEffect(() => {
+    setMessages([{ role: "assistant", content: WELCOME_CONTENT, sentAt: Date.now() }]);
+    setShowTimes(true);
+  }, []);
+
+  useEffect(() => {
+    if (isStaticExport) {
+      setApiReady(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    async function checkStatus() {
+      try {
+        const response = await fetch("/api/digital-twin");
+        const data = (await response.json()) as { ready?: boolean };
+        if (!cancelled) setApiReady(Boolean(data.ready));
+      } catch {
+        if (!cancelled) setApiReady(false);
+      }
+    }
+
+    void checkStatus();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!messagesContainerRef.current) return;
     messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
   }, [messages, isLoading]);
 
+  function clearChat() {
+    setMessages([{ role: "assistant", content: WELCOME_CONTENT, sentAt: Date.now() }]);
+    setInput("");
+    setError(null);
+  }
+
   async function sendMessage(text: string) {
     const userText = text.trim();
-    if (!userText || isLoading) return;
+    if (!userText || isLoading || apiReady === false) return;
 
     setIsLoading(true);
     setError(null);
 
     const nextMessages: ChatMessage[] = [
       ...messages,
-      { role: "user", content: userText },
+      { role: "user", content: userText, sentAt: Date.now() },
     ];
     setMessages(nextMessages);
     setInput("");
@@ -56,7 +163,9 @@ export function DigitalTwinSection() {
       const response = await fetch("/api/digital-twin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages }),
+        body: JSON.stringify({
+          messages: nextMessages.map(({ role, content }) => ({ role, content })),
+        }),
       });
       const data = (await response.json()) as { reply?: string; error?: string };
 
@@ -68,7 +177,10 @@ export function DigitalTwinSection() {
         throw new Error("Empty response received from the model.");
       }
 
-      setMessages((prev) => [...prev, { role: "assistant", content: data.reply! }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.reply!, sentAt: Date.now() },
+      ]);
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Something went wrong. Please retry.";
@@ -86,93 +198,205 @@ export function DigitalTwinSection() {
   return (
     <section
       id="digital-twin"
-      className="border-border-subtle scroll-mt-[4.25rem] border-t py-28 sm:py-36"
+      className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-28 sm:py-36"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(62,232,200,0.1), transparent 70%)",
+        }}
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="AI Digital Twin"
-          title="Chat with my career twin"
-          description="Ask direct questions about my role, experience, skills, and growth trajectory. Responses are grounded in this portfolio's career data."
+          title="Ask my career twin"
+          description={`${sectionCopy.digitalTwin.description} Currently ${site.availability.toLowerCase()}.`}
         />
 
         <Reveal delay={0.08}>
-          <div className="surface-card border-border-subtle mt-12 rounded-2xl border p-4 shadow-[0_24px_46px_-28px_rgba(0,0,0,0.65)] sm:p-6">
-            <div className="border-border-subtle mb-4 flex items-center justify-between border-b px-2 pb-4 sm:px-1">
-              <div>
-                <p className="text-text-primary text-sm font-semibold">
-                  Career Twin Assistant
-                </p>
-                <p className="text-text-muted text-xs">
-                  Powered by OpenRouter · Context-aware of your profile
-                </p>
+          <div className="surface-card border-border-highlight relative mx-auto mt-12 max-w-5xl overflow-hidden rounded-2xl border">
+            <div
+              className="pointer-events-none absolute inset-0 opacity-60"
+              style={{
+                background:
+                  "radial-gradient(ellipse 90% 60% at 0% 0%, rgba(62,232,200,0.12), transparent 55%)",
+              }}
+              aria-hidden
+            />
+
+            <div className="border-border-subtle relative flex flex-wrap items-center justify-between gap-4 border-b px-5 py-5 sm:px-6">
+              <div className="flex min-w-0 items-center gap-4">
+                <TwinAnimatedAvatar active={isLoading} />
+                <div className="min-w-0">
+                  <p className="font-display text-text-primary text-base font-bold tracking-tight">
+                    {sectionCopy.digitalTwin.chatTitle}
+                  </p>
+                  <p className="text-text-muted mt-0.5 text-xs leading-relaxed">
+                    Portfolio-aware answers · Powered by{" "}
+                    <a
+                      href="https://openrouter.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline"
+                    >
+                      OpenRouter
+                    </a>
+                  </p>
+                </div>
               </div>
-              <span className="text-accent inline-flex items-center gap-2 text-xs font-medium">
-                <span className="bg-accent h-2 w-2 rounded-full" aria-hidden />
-                Online
-              </span>
+              <div className="flex shrink-0 items-center gap-2">
+                {hasUserMessages ? (
+                  <button
+                    type="button"
+                    onClick={clearChat}
+                    disabled={isLoading}
+                    className="border-border-highlight text-text-muted hover:border-accent/35 hover:text-text-primary disabled:opacity-55 rounded-full border px-3 py-1.5 text-[11px] font-semibold tracking-wide transition-colors"
+                  >
+                    Clear chat
+                  </button>
+                ) : null}
+                <span
+                  className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold tracking-wide ${
+                    apiReady === false
+                      ? "border-accent-warm/30 bg-accent-warm/[0.06] text-accent-warm/95"
+                      : "border-accent/25 bg-accent/[0.06] text-accent"
+                  }`}
+                >
+                  <span className="relative flex h-2 w-2" aria-hidden>
+                    {apiReady !== false ? (
+                      <span className="bg-accent absolute inline-flex h-full w-full animate-ping rounded-full opacity-40" />
+                    ) : null}
+                    <span
+                      className={`relative inline-flex h-2 w-2 rounded-full ${
+                        apiReady === false ? "bg-accent-warm/90" : "bg-accent"
+                      }`}
+                    />
+                  </span>
+                  {apiReady === false ? "Offline" : apiReady === null ? "Checking" : "Online"}
+                </span>
+              </div>
             </div>
 
-            <div className="border-border-subtle mb-4 flex flex-wrap gap-2 border-b pb-4">
-              {STARTER_QUESTIONS.map((question) => (
-                <button
-                  key={question}
-                  type="button"
-                  onClick={() => void sendMessage(question)}
-                  disabled={isLoading}
-                  className="border-border-highlight text-text-muted hover:text-text-primary disabled:opacity-60 rounded-full border px-3 py-1.5 text-xs transition-colors"
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
+            {apiReady === false ? (
+              <div className="border-accent-warm/20 bg-accent-warm/[0.06] text-accent-warm/95 mx-5 mt-5 rounded-xl border px-4 py-3 text-sm leading-relaxed sm:mx-6">
+                {isStaticExport ? (
+                  <>
+                    Live chat is not available on this static GitHub Pages site. Browse the portfolio,
+                    download my resume, or email{" "}
+                    <a href={`mailto:${site.email}`} className="text-accent hover:underline">
+                      {site.email}
+                    </a>
+                    .
+                  </>
+                ) : (
+                  <>
+                    Chat is unavailable — add{" "}
+                    <code className="font-mono text-xs">OPENROUTER_API_KEY</code> to{" "}
+                    <code className="font-mono text-xs">.env.local</code> to enable the career twin.
+                    You can still browse the portfolio or email{" "}
+                    <a href={`mailto:${site.email}`} className="text-accent hover:underline">
+                      {site.email}
+                    </a>
+                    .
+                  </>
+                )}
+              </div>
+            ) : null}
+
+            {!hasUserMessages ? (
+              <div className="relative px-5 pt-5 sm:px-6">
+                <p className="text-text-muted text-[10px] font-semibold tracking-[0.16em] uppercase">
+                  Suggested prompts
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {twinStarterQuestions.map((question) => (
+                    <button
+                      key={question}
+                      type="button"
+                      onClick={() => void sendMessage(question)}
+                      disabled={isLoading || apiReady === false}
+                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 rounded-full border bg-[rgba(0,0,0,0.18)] px-3.5 py-2 text-left text-xs leading-snug transition-colors"
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             <div
               ref={messagesContainerRef}
-              className="h-[420px] space-y-4 overflow-y-auto rounded-xl bg-[rgba(0,0,0,0.18)] p-3 pr-2 sm:h-[500px] sm:p-4"
+              className="chat-panel border-border-subtle relative mx-5 mt-5 mb-4 max-h-[min(58vh,520px)] min-h-[360px] space-y-5 overflow-y-auto rounded-2xl border p-4 sm:mx-6 sm:min-h-[420px] sm:p-5"
             >
               {messages.map((message, idx) => (
-                <div
-                  key={`${message.role}-${idx}`}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed sm:max-w-[78%] ${
-                      message.role === "user"
-                        ? "bg-accent text-bg-deep font-medium"
-                        : "border-border-subtle bg-bg-card text-text-primary border whitespace-pre-wrap"
-                    }`}
-                  >
-                    {message.content}
-                  </div>
-                </div>
+                <MessageBubble
+                  key={`${message.role}-${message.sentAt}-${idx}`}
+                  message={message}
+                  showTimes={showTimes}
+                />
               ))}
-              {isLoading ? (
-                <div className="text-text-muted text-sm">Thinking...</div>
-              ) : null}
+              {isLoading ? <TypingIndicator /> : null}
             </div>
 
             {error ? (
-              <p className="mt-3 text-sm text-red-300">{error}</p>
+              <p className="text-red-300 mx-5 mb-4 rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm sm:mx-6">
+                {error}
+              </p>
             ) : null}
 
             <form
               onSubmit={onSubmit}
-              className="border-border-subtle mt-4 flex items-end gap-3 border-t pt-4"
+              className="border-border-subtle relative border-t px-5 py-5 sm:px-6"
             >
-              <textarea
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                placeholder="Ask about roles, skills, experience, projects..."
-                rows={2}
-                className="border-border-highlight bg-bg-card text-text-primary placeholder:text-text-muted/80 focus:border-accent min-h-12 max-h-28 min-w-0 flex-1 resize-y rounded-xl border px-4 py-3 text-sm outline-none"
-              />
-              <button
-                type="submit"
-                disabled={!canSend}
-                className="bg-accent text-bg-deep disabled:bg-accent/55 rounded-xl px-5 py-3 text-sm font-bold transition-colors disabled:cursor-not-allowed"
-              >
-                Send
-              </button>
+              <div className="border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(62,232,200,0.12)] flex items-end gap-3 rounded-2xl border bg-[rgba(0,0,0,0.22)] p-2 transition-[border-color,box-shadow]">
+                <textarea
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  placeholder={
+                    apiReady === false
+                      ? "Chat unavailable until OpenRouter API key is configured..."
+                      : sectionCopy.digitalTwin.inputPlaceholder
+                  }
+                  rows={2}
+                  disabled={apiReady === false}
+                  className="text-text-primary placeholder:text-text-muted/75 max-h-28 min-h-12 min-w-0 flex-1 resize-none bg-transparent px-3 py-2.5 text-sm leading-relaxed outline-none disabled:cursor-not-allowed disabled:opacity-60"
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" && !event.shiftKey) {
+                      event.preventDefault();
+                      if (canSend) void sendMessage(input);
+                    }
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={!canSend}
+                  className="bg-accent text-bg-deep hover:shadow-[0_0_24px_var(--glow)] mb-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-[box-shadow,opacity] disabled:cursor-not-allowed disabled:opacity-45"
+                  aria-label="Send message"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden
+                  >
+                    <path
+                      d="M5 12h12M13 7l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <p className="text-text-muted/75 mt-3 text-center text-[11px]">
+                Press Enter to send · Shift + Enter for a new line ·{" "}
+                {sectionCopy.digitalTwin.formFooter}
+              </p>
             </form>
           </div>
         </Reveal>
