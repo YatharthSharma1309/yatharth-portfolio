@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ConnectIconBadge } from "@/components/ConnectIcons";
 import { focusAreas, site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { primaryNav } from "@/lib/navigation";
@@ -50,6 +49,8 @@ function FooterLink({
 }
 
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="border-border-subtle border-t py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -87,15 +88,12 @@ export function SiteFooter() {
             <ul className="space-y-3">
               {connectLinks.map((item) => (
                 <li key={item.channel}>
-                  <div className="flex items-center gap-3">
-                    <ConnectIconBadge channel={item.channel} />
-                    <FooterLink
-                      href={item.href}
-                      label={item.label}
-                      external={item.external}
-                      download={item.download}
-                    />
-                  </div>
+                  <FooterLink
+                    href={item.href}
+                    label={item.label}
+                    external={item.external}
+                    download={item.download}
+                  />
                 </li>
               ))}
             </ul>
@@ -113,13 +111,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="border-border-subtle mt-14 border-t pt-8">
-          <p className="text-text-muted/75 text-center text-sm leading-relaxed">
-            <span className="font-mono text-[11px] tracking-wide">© {new Date().getFullYear()}</span>
-            <span className="text-text-muted/40 mx-2" aria-hidden>
-              ·
-            </span>
-            <span className="text-text-primary font-medium">{site.name}</span>
+        <div className="border-border-subtle mt-14 flex flex-col items-center gap-1.5 border-t pt-8">
+          <p className="font-display text-text-primary text-sm font-semibold tracking-tight">
+            {site.name}
+          </p>
+          <p className="text-text-muted/70 font-mono text-[11px] tracking-[0.14em] uppercase">
+            © {year}
           </p>
         </div>
       </div>
