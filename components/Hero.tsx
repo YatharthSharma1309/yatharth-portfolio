@@ -57,15 +57,17 @@ export function Hero() {
           </a>
         </div>
 
-        <p className="text-text-muted mt-4 text-sm sm:mt-5">
-          <a href="#contact" className="text-accent font-semibold hover:underline">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:mt-7 sm:gap-x-8">
+          <a href="#contact" className="text-accent text-sm font-semibold hover:underline">
             Get in touch
           </a>
-          {" · "}
-          <a href="#digital-twin" className="text-accent font-semibold hover:underline">
+          <span className="text-text-muted/35 hidden text-xs select-none sm:inline" aria-hidden>
+            ·
+          </span>
+          <a href="#digital-twin" className="text-accent text-sm font-semibold hover:underline">
             Ask career twin →
           </a>
-        </p>
+        </div>
       </div>
     </section>
   );
