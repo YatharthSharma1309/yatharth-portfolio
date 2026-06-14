@@ -37,9 +37,6 @@ export function Hero() {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:mt-5">
-          <span className="border-border-highlight text-text-muted inline-flex w-fit items-center rounded-full border bg-[var(--bg-card)] px-3.5 py-2 text-[10px] font-medium tracking-wide backdrop-blur-sm sm:px-4 sm:text-[11px]">
-            {site.location}
-          </span>
           <span className="border-accent/30 bg-accent/[0.08] text-accent inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-2 text-[11px] font-semibold tracking-wide">
             <span className="bg-accent h-2 w-2 shrink-0 rounded-full" aria-hidden />
             {site.availability}
