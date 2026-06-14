@@ -82,18 +82,3 @@ export function ConnectIcon({ channel, className = "", size = 18 }: ConnectIconP
       );
   }
 }
-
-type ConnectIconBadgeProps = {
-  channel: ConnectChannel;
-  className?: string;
-};
-
-export function ConnectIconBadge({ channel, className = "" }: ConnectIconBadgeProps) {
-  return (
-    <span
-      className={`bg-accent/12 text-accent inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${className}`}
-    >
-      <ConnectIcon channel={channel} size={16} />
-    </span>
-  );
-}

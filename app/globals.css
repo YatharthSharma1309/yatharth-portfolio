@@ -91,6 +91,30 @@ body {
   filter: blur(80px);
 }
 
+.section-glow-top {
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 0%,
+    rgba(62, 232, 200, 0.14),
+    transparent 65%
+  );
+}
+
+.section-glow-bottom {
+  background: radial-gradient(
+    ellipse 75% 55% at 50% 100%,
+    rgba(62, 232, 200, 0.12),
+    transparent 62%
+  );
+}
+
+.section-glow-twin {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    rgba(62, 232, 200, 0.1),
+    transparent 70%
+  );
+}
+
 .text-gradient {
   background: linear-gradient(120deg, var(--text-primary) 0%, var(--accent) 45%, var(--accent-warm) 100%);
   -webkit-background-clip: text;

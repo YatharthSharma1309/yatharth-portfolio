@@ -1,4 +1,5 @@
 import { heroFocus, site } from "@/lib/content";
+import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
 
 const focusPill =
   "border-border-highlight text-text-muted inline-flex items-center rounded-full border bg-[var(--bg-card)] px-3 py-1.5 text-xs font-medium backdrop-blur-sm sm:px-3.5 sm:py-2 sm:text-[13px]";
@@ -44,16 +45,13 @@ export function Hero() {
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4 lg:mt-12">
-          <a
-            href="#featured-work"
-            className="bg-accent text-bg-deep focus-visible:ring-accent/50 inline-flex min-h-11 w-full max-w-sm items-center justify-center rounded-xl px-6 py-3.5 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98] sm:w-auto sm:px-7"
-          >
+          <a href="#featured-work" className={`${btnPrimary} w-full max-w-sm sm:w-auto sm:px-7`}>
             Featured projects
           </a>
           <a
             href={site.resumePdf}
             download="Yatharth-Sharma-Resume.pdf"
-            className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent inline-flex min-h-11 w-full max-w-sm items-center justify-center rounded-xl border bg-[var(--bg-card)] px-6 py-3.5 text-sm font-semibold tracking-wide backdrop-blur-sm transition-colors sm:w-auto"
+            className={`${btnSecondary} w-full max-w-sm sm:w-auto`}
           >
             Download resume
           </a>

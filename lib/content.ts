@@ -84,13 +84,6 @@ export const skillGroups = {
 
 export const heroFocus = ["AI", "React / TypeScript", "RAG & APIs"] as const;
 
-export const focusAreas = [
-  "React, TypeScript & Next.js",
-  "Node.js, Express & FastAPI",
-  "Prisma, PostgreSQL & REST APIs",
-  "LLM integrations, RAG & streaming APIs",
-] as const;
-
 export const twinStarterQuestions = [
   "What did you work on at Whilter.AI?",
   "Summarize my background for a hiring manager in 3 bullets.",
@@ -112,17 +105,12 @@ export const sectionCopy = {
       "Core stack I ship in production — React/TypeScript UIs, REST APIs, and LLM integrations.",
     buildingTitle: "Building depth in",
     buildingHelper: "Focused growth areas — where I am actively leveling up.",
-    hirePrompt: "Hiring for full-stack + AI?",
-    hireAction: "Get in touch",
   },
   portfolio: {
     title: "Featured full-stack & AI builds",
     description:
       "Three flagship projects — multi-tenant CRM, recruiter tooling, and production RAG — with problem, outcome, and stack at a glance. Live repos linked where available.",
     moreBuildsLabel: "More builds",
-    footerPrompt: "Want to dig into how these were built?",
-    footerTwin: "Ask my career twin",
-    footerContact: "get in touch",
   },
   contact: {
     title: "Open to full-time engineering roles",
@@ -183,6 +171,7 @@ export const journey: JourneyItem[] = [
     org: "Whilter.AI",
     period: "Dec 2025 — Jun 2026",
     location: "Gurugram, Haryana",
+    current: true,
     description: [
       "Contributed to a production AI product stack — shipping React and TypeScript UI features, reusable component patterns, and interface polish in a fast-moving engineering environment.",
       "Built and maintained REST endpoints on the backend, including request validation, service integration, and API contracts that supported live product workflows.",

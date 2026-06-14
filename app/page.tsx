@@ -4,25 +4,12 @@ import { ContactSection } from "@/components/ContactSection";
 import { DigitalTwinSection } from "@/components/DigitalTwinSection";
 import { Hero } from "@/components/Hero";
 import { JourneySection } from "@/components/JourneySection";
-import { Navigation } from "@/components/Navigation";
+import { PageShell } from "@/components/PageShell";
 import { PortfolioSection } from "@/components/PortfolioSection";
-import { SiteFooter } from "@/components/SiteFooter";
-import { StickyRecruiterBar } from "@/components/StickyRecruiterBar";
 
 export default function Home() {
   return (
-    <div className="bg-bg-deep relative z-[1] min-h-full pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-0">
-      <a
-        href="#main"
-        className="focus:bg-accent focus:text-bg-deep sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:px-4 focus:py-2"
-      >
-        Skip to content
-      </a>
-      <div
-        className="bg-grid pointer-events-none fixed inset-0 z-0"
-        aria-hidden
-      />
-      <Navigation />
+    <PageShell showStickyBar>
       <main id="main">
         <Hero />
         <PortfolioSection />
@@ -32,8 +19,6 @@ export default function Home() {
         <DigitalTwinSection />
         <ContactSection />
       </main>
-      <SiteFooter />
-      <StickyRecruiterBar />
-    </div>
+    </PageShell>
   );
 }

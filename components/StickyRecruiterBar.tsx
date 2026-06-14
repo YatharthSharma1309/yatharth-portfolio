@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { ConnectIcon } from "@/components/ConnectIcons";
+import { useMobileNav } from "@/components/MobileNavContext";
+import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
 import { connectLinks } from "@/lib/connect";
 import { trackEvent } from "@/lib/analytics";
 
 export function StickyRecruiterBar() {
   const [visible, setVisible] = useState(false);
   const [contactInView, setContactInView] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
+  const { menuOpen } = useMobileNav();
 
   useEffect(() => {
     const contactEl = document.getElementById("contact");
@@ -27,27 +29,15 @@ export function StickyRecruiterBar() {
     const heroEl = document.getElementById("top");
     if (heroEl) showObserver.observe(heroEl);
 
-    const syncNavOpen = () => {
-      setNavOpen(document.body.dataset.mobileNavOpen === "true");
-    };
-    syncNavOpen();
-
-    const navObserver = new MutationObserver(syncNavOpen);
-    navObserver.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["data-mobile-nav-open"],
-    });
-
     return () => {
       contactObserver.disconnect();
       showObserver.disconnect();
-      navObserver.disconnect();
     };
   }, []);
 
   const resume = connectLinks.find((item) => item.channel === "resume");
 
-  if (!visible || contactInView || navOpen) return null;
+  if (!visible || contactInView || menuOpen) return null;
 
   return (
     <div
@@ -59,7 +49,7 @@ export function StickyRecruiterBar() {
       <div className="mx-auto flex max-w-6xl gap-3">
         <a
           href="#contact"
-          className="border-border-highlight text-text-primary hover:border-accent/45 hover:text-accent inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border bg-[var(--bg-card)] px-4 text-sm font-semibold transition-colors"
+          className={`${btnSecondary} flex-1 gap-2 px-4 py-2.5`}
         >
           <ConnectIcon channel="email" size={16} />
           Email
@@ -69,7 +59,7 @@ export function StickyRecruiterBar() {
             href={resume.href}
             download={resume.download}
             onClick={() => trackEvent("resume_download", { source: "sticky_bar" })}
-            className="bg-accent text-bg-deep inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl px-4 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform] active:scale-[0.98]"
+            className={`${btnPrimary} flex-1 gap-2 px-4 py-2.5`}
           >
             <ConnectIcon channel="resume" size={16} className="text-bg-deep" />
             Resume

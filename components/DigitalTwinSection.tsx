@@ -1,9 +1,9 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
 import { TwinAnimatedAvatar } from "@/components/TwinAnimatedAvatar";
+import { alertError } from "@/lib/ui-classes";
 import { sectionCopy, site, twinStarterQuestions, twinWelcome } from "@/lib/content";
 
 type ChatMessage = {
@@ -191,14 +191,7 @@ export function DigitalTwinSection() {
 
   return (
     <section id="digital-twin" className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(62,232,200,0.1), transparent 70%)",
-        }}
-        aria-hidden
-      />
+      <div className="section-glow-twin pointer-events-none absolute inset-0 opacity-30" aria-hidden />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="AI Digital Twin"
@@ -206,16 +199,8 @@ export function DigitalTwinSection() {
           description={`${sectionCopy.digitalTwin.description} Currently ${site.availability.toLowerCase()}.`}
         />
 
-        <Reveal delay={0.08}>
-          <div className="surface-card border-border-highlight relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border sm:mt-12">
-            <div
-              className="pointer-events-none absolute inset-0 opacity-60"
-              style={{
-                background:
-                  "radial-gradient(ellipse 90% 60% at 0% 0%, rgba(62,232,200,0.12), transparent 55%)",
-              }}
-              aria-hidden
-            />
+        <div className="surface-card border-border-highlight relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border sm:mt-12">
+          <div className="section-glow-twin pointer-events-none absolute inset-0 opacity-60" aria-hidden />
 
             <div className="border-border-subtle relative flex flex-wrap items-center justify-between gap-4 border-b px-5 py-5 sm:px-6">
               <div className="flex min-w-0 items-center gap-4">
@@ -308,6 +293,8 @@ export function DigitalTwinSection() {
             <div
               ref={messagesContainerRef}
               className="chat-panel border-border-subtle relative mx-5 mt-5 mb-4 max-h-[min(58vh,520px)] min-h-[360px] space-y-5 overflow-y-auto rounded-2xl border p-4 sm:mx-6 sm:min-h-[420px] sm:p-5"
+              aria-live="polite"
+              aria-relevant="additions"
             >
               {messages.map((message, idx) => (
                 <MessageBubble
@@ -320,7 +307,7 @@ export function DigitalTwinSection() {
             </div>
 
             {error ? (
-              <p className="text-red-300 mx-5 mb-4 rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm sm:mx-6">
+              <p className={`${alertError} mx-5 mb-4 sm:mx-6`} role="alert">
                 {error}
               </p>
             ) : null}
@@ -378,7 +365,6 @@ export function DigitalTwinSection() {
               </p>
             </form>
           </div>
-        </Reveal>
       </div>
     </section>
   );

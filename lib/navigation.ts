@@ -8,6 +8,7 @@ export const primaryNav: NavItem[] = [
   { href: "#portfolio", label: "Portfolio" },
   { href: "#about", label: "About" },
   { href: "#journey", label: "Career journey" },
+  { href: "#certifications", label: "Certifications" },
   { href: "#digital-twin", label: "AI Digital Twin" },
   { href: "#contact", label: "Contact" },
   { href: "/resume", label: "Resume" },

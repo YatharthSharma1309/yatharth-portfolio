@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo, MenuIcon } from "@/components/Logo";
 import { ConnectIcon } from "@/components/ConnectIcons";
+import { useMobileNav } from "@/components/MobileNavContext";
+import { btnSecondary } from "@/lib/ui-classes";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
@@ -12,13 +14,12 @@ import { connectLinks } from "@/lib/connect";
 const navLinkClass =
   "font-sans text-text-muted hover:text-text-primary block rounded-lg px-3 py-2.5 text-[0.9375rem] font-medium tracking-normal transition-colors md:py-2 md:text-sm";
 
-const externalBtnClass =
-  "font-sans border-border-highlight bg-bg-card text-text-primary hover:border-accent/40 hover:text-accent inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors";
-
 export function Navigation() {
   const pathname = usePathname();
+  const { menuOpen, setMenuOpen, toggleMenu } = useMobileNav();
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
   const homeHref = pathname === "/" ? "#top" : "/";
 
   useEffect(() => {
@@ -30,16 +31,27 @@ export function Navigation() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    if (menuOpen) {
-      document.body.dataset.mobileNavOpen = "true";
-    } else {
-      delete document.body.dataset.mobileNavOpen;
-    }
     return () => {
       document.body.style.overflow = "";
-      delete document.body.dataset.mobileNavOpen;
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    const firstFocusable = mobileNavRef.current?.querySelector<HTMLElement>("a, button");
+    firstFocusable?.focus();
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen, setMenuOpen]);
 
   return (
     <header
@@ -81,7 +93,7 @@ export function Navigation() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={externalBtnClass}
+                className={`${btnSecondary} gap-2 px-4 py-2.5 text-sm font-medium`}
               >
                 <ConnectIcon channel={item.channel} size={16} />
                 {item.channel === "github" ? "GitHub" : "LinkedIn"}
@@ -90,11 +102,12 @@ export function Navigation() {
         </div>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          className={`${externalBtnClass} gap-2 lg:hidden`}
+          className={`${btnSecondary} gap-2 px-4 py-2.5 lg:hidden`}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
-          onClick={() => setMenuOpen((open) => !open)}
+          onClick={toggleMenu}
         >
           <MenuIcon open={menuOpen} />
           <span>{menuOpen ? "Close" : "Navigation"}</span>
@@ -104,6 +117,7 @@ export function Navigation() {
       {menuOpen ? (
         <div
           id="mobile-nav"
+          ref={mobileNavRef}
           className="border-border-subtle border-t bg-bg-deep/95 px-5 py-6 backdrop-blur-xl lg:hidden"
         >
           <p className="font-mono text-accent mb-4 text-[11px] font-semibold tracking-[0.18em] uppercase">
@@ -141,7 +155,7 @@ export function Navigation() {
                     key={item.channel}
                     href={item.href}
                     download={item.download}
-                    className={externalBtnClass}
+                    className={`${btnSecondary} gap-2 px-4 py-2.5`}
                     onClick={() => setMenuOpen(false)}
                   >
                     {content}
@@ -156,7 +170,7 @@ export function Navigation() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={externalBtnClass}
+                    className={`${btnSecondary} gap-2 px-4 py-2.5`}
                     onClick={() => setMenuOpen(false)}
                   >
                     {content}
@@ -168,7 +182,7 @@ export function Navigation() {
                 <a
                   key={item.channel}
                   href={item.href}
-                  className={externalBtnClass}
+                  className={`${btnSecondary} gap-2 px-4 py-2.5`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {content}
