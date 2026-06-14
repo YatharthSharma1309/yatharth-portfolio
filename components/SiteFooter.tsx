@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ConnectIcon, ConnectIconBadge } from "@/components/ConnectIcons";
+import { ConnectIconBadge } from "@/components/ConnectIcons";
 import { focusAreas, site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { primaryNav } from "@/lib/navigation";
@@ -113,27 +113,14 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="border-border-subtle mt-14 flex flex-col gap-5 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-text-muted text-center text-xs sm:text-left">
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+        <div className="border-border-subtle mt-14 border-t pt-8">
+          <p className="text-text-muted/75 text-center text-sm leading-relaxed">
+            <span className="font-mono text-[11px] tracking-wide">© {new Date().getFullYear()}</span>
+            <span className="text-text-muted/40 mx-2" aria-hidden>
+              ·
+            </span>
+            <span className="text-text-primary font-medium">{site.name}</span>
           </p>
-          <div className="flex flex-col items-center gap-3 sm:items-end">
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {connectLinks.map((item) => (
-                <a
-                  key={`footer-icon-${item.channel}`}
-                  href={item.href}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
-                  download={item.download}
-                  aria-label={item.label}
-                  className="border-border-highlight text-text-muted hover:border-accent/40 hover:text-accent inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-[var(--bg-card)] transition-colors"
-                >
-                  <ConnectIcon channel={item.channel} size={17} />
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </footer>
