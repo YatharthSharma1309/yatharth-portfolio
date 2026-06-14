@@ -1,4 +1,7 @@
-import { heroEyebrow, site } from "@/lib/content";
+import { heroFocus, site } from "@/lib/content";
+
+const focusPill =
+  "border-border-highlight text-text-muted inline-flex items-center rounded-full border bg-[var(--bg-card)] px-3 py-1.5 text-xs font-medium backdrop-blur-sm sm:px-3.5 sm:py-2 sm:text-[13px]";
 
 export function Hero() {
   return (
@@ -12,10 +15,6 @@ export function Hero() {
       />
 
       <div className="relative z-[1] mx-auto w-full max-w-3xl px-5 text-center sm:px-8">
-        <p className="text-accent mb-4 text-[10px] font-semibold tracking-[0.22em] uppercase sm:mb-5 sm:text-[11px] sm:tracking-[0.28em]">
-          {heroEyebrow}
-        </p>
-
         <h1 className="text-text-primary text-[clamp(2rem,7vw,4.5rem)] leading-[1.08] font-extrabold tracking-[-0.02em] sm:leading-[1.06]">
           {site.name.split(" ").slice(0, -1).join(" ")}{" "}
           <span className="text-gradient">{site.name.split(" ").slice(-1)[0]}</span>
@@ -30,6 +29,14 @@ export function Hero() {
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:mt-8">
+          {heroFocus.map((item) => (
+            <span key={item} className={focusPill}>
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:mt-5">
           <span className="border-border-highlight text-text-muted inline-flex w-fit items-center rounded-full border bg-[var(--bg-card)] px-3.5 py-2 text-[10px] font-medium tracking-wide backdrop-blur-sm sm:px-4 sm:text-[11px]">
             {site.location}
           </span>

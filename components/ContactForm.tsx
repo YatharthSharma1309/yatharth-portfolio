@@ -6,8 +6,37 @@ import { submitContactForm } from "@/lib/contact-submit";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+const fieldWrap =
+  "border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(62,232,200,0.12)] rounded-xl border bg-[rgba(0,0,0,0.22)] transition-[border-color,box-shadow]";
+
 const inputClass =
-  "border-border-highlight bg-bg-card text-text-primary placeholder:text-text-muted/70 focus:border-accent/50 focus:ring-accent/25 w-full rounded-xl border px-4 py-3 text-sm transition-[border-color,box-shadow] focus:ring-2 focus:outline-none";
+  "text-text-primary placeholder:text-text-muted/70 w-full bg-transparent px-4 py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-60";
+
+function FieldLabel({
+  htmlFor,
+  children,
+  optional,
+}: {
+  htmlFor: string;
+  children: React.ReactNode;
+  optional?: boolean;
+}) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className="text-text-primary mb-2 block text-xs font-semibold tracking-wide"
+    >
+      {children}
+      {optional ? (
+        <span className="text-text-muted ml-1.5 font-normal">(optional)</span>
+      ) : (
+        <span className="text-accent ml-0.5" aria-hidden>
+          *
+        </span>
+      )}
+    </label>
+  );
+}
 
 export function ContactForm() {
   const [formState, setFormState] = useState<FormState>("idle");
@@ -62,19 +91,35 @@ export function ContactForm() {
   if (formState === "success") {
     return (
       <div
-        className="surface-card border-accent/25 rounded-2xl border p-8"
+        className="surface-card border-accent/25 rounded-2xl border p-8 text-center sm:p-10"
         role="status"
         aria-live="polite"
       >
-        <p className="text-accent font-display text-lg font-bold">Message sent</p>
-        <p className="text-text-muted mt-2 text-sm leading-relaxed">{successNote}</p>
+        <span
+          className="bg-accent/15 text-accent mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full"
+          aria-hidden
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12.5l4.5 4.5L19 7.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+        <p className="text-accent font-display text-xl font-bold">Message sent</p>
+        <p className="text-text-muted mx-auto mt-2 max-w-sm text-sm leading-relaxed">
+          {successNote}
+        </p>
         <button
           type="button"
           onClick={() => {
             setFormState("idle");
             setSuccessNote("");
           }}
-          className="text-accent hover:text-text-primary mt-5 text-sm font-semibold underline-offset-2 hover:underline"
+          className="text-accent hover:text-text-primary mt-6 text-sm font-semibold underline-offset-2 hover:underline"
         >
           Send another message
         </button>
@@ -83,87 +128,108 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="contact-name" className="text-text-primary mb-2 block text-sm font-medium">
-            Name <span className="text-accent">*</span>
-          </label>
-          <input
-            id="contact-name"
-            name="name"
-            type="text"
-            required
-            autoComplete="name"
-            disabled={formState === "submitting"}
-            className={inputClass}
-            placeholder="Your name"
-          />
-        </div>
-        <div>
-          <label htmlFor="contact-email" className="text-text-primary mb-2 block text-sm font-medium">
-            Email <span className="text-accent">*</span>
-          </label>
-          <input
-            id="contact-email"
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-            disabled={formState === "submitting"}
-            className={inputClass}
-            placeholder="you@company.com"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label
-          htmlFor="contact-company"
-          className="text-text-primary mb-2 block text-sm font-medium"
-        >
-          Company / Role <span className="text-text-muted text-xs font-normal">(optional)</span>
-        </label>
-        <input
-          id="contact-company"
-          name="companyRole"
-          type="text"
-          autoComplete="organization"
-          disabled={formState === "submitting"}
-          className={inputClass}
-          placeholder="Acme Corp · Hiring manager"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="contact-message" className="text-text-primary mb-2 block text-sm font-medium">
-          Message <span className="text-accent">*</span>
-        </label>
-        <textarea
-          id="contact-message"
-          name="message"
-          required
-          rows={5}
-          minLength={10}
-          disabled={formState === "submitting"}
-          className={`${inputClass} resize-y min-h-[140px]`}
-          placeholder="Tell me about the role, team, or what you'd like to discuss..."
-        />
-      </div>
-
-      {formState === "error" && errorMessage ? (
-        <p className="text-accent-warm text-sm font-medium" role="alert" aria-live="assertive">
-          {errorMessage}
+    <div className="surface-card border-border-subtle overflow-hidden rounded-2xl border">
+      <div className="border-border-subtle border-b px-6 py-5 text-center sm:px-8 sm:py-6">
+        <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+          Send a message
         </p>
-      ) : null}
+        <p className="text-text-muted mt-2 text-sm leading-relaxed">
+          Share a role, team, or question — I&apos;ll get back to you by email.
+        </p>
+      </div>
 
-      <button
-        type="submit"
-        disabled={formState === "submitting"}
-        className="bg-accent text-bg-deep focus-visible:ring-accent/50 inline-flex min-h-11 w-full items-center justify-center rounded-xl px-8 py-3.5 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform,opacity] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-      >
-        {formState === "submitting" ? "Sending…" : "Send message"}
-      </button>
-    </form>
+      <form onSubmit={handleSubmit} className="space-y-5 px-6 py-6 sm:px-8 sm:py-7" noValidate>
+        <div className="space-y-5">
+          <div>
+            <FieldLabel htmlFor="contact-name">Name</FieldLabel>
+            <div className={fieldWrap}>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                required
+                autoComplete="name"
+                disabled={formState === "submitting"}
+                className={inputClass}
+                placeholder="Your name"
+              />
+            </div>
+          </div>
+
+          <div>
+            <FieldLabel htmlFor="contact-email">Email</FieldLabel>
+            <div className={fieldWrap}>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                disabled={formState === "submitting"}
+                className={inputClass}
+                placeholder="you@company.com"
+              />
+            </div>
+          </div>
+
+          <div>
+            <FieldLabel htmlFor="contact-company" optional>
+              Company / Role
+            </FieldLabel>
+            <div className={fieldWrap}>
+              <input
+                id="contact-company"
+                name="companyRole"
+                type="text"
+                autoComplete="organization"
+                disabled={formState === "submitting"}
+                className={inputClass}
+                placeholder="Acme Corp · Hiring manager"
+              />
+            </div>
+          </div>
+
+          <div>
+            <FieldLabel htmlFor="contact-message">Message</FieldLabel>
+            <div className={fieldWrap}>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows={5}
+                minLength={10}
+                disabled={formState === "submitting"}
+                className={`${inputClass} resize-y min-h-[148px] leading-relaxed`}
+                placeholder="Tell me about the role, team, or what you'd like to discuss..."
+              />
+            </div>
+          </div>
+        </div>
+
+        {formState === "error" && errorMessage ? (
+          <p
+            className="text-accent-warm rounded-xl border border-accent-warm/25 bg-accent-warm/10 px-4 py-3 text-sm font-medium"
+            role="alert"
+            aria-live="assertive"
+          >
+            {errorMessage}
+          </p>
+        ) : null}
+
+        <div className="border-border-subtle border-t pt-5">
+          <button
+            type="submit"
+            disabled={formState === "submitting"}
+            className="bg-accent text-bg-deep focus-visible:ring-accent/50 inline-flex min-h-11 w-full items-center justify-center rounded-xl px-8 py-3.5 text-sm font-bold tracking-wide shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-[box-shadow,transform,opacity] hover:shadow-[0_0_32px_var(--glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-deep)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {formState === "submitting" ? "Sending…" : "Send message"}
+          </button>
+          <p className="text-text-muted/75 mt-3 text-center text-[11px] leading-relaxed">
+            Required fields are marked with <span className="text-accent">*</span>. Typically
+            reply within 2 business days.
+          </p>
+        </div>
+      </form>
+    </div>
   );
 }

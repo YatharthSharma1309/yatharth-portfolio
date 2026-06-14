@@ -82,7 +82,7 @@ export const skillGroups = {
   deepening: [...skillBuilding],
 } as const;
 
-export const heroEyebrow = "AI · React/TypeScript · RAG & APIs" as const;
+export const heroFocus = ["AI", "React / TypeScript", "RAG & APIs"] as const;
 
 export const focusAreas = [
   "React, TypeScript & Next.js",

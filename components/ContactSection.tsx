@@ -39,17 +39,12 @@ export function ContactSection() {
 
         <div className="mx-auto mt-10 max-w-2xl space-y-12 sm:mt-12">
           <Reveal delay={0.06}>
-            <div>
-              <p className="text-text-primary mb-5 text-center text-sm font-semibold">
-                Send a message
-              </p>
-              <ContactForm />
-            </div>
+            <ContactForm />
           </Reveal>
 
           <Reveal delay={0.1}>
             <div>
-              <p className="text-text-primary mb-5 text-center text-sm font-semibold">
+              <p className="text-accent font-mono mb-5 text-center text-[10px] font-semibold tracking-[0.18em] uppercase">
                 Or reach me directly
               </p>
               <div className="flex flex-col items-center gap-4">
