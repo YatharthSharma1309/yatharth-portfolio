@@ -51,7 +51,7 @@ export function StickyRecruiterBar() {
 
   return (
     <div
-      className="border-border-subtle bg-bg-deep/92 fixed right-0 bottom-0 left-0 z-40 border-t px-4 py-3 backdrop-blur-xl md:hidden"
+      className="border-border-subtle bg-bg-deep/92 fixed right-0 bottom-0 left-0 z-40 border-t px-4 py-3 backdrop-blur-xl lg:hidden"
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       role="region"
       aria-label="Quick contact"

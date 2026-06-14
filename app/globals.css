@@ -185,3 +185,56 @@ body {
     transform: scale(1.12);
   }
 }
+
+/* Shared section rhythm — tighter on phones, roomier on desktop */
+.section-shell {
+  scroll-margin-top: 4.25rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-shell {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-shell {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-shell {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+.panel-card {
+  background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 42%
+    ),
+    linear-gradient(180deg, rgba(14, 14, 20, 0.72) 0%, rgba(14, 14, 20, 0.45) 100%);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .panel-card:hover {
+    border-color: rgba(62, 232, 200, 0.3);
+    box-shadow:
+      0 0 0 1px rgba(62, 232, 200, 0.08),
+      0 16px 32px -16px rgba(0, 0, 0, 0.4);
+  }
+}

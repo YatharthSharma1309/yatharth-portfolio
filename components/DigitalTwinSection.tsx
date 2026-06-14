@@ -190,10 +190,7 @@ export function DigitalTwinSection() {
   }
 
   return (
-    <section
-      id="digital-twin"
-      className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-28 sm:py-36"
-    >
+    <section id="digital-twin" className="section-shell relative">
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
@@ -210,7 +207,7 @@ export function DigitalTwinSection() {
         />
 
         <Reveal delay={0.08}>
-          <div className="surface-card border-border-highlight relative mx-auto mt-12 max-w-5xl overflow-hidden rounded-2xl border">
+          <div className="surface-card border-border-highlight relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border sm:mt-12">
             <div
               className="pointer-events-none absolute inset-0 opacity-60"
               style={{

@@ -189,10 +189,7 @@ export function PortfolioSection() {
   const { portfolio } = sectionCopy;
 
   return (
-    <section
-      id="portfolio"
-      className="border-border-subtle scroll-mt-[4.25rem] border-t py-28 sm:py-36"
-    >
+    <section id="portfolio" className="section-shell">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Portfolio"
@@ -200,7 +197,7 @@ export function PortfolioSection() {
           description={portfolio.description}
         />
 
-        <div id="featured-work" className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div id="featured-work" className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featuredPortfolioLinks.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
               <FeaturedProjectCard item={item} />
@@ -208,11 +205,11 @@ export function PortfolioSection() {
           ))}
         </div>
 
-        <h3 className="text-text-primary mt-16 text-lg font-semibold tracking-tight">
+        <h3 className="text-text-primary mt-12 text-base font-semibold tracking-tight sm:mt-16 sm:text-lg">
           {portfolio.moreBuildsLabel}
         </h3>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
           {morePortfolioLinks.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.08}>
               <PortfolioCard item={item} />

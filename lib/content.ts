@@ -16,37 +16,46 @@ export const site = {
 };
 
 export const aboutParagraphs = [
-  "I am an AI-Focused full-stack developer shipping intelligent web applications — RAG pipelines, semantic search, streaming APIs, and scalable backends — with strong emphasis on performance, accessibility, and craft.",
-  "My stack centers on React, TypeScript, Next.js (App Router + API Routes), Node.js, and Python. I build responsive UIs and the backend services that power them — REST endpoints, request validation, LLM integrations — so I can own more of the vertical slice with fewer hand-offs between layers.",
-  "I translate Figma into code with Tailwind CSS and Styled Components. I care about user-centered design, responsive layouts, clean state management (Redux, Context), and interfaces that are beautiful, intuitive, and accessible.",
+  "I ship intelligent web applications end to end — from RAG pipelines and semantic search to polished, accessible interfaces with strong attention to performance and craft.",
+  "I own full vertical slices: responsive UIs, REST endpoints, request validation, and LLM integrations — so features move from idea to production with fewer hand-offs between layers.",
+  "I translate Figma into code with Tailwind CSS and Styled Components, with clean state management (Redux, Context) and interfaces that are intuitive and accessible.",
 ];
 
 export const skillCategories = [
   {
     label: "Frontend",
     skills: [
-      "React & TypeScript",
-      "Next.js (App Router & API Routes)",
-      "Tailwind · Styled Components",
-      "Redux · Context API",
-      "Responsive UI & accessibility",
-      "HTML5 / CSS3 / ES6+",
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "Styled Components",
+      "Redux",
+      "Context API",
+      "Accessibility",
     ],
   },
   {
-    label: "Backend & APIs",
+    label: "Backend",
     skills: [
-      "Node.js & REST API development",
-      "Express.js",
-      "Python & FastAPI",
-      "Prisma ORM",
+      "Node.js",
+      "Express",
+      "FastAPI",
+      "Prisma",
       "PostgreSQL",
-      "JWT & session auth",
-      "OAuth & third-party API integrations",
-      "LLM / OpenRouter API integration",
+      "REST APIs",
+      "JWT auth",
+      "OAuth",
+    ],
+  },
+  {
+    label: "AI & LLM",
+    skills: [
+      "OpenRouter",
       "RAG pipelines",
       "Semantic search",
       "Streaming APIs",
+      "Document ingestion",
     ],
   },
 ] as const;
@@ -54,15 +63,15 @@ export const skillCategories = [
 export const skillBuildingGroups = [
   {
     label: "Document & ingestion",
-    skills: ["OCR", "Document parsing (PDF/DOCX)"],
+    skills: ["OCR", "PDF/DOCX parsing"],
   },
   {
     label: "Data & persistence",
-    skills: ["Advanced SQL & query optimization", "Schema design & relational modeling"],
+    skills: ["SQL optimization", "Schema design"],
   },
   {
     label: "Delivery & craft",
-    skills: ["CI/CD & deployment", "UI & UX design"],
+    skills: ["CI/CD", "UI/UX design"],
   },
 ] as const;
 

@@ -62,7 +62,7 @@ export function Navigation() {
           <Logo />
         </Link>
 
-        <ul className="hidden items-center gap-0.5 md:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {primaryNav.map((item) => (
             <li key={item.href}>
               <Link href={resolveNavHref(item.href, pathname)} className={navLinkClass}>
@@ -72,7 +72,7 @@ export function Navigation() {
           ))}
         </ul>
 
-        <div className="hidden shrink-0 items-center gap-2 md:flex">
+        <div className="hidden shrink-0 items-center gap-2 lg:flex">
           {connectLinks
             .filter((item) => item.channel === "github" || item.channel === "linkedin")
             .map((item) => (
@@ -91,7 +91,7 @@ export function Navigation() {
 
         <button
           type="button"
-          className={`${externalBtnClass} gap-2 md:hidden`}
+          className={`${externalBtnClass} gap-2 lg:hidden`}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((open) => !open)}
@@ -104,7 +104,7 @@ export function Navigation() {
       {menuOpen ? (
         <div
           id="mobile-nav"
-          className="border-border-subtle border-t bg-bg-deep/95 px-5 py-6 backdrop-blur-xl md:hidden"
+          className="border-border-subtle border-t bg-bg-deep/95 px-5 py-6 backdrop-blur-xl lg:hidden"
         >
           <p className="font-mono text-accent mb-4 text-[11px] font-semibold tracking-[0.18em] uppercase">
             Navigate

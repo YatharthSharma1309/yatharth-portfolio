@@ -18,10 +18,7 @@ export function ContactSection() {
   );
 
   return (
-    <section
-      id="contact"
-      className="border-border-subtle scroll-mt-[4.25rem] relative overflow-hidden border-t py-28 sm:py-36"
-    >
+    <section id="contact" className="section-shell relative overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 opacity-35"
         style={{
@@ -37,7 +34,7 @@ export function ContactSection() {
           description={`${contact.description} ${contact.responseTime}`}
         />
 
-        <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <div className="mt-10 grid gap-8 sm:mt-12 sm:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-12">
           <Reveal delay={0.06}>
             <div>
               <p className="text-text-primary mb-5 text-sm font-semibold">Send a message</p>

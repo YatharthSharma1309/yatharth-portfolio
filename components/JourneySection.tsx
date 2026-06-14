@@ -4,10 +4,7 @@ import { education, journey, sectionCopy } from "@/lib/content";
 
 export function JourneySection() {
   return (
-    <section
-      id="journey"
-      className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-28 sm:py-36"
-    >
+    <section id="journey" className="section-shell relative">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Career journey"
@@ -15,7 +12,7 @@ export function JourneySection() {
           description={sectionCopy.journey.description}
         />
 
-        <div className="relative mt-20 max-w-3xl">
+        <div className="relative mt-12 max-w-3xl sm:mt-16 lg:mt-20">
           <div
             className="from-accent/45 via-border-highlight absolute top-3 bottom-3 left-[9px] w-px bg-gradient-to-b to-transparent"
             aria-hidden
@@ -62,7 +59,7 @@ export function JourneySection() {
         </div>
 
         <Reveal>
-          <div className="surface-card border-border-subtle mt-24 rounded-2xl border p-9 sm:p-11">
+          <div className="surface-card border-border-subtle mt-16 rounded-2xl border p-6 sm:mt-20 sm:p-9 lg:mt-24 lg:p-11">
             <div className="mb-8 flex items-center gap-3">
               <span
                 className="from-accent h-px w-10 shrink-0 bg-gradient-to-r to-transparent"
