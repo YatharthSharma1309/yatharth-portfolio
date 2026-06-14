@@ -9,18 +9,26 @@ import { trackEvent } from "@/lib/analytics";
 
 export function StickyRecruiterBar() {
   const [visible, setVisible] = useState(false);
-  const [contactInView, setContactInView] = useState(false);
+  const [overlaySectionInView, setOverlaySectionInView] = useState(false);
   const { menuOpen } = useMobileNav();
 
   useEffect(() => {
-    const contactEl = document.getElementById("contact");
-    if (!contactEl) return;
+    const observedSections = ["contact", "digital-twin"]
+      .map((id) => document.getElementById(id))
+      .filter((element): element is HTMLElement => element !== null);
 
-    const contactObserver = new IntersectionObserver(
-      ([entry]) => setContactInView(entry.isIntersecting),
-      { threshold: 0.15 },
+    if (observedSections.length === 0) return;
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        setOverlaySectionInView(
+          entries.some((entry) => entry.isIntersecting),
+        );
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -10% 0px" },
     );
-    contactObserver.observe(contactEl);
+
+    observedSections.forEach((element) => sectionObserver.observe(element));
 
     const showObserver = new IntersectionObserver(
       ([entry]) => setVisible(!entry.isIntersecting),
@@ -30,14 +38,14 @@ export function StickyRecruiterBar() {
     if (heroEl) showObserver.observe(heroEl);
 
     return () => {
-      contactObserver.disconnect();
+      sectionObserver.disconnect();
       showObserver.disconnect();
     };
   }, []);
 
   const resume = connectLinks.find((item) => item.channel === "resume");
 
-  if (!visible || contactInView || menuOpen) return null;
+  if (!visible || overlaySectionInView || menuOpen) return null;
 
   return (
     <div

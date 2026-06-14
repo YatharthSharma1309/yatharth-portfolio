@@ -50,12 +50,12 @@ function MessageBubble({
   if (isUser) {
     return (
       <div className="flex justify-end">
-        <div className="max-w-[min(88%,36rem)]">
+        <div className="max-w-[min(88%,36rem)] min-w-0">
           <div className="text-text-muted mb-1.5 flex items-center justify-end gap-2 pr-1 text-[10px] font-semibold tracking-[0.14em] uppercase">
             {time ? <span>{time}</span> : null}
             <span>You</span>
           </div>
-          <div className="bg-accent text-bg-deep rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(62,232,200,0.55)]">
+          <div className="bg-accent text-bg-deep break-words rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(62,232,200,0.55)] [overflow-wrap:anywhere]">
             {message.content}
           </div>
         </div>
@@ -66,7 +66,7 @@ function MessageBubble({
   return (
     <div className="flex items-start gap-3">
       <TwinAnimatedAvatar />
-      <div className="max-w-[min(88%,36rem)]">
+      <div className="max-w-[min(88%,36rem)] min-w-0">
         <div className="text-accent/90 mb-1.5 flex items-center gap-2 text-[10px] font-semibold tracking-[0.14em] uppercase">
           <span>Career Twin</span>
           {time ? (
@@ -75,7 +75,7 @@ function MessageBubble({
             </span>
           ) : null}
         </div>
-        <div className="border-border-subtle bg-bg-card text-text-primary rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(62,232,200,0.45)]">
+        <div className="border-border-subtle bg-bg-card text-text-primary break-words rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(62,232,200,0.45)] [overflow-wrap:anywhere]">
           {message.content}
         </div>
       </div>
@@ -222,7 +222,7 @@ export function DigitalTwinSection() {
                   </p>
                 </div>
               </div>
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex w-full min-w-0 shrink-0 items-center gap-2 sm:w-auto">
                 {hasUserMessages ? (
                   <button
                     type="button"
@@ -259,7 +259,7 @@ export function DigitalTwinSection() {
               <div className="border-accent-warm/20 bg-accent-warm/[0.06] text-accent-warm/95 mx-5 mt-5 rounded-xl border px-4 py-3 text-sm leading-relaxed sm:mx-6">
                 <>
                   Chat is unavailable — add{" "}
-                  <code className="font-mono text-xs">OPENROUTER_API_KEY</code> in Vercel environment
+                  <code className="font-mono text-xs break-all">OPENROUTER_API_KEY</code> in Vercel environment
                   variables to enable the career twin. You can still browse the portfolio or email{" "}
                   <a href={`mailto:${site.email}`} className="text-accent hover:underline">
                     {site.email}
@@ -281,7 +281,7 @@ export function DigitalTwinSection() {
                       type="button"
                       onClick={() => void sendMessage(question)}
                       disabled={isLoading || apiReady === false}
-                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 rounded-full border bg-[rgba(0,0,0,0.18)] px-3.5 py-2 text-left text-xs leading-snug transition-colors"
+                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 max-w-full rounded-full border bg-[rgba(0,0,0,0.18)] px-3.5 py-2 text-left text-xs leading-snug break-words transition-colors"
                     >
                       {question}
                     </button>
@@ -292,7 +292,7 @@ export function DigitalTwinSection() {
 
             <div
               ref={messagesContainerRef}
-              className="chat-panel border-border-subtle relative mx-5 mt-5 mb-4 max-h-[min(58vh,520px)] min-h-[360px] space-y-5 overflow-y-auto rounded-2xl border p-4 sm:mx-6 sm:min-h-[420px] sm:p-5"
+              className="chat-panel border-border-subtle relative mx-5 mt-5 mb-4 max-h-[min(58vh,520px)] min-h-[260px] space-y-5 overflow-y-auto rounded-2xl border p-4 sm:mx-6 sm:min-h-[360px] md:min-h-[420px] sm:p-5"
               aria-live="polite"
               aria-relevant="additions"
             >
@@ -359,7 +359,7 @@ export function DigitalTwinSection() {
                   </svg>
                 </button>
               </div>
-              <p className="text-text-muted/75 mt-3 text-center text-[11px]">
+              <p className="text-text-muted/75 mt-3 text-center text-[11px] leading-relaxed break-words">
                 Press Enter to send · Shift + Enter for a new line ·{" "}
                 {sectionCopy.digitalTwin.formFooter}
               </p>

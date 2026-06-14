@@ -28,27 +28,39 @@ export default function ResumePage() {
               {site.availability}. PDF below is generated from this portfolio and stays in sync with
               the site.
             </p>
-            <p className="font-mono text-text-muted mt-4 text-xs leading-relaxed">
-              {site.email}
-              &nbsp;·&nbsp;
-              <a
-                href={site.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-accent transition-colors"
-              >
-                {formatExternalLabel(site.linkedin)}
-              </a>
-              &nbsp;·&nbsp;
-              <a
-                href={site.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-accent transition-colors"
-              >
-                {formatExternalLabel(site.github)}
-              </a>
-            </p>
+            <ul className="text-text-muted mt-4 flex flex-col items-center gap-2 text-xs leading-relaxed sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-2">
+              <li>
+                <a href={`mailto:${site.email}`} className="hover:text-accent font-mono transition-colors">
+                  {site.email}
+                </a>
+              </li>
+              <li className="hidden sm:list-item sm:text-text-muted/40" aria-hidden>
+                ·
+              </li>
+              <li>
+                <a
+                  href={site.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-accent font-mono break-all transition-colors"
+                >
+                  {formatExternalLabel(site.linkedin)}
+                </a>
+              </li>
+              <li className="hidden sm:list-item sm:text-text-muted/40" aria-hidden>
+                ·
+              </li>
+              <li>
+                <a
+                  href={site.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-accent font-mono break-all transition-colors"
+                >
+                  {formatExternalLabel(site.github)}
+                </a>
+              </li>
+            </ul>
             <div className="mt-8">
               <ResumeActions />
             </div>

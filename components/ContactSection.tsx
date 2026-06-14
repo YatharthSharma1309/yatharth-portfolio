@@ -38,7 +38,7 @@ export function ContactSection() {
             <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
             <div className="flex flex-col items-center gap-4">
               {email ? (
-                <a href={email.href} className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4`}>
+                <a href={email.href} className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}>
                   <ConnectIcon channel="email" size={17} />
                   {contact.emailLabel}
                 </a>
@@ -48,7 +48,7 @@ export function ContactSection() {
                 <a
                   href={resume.href}
                   download={resume.download}
-                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4`}
+                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
                 >
                   <ConnectIcon channel="resume" size={17} />
                   {resume.label}
@@ -61,10 +61,10 @@ export function ContactSection() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4`}
+                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
                 >
                   <ConnectIcon channel={item.channel} size={17} />
-                  {item.label}
+                  <span className="min-w-0">{item.label}</span>
                 </a>
               ))}
             </div>

@@ -130,7 +130,7 @@ export function ContactForm() {
 
   return (
     <div className="surface-card border-border-subtle overflow-hidden rounded-2xl border">
-      <div className="border-border-subtle border-b px-6 py-5 text-center sm:px-8 sm:py-6">
+      <div className="border-border-subtle border-b px-5 py-5 text-center sm:px-8 sm:py-6">
         <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
           Send a message
         </p>
@@ -139,7 +139,7 @@ export function ContactForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5 px-6 py-6 sm:px-8 sm:py-7" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-5 px-5 py-6 sm:px-8 sm:py-7" noValidate>
         <div className="space-y-5">
           <div>
             <FieldLabel htmlFor="contact-name">Name</FieldLabel>

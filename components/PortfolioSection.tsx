@@ -41,7 +41,7 @@ function ProjectCard({
   variant?: "featured" | "compact";
 }) {
   const isInteractive = hasInteractiveLink(item);
-  const cardClass = `surface-card border-border-subtle from-bg-elevated/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b to-transparent p-7 transition-[border-color,box-shadow,transform] duration-300 ${
+  const cardClass = `surface-card border-border-subtle from-bg-elevated/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b to-transparent p-5 transition-[border-color,box-shadow,transform] duration-300 sm:p-7 ${
     isInteractive
       ? "hover:border-accent/30 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(62,232,200,0.12),0_20px_40px_-20px_rgba(0,0,0,0.5)]"
       : variant === "featured"
