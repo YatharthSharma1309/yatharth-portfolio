@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { isStaticExport, submitContactForm } from "@/lib/contact-submit";
+import { submitContactForm } from "@/lib/contact-submit";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -37,10 +37,7 @@ export function ContactForm() {
       if (!result.ok) {
         setFormState("error");
         setErrorMessage(
-          result.error ??
-            (isStaticExport
-              ? "Contact form is not configured. Use the email link below."
-              : "Something went wrong. Please try again."),
+          result.error ?? "Something went wrong. Please try again.",
         );
         return;
       }
@@ -48,11 +45,9 @@ export function ContactForm() {
       setFormState("success");
       form.reset();
       setSuccessNote(
-        result.delivery === "web3forms"
-          ? "Thanks for reaching out. I typically respond within 2 business days."
-          : result.delivery === "local"
-            ? "Saved locally for development. Add RESEND_API_KEY to .env.local to receive emails."
-            : "Thanks for reaching out. I typically respond within 2 business days.",
+        result.delivery === "local"
+          ? "Saved locally for development. Add RESEND_API_KEY to .env.local to receive emails."
+          : "Thanks for reaching out. I typically respond within 2 business days.",
       );
       trackEvent("contact_form_submit", {
         status: "success",

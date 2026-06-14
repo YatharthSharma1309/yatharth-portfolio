@@ -5,7 +5,6 @@ import { Reveal } from "@/components/Reveal";
 import { SectionIntro } from "@/components/SectionIntro";
 import { TwinAnimatedAvatar } from "@/components/TwinAnimatedAvatar";
 import { sectionCopy, site, twinStarterQuestions, twinWelcome } from "@/lib/content";
-import { isStaticExport } from "@/lib/contact-submit";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -111,11 +110,6 @@ export function DigitalTwinSection() {
   }, []);
 
   useEffect(() => {
-    if (isStaticExport) {
-      setApiReady(false);
-      return;
-    }
-
     let cancelled = false;
 
     async function checkStatus() {
@@ -281,27 +275,15 @@ export function DigitalTwinSection() {
 
             {apiReady === false ? (
               <div className="border-accent-warm/20 bg-accent-warm/[0.06] text-accent-warm/95 mx-5 mt-5 rounded-xl border px-4 py-3 text-sm leading-relaxed sm:mx-6">
-                {isStaticExport ? (
-                  <>
-                    Live chat is not available on this static GitHub Pages site. Browse the portfolio,
-                    download my resume, or email{" "}
-                    <a href={`mailto:${site.email}`} className="text-accent hover:underline">
-                      {site.email}
-                    </a>
-                    .
-                  </>
-                ) : (
-                  <>
-                    Chat is unavailable — add{" "}
-                    <code className="font-mono text-xs">OPENROUTER_API_KEY</code> to{" "}
-                    <code className="font-mono text-xs">.env.local</code> to enable the career twin.
-                    You can still browse the portfolio or email{" "}
-                    <a href={`mailto:${site.email}`} className="text-accent hover:underline">
-                      {site.email}
-                    </a>
-                    .
-                  </>
-                )}
+                <>
+                  Chat is unavailable — add{" "}
+                  <code className="font-mono text-xs">OPENROUTER_API_KEY</code> in Vercel environment
+                  variables to enable the career twin. You can still browse the portfolio or email{" "}
+                  <a href={`mailto:${site.email}`} className="text-accent hover:underline">
+                    {site.email}
+                  </a>
+                  .
+                </>
               </div>
             ) : null}
 

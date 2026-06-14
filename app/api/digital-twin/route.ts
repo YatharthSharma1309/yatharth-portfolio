@@ -9,6 +9,7 @@ import {
   site,
   skillGroups,
 } from "@/lib/content";
+import { getSiteUrl } from "@/lib/site-url";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -18,14 +19,6 @@ type ChatMessage = {
 const RATE_LIMIT_MAX = 20;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
-
-function getSiteUrl(): string {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (fromEnv) return fromEnv.replace(/\/$/, "");
-  const vercel = process.env.VERCEL_URL?.trim();
-  if (vercel) return `https://${vercel}`;
-  return "http://localhost:3000";
-}
 
 function getClientIp(request: Request): string {
   return (

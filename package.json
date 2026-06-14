@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run generate:resume && next build",
-    "build:pages": "node scripts/build-github-pages.mjs",
     "start": "next start",
     "lint": "eslint",
     "generate:resume": "tsx scripts/generate-resume-pdf.ts",

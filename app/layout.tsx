@@ -4,8 +4,6 @@ import { DM_Sans, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { featuredPortfolioLinks, site } from "@/lib/content";
 
-const isStaticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
-
 const dmSans = DM_Sans({
   variable: "--font-dm",
   subsets: ["latin"],
@@ -122,7 +120,7 @@ export default function RootLayout({
         />
         <div className="noise" aria-hidden />
         {children}
-        {!isStaticExport ? <Analytics /> : null}
+        <Analytics />
       </body>
     </html>
   );

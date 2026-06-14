@@ -1,3 +1,5 @@
+import { getSiteUrl } from "@/lib/site-url";
+
 export const site = {
   name: "Yatharth Sharma",
   role: "AI-Focused Full-Stack Developer",
@@ -10,7 +12,7 @@ export const site = {
   github: "https://github.com/YatharthSharma1309",
   resumePdf: "/resume/yatharth-sharma-resume.pdf",
   profileImage: "/profile-avatar.jpeg",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yatharthsharma1309.github.io",
+  url: getSiteUrl(),
 };
 
 export const aboutParagraphs = [
