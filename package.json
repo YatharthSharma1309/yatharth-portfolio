@@ -8,10 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "generate:resume": "tsx scripts/generate-resume-pdf.ts",
+    "build:github-pages": "node scripts/build-github-pages.mjs",
     "setup:contact": "start https://resend.com/api-keys",
     "test:resend": "tsx scripts/test-resend-email.ts"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
     "@vercel/analytics": "^2.0.1",
     "next": "16.2.2",
     "react": "19.2.4",
@@ -25,7 +27,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
-    "pdf-lib": "^1.17.1",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"

@@ -7,6 +7,7 @@ export const site = {
     "Software engineer with production experience shipping React/TypeScript UIs and REST APIs. I own features end to end: LLM integrations, RAG pipelines, document ingestion, and polished, accessible interfaces with strong attention to performance and craft.",
   availability: "Open to full-time roles",
   location: "Faridabad, Haryana, India",
+  phone: "+91 8802518567",
   email: "yatharthsharma1309@gmail.com",
   linkedin: "https://www.linkedin.com/in/yatharthsharma-ai/",
   github: "https://github.com/YatharthSharma1309",
@@ -14,6 +15,10 @@ export const site = {
   profileImage: "/profile-avatar.jpeg",
   url: getSiteUrl(),
 };
+
+/** ATS-friendly summary for the downloadable resume PDF. */
+export const resumeSummary =
+  "AI-focused full-stack developer currently shipping production features at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations. Also delivered multi-tenant CRM, recruiter AI tooling, and end-to-end RAG and document ingestion pipelines. Open to full-time engineering roles — India and remote-friendly.";
 
 export const aboutParagraphs = [
   "I ship intelligent web applications end to end — from RAG pipelines and semantic search to polished, accessible interfaces with strong attention to performance and craft.",
@@ -300,9 +305,15 @@ export const portfolioLinks: PortfolioLink[] = [
   {
     title: "SupportAI — Customer Support Platform",
     description:
-      "Portfolio-grade support stack: document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget.",
-    href: "",
-    status: "In progress",
+      "Multi-tenant SaaS for AI-powered customer support — document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget.",
+    href: "https://github.com/YatharthSharma1309/ai-customer-support-platform",
+    status: "Live",
+    external: true,
+    problem:
+      "Support teams need grounded AI answers, agent handoff, and measurable deflection — without bolting together separate chat, ticketing, and analytics tools.",
+    result:
+      "Shipped a full support platform: knowledge-base ingestion (PDF/DOCX/TXT/MD), streaming RAG with citations, agent inbox, ticket copilot, embeddable widget, help center, and deflection analytics — multi-tenant with Clerk orgs.",
+    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG"],
   },
   {
     title: "EduTech — AI Document Processing",
@@ -331,3 +342,9 @@ export const portfolioLinks: PortfolioLink[] = [
 
 export const featuredPortfolioLinks = portfolioLinks.filter((p) => p.featured);
 export const morePortfolioLinks = portfolioLinks.filter((p) => !p.featured);
+
+/** Projects on the resume — featured builds first, then additional AI/full-stack work. */
+export const resumeProjectLinks = [
+  ...featuredPortfolioLinks,
+  ...morePortfolioLinks.filter((p) => p.status === "Private" || p.status === "Live"),
+];

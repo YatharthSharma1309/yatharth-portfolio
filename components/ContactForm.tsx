@@ -75,9 +75,11 @@ export function ContactForm() {
       setFormState("success");
       form.reset();
       setSuccessNote(
-        result.delivery === "local"
-          ? "Saved locally for development. Add RESEND_API_KEY to .env.local to receive emails."
-          : "Thanks for reaching out. I typically respond within 2 business days.",
+        result.delivery === "web3forms"
+          ? "Thanks for reaching out. I typically respond within 2 business days."
+          : result.delivery === "local"
+            ? "Saved locally for development. Add RESEND_API_KEY to .env.local to receive emails."
+            : "Thanks for reaching out. I typically respond within 2 business days.",
       );
       trackEvent("contact_form_submit", {
         status: "success",
