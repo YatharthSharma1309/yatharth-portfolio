@@ -1,4 +1,5 @@
 import { getSiteUrl } from "@/lib/site-url";
+import { demoStatus, getDemoUrl } from "@/lib/demo-urls";
 
 export const site = {
   name: "Yatharth Sharma",
@@ -18,7 +19,7 @@ export const site = {
 
 /** ATS-friendly summary for the downloadable resume PDF. */
 export const resumeSummary =
-  "AI-focused full-stack developer currently shipping production features at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations. Also delivered multi-tenant CRM, recruiter AI tooling, and end-to-end RAG and document ingestion pipelines. Open to full-time engineering roles — India and remote-friendly.";
+  "AI-focused full-stack developer with production experience at Whilter.AI (Dec 2025 — Jun 2026) — React/TypeScript UIs, REST APIs, and LLM integrations. Also delivered multi-tenant CRM, recruiter AI tooling, and end-to-end RAG and document ingestion pipelines. Open to full-time engineering roles — India and remote-friendly.";
 
 export const aboutParagraphs = [
   "I ship intelligent web applications end to end — from RAG pipelines and semantic search to polished, accessible interfaces with strong attention to performance and craft.",
@@ -102,7 +103,7 @@ export const sectionCopy = {
   about: {
     title: "Production full-stack engineering with AI at the core",
     recruiterBullets: [
-      "Recent production React/TypeScript + REST APIs at Whilter.AI (Dec 2025 — Jun 2026)",
+      "Production React/TypeScript + REST APIs at Whilter.AI (Dec 2025 — Jun 2026)",
       "Shipped RAG, document ingestion, OAuth CRM, and recruiter tooling end to end",
       "Open to full-time roles · India / remote-friendly",
     ],
@@ -114,7 +115,7 @@ export const sectionCopy = {
   portfolio: {
     title: "Featured full-stack & AI builds",
     description:
-      "Three flagship projects — multi-tenant CRM, recruiter tooling, and production RAG — with problem, outcome, and stack at a glance. Live repos linked where available.",
+      "Three flagship projects — production RAG support SaaS, recruiter AI tooling, and multi-tenant CRM — with problem, outcome, and stack at a glance. Live demos and repos linked where available.",
     moreBuildsLabel: "More builds",
   },
   contact: {
@@ -132,7 +133,7 @@ export const sectionCopy = {
   journey: {
     title: "From analytics to production full-stack AI engineering",
     description:
-      "Grounded in data work at EY and Honeywell, then into web development and production software — most recently full-stack AI features at Whilter.AI with React, TypeScript, REST APIs, and LLM/RAG integrations.",
+      "Grounded in data work at EY and Honeywell, then into web development and production software — most recently full-stack AI features at Whilter.AI (through Jun 2026) with React, TypeScript, REST APIs, and LLM/RAG integrations.",
   },
   digitalTwin: {
     description:
@@ -176,9 +177,9 @@ export const journey: JourneyItem[] = [
     org: "Whilter.AI",
     period: "Dec 2025 — Jun 2026",
     location: "Gurugram, Haryana",
-    current: true,
+    current: false,
     description: [
-      "Contributed to a production AI product stack — shipping React and TypeScript UI features, reusable component patterns, and interface polish in a fast-moving engineering environment.",
+      "Contributed to a production AI product stack — shipped React and TypeScript UI features, reusable component patterns, and interface polish in a fast-moving engineering environment.",
       "Built and maintained REST endpoints on the backend, including request validation, service integration, and API contracts that supported live product workflows.",
       "Integrated third-party services and LLM-powered capabilities into application flows — connecting external APIs to front-end experiences with clear error handling and predictable behavior.",
       "Owned full-stack feature slices end to end: UI states, backend routes, data handling, and hand-off between layers so features could move from idea to production with fewer dependencies.",
@@ -265,12 +266,42 @@ export type PortfolioLink = {
 
 export const portfolioLinks: PortfolioLink[] = [
   {
+    title: "SupportAI — Customer Support Platform",
+    description:
+      "Multi-tenant SaaS for AI-powered customer support — document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget.",
+    href: "https://github.com/YatharthSharma1309/ai-customer-support-platform",
+    status: demoStatus(getDemoUrl("supportAI")),
+    external: true,
+    featured: true,
+    demoUrl: getDemoUrl("supportAI"),
+    problem:
+      "Support teams need grounded AI answers, agent handoff, and measurable deflection — without bolting together separate chat, ticketing, and analytics tools.",
+    result:
+      "Shipped a full support platform: knowledge-base ingestion (PDF/DOCX/TXT/MD), streaming RAG with citations, agent inbox, ticket copilot, embeddable widget, help center, and deflection analytics — multi-tenant with Clerk orgs.",
+    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG"],
+  },
+  {
+    title: "RecruitAI — Smart Recruitment Assistant",
+    description: "Recruiter dashboard for resume screening and candidate scoring.",
+    href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
+    status: demoStatus(getDemoUrl("recruitAI")),
+    external: true,
+    featured: true,
+    demoUrl: getDemoUrl("recruitAI"),
+    problem:
+      "Manual resume screening is slow and inconsistent when matching candidates to job requirements.",
+    result:
+      "Built a dashboard that parses PDF/DOCX resumes, scores candidates against job descriptions, surfaces skill gaps, and generates interview questions.",
+    stack: ["Next.js", "Prisma", "PostgreSQL", "OpenRouter", "PDF parsing"],
+  },
+  {
     title: "AI Sales Assistant CRM",
     description: "Multi-tenant B2B CRM with OAuth integrations and AI-drafted follow-ups.",
     href: "https://github.com/YatharthSharma1309/ai-sales-assistant-crm",
-    status: "Live",
+    status: demoStatus(getDemoUrl("salesCRM")),
     external: true,
     featured: true,
+    demoUrl: getDemoUrl("salesCRM"),
     problem:
       "Sales teams juggle leads across tools without a unified pipeline or AI-assisted follow-up workflow.",
     result:
@@ -278,42 +309,16 @@ export const portfolioLinks: PortfolioLink[] = [
     stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth"],
   },
   {
-    title: "RecruitAI — Smart Recruitment Assistant",
-    description: "Recruiter dashboard for resume screening and candidate scoring.",
-    href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
-    status: "Live",
-    external: true,
-    featured: true,
-    problem:
-      "Manual resume screening is slow and inconsistent when matching candidates to job requirements.",
-    result:
-      "Built a dashboard that parses PDF/DOCX resumes, scores candidates against job descriptions, surfaces skill gaps, and generates interview questions.",
-    stack: ["Next.js", "Prisma", "SQLite", "OpenRouter", "PDF parsing"],
-  },
-  {
     title: "IntelliRAG",
     description: "Production RAG platform for contextual querying and semantic search.",
     href: "",
     status: "Private",
-    featured: true,
+    featured: false,
     problem:
       "Organisations need reliable semantic search over proprietary documents without exposing source code.",
     result:
       "Delivered end-to-end RAG — document ingestion, chunking, embeddings, retrieval, and LLM response generation — as private org infrastructure.",
     stack: ["RAG", "Embeddings", "Semantic search", "LLM APIs", "Document ingestion"],
-  },
-  {
-    title: "SupportAI — Customer Support Platform",
-    description:
-      "Multi-tenant SaaS for AI-powered customer support — document ingestion, streaming RAG chat with citations, agent inbox, ticket escalation, deflection analytics, and an embeddable widget.",
-    href: "https://github.com/YatharthSharma1309/ai-customer-support-platform",
-    status: "Live",
-    external: true,
-    problem:
-      "Support teams need grounded AI answers, agent handoff, and measurable deflection — without bolting together separate chat, ticketing, and analytics tools.",
-    result:
-      "Shipped a full support platform: knowledge-base ingestion (PDF/DOCX/TXT/MD), streaming RAG with citations, agent inbox, ticket copilot, embeddable widget, help center, and deflection analytics — multi-tenant with Clerk orgs.",
-    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG"],
   },
   {
     title: "EduTech — AI Document Processing",
@@ -325,7 +330,7 @@ export const portfolioLinks: PortfolioLink[] = [
   {
     title: "TermLens",
     description:
-      "Legal-tech SaaS that explains Terms, Privacy, and Refund policies in plain English with risk scores and clause flags. Monorepo: FastAPI backend, Chrome/Firefox extension, Tauri desktop app, Razorpay billing, team accounts. Source is private — code not publicly shareable.",
+      "Legal-tech SaaS (parked for job search) — explains Terms, Privacy, and Refund policies in plain English with risk scores. FastAPI backend, browser extension, desktop app, Razorpay billing. Private repo; interview narrative only.",
     href: "https://github.com/YatharthSharma1309/TermLens",
     status: "Private",
     external: true,

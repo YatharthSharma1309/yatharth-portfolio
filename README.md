@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yatharth Sharma — Portfolio Site
 
-## Getting Started
+Personal portfolio and career hub: [yatharthsharma.vercel.app](https://yatharthsharma.vercel.app)
 
-First, run the development server:
+## Features
+
+- Featured AI/full-stack project cards with live demo links (when env URLs set)
+- Career journey timeline and downloadable resume PDF
+- Digital Twin chat (OpenRouter) grounded in portfolio content
+- Contact form (Resend on Vercel)
+- Dual deploy: Vercel + GitHub Pages
+
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
+# Set OPENROUTER_API_KEY, NEXT_PUBLIC_SITE_URL, demo URLs after deploy
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+|----------|---------|
+| `OPENROUTER_API_KEY` | Digital Twin API |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL |
+| `NEXT_PUBLIC_DEMO_RECRUITAI_URL` | Live RecruitAI demo link |
+| `NEXT_PUBLIC_DEMO_SUPPORTAI_URL` | Live SupportAI demo link |
+| `NEXT_PUBLIC_DEMO_SALES_CRM_URL` | Live Sales CRM demo link |
+| `RESEND_API_KEY` | Contact form (production) |
 
-## Learn More
+## After deploying flagship apps
 
-To learn more about Next.js, take a look at the following resources:
+1. Set demo URL env vars in Vercel
+2. Redeploy portfolio
+3. Project cards show **View demo** when URLs are present
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Career OS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Job search trackers and templates: `../Career-OS/`
 
-## Deploy on Vercel
+## Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js 16, React 19, TypeScript, Tailwind CSS 4, `@react-pdf/renderer`, Resend
