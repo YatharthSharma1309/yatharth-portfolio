@@ -30,7 +30,7 @@ const seoDescription =
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} · Full-Stack Software Engineer (AI/RAG)`,
+  title: `${site.name} · Full-Stack Developer · AI & LLM Integrations`,
   description: seoDescription,
   keywords: [
     "full-stack",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "India",
   ],
   openGraph: {
-    title: `${site.name} · Full-Stack Software Engineer (AI/RAG)`,
+    title: `${site.name} · Full-Stack Developer · AI & LLM Integrations`,
     description: seoDescription,
     type: "website",
     locale: "en_IN",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} · Full-Stack Software Engineer (AI/RAG)`,
+    title: `${site.name} · Full-Stack Developer · AI & LLM Integrations`,
     description: seoDescription,
   },
 };

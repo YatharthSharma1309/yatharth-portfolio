@@ -157,7 +157,7 @@ export const linkedInProfileSnapshot = {
   headline:
     "Full-Stack Developer (AI / LLM integrations) — React/TypeScript, RAG, REST APIs",
   about:
-    "Strong work ethic, adaptability, and interpersonal collaboration. Comfortable working independently across the stack — from UI components to API endpoints — learning quickly, and delivering end-to-end features.",
+    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, document ingestion, multi-tenant SaaS dashboards, and polished interfaces. Portfolio projects include SupportAI (RAG support platform) and RecruitAI (AI resume screening). Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...currentlyLearning],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
