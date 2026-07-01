@@ -46,7 +46,7 @@ export function Hero() {
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4 lg:mt-12">
           <a href="#featured-work" className={`${btnPrimary} w-full max-w-sm sm:w-auto sm:px-7`}>
-            Featured projects
+            View flagship projects
           </a>
           <a
             href={site.resumePdf}

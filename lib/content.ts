@@ -3,10 +3,10 @@ import { demoStatus, getDemoUrl } from "@/lib/demo-urls";
 
 export const site = {
   name: "Yatharth Sharma",
-  role: "AI-Focused Full-Stack Developer",
+  role: "Full-Stack Developer · AI & LLM Integrations",
   tagline:
-    "Software engineer with production experience shipping React/TypeScript UIs and REST APIs. I own features end to end: LLM integrations, RAG pipelines, document ingestion, and polished, accessible interfaces with strong attention to performance and craft.",
-  availability: "Open to full-time roles",
+    "I build production web applications end to end — React/TypeScript interfaces, REST APIs, and LLM-powered features including RAG, document ingestion, and multi-tenant SaaS. Recently shipped at Whilter.AI; open to full-time roles in India and remote-friendly teams.",
+  availability: "Open to full-time · India & remote",
   location: "Faridabad, Haryana, India",
   phone: "+91 8802518567",
   email: "yatharthsharma1309@gmail.com",
@@ -104,8 +104,8 @@ export const sectionCopy = {
     title: "Production full-stack engineering with AI at the core",
     recruiterBullets: [
       "Production React/TypeScript + REST APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Shipped RAG, document ingestion, OAuth CRM, and recruiter tooling end to end",
-      "Open to full-time roles · India / remote-friendly",
+      "Flagship builds: SupportAI (RAG support SaaS) and RecruitAI (AI resume screening)",
+      "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
       "Core stack I ship in production — React/TypeScript UIs, REST APIs, and LLM integrations.",
@@ -113,10 +113,11 @@ export const sectionCopy = {
     buildingHelper: "Focused growth areas — where I am actively leveling up.",
   },
   portfolio: {
-    title: "Featured full-stack & AI builds",
+    title: "Flagship AI & full-stack builds",
     description:
-      "Three flagship projects — production RAG support SaaS, recruiter AI tooling, and multi-tenant CRM — with problem, outcome, and stack at a glance. Live demos and repos linked where available.",
-    moreBuildsLabel: "More builds",
+      "Two production-style SaaS demos — multi-tenant RAG support and AI recruiter tooling — plus additional full-stack work. Each card summarizes the problem, outcome, and stack recruiters care about.",
+    moreBuildsLabel: "Additional projects",
+    demoSoonLabel: "Live demo deploying",
   },
   contact: {
     title: "Open to full-time engineering roles",
@@ -154,7 +155,7 @@ export const currentlyLearning = [...skillBuilding] as const;
 
 export const linkedInProfileSnapshot = {
   headline:
-    "AI-Focused Full-Stack Developer — React/TypeScript, REST APIs, RAG, and LLM integrations.",
+    "Full-Stack Developer (AI / LLM integrations) — React/TypeScript, RAG, REST APIs",
   about:
     "Strong work ethic, adaptability, and interpersonal collaboration. Comfortable working independently across the stack — from UI components to API endpoints — learning quickly, and delivering end-to-end features.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
@@ -282,7 +283,8 @@ export const portfolioLinks: PortfolioLink[] = [
   },
   {
     title: "RecruitAI — Smart Recruitment Assistant",
-    description: "Recruiter dashboard for resume screening and candidate scoring.",
+    description:
+      "Recruiter dashboard for resume screening — PDF/DOCX parsing, JD match scoring, skill gaps, and AI-generated interview questions.",
     href: "https://github.com/YatharthSharma1309/AI-Recruitment-Assistant",
     status: demoStatus(getDemoUrl("recruitAI")),
     external: true,
@@ -300,7 +302,7 @@ export const portfolioLinks: PortfolioLink[] = [
     href: "https://github.com/YatharthSharma1309/ai-sales-assistant-crm",
     status: demoStatus(getDemoUrl("salesCRM")),
     external: true,
-    featured: true,
+    featured: false,
     demoUrl: getDemoUrl("salesCRM"),
     problem:
       "Sales teams juggle leads across tools without a unified pipeline or AI-assisted follow-up workflow.",
