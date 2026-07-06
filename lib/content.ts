@@ -172,7 +172,7 @@ export const sectionCopy = {
     title: "Production full-stack engineering with AI at the core",
     recruiterBullets: [
       "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Flagship demo: OpsAI — unified support + recruitment AI platform",
+      "Flagship demo: Relay AI — unified support + recruitment platform",
       "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
@@ -225,7 +225,7 @@ export const linkedInProfileSnapshot = {
   headline:
     "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
   about:
-    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Portfolio flagship: OpsAI (unified support + recruitment platform). Open to full-time roles — India and remote-friendly.",
+    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Portfolio flagship: Relay AI (unified support + recruitment platform). Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...currentlyLearning],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
@@ -323,7 +323,7 @@ export const resumeJourney = journey.filter((item) => item.resume !== false);
 
 /** Static demo URLs for PDF (env may be empty at generate time). */
 export const resumeDemoUrls = {
-  opsAI: "https://support-ai-nine-mu.vercel.app",
+  relayAI: "https://support-ai-nine-mu.vercel.app",
 } as const;
 
 export type PortfolioLink = {
@@ -344,20 +344,20 @@ export type PortfolioLink = {
 
 export const portfolioLinks: PortfolioLink[] = [
   {
-    title: "OpsAI — AI Operations Platform",
+    title: "Relay AI — Support & Recruitment Platform",
     description:
       "Unified multi-tenant SaaS: RAG customer support (KB, chat, tickets, widget) plus AI recruitment (resume parsing, JD scoring, hiring pipeline).",
-    href: "https://github.com/YatharthSharma1309/ops-ai",
-    status: demoStatus(getDemoUrl("opsAI")),
+    href: "https://github.com/YatharthSharma1309/relay-ai",
+    status: demoStatus(getDemoUrl("relayAI")),
     external: true,
     featured: true,
-    demoUrl: getDemoUrl("opsAI"),
+    demoUrl: getDemoUrl("relayAI"),
     problem:
       "Teams need both customer support AI and hiring automation — usually as separate tools with duplicate auth, document parsing, and LLM plumbing.",
     result:
-      "Built OpsAI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
+      "Built Relay AI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
     resumeBullets: [
-      "Live: support-ai-nine-mu.vercel.app | GitHub: github.com/YatharthSharma1309/ops-ai",
+      "Live: support-ai-nine-mu.vercel.app | GitHub: github.com/YatharthSharma1309/relay-ai",
     ],
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
   },
