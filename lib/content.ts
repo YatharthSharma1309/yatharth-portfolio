@@ -172,7 +172,7 @@ export const sectionCopy = {
     title: "Production full-stack engineering with AI at the core",
     recruiterBullets: [
       "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Flagship demo: SupportAI — multi-tenant RAG customer support SaaS",
+      "Flagship demo: OpsAI — unified support + recruitment AI platform",
       "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
@@ -225,7 +225,7 @@ export const linkedInProfileSnapshot = {
   headline:
     "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
   about:
-    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Portfolio flagship: SupportAI (RAG support platform with Clerk). Open to full-time roles — India and remote-friendly.",
+    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Portfolio flagship: OpsAI (unified support + recruitment platform). Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...currentlyLearning],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
@@ -344,22 +344,22 @@ export type PortfolioLink = {
 
 export const portfolioLinks: PortfolioLink[] = [
   {
-    title: "SupportAI — Customer Support Platform",
+    title: "OpsAI — AI Operations Platform",
     description:
-      "AI customer support platform with RAG chat, knowledge base, ticket routing, and analytics.",
+      "Unified multi-tenant SaaS: RAG customer support (KB, chat, tickets, widget) plus AI recruitment (resume parsing, JD scoring, hiring pipeline).",
     href: "https://github.com/YatharthSharma1309/ai-customer-support-platform",
     status: demoStatus(getDemoUrl("supportAI")),
     external: true,
     featured: true,
     demoUrl: getDemoUrl("supportAI"),
     problem:
-      "Support teams need grounded AI answers, agent handoff, and measurable deflection — without bolting together separate chat, ticketing, and analytics tools.",
+      "Teams need both customer support AI and hiring automation — usually as separate tools with duplicate auth, document parsing, and LLM plumbing.",
     result:
-      "Shipped multi-tenant RAG support platform with KB ingestion, streaming cited answers, agent inbox, and deflection analytics.",
+      "Built OpsAI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
     resumeBullets: [
       "Live: support-ai-nine-mu.vercel.app | GitHub: github.com/YatharthSharma1309/ai-customer-support-platform",
     ],
-    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "Streaming APIs"],
+    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
   },
   {
     title: "AI Sales Assistant CRM",
