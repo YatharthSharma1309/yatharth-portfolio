@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { SectionIntro } from "@/components/SectionIntro";
 import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
@@ -10,47 +8,71 @@ import {
   type PortfolioLink,
 } from "@/lib/content";
 
-function statusBadgeClass(status: PortfolioLink["status"]) {
+const cardBase =
+  "surface-card border-border-subtle group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b from-bg-elevated/40 to-transparent p-5 transition-[border-color,box-shadow,transform] duration-300 sm:p-6";
+
+const cardInteractive =
+  "hover:border-accent/30 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(62,232,200,0.12),0_16px_36px_-20px_rgba(0,0,0,0.5)]";
+
+const stackTagClass =
+  "border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium";
+
+function statusBadgeClass(status: PortfolioLink["status"], hasDemo: boolean) {
+  if (status === "Open source") {
+    return "border-border-highlight text-text-muted border bg-transparent";
+  }
+  if (status === "Live" && !hasDemo) {
+    return "border-border-highlight text-text-muted border bg-transparent";
+  }
   switch (status) {
     case "Live":
       return "bg-accent/[0.12] text-accent";
     case "Coming soon":
-      return "bg-[rgba(232,164,58,0.1)] text-accent-warm/95";
     case "In progress":
-      return "bg-[rgba(232,164,58,0.08)] text-accent-warm/85 border border-accent-warm/20";
+      return "bg-[rgba(232,164,58,0.1)] text-accent-warm/95 border border-accent-warm/20";
     case "Private":
       return "border-border-highlight text-text-muted border bg-transparent";
-    case "Profile":
-      return "bg-accent/[0.08] text-accent/90";
     default:
       return "bg-[rgba(232,164,58,0.1)] text-accent-warm/95";
   }
+}
+
+function statusLabel(status: PortfolioLink["status"], hasDemo: boolean): string {
+  if (status === "In progress") return "Deploying";
+  if (status === "Open source") return "Open source";
+  if (status === "Live" && !hasDemo) return "Open source";
+  return status;
 }
 
 function hasRepoLink(item: PortfolioLink) {
   return Boolean(item.href) && item.status !== "Private";
 }
 
-function ProjectActions({
-  item,
-  variant,
-}: {
-  item: PortfolioLink;
-  variant: "featured" | "compact";
-}) {
-  const { portfolio } = sectionCopy;
+function StackTags({ tags }: { tags: string[] }) {
+  if (tags.length === 0) return null;
+
+  return (
+    <ul className="mt-3 flex flex-wrap gap-1.5">
+      {tags.map((tag) => (
+        <li key={tag} className={stackTagClass}>
+          {tag}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ProjectActions({ item }: { item: PortfolioLink }) {
   const repo = hasRepoLink(item);
   const demo = Boolean(item.demoUrl);
 
   if (item.status === "Private") {
     return (
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-text-muted text-sm font-medium">Private org project</span>
-        <Link
-          href="#digital-twin"
-          className="text-accent text-sm font-semibold underline-offset-2 hover:underline"
-        >
-          Ask career twin →
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <span className="text-text-muted text-sm font-medium">Confidential · details via career twin</span>
+        <Link href="#digital-twin" className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
+          Ask career twin
+          <span aria-hidden>→</span>
         </Link>
       </div>
     );
@@ -64,74 +86,72 @@ function ProjectActions({
     );
   }
 
-  const demoClass =
-    variant === "featured" && demo
-      ? `${btnPrimary} gap-2 px-5 py-2.5 text-sm`
-      : "text-accent text-sm font-semibold underline-offset-2 hover:underline";
-
-  const repoClass =
-    variant === "featured"
-      ? `${btnSecondary} gap-2 px-5 py-2.5 text-sm`
-      : "text-text-muted hover:text-accent text-sm font-medium underline-offset-2 hover:underline";
-
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
       {demo ? (
         <Link
           href={item.demoUrl!}
           target="_blank"
           rel="noopener noreferrer"
-          className={demoClass}
+          className={`${btnPrimary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}
         >
           Live demo
-          <span aria-hidden>→</span>
+          <span aria-hidden>↗</span>
         </Link>
-      ) : repo && variant === "featured" ? (
-        <span className="border-accent-warm/25 bg-accent-warm/[0.06] text-accent-warm/90 inline-flex items-center rounded-lg border px-3 py-1.5 text-xs font-semibold tracking-wide">
-          {portfolio.demoSoonLabel}
-        </span>
       ) : null}
-
       {repo ? (
         <Link
           href={item.href}
           target={item.external ? "_blank" : undefined}
           rel={item.external ? "noopener noreferrer" : undefined}
-          className={repoClass}
+          className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}
         >
-          {item.status === "Profile" ? "View profile" : "Source code"}
-          {variant === "featured" ? <span aria-hidden>↗</span> : <span aria-hidden> →</span>}
+          Source code
+          <span aria-hidden>↗</span>
         </Link>
       ) : null}
     </div>
   );
 }
 
+function DetailBlock({ label, children }: { label: string; children: string }) {
+  return (
+    <div>
+      <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+        {label}
+      </p>
+      <p className="text-text-muted mt-1.5 text-sm leading-relaxed">{children}</p>
+    </div>
+  );
+}
+
 function ProjectCard({
   item,
-  variant = "compact",
+  variant,
 }: {
   item: PortfolioLink;
-  variant?: "featured" | "compact";
+  variant: "featured" | "standard";
 }) {
-  const isInteractive = hasRepoLink(item) || Boolean(item.demoUrl);
-  const cardClass = `surface-card border-border-subtle from-bg-elevated/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b to-transparent p-5 transition-[border-color,box-shadow,transform] duration-300 sm:p-7 ${
-    isInteractive
-      ? "hover:border-accent/30 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(62,232,200,0.12),0_20px_40px_-20px_rgba(0,0,0,0.5)]"
-      : "opacity-92"
-  }`;
+  const hasDemo = Boolean(item.demoUrl);
+  const isInteractive = hasRepoLink(item) || hasDemo || item.status === "Private";
+  const stack = item.stack ?? [];
 
   return (
-    <article className={cardClass}>
-      <div className="mb-5 flex flex-wrap items-center gap-2">
+    <article className={`${cardBase} ${isInteractive ? cardInteractive : ""}`}>
+      <div className="mb-4 flex flex-wrap items-center gap-2">
         <span
-          className={`inline-flex w-fit rounded-md px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] uppercase ${statusBadgeClass(item.status)}`}
+          className={`inline-flex rounded-md px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] uppercase ${statusBadgeClass(item.status, hasDemo)}`}
         >
-          {item.status === "In progress" ? "Deploying" : item.status}
+          {statusLabel(item.status, hasDemo)}
         </span>
         {variant === "featured" ? (
           <span className="text-text-muted text-[10px] font-semibold tracking-[0.12em] uppercase">
             Flagship
+          </span>
+        ) : null}
+        {item.resumeTag ? (
+          <span className="text-text-muted/80 text-[10px] font-medium tracking-wide">
+            {item.resumeTag}
           </span>
         ) : null}
       </div>
@@ -140,58 +160,40 @@ function ProjectCard({
         {item.title}
       </h3>
 
+      <p className="text-text-muted mt-2.5 flex-1 text-sm leading-relaxed sm:text-[0.9375rem]">
+        {item.description}
+      </p>
+
       {variant === "featured" ? (
-        <>
-          {item.description ? (
-            <p className="text-text-muted mt-2.5 text-sm leading-relaxed sm:text-[0.9375rem]">
-              {item.description}
+        <div className="mt-5 space-y-4">
+          {item.problem ? <DetailBlock label="Problem">{item.problem}</DetailBlock> : null}
+          {item.result ? <DetailBlock label="Outcome">{item.result}</DetailBlock> : null}
+        </div>
+      ) : null}
+
+      {stack.length > 0 ? (
+        <div className={variant === "featured" ? "mt-4" : ""}>
+          {variant === "featured" ? (
+            <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+              Stack
             </p>
           ) : null}
+          <StackTags tags={stack} />
+        </div>
+      ) : null}
 
-          {item.problem ? (
-            <div className="mt-5">
-              <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
-                Problem
-              </p>
-              <p className="text-text-muted mt-1.5 text-sm leading-relaxed">{item.problem}</p>
-            </div>
-          ) : null}
-
-          {item.result ? (
-            <div className="mt-4">
-              <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
-                Outcome
-              </p>
-              <p className="text-text-muted mt-1.5 text-sm leading-relaxed">{item.result}</p>
-            </div>
-          ) : null}
-
-          {item.stack && item.stack.length > 0 ? (
-            <div className="mt-4">
-              <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
-                Stack
-              </p>
-              <ul className="mt-2 flex flex-wrap gap-1.5">
-                {item.stack.map((tag) => (
-                  <li
-                    key={tag}
-                    className="border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-        </>
-      ) : (
-        <p className="text-text-muted mt-3 flex-1 text-sm leading-relaxed">{item.description}</p>
-      )}
-
-      <div className={`mt-auto ${variant === "featured" ? "pt-6" : "pt-5"}`}>
-        <ProjectActions item={item} variant={variant} />
+      <div className="mt-5 border-border-subtle border-t pt-5 sm:mt-6">
+        <ProjectActions item={item} />
       </div>
     </article>
+  );
+}
+
+function SubsectionHeading({ children }: { children: string }) {
+  return (
+    <h3 className="text-text-primary text-center text-base font-semibold tracking-tight sm:text-lg">
+      {children}
+    </h3>
   );
 }
 
@@ -210,24 +212,27 @@ export function PortfolioSection() {
           description={portfolio.description}
         />
 
-        <div
-          id="featured-work"
-          className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 lg:grid-cols-2 lg:gap-8"
-        >
-          {featuredPortfolioLinks.map((item) => (
-            <ProjectCard key={item.title} item={item} variant="featured" />
-          ))}
-        </div>
+        {featuredPortfolioLinks.length > 0 ? (
+          <div id="featured-work" className="mt-10 sm:mt-14">
+            <SubsectionHeading>{portfolio.featuredLabel}</SubsectionHeading>
+            <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
+              {featuredPortfolioLinks.map((item) => (
+                <ProjectCard key={item.title} item={item} variant="featured" />
+              ))}
+            </div>
+          </div>
+        ) : null}
 
-        <h3 className="text-text-primary mt-14 text-center text-base font-semibold tracking-tight sm:mt-16 sm:text-lg">
-          {portfolio.moreBuildsLabel}
-        </h3>
-
-        <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
-          {morePortfolioLinks.map((item) => (
-            <ProjectCard key={item.title} item={item} variant="compact" />
-          ))}
-        </div>
+        {morePortfolioLinks.length > 0 ? (
+          <div className="mt-14 sm:mt-16">
+            <SubsectionHeading>{portfolio.moreBuildsLabel}</SubsectionHeading>
+            <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
+              {morePortfolioLinks.map((item) => (
+                <ProjectCard key={item.title} item={item} variant="standard" />
+              ))}
+            </div>
+          </div>
+        ) : null}
       </div>
     </section>
   );

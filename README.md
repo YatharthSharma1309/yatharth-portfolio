@@ -4,7 +4,7 @@ Personal portfolio and career hub: [yatharthsharma.vercel.app](https://yatharths
 
 ## Features
 
-- Featured AI/full-stack project cards with live demo links (when env URLs set)
+- Featured AI/full-stack project cards with live demo links (defaults in `lib/demo-urls.ts`; override via env)
 - Career journey timeline and downloadable resume PDF
 - Digital Twin chat (OpenRouter) grounded in portfolio content
 - Contact form (Resend on Vercel)
@@ -33,9 +33,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## After deploying flagship apps
 
-1. Set demo URL env vars in Vercel
-2. Redeploy portfolio
-3. Project cards show **View demo** when URLs are present
+1. Demo URLs default to production (`lib/demo-urls.ts`) — override with env vars if needed
+2. Redeploy portfolio after changing env vars on Vercel
+3. Project cards show **Live demo** when a URL resolves
 
 ## Career OS
 

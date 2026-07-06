@@ -2,12 +2,15 @@ import {
   aboutParagraphs,
   certifications,
   education,
+  heroMetrics,
   journey,
   languages,
   linkedInProfileSnapshot,
   portfolioLinks,
+  sectionCopy,
   site,
   skillGroups,
+  type PortfolioLink,
 } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -40,6 +43,18 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+function formatProjectContext(project: PortfolioLink): string {
+  const parts = [`- ${project.title} (${project.status}): ${project.description}`];
+  if (project.demoUrl?.trim()) {
+    parts.push(`Live demo: ${project.demoUrl}`);
+  }
+  const href = project.href?.trim();
+  if (href && href !== "#" && project.status !== "Private") {
+    parts.push(`Source: ${href}`);
+  }
+  return parts.join(" | ");
+}
+
 const CAREER_CONTEXT = `
 Name: ${site.name}
 Role: ${site.role}
@@ -50,6 +65,12 @@ Email: ${site.email}
 LinkedIn: ${site.linkedin}
 GitHub: ${site.github}
 Tagline: ${site.tagline}
+
+Recruiter highlights:
+${sectionCopy.about.recruiterBullets.map((b) => `- ${b}`).join("\n")}
+
+Key metrics:
+${heroMetrics.map((m) => `- ${m.value} ${m.label}`).join("\n")}
 
 About:
 ${aboutParagraphs.map((p) => `- ${p}`).join("\n")}
@@ -70,13 +91,7 @@ ${journey
   .join("\n")}
 
 Portfolio projects:
-${portfolioLinks
-  .map(
-    (p) =>
-      `- ${p.title} (${p.status}): ${p.description}` +
-      (p.href !== "#" ? ` | Link: ${p.href}` : "")
-  )
-  .join("\n")}
+${portfolioLinks.map(formatProjectContext).join("\n")}
 
 Education:
 ${education

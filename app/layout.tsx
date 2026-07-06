@@ -91,9 +91,8 @@ const featuredProjectsJsonLd = {
       name: project.title,
       description: project.description,
       url:
-        project.status === "Live" && project.href
-          ? project.href
-          : `${site.url}/#portfolio`,
+        project.demoUrl?.trim() ||
+        (project.status !== "Private" && project.href?.trim() ? project.href : `${site.url}/#portfolio`),
     },
   })),
 };

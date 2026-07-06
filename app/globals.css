@@ -142,6 +142,7 @@ body {
     rgba(0, 0, 0, 0.28);
   scrollbar-color: rgba(62, 232, 200, 0.35) transparent;
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .chat-panel::-webkit-scrollbar {

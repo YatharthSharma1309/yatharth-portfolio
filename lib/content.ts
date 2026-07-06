@@ -54,7 +54,7 @@ export const engineeringHighlights = [
 
 export const heroMetrics = [
   { value: "6+", label: "AI applications shipped" },
-  { value: "1", label: "Live flagship demo" },
+  { value: "2", label: "Live SaaS demos" },
   { value: "4+", label: "Production domains" },
   { value: "3", label: "Azure certifications" },
 ] as const;
@@ -172,7 +172,7 @@ export const sectionCopy = {
     title: "Production full-stack engineering with AI at the core",
     recruiterBullets: [
       "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Flagship demo: Relay AI — unified support + recruitment platform",
+      "Two live demos: Relay AI (RAG support + recruitment) and AI Sales Assistant CRM",
       "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
@@ -183,9 +183,9 @@ export const sectionCopy = {
   portfolio: {
     title: "Flagship AI & full-stack builds",
     description:
-      "Production-style SaaS demo — multi-tenant RAG support — plus additional full-stack work. Each card summarizes the problem, outcome, and stack recruiters care about.",
+      "Two live SaaS demos plus commercial, enterprise, and open-source work — each with the problem, outcome, and stack recruiters care about.",
+    featuredLabel: "Live demos",
     moreBuildsLabel: "Additional projects",
-    demoSoonLabel: "Live demo deploying",
   },
   contact: {
     title: "Open to full-time engineering roles",
@@ -208,8 +208,7 @@ export const sectionCopy = {
     description:
       "A conversational way to explore my background — roles, stack, and projects. Answers are based on this portfolio's career data.",
     chatTitle: "Career Twin",
-    inputPlaceholder: "Ask about my React/TypeScript work, RAG projects, or full-time role search...",
-    formFooter: "Ready to talk? Email me or download my resume from the contact section.",
+    inputPlaceholder: "Ask about my experience, stack, or projects...",
   },
 } as const;
 
@@ -219,15 +218,13 @@ export const languages = [
   { name: "French", level: "Beginner" },
 ] as const;
 
-export const currentlyLearning = [...skillBuilding] as const;
-
 export const linkedInProfileSnapshot = {
   headline:
     "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
   about:
-    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Portfolio flagship: Relay AI (unified support + recruitment platform). Open to full-time roles — India and remote-friendly.",
+    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Live demos: Relay AI (support + recruitment) and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
-  currentlyLearning: [...currentlyLearning],
+  currentlyLearning: [...skillBuilding],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
 } as const;
 
@@ -321,23 +318,17 @@ export const certifications = [
 
 export const resumeJourney = journey.filter((item) => item.resume !== false);
 
-/** Static demo URLs for PDF (env may be empty at generate time). */
-export const resumeDemoUrls = {
-  relayAI: "https://relay-ai-app.vercel.app",
-} as const;
-
 export type PortfolioLink = {
   title: string;
   description: string;
   href: string;
-  status: "Coming soon" | "In progress" | "Add URL" | "Profile" | "Live" | "Private";
+  status: "Coming soon" | "In progress" | "Live" | "Private" | "Open source";
   external?: boolean;
   demoUrl?: string;
   featured?: boolean;
   problem?: string;
   result?: string;
   stack?: string[];
-  resumeBullets?: string[];
   /** Short right-aligned label for the resume PDF (e.g. "Private · Whilter.AI"). */
   resumeTag?: string;
 };
@@ -356,9 +347,6 @@ export const portfolioLinks: PortfolioLink[] = [
       "Teams need both customer support AI and hiring automation — usually as separate tools with duplicate auth, document parsing, and LLM plumbing.",
     result:
       "Built Relay AI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
-    resumeBullets: [
-      "Live: relay-ai-app.vercel.app | GitHub: github.com/YatharthSharma1309/relay-ai",
-    ],
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
   },
   {
@@ -367,7 +355,7 @@ export const portfolioLinks: PortfolioLink[] = [
     href: "https://github.com/YatharthSharma1309/ai-sales-assistant-crm",
     status: demoStatus(getDemoUrl("salesCRM")),
     external: true,
-    featured: false,
+    featured: true,
     demoUrl: getDemoUrl("salesCRM"),
     problem:
       "Sales teams juggle leads across tools without a unified pipeline or AI-assisted follow-up workflow.",
@@ -379,9 +367,8 @@ export const portfolioLinks: PortfolioLink[] = [
     title: "TermLens — LegalTech SaaS",
     description:
       "Commercial LegalTech SaaS — explains Terms, Privacy, and Refund policies in plain English with risk scores. Source code confidential.",
-    href: "https://github.com/YatharthSharma1309/TermLens",
+    href: "",
     status: "Private",
-    external: true,
     featured: false,
     resumeTag: "Private · Commercial SaaS",
     problem:
@@ -428,8 +415,9 @@ export const portfolioLinks: PortfolioLink[] = [
     description:
       "Browser-based 3D first-person arena shooter — waves, dual weapons, minimap, difficulty tiers, and persistent high scores.",
     href: "https://github.com/YatharthSharma1309/arena-deathmatch",
-    status: "Live",
+    status: "Open source",
     external: true,
+    stack: ["HTML5", "CSS3", "JavaScript", "Canvas", "WebGL"],
   },
 ];
 

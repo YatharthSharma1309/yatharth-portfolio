@@ -106,7 +106,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <p className="text-text-muted mt-10 text-sm">
+        <p className="text-text-muted mt-10 text-sm" suppressHydrationWarning>
           © {year} {site.name}. All rights reserved.
         </p>
       </div>

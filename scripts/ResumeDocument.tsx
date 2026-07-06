@@ -14,7 +14,6 @@ import {
   resumeSkillKeywords,
   resumeContactLinks,
   resumeContactPrimary,
-  resumeDemoUrls,
   resumeJourney,
   resumeProjectLinks,
   resumeConfidentialProjects,
@@ -23,6 +22,7 @@ import {
   skillCategories,
   type PortfolioLink,
 } from "../lib/content";
+import { formatDemoHost, formatRepoPath } from "../lib/demo-urls";
 
 Font.register({
   family: "DM Sans",
@@ -242,22 +242,24 @@ function resumeBulletsForJob(org: string, bullets: string[] | undefined): string
   return bullets.slice(0, 1);
 }
 
+function projectLinkBullets(project: PortfolioLink): string[] {
+  const lines: string[] = [];
+  if (project.demoUrl?.trim()) {
+    lines.push(`Live: ${formatDemoHost(project.demoUrl)}`);
+  }
+  const repo = project.href?.trim();
+  if (repo) {
+    lines.push(`GitHub: ${formatRepoPath(repo)}`);
+  }
+  return lines;
+}
+
 function projectBullets(project: PortfolioLink): string[] {
   const bullets: string[] = [];
   if (project.result) bullets.push(project.result);
   else if (project.description) bullets.push(project.description);
-  if (project.resumeBullets?.length) bullets.push(...project.resumeBullets);
+  bullets.push(...projectLinkBullets(project));
   return bullets;
-}
-
-function projectHasInlineLinks(project: PortfolioLink): boolean {
-  return Boolean(project.resumeBullets?.length);
-}
-
-function projectDemoUrl(project: PortfolioLink): string | undefined {
-  if (project.demoUrl) return project.demoUrl;
-  if (project.title.startsWith("Relay AI")) return resumeDemoUrls.relayAI;
-  return undefined;
 }
 
 function Bullets({ items }: { items: string[] }) {
@@ -371,8 +373,6 @@ function ProjectsBlock() {
     <View style={styles.section}>
       <SectionTitle>Projects</SectionTitle>
       {resumeProjectLinks.map((project, index) => {
-        const demoUrl = projectDemoUrl(project);
-
         return (
           <View key={project.title} wrap={false}>
             {index > 0 ? <View style={styles.divider} /> : null}
@@ -384,16 +384,6 @@ function ProjectsBlock() {
                 </PdfText>
               ) : null}
               <Bullets items={projectBullets(project)} />
-              {!projectHasInlineLinks(project) && demoUrl ? (
-                <Link src={demoUrl} style={styles.projectLink}>
-                  Live demo: {demoUrl.replace(/^https?:\/\//, "")}
-                </Link>
-              ) : null}
-              {!projectHasInlineLinks(project) && project.href && project.external ? (
-                <Link src={project.href} style={styles.projectLink}>
-                  GitHub: {project.href.replace(/^https?:\/\//, "")}
-                </Link>
-              ) : null}
             </View>
           </View>
         );

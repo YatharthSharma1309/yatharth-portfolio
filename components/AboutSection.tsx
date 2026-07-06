@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
 import {
@@ -5,7 +6,7 @@ import {
   languages,
   sectionCopy,
   site,
-  skillBuilding,
+  skillBuildingGroups,
   skillCategories,
 } from "@/lib/content";
 
@@ -16,7 +17,7 @@ function SkillTag({
   children,
   variant = "core",
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: "core" | "building";
 }) {
   if (variant === "building") {
@@ -74,7 +75,7 @@ export function AboutSection() {
             {about.stackHelper}
           </p>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skillCategories.map((category) => (
               <div
                 key={category.label}
@@ -97,13 +98,25 @@ export function AboutSection() {
             <p className="text-text-muted mx-auto mb-4 max-w-2xl text-center text-sm leading-relaxed sm:mb-5">
               {about.buildingHelper}
             </p>
-            <ul className="flex flex-wrap justify-center gap-1.5">
-              {skillBuilding.map((skill) => (
-                <SkillTag key={skill} variant="building">
-                  {skill}
-                </SkillTag>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {skillBuildingGroups.map((group) => (
+                <div
+                  key={group.label}
+                  className="border-border-subtle rounded-xl border bg-[rgba(0,0,0,0.15)] p-3 sm:p-4"
+                >
+                  <p className="text-accent/90 mb-2 text-center font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+                    {group.label}
+                  </p>
+                  <ul className="flex flex-wrap justify-center gap-1.5">
+                    {group.skills.map((skill) => (
+                      <SkillTag key={skill} variant="building">
+                        {skill}
+                      </SkillTag>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
