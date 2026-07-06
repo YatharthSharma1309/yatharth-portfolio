@@ -11,16 +11,18 @@ import {
 import {
   certifications,
   education,
-  journey,
-  languages,
+  resumeSkillKeywords,
+  resumeContactLinks,
+  resumeContactPrimary,
+  resumeDemoUrls,
+  resumeJourney,
   resumeProjectLinks,
+  resumeConfidentialProjects,
   resumeSummary,
   site,
-  skillBuilding,
   skillCategories,
   type PortfolioLink,
 } from "../lib/content";
-import { formatExternalLabel } from "../lib/format";
 
 Font.register({
   family: "DM Sans",
@@ -54,333 +56,277 @@ Font.register({
   ],
 });
 
+const noHyphen = (word: string) => [word];
+
 const C = {
-  brand: "#0d5c4d",
-  brandLight: "#1f856f",
-  brandTint: "#e8f6f2",
-  brandMuted: "#8ecdb9",
-  ink: "#121218",
-  body: "#2e2e34",
-  muted: "#6b6b74",
-  line: "#dcdce2",
-  chipBg: "#edf5f3",
-  chipBorder: "#c5ddd6",
-  warm: "#c9921a",
+  brand: "#0f766e",
+  brandDark: "#0c4a42",
+  brandLight: "#14b8a6",
+  brandSoft: "#ccfbf1",
+  ink: "#0f172a",
+  body: "#1e293b",
+  muted: "#475569",
+  line: "#e2e8f0",
+  surface: "#f8fafc",
 };
 
 const styles = StyleSheet.create({
   page: {
     fontFamily: "DM Sans",
-    fontSize: 9,
+    fontSize: 10,
     color: C.body,
     lineHeight: 1.45,
-    paddingBottom: 36,
+    paddingBottom: 44,
   },
   header: {
-    backgroundColor: C.brand,
+    backgroundColor: C.brandDark,
     paddingHorizontal: 40,
-    paddingTop: 28,
-    paddingBottom: 22,
+    paddingTop: 24,
+    paddingBottom: 16,
   },
   headerAccent: {
     height: 3,
     backgroundColor: C.brandLight,
-    marginBottom: 14,
+    marginBottom: 10,
   },
+  headerContent: { gap: 4 },
   name: {
     fontFamily: "Plus Jakarta",
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 700,
     color: "#ffffff",
-    letterSpacing: -0.3,
+    lineHeight: 1.2,
   },
   role: {
     fontFamily: "Plus Jakarta",
-    fontSize: 11,
+    fontSize: 11.5,
     fontWeight: 600,
-    color: C.brandMuted,
-    marginTop: 4,
+    color: C.brandSoft,
+    lineHeight: 1.35,
   },
-  contactRow: {
+  availability: { fontSize: 8.5, color: "#a7f3d0", lineHeight: 1.35 },
+  contactLine: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 6,
-    marginTop: 12,
+    flexWrap: "nowrap",
+    alignItems: "center",
+    marginTop: 3,
   },
-  contactItem: {
-    fontSize: 7.75,
-    color: "#d7ece6",
-  },
-  contactDot: {
-    fontSize: 7.75,
-    color: "#8fb8ad",
-  },
-  body: {
-    paddingHorizontal: 40,
-    paddingTop: 22,
-    gap: 18,
-  },
-  topGrid: {
-    flexDirection: "row",
-    gap: 18,
-  },
-  sidebar: {
-    width: "31%",
-    gap: 14,
-  },
-  main: {
-    flex: 1,
-    gap: 16,
-  },
-  section: {
-    gap: 8,
-  },
+  contactItem: { fontSize: 8.25, color: "#e6fffa", flexShrink: 0 },
+  contactDot: { fontSize: 8.25, color: "#5eead4", marginHorizontal: 5, flexShrink: 0 },
+  body: { paddingHorizontal: 40, paddingTop: 16, gap: 11 },
+  section: { gap: 6 },
   sectionTitle: {
     fontFamily: "Plus Jakarta",
-    fontSize: 9.5,
+    fontSize: 10,
     fontWeight: 700,
     color: C.brand,
     textTransform: "uppercase",
-    letterSpacing: 0.8,
-    paddingBottom: 4,
-    borderBottomWidth: 1.5,
+    letterSpacing: 0.7,
+    paddingBottom: 3,
+    borderBottomWidth: 2,
     borderBottomColor: C.brandLight,
   },
-  summary: {
-    fontSize: 9.25,
-    color: C.body,
-    lineHeight: 1.55,
-  },
-  skillGroup: {
-    gap: 5,
-  },
-  skillLabel: {
-    fontSize: 7.75,
-    fontWeight: 700,
-    color: C.ink,
-  },
-  chipRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 4,
-  },
-  chip: {
-    backgroundColor: C.chipBg,
-    borderWidth: 0.5,
-    borderColor: C.chipBorder,
-    borderRadius: 3,
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-  },
-  chipText: {
-    fontSize: 7.25,
-    color: C.body,
-  },
-  eduBlock: {
-    gap: 2,
-    marginBottom: 6,
-  },
-  eduDegree: {
-    fontSize: 7.75,
-    fontWeight: 700,
-    color: C.ink,
-  },
-  eduMeta: {
-    fontSize: 7.25,
-    color: C.muted,
-  },
-  certItem: {
-    fontSize: 7.25,
-    color: C.body,
-    marginBottom: 3,
-    paddingLeft: 8,
-  },
-  entryCard: {
-    borderWidth: 0.5,
-    borderColor: C.line,
-    borderRadius: 4,
-    padding: 10,
-    gap: 4,
-  },
-  entryCardCurrent: {
-    backgroundColor: C.brandTint,
-    borderColor: C.brandLight,
-  },
-  entryHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: 8,
-  },
-  entryOrg: {
-    fontFamily: "Plus Jakarta",
-    fontSize: 9.75,
-    fontWeight: 700,
-    color: C.ink,
-  },
-  entryRole: {
+  summary: { fontSize: 9.5, color: C.body, lineHeight: 1.5 },
+  skillsGrid: { gap: 3 },
+  skillLine: { fontSize: 8.5, lineHeight: 1.42, color: C.body },
+  skillKeywords: {
     fontSize: 8.25,
     color: C.muted,
-    marginTop: 1,
+    lineHeight: 1.4,
+    marginBottom: 4,
   },
-  entryPeriod: {
-    fontSize: 7.5,
-    color: C.muted,
-    marginTop: 2,
-  },
-  badge: {
-    backgroundColor: C.brandLight,
-    borderRadius: 3,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-  },
-  badgeWarm: {
-    backgroundColor: C.warm,
-  },
-  badgeText: {
-    fontSize: 6.75,
-    fontWeight: 700,
-    color: "#ffffff",
-    letterSpacing: 0.4,
-  },
-  bulletList: {
-    marginTop: 4,
-    gap: 3,
-  },
-  bulletRow: {
-    flexDirection: "row",
-    gap: 6,
-    paddingRight: 4,
-  },
-  bulletDot: {
+  skillLabel: { fontSize: 8.5, fontWeight: 700, color: C.ink },
+  eduEntry: { gap: 1, marginBottom: 4 },
+  eduDegree: { fontSize: 8.5, fontWeight: 700, color: C.ink, lineHeight: 1.35 },
+  eduMeta: { fontSize: 8, color: C.muted, lineHeight: 1.35 },
+  certColumn: { gap: 2 },
+  certRow: { flexDirection: "row", gap: 5, alignItems: "flex-start" },
+  certDot: {
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: C.brandLight,
-    marginTop: 3,
+    backgroundColor: C.brand,
+    marginTop: 4,
+    flexShrink: 0,
   },
-  bulletText: {
-    flex: 1,
-    fontSize: 8.75,
-    lineHeight: 1.45,
+  certText: { flex: 1, fontSize: 8.25, color: C.body, lineHeight: 1.4 },
+  entryCard: {
+    backgroundColor: C.surface,
+    borderWidth: 0.5,
+    borderColor: C.line,
+    borderLeftWidth: 2.5,
+    borderLeftColor: C.brandLight,
+    borderRadius: 4,
+    padding: 8,
+    gap: 2,
+    marginBottom: 4,
   },
-  projectStack: {
-    fontSize: 7.5,
-    color: C.muted,
-    marginTop: 1,
+  entryOrg: {
+    fontFamily: "Plus Jakarta",
+    fontSize: 10,
+    fontWeight: 700,
+    color: C.ink,
+    lineHeight: 1.3,
   },
-  langText: {
+  entryHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: 10,
+  },
+  entryOrgWrap: { flex: 1 },
+  entryPeriod: {
     fontSize: 8,
-    color: C.body,
+    color: C.brand,
+    fontWeight: 500,
+    textAlign: "right",
+    flexShrink: 0,
+  },
+  entryRole: { fontSize: 8.75, color: C.muted, marginTop: 1, lineHeight: 1.35 },
+  bulletList: { marginTop: 3, gap: 2 },
+  bulletRow: { flexDirection: "row", gap: 5, paddingRight: 2 },
+  bulletDot: {
+    width: 4.5,
+    height: 4.5,
+    borderRadius: 2.25,
+    backgroundColor: C.brand,
+    marginTop: 4,
+    flexShrink: 0,
+  },
+  bulletText: { flex: 1, fontSize: 9, lineHeight: 1.45 },
+  projectMeta: { fontSize: 8, color: C.muted, marginTop: 2, lineHeight: 1.38 },
+  projectLink: { fontSize: 8, color: C.brand, marginTop: 2 },
+  subsectionTitle: {
+    fontFamily: "Plus Jakarta",
+    fontSize: 9,
+    fontWeight: 700,
+    color: C.ink,
+    marginTop: 4,
+    marginBottom: 2,
   },
   footer: {
     position: "absolute",
-    bottom: 16,
+    bottom: 18,
     left: 0,
     right: 0,
     textAlign: "center",
-    fontSize: 7,
+    fontSize: 7.5,
     color: C.muted,
   },
-  divider: {
-    height: 0.5,
-    backgroundColor: C.line,
-    marginVertical: 2,
+  divider: { height: 0.5, backgroundColor: C.line, marginVertical: 3 },
+  continuationHeader: {
+    backgroundColor: C.brandDark,
+    paddingHorizontal: 40,
+    paddingVertical: 9,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
+  continuationName: {
+    fontFamily: "Plus Jakarta",
+    fontSize: 10.5,
+    fontWeight: 700,
+    color: "#ffffff",
+  },
+  continuationMeta: { fontSize: 8.25, color: "#a7f3d0" },
 });
+
+function PdfText(props: React.ComponentProps<typeof Text>) {
+  return <Text hyphenationCallback={noHyphen} {...props} />;
+}
+
+function resumeBulletsForJob(org: string, bullets: string[] | undefined): string[] {
+  if (!bullets?.length) return [];
+  if (org === "Whilter.AI") return bullets;
+  if (org === "Ernst & Young Global Consulting Services") return bullets.slice(0, 2);
+  return bullets.slice(0, 1);
+}
 
 function projectBullets(project: PortfolioLink): string[] {
   const bullets: string[] = [];
-  if (project.problem) bullets.push(project.problem);
   if (project.result) bullets.push(project.result);
-  if (bullets.length) return bullets;
+  else if (project.description) bullets.push(project.description);
+  if (project.resumeBullets?.length) bullets.push(...project.resumeBullets);
+  return bullets;
+}
 
-  return project.description
-    .split(/\.\s+/)
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .map((part) => (part.endsWith(".") ? part : `${part}.`));
+function projectHasInlineLinks(project: PortfolioLink): boolean {
+  return Boolean(project.resumeBullets?.length);
+}
+
+function projectDemoUrl(project: PortfolioLink): string | undefined {
+  if (project.demoUrl) return project.demoUrl;
+  if (project.title.startsWith("SupportAI")) return resumeDemoUrls.supportAI;
+  return undefined;
 }
 
 function Bullets({ items }: { items: string[] }) {
   return (
     <View style={styles.bulletList}>
       {items.map((item) => (
-        <View key={item.slice(0, 40)} style={styles.bulletRow} wrap={false}>
+        <View key={item.slice(0, 48)} style={styles.bulletRow}>
           <View style={styles.bulletDot} />
-          <Text style={styles.bulletText}>{item}</Text>
+          <PdfText style={styles.bulletText}>{item}</PdfText>
         </View>
       ))}
-    </View>
-  );
-}
-
-function Badge({ label, warm = false }: { label: string; warm?: boolean }) {
-  return (
-    <View style={[styles.badge, ...(warm ? [styles.badgeWarm] : [])]}>
-      <Text style={styles.badgeText}>{label}</Text>
     </View>
   );
 }
 
 function SectionTitle({ children }: { children: string }) {
-  return <Text style={styles.sectionTitle}>{children}</Text>;
+  return <PdfText style={styles.sectionTitle}>{children}</PdfText>;
 }
 
-function SkillChips({ skills }: { skills: readonly string[] }) {
+function ContactLine({
+  items,
+}: {
+  items: readonly { label: string; href?: string }[];
+}) {
   return (
-    <View style={styles.chipRow}>
-      {skills.map((skill) => (
-        <View key={skill} style={styles.chip}>
-          <Text style={styles.chipText}>{skill}</Text>
-        </View>
+    <View style={styles.contactLine} wrap={false}>
+      {items.map((item, index) => (
+        <React.Fragment key={item.label}>
+          {index > 0 ? <PdfText style={styles.contactDot}>|</PdfText> : null}
+          {item.href ? (
+            <Link src={item.href} style={styles.contactItem}>
+              {item.label}
+            </Link>
+          ) : (
+            <PdfText style={styles.contactItem}>{item.label}</PdfText>
+          )}
+        </React.Fragment>
       ))}
     </View>
   );
 }
 
-function Sidebar() {
+function Header() {
   return (
-    <View style={styles.sidebar}>
-      <View style={styles.section}>
-        <SectionTitle>Technical Skills</SectionTitle>
+    <View style={styles.header}>
+      <View style={styles.headerAccent} />
+      <View style={styles.headerContent}>
+        <PdfText style={styles.name}>{site.name}</PdfText>
+        <PdfText style={styles.role}>{site.role}</PdfText>
+        <PdfText style={styles.availability}>{site.availability}</PdfText>
+      </View>
+      <ContactLine items={resumeContactPrimary} />
+      <ContactLine items={resumeContactLinks} />
+    </View>
+  );
+}
+
+function SkillsSection() {
+  return (
+    <View style={styles.section}>
+      <SectionTitle>Technical Skills</SectionTitle>
+      <PdfText style={styles.skillKeywords}>{resumeSkillKeywords}</PdfText>
+      <View style={styles.skillsGrid}>
         {skillCategories.map((category) => (
-          <View key={category.label} style={styles.skillGroup}>
-            <Text style={styles.skillLabel}>{category.label}</Text>
-            <SkillChips skills={category.skills} />
-          </View>
+          <PdfText key={category.label} style={styles.skillLine}>
+            <PdfText style={styles.skillLabel}>{category.label}: </PdfText>
+            {category.skills.join(", ")}
+          </PdfText>
         ))}
-        <View style={styles.skillGroup}>
-          <Text style={styles.skillLabel}>Building depth in</Text>
-          <SkillChips skills={skillBuilding} />
-        </View>
-      </View>
-
-      <View style={styles.section}>
-        <SectionTitle>Education</SectionTitle>
-        {education.map((item) => (
-          <View key={item.degree} style={styles.eduBlock}>
-            <Text style={styles.eduDegree}>{item.degree}</Text>
-            <Text style={styles.eduMeta}>{item.school}</Text>
-            <Text style={styles.eduMeta}>{item.period}</Text>
-          </View>
-        ))}
-      </View>
-
-      <View style={styles.section}>
-        <SectionTitle>Certifications</SectionTitle>
-        {certifications.map((item) => (
-          <Text key={item} style={styles.certItem}>
-            • {item}
-          </Text>
-        ))}
-      </View>
-
-      <View style={styles.section}>
-        <SectionTitle>Languages</SectionTitle>
-        <Text style={styles.langText}>
-          {languages.map((l) => `${l.name} (${l.level})`).join(" · ")}
-        </Text>
       </View>
     </View>
   );
@@ -389,29 +335,29 @@ function Sidebar() {
 function ExperienceBlock() {
   return (
     <View style={styles.section}>
-      <SectionTitle>Experience</SectionTitle>
-      {journey.map((item, index) => {
+      <SectionTitle>Work Experience</SectionTitle>
+      {resumeJourney.map((item, index) => {
         const location =
-          item.location && item.location !== "-" && item.location !== "—" ? ` · ${item.location}` : "";
+          item.location && item.location !== "-" && item.location !== "—"
+            ? ` | ${item.location}`
+            : "";
+        const bullets = resumeBulletsForJob(item.org, item.description);
+
         return (
-          <View key={`${item.org}-${item.period}`}>
+          <View key={`${item.org}-${item.period}`} wrap={false}>
             {index > 0 ? <View style={styles.divider} /> : null}
-            <View
-              style={[styles.entryCard, ...(item.current ? [styles.entryCardCurrent] : [])]}
-              wrap={false}
-            >
-              <View style={styles.entryHeader}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.entryOrg}>{item.org}</Text>
-                  <Text style={styles.entryRole}>
-                    {item.title}
-                    {location}
-                  </Text>
-                  <Text style={styles.entryPeriod}>{item.period}</Text>
+            <View style={styles.entryCard}>
+              <View style={styles.entryHeaderRow}>
+                <View style={styles.entryOrgWrap}>
+                  <PdfText style={styles.entryOrg}>{item.org}</PdfText>
                 </View>
-                {item.current ? <Badge label="CURRENT" /> : null}
+                <PdfText style={styles.entryPeriod}>{item.period}</PdfText>
               </View>
-              {item.description?.length ? <Bullets items={item.description} /> : null}
+              <PdfText style={styles.entryRole}>
+                {item.title}
+                {location}
+              </PdfText>
+              {bullets.length > 0 ? <Bullets items={bullets} /> : null}
             </View>
           </View>
         );
@@ -424,93 +370,149 @@ function ProjectsBlock() {
   return (
     <View style={styles.section}>
       <SectionTitle>Projects</SectionTitle>
-      {resumeProjectLinks.map((project, index) => (
-        <View key={project.title}>
-          {index > 0 ? <View style={styles.divider} /> : null}
-          <View style={styles.entryCard} wrap={false}>
-            <View style={styles.entryHeader}>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.entryOrg}>{project.title}</Text>
-                {project.stack?.length ? (
-                  <Text style={styles.projectStack}>{project.stack.join(" · ")}</Text>
-                ) : null}
-              </View>
-              {project.status === "In progress" ? <Badge label="IN PROGRESS" warm /> : null}
+      {resumeProjectLinks.map((project, index) => {
+        const demoUrl = projectDemoUrl(project);
+
+        return (
+          <View key={project.title} wrap={false}>
+            {index > 0 ? <View style={styles.divider} /> : null}
+            <View style={styles.entryCard}>
+              <PdfText style={styles.entryOrg}>{project.title}</PdfText>
+              {project.stack?.length ? (
+                <PdfText style={styles.projectMeta}>
+                  {project.stack.join(" · ")}
+                </PdfText>
+              ) : null}
+              <Bullets items={projectBullets(project)} />
+              {!projectHasInlineLinks(project) && demoUrl ? (
+                <Link src={demoUrl} style={styles.projectLink}>
+                  Live demo: {demoUrl.replace(/^https?:\/\//, "")}
+                </Link>
+              ) : null}
+              {!projectHasInlineLinks(project) && project.href && project.external ? (
+                <Link src={project.href} style={styles.projectLink}>
+                  GitHub: {project.href.replace(/^https?:\/\//, "")}
+                </Link>
+              ) : null}
             </View>
-            <Bullets items={projectBullets(project)} />
           </View>
+        );
+      })}
+
+      <PdfText style={styles.subsectionTitle}>Confidential / Private Work</PdfText>
+      {resumeConfidentialProjects.map((project) => (
+        <View key={project.title} style={styles.entryCard} wrap={false}>
+          <View style={styles.entryHeaderRow}>
+            <View style={styles.entryOrgWrap}>
+              <PdfText style={styles.entryOrg}>{project.title}</PdfText>
+            </View>
+            {project.resumeTag ? (
+              <PdfText style={styles.entryPeriod}>{project.resumeTag}</PdfText>
+            ) : null}
+          </View>
+          {project.stack?.length ? (
+            <PdfText style={styles.projectMeta}>{project.stack.join(" · ")}</PdfText>
+          ) : null}
+          <Bullets items={projectBullets(project)} />
         </View>
       ))}
     </View>
   );
 }
 
-export function ResumeDocument() {
-  const contact = [
-    site.location.replace(", India", ""),
-    site.phone,
-    site.email,
-    formatExternalLabel(site.linkedin),
-    formatExternalLabel(site.github),
-  ];
+function CertificationColumn({ items }: { items: readonly string[] }) {
+  return (
+    <View style={styles.certColumn}>
+      {items.map((cert) => (
+        <View key={cert} style={styles.certRow}>
+          <View style={styles.certDot} />
+          <PdfText style={styles.certText}>{cert}</PdfText>
+        </View>
+      ))}
+    </View>
+  );
+}
 
+function EducationSection() {
+  return (
+    <View style={styles.section}>
+      <SectionTitle>Education</SectionTitle>
+      {education.map((item) => (
+        <View key={item.degree} style={styles.eduEntry}>
+          <View style={styles.entryHeaderRow}>
+            <View style={styles.entryOrgWrap}>
+              <PdfText style={styles.eduDegree}>{item.degree}</PdfText>
+            </View>
+            <PdfText style={styles.entryPeriod}>{item.period}</PdfText>
+          </View>
+          <PdfText style={styles.eduMeta}>{item.school}</PdfText>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function CertificationsSection() {
+  return (
+    <View style={styles.section}>
+      <SectionTitle>Certifications</SectionTitle>
+      <CertificationColumn items={certifications} />
+    </View>
+  );
+}
+
+function ContinuationHeader() {
+  return (
+    <View style={styles.continuationHeader} fixed>
+      <PdfText style={styles.continuationName}>{site.name}</PdfText>
+      <PdfText style={styles.continuationMeta}>
+        {site.role} · {site.email}
+      </PdfText>
+    </View>
+  );
+}
+
+function PageFooter() {
+  return (
+    <PdfText
+      style={styles.footer}
+      fixed
+      render={({ pageNumber, totalPages }) =>
+        `${site.name} | Page ${pageNumber} of ${totalPages}`
+      }
+    />
+  );
+}
+
+export function ResumeDocument() {
   return (
     <Document
       title={`${site.name} — Resume`}
       author={site.name}
-      subject="Resume"
-      creator="yatharth-portfolio"
+      subject={`Resume — ${site.role}`}
+      creator={site.url}
     >
       <Page size="LETTER" style={styles.page}>
-        <View style={styles.header} fixed>
-          <View style={styles.headerAccent} />
-          <Text style={styles.name}>{site.name}</Text>
-          <Text style={styles.role}>{site.role}</Text>
-          <View style={styles.contactRow}>
-            {contact.map((item, index) => (
-              <React.Fragment key={item}>
-                {index > 0 ? <Text style={styles.contactDot}>·</Text> : null}
-                {item.includes("@") ? (
-                  <Link src={`mailto:${site.email}`} style={styles.contactItem}>
-                    {item}
-                  </Link>
-                ) : item.includes("linkedin") || item.includes("github") ? (
-                  <Link
-                    src={item.includes("linkedin") ? site.linkedin : site.github}
-                    style={styles.contactItem}
-                  >
-                    {item}
-                  </Link>
-                ) : (
-                  <Text style={styles.contactItem}>{item}</Text>
-                )}
-              </React.Fragment>
-            ))}
-          </View>
-        </View>
-
+        <Header />
         <View style={styles.body}>
-          <View style={styles.topGrid}>
-            <Sidebar />
-            <View style={styles.main}>
-              <View style={styles.section}>
-                <SectionTitle>Professional Summary</SectionTitle>
-                <Text style={styles.summary}>{resumeSummary}</Text>
-              </View>
-              <ExperienceBlock />
-            </View>
+          <View style={styles.section}>
+            <SectionTitle>Professional Summary</SectionTitle>
+            <PdfText style={styles.summary}>{resumeSummary}</PdfText>
           </View>
-
-          <ProjectsBlock />
+          <SkillsSection />
+          <ExperienceBlock />
         </View>
+        <PageFooter />
+      </Page>
 
-        <Text
-          style={styles.footer}
-          render={({ pageNumber, totalPages }) =>
-            `${site.name} · Page ${pageNumber} of ${totalPages}`
-          }
-          fixed
-        />
+      <Page size="LETTER" style={styles.page}>
+        <ContinuationHeader />
+        <View style={styles.body}>
+          <ProjectsBlock />
+          <EducationSection />
+          <CertificationsSection />
+        </View>
+        <PageFooter />
       </Page>
     </Document>
   );

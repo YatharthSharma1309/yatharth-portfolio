@@ -3,10 +3,9 @@
  * Portfolio shows "View demo" only when URL is non-empty.
  */
 export function getDemoUrl(
-  key: "recruitAI" | "supportAI" | "salesCRM"
+  key: "supportAI" | "salesCRM"
 ): string | undefined {
   const map = {
-    recruitAI: process.env.NEXT_PUBLIC_DEMO_RECRUITAI_URL,
     supportAI: process.env.NEXT_PUBLIC_DEMO_SUPPORTAI_URL,
     salesCRM: process.env.NEXT_PUBLIC_DEMO_SALES_CRM_URL,
   };

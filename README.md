@@ -27,7 +27,6 @@ Open [http://localhost:3000](http://localhost:3000).
 |----------|---------|
 | `OPENROUTER_API_KEY` | Digital Twin API |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL |
-| `NEXT_PUBLIC_DEMO_RECRUITAI_URL` | Live RecruitAI demo link |
 | `NEXT_PUBLIC_DEMO_SUPPORTAI_URL` | Live SupportAI demo link |
 | `NEXT_PUBLIC_DEMO_SALES_CRM_URL` | Live Sales CRM demo link |
 | `RESEND_API_KEY` | Contact form (production) |
