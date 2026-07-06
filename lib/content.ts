@@ -323,7 +323,7 @@ export const resumeJourney = journey.filter((item) => item.resume !== false);
 
 /** Static demo URLs for PDF (env may be empty at generate time). */
 export const resumeDemoUrls = {
-  relayAI: "https://support-ai-nine-mu.vercel.app",
+  relayAI: "https://relay-ai-app.vercel.app",
 } as const;
 
 export type PortfolioLink = {
@@ -357,7 +357,7 @@ export const portfolioLinks: PortfolioLink[] = [
     result:
       "Built Relay AI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
     resumeBullets: [
-      "Live: support-ai-nine-mu.vercel.app | GitHub: github.com/YatharthSharma1309/relay-ai",
+      "Live: relay-ai-app.vercel.app | GitHub: github.com/YatharthSharma1309/relay-ai",
     ],
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
   },
