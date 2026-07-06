@@ -3,7 +3,7 @@ import { SectionIntro } from "@/components/SectionIntro";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { ContactForm } from "@/components/ContactForm";
 import { btnSecondary } from "@/lib/ui-classes";
-import { sectionCopy } from "@/lib/content";
+import { sectionCopy, site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 
 export function ContactSection() {
@@ -54,6 +54,22 @@ export function ContactSection() {
                   {resume.label}
                 </a>
               ) : null}
+              <a
+                href={site.resumePdf}
+                download="Yatharth-Sharma-Resume.pdf"
+                className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
+              >
+                <ConnectIcon channel="resume" size={17} />
+                Download resume (PDF)
+              </a>
+              <a
+                href={site.resumeDocx}
+                download="Yatharth_Sharma_Premium_Resume_V2.docx"
+                className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
+              >
+                <ConnectIcon channel="resume" size={17} />
+                Download resume (DOCX)
+              </a>
 
               {social.map((item) => (
                 <a

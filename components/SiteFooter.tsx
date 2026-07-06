@@ -1,8 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ConnectChannel } from "@/components/ConnectIcons";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
-import { primaryNav } from "@/lib/navigation";
+import { primaryNav, resolveNavHref } from "@/lib/navigation";
 
 const linkClass = "text-text-muted hover:text-accent text-sm font-medium transition-colors";
 
@@ -56,6 +59,7 @@ function FooterAnchor({
 }
 
 export function SiteFooter() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
 
   return (
@@ -75,7 +79,10 @@ export function SiteFooter() {
                     ·
                   </span>
                 ) : null}
-                <FooterAnchor href={item.href} label={item.label} />
+                <FooterAnchor
+                  href={resolveNavHref(item.href, pathname)}
+                  label={item.label}
+                />
               </li>
             ))}
           </ul>

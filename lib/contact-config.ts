@@ -41,16 +41,23 @@ export function formatContactEmail(payload: ContactPayload) {
 
 export function formatContactEmailHtml(payload: ContactPayload) {
   const { name, email, companyRole, message } = payload;
-  const escapedMessage = message
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n/g, "<br />");
+  const escapeHtml = (value: string) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const escapedName = escapeHtml(name);
+  const escapedEmail = escapeHtml(email);
+  const escapedCompanyRole = companyRole ? escapeHtml(companyRole) : "";
+  const escapedMessage = escapeHtml(message).replace(/\n/g, "<br />");
 
   return `
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-    ${companyRole ? `<p><strong>Company / Role:</strong> ${companyRole}</p>` : ""}
+    <p><strong>Name:</strong> ${escapedName}</p>
+    <p><strong>Email:</strong> <a href="mailto:${escapedEmail}">${escapedEmail}</a></p>
+    ${escapedCompanyRole ? `<p><strong>Company / Role:</strong> ${escapedCompanyRole}</p>` : ""}
     <p><strong>Message:</strong></p>
     <p>${escapedMessage}</p>
     <hr />

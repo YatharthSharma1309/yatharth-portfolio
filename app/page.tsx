@@ -3,6 +3,7 @@ import { CertificationsSection } from "@/components/CertificationsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { DigitalTwinSection } from "@/components/DigitalTwinSection";
 import { Hero } from "@/components/Hero";
+import { HighlightsSection } from "@/components/HighlightsSection";
 import { JourneySection } from "@/components/JourneySection";
 import { PageShell } from "@/components/PageShell";
 import { PortfolioSection } from "@/components/PortfolioSection";
@@ -12,6 +13,7 @@ export default function Home() {
     <PageShell showStickyBar>
       <main id="main">
         <Hero />
+        <HighlightsSection />
         <PortfolioSection />
         <AboutSection />
         <JourneySection />

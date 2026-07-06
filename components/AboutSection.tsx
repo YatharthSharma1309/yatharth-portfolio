@@ -74,7 +74,7 @@ export function AboutSection() {
             {about.stackHelper}
           </p>
 
-          <div className="space-y-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             {skillCategories.map((category) => (
               <div
                 key={category.label}

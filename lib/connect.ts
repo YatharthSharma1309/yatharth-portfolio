@@ -30,8 +30,8 @@ export const connectLinks: ConnectLinkItem[] = [
   },
   {
     channel: "resume",
-    href: site.resumePdf,
-    label: "Download resume",
-    download: "Yatharth-Sharma-Resume.pdf",
+    href: site.resumeZip,
+    label: "Download resume package (ZIP)",
+    download: "Yatharth-Sharma-Resume-Package.zip",
   },
 ];

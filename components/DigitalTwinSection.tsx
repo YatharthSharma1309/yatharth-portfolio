@@ -94,6 +94,12 @@ export function DigitalTwinSection() {
   const [error, setError] = useState<string | null>(null);
   const [apiReady, setApiReady] = useState<boolean | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const messagesRef = useRef(messages);
+  const isLoadingRef = useRef(isLoading);
+  const fetchAbortRef = useRef<AbortController | null>(null);
+
+  messagesRef.current = messages;
+  isLoadingRef.current = isLoading;
 
   const hasUserMessages = useMemo(
     () => messages.some((message) => message.role === "user"),
@@ -104,6 +110,12 @@ export function DigitalTwinSection() {
     () => input.trim().length > 0 && !isLoading && apiReady !== false,
     [input, isLoading, apiReady]
   );
+
+  useEffect(() => {
+    return () => {
+      fetchAbortRef.current?.abort();
+    };
+  }, []);
 
   useEffect(() => {
     setMessages([{ role: "assistant", content: WELCOME_CONTENT, sentAt: Date.now() }]);
@@ -147,25 +159,30 @@ export function DigitalTwinSection() {
 
   async function sendMessage(text: string) {
     const userText = text.trim();
-    if (!userText || isLoading || apiReady === false) return;
+    if (!userText || isLoadingRef.current || apiReady === false) return;
 
     setIsLoading(true);
     setError(null);
 
     const nextMessages: ChatMessage[] = [
-      ...messages,
+      ...messagesRef.current,
       { role: "user", content: userText, sentAt: Date.now() },
     ];
     setMessages(nextMessages);
     setInput("");
 
     try {
+      fetchAbortRef.current?.abort();
+      const controller = new AbortController();
+      fetchAbortRef.current = controller;
+
       const response = await fetch("/api/digital-twin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: nextMessages.map(({ role, content }) => ({ role, content })),
         }),
+        signal: controller.signal,
       });
       const data = (await response.json()) as { reply?: string; error?: string };
 
@@ -182,6 +199,8 @@ export function DigitalTwinSection() {
         { role: "assistant", content: data.reply!, sentAt: Date.now() },
       ]);
     } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return;
+
       const message =
         err instanceof Error ? err.message : "Something went wrong. Please retry.";
       setError(message);

@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate:resume && next build",
+    "build": "npm run package:resume && next build",
     "start": "next start",
     "lint": "eslint",
     "generate:resume": "tsx scripts/generate-resume-pdf.ts",
+    "package:resume": "tsx scripts/package-resume-download.ts",
     "build:github-pages": "node scripts/build-github-pages.mjs",
     "setup:contact": "start https://resend.com/api-keys",
-    "test:resend": "tsx scripts/test-resend-email.ts"
+    "test:resend": "tsx scripts/test-resend-email.ts",
+    "typecheck:scripts": "tsc -p tsconfig.scripts.json --noEmit"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",

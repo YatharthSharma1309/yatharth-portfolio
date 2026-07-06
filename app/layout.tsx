@@ -26,11 +26,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const seoDescription =
-  "Full-stack SWE shipping React/TypeScript UIs and LLM/RAG backends. Recent production experience at Whilter.AI. Open to full-time software engineering roles.";
+  "AI Full-Stack Engineer shipping React/Next.js UIs and LLM/RAG backends. Production experience at Whilter.AI. Open to full-time software engineering roles.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} · Full-Stack Developer · AI & LLM Integrations`,
+  title: `${site.name} · AI Full-Stack Engineer`,
   description: seoDescription,
   keywords: [
     "full-stack",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "India",
   ],
   openGraph: {
-    title: `${site.name} · Full-Stack Developer · AI & LLM Integrations`,
+    title: `${site.name} · AI Full-Stack Engineer`,
     description: seoDescription,
     type: "website",
     locale: "en_IN",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} · Full-Stack Developer · AI & LLM Integrations`,
+    title: `${site.name} · AI Full-Stack Engineer`,
     description: seoDescription,
   },
 };

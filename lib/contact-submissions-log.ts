@@ -13,7 +13,3 @@ export async function logContactSubmission(payload: ContactPayload) {
   };
   await appendFile(LOG_FILE, `${JSON.stringify(entry)}\n`, "utf8");
 }
-
-export function getContactLogPath() {
-  return LOG_FILE;
-}

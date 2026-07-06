@@ -25,7 +25,9 @@ try {
     rmSync(apiDir, { recursive: true, force: true });
   }
 
-  run("npm", ["run", "generate:resume"]);
+  run("npm", ["run", "generate:resume"], {
+    NEXT_PUBLIC_SITE_URL: "https://yatharthsharma1309.github.io",
+  });
 
   const nextDir = path.join(root, ".next");
   if (existsSync(nextDir)) {

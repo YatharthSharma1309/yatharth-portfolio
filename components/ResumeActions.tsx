@@ -5,25 +5,58 @@ import { site } from "@/lib/content";
 import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
 import { trackEvent } from "@/lib/analytics";
 
+const downloads = [
+  {
+    href: site.resumePdf,
+    filename: "Yatharth-Sharma-Resume.pdf",
+    label: "Download PDF",
+    primary: true,
+    source: "resume_page_pdf",
+  },
+  {
+    href: site.resumeDocx,
+    filename: "Yatharth_Sharma_Premium_Resume_V2.docx",
+    label: "Download DOCX",
+    primary: false,
+    source: "resume_page_docx",
+  },
+  {
+    href: site.resumeZip,
+    filename: "Yatharth-Sharma-Resume-Package.zip",
+    label: "Download ZIP (PDF + DOCX)",
+    primary: false,
+    source: "resume_page_zip",
+  },
+] as const;
+
 export function ResumeActions() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3">
-      <a
-        href={site.resumePdf}
-        download="Yatharth-Sharma-Resume.pdf"
-        onClick={() => trackEvent("resume_download", { source: "resume_page" })}
-        className={`${btnPrimary} gap-2 px-5 py-2.5`}
-      >
-        Download PDF
-      </a>
-      <a
-        href={site.resumePdf}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${btnSecondary} px-5 py-2.5`}
-      >
-        Open in new tab
-      </a>
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        {downloads.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            download={item.filename}
+            onClick={() => trackEvent("resume_download", { source: item.source })}
+            className={`${item.primary ? btnPrimary : btnSecondary} gap-2 px-5 py-2.5`}
+          >
+            {item.label}
+          </a>
+        ))}
+        <a
+          href={site.resumePdf}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${btnSecondary} px-5 py-2.5`}
+        >
+          Open PDF in tab
+        </a>
+      </div>
+      <p className="text-text-muted max-w-md text-center text-xs leading-relaxed">
+        PDF is generated from this portfolio and stays in sync. DOCX is your Premium Resume V2.
+        ZIP includes both — attach to job applications or share with recruiters.
+      </p>
       <Link
         href="/"
         className="text-text-muted hover:text-accent text-sm font-semibold tracking-wide underline-offset-[6px] transition-colors hover:underline"
