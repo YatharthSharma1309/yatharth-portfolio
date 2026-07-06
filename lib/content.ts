@@ -323,7 +323,7 @@ export const resumeJourney = journey.filter((item) => item.resume !== false);
 
 /** Static demo URLs for PDF (env may be empty at generate time). */
 export const resumeDemoUrls = {
-  supportAI: "https://support-ai-nine-mu.vercel.app",
+  opsAI: "https://support-ai-nine-mu.vercel.app",
 } as const;
 
 export type PortfolioLink = {
@@ -347,17 +347,17 @@ export const portfolioLinks: PortfolioLink[] = [
     title: "OpsAI — AI Operations Platform",
     description:
       "Unified multi-tenant SaaS: RAG customer support (KB, chat, tickets, widget) plus AI recruitment (resume parsing, JD scoring, hiring pipeline).",
-    href: "https://github.com/YatharthSharma1309/ai-customer-support-platform",
-    status: demoStatus(getDemoUrl("supportAI")),
+    href: "https://github.com/YatharthSharma1309/ops-ai",
+    status: demoStatus(getDemoUrl("opsAI")),
     external: true,
     featured: true,
-    demoUrl: getDemoUrl("supportAI"),
+    demoUrl: getDemoUrl("opsAI"),
     problem:
       "Teams need both customer support AI and hiring automation — usually as separate tools with duplicate auth, document parsing, and LLM plumbing.",
     result:
       "Built OpsAI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
     resumeBullets: [
-      "Live: support-ai-nine-mu.vercel.app | GitHub: github.com/YatharthSharma1309/ai-customer-support-platform",
+      "Live: support-ai-nine-mu.vercel.app | GitHub: github.com/YatharthSharma1309/ops-ai",
     ],
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
   },

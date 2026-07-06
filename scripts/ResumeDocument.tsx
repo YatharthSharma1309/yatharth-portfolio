@@ -256,8 +256,7 @@ function projectHasInlineLinks(project: PortfolioLink): boolean {
 
 function projectDemoUrl(project: PortfolioLink): string | undefined {
   if (project.demoUrl) return project.demoUrl;
-  if (project.title.startsWith("OpsAI")) return resumeDemoUrls.supportAI;
-  if (project.title.startsWith("SupportAI")) return resumeDemoUrls.supportAI;
+  if (project.title.startsWith("OpsAI")) return resumeDemoUrls.opsAI;
   return undefined;
 }
 
