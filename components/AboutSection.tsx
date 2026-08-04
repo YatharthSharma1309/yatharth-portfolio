@@ -22,15 +22,44 @@ function SkillTag({
 }) {
   if (variant === "building") {
     return (
-      <li className="border-accent-warm/25 text-accent-warm/90 rounded-md border border-dashed bg-accent-warm/[0.06] px-2.5 py-1 text-[11px] font-medium sm:text-xs">
+      <li className="border-accent-warm/30 text-accent-warm/95 rounded-lg border border-dashed bg-accent-warm/[0.07] px-2.5 py-1 text-[11px] font-medium sm:px-3 sm:py-1.5 sm:text-xs">
         {children}
       </li>
     );
   }
 
   return (
-    <li className="border-border-highlight text-text-primary/90 rounded-md border bg-[var(--bg-card)] px-2.5 py-1 text-[11px] font-medium sm:text-xs">
+    <li className="border-border-highlight text-text-primary/90 rounded-lg border bg-[var(--bg-card)] px-2.5 py-1 text-[11px] font-medium sm:px-3 sm:py-1.5 sm:text-xs">
       {children}
+    </li>
+  );
+}
+
+function SkillGroupRow({
+  label,
+  skills,
+  variant = "core",
+}: {
+  label: string;
+  skills: readonly string[];
+  variant?: "core" | "building";
+}) {
+  return (
+    <li className="grid gap-3 py-4 first:pt-0 last:pb-0 sm:grid-cols-[minmax(6rem,7.25rem)_1fr] sm:items-start sm:gap-4 md:grid-cols-[7.25rem_1fr] md:gap-5 lg:grid-cols-[7.75rem_1fr]">
+      <p
+        className={`text-sm font-semibold tracking-tight sm:pt-1 ${
+          variant === "building" ? "text-accent-warm/95" : "text-text-primary"
+        }`}
+      >
+        {label}
+      </p>
+      <ul className="flex flex-wrap gap-1.5 sm:gap-2">
+        {skills.map((skill) => (
+          <SkillTag key={skill} variant={variant}>
+            {skill}
+          </SkillTag>
+        ))}
+      </ul>
     </li>
   );
 }
@@ -69,54 +98,40 @@ export function AboutSection() {
           ))}
         </div>
 
-        <div className={`${card} ${content} mt-10 p-5 sm:mt-14 sm:p-7 lg:p-9`}>
-          <SectionEyebrow className="mb-3 sm:mb-4">Core stack</SectionEyebrow>
-          <p className="text-text-muted mx-auto mb-6 max-w-2xl text-center text-sm leading-relaxed sm:mb-8">
-            {about.stackHelper}
-          </p>
+        {/* Core stack — row-based layout for better scanability across breakpoints */}
+        <div className={`${card} mt-10 p-5 sm:mt-14 sm:p-7 lg:p-9`}>
+          <div className="mx-auto max-w-[56rem]">
+            <SectionEyebrow className="mb-3 sm:mb-4">Core stack</SectionEyebrow>
+            <p className="text-text-muted mx-auto mb-6 max-w-2xl text-center text-sm leading-relaxed sm:mb-8">
+              {about.stackHelper}
+            </p>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {skillCategories.map((category) => (
-              <div
-                key={category.label}
-                className="border-border-subtle rounded-2xl border bg-[rgba(0,0,0,0.2)] p-4 sm:p-5"
-              >
-                <p className="font-display text-text-primary mb-3 text-center text-sm font-semibold">
-                  {category.label}
-                </p>
-                <ul className="flex flex-wrap justify-center gap-1.5">
-                  {category.skills.map((skill) => (
-                    <SkillTag key={skill}>{skill}</SkillTag>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <ul className="divide-border-subtle divide-y rounded-xl border border-[var(--border-subtle)] bg-[rgba(0,0,0,0.18)] px-4 sm:px-5 md:px-6">
+              {skillCategories.map((category) => (
+                <SkillGroupRow
+                  key={category.label}
+                  label={category.label}
+                  skills={category.skills}
+                />
+              ))}
+            </ul>
           </div>
 
-          <div className="border-border-subtle mt-8 border-t pt-6 sm:mt-10 sm:pt-8">
+          <div className="border-border-subtle mx-auto mt-8 max-w-[56rem] border-t pt-6 sm:mt-10 sm:pt-8">
             <SectionEyebrow className="mb-3 sm:mb-4">{about.buildingTitle}</SectionEyebrow>
-            <p className="text-text-muted mx-auto mb-4 max-w-2xl text-center text-sm leading-relaxed sm:mb-5">
+            <p className="text-text-muted mx-auto mb-5 max-w-2xl text-center text-sm leading-relaxed sm:mb-6">
               {about.buildingHelper}
             </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="divide-border-subtle divide-y rounded-xl border border-accent-warm/15 bg-accent-warm/[0.03] px-4 sm:px-5 md:px-6">
               {skillBuildingGroups.map((group) => (
-                <div
+                <SkillGroupRow
                   key={group.label}
-                  className="border-border-subtle rounded-xl border bg-[rgba(0,0,0,0.15)] p-3 sm:p-4"
-                >
-                  <p className="text-accent/90 mb-2 text-center font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
-                    {group.label}
-                  </p>
-                  <ul className="flex flex-wrap justify-center gap-1.5">
-                    {group.skills.map((skill) => (
-                      <SkillTag key={skill} variant="building">
-                        {skill}
-                      </SkillTag>
-                    ))}
-                  </ul>
-                </div>
+                  label={group.label}
+                  skills={group.skills}
+                  variant="building"
+                />
               ))}
-            </div>
+            </ul>
           </div>
         </div>
 
