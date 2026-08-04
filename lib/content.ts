@@ -40,22 +40,22 @@ export const resumeContactLinks: ResumeContactItem[] = [
 
 /** ATS-friendly summary for the downloadable resume PDF. */
 export const resumeSummary =
-  "AI Full-Stack Engineer with production experience at Whilter.AI — React/TypeScript UIs, FastAPI/Node.js REST APIs, and LLM integrations (RAG pipelines, embeddings, document ingestion, semantic search, streaming cited answers). Shipped 8+ end-to-end features across multi-tenant SaaS, enterprise RAG, and commercial LegalTech.";
+  "AI Full-Stack Engineer with production experience shipping React/TypeScript UIs, FastAPI and Node.js APIs, and LLM/RAG systems at Whilter.AI. Delivered multi-tenant SaaS, semantic search, OCR, and document intelligence across recruitment, CRM, support, and LegalTech, and built Debrief for OpenAI Build Week 2026.";
 
 /** Flat keyword line for ATS parsers — mirrors common JD terminology. */
 export const resumeSkillKeywords =
-  "TypeScript, JavaScript, Python, React, Next.js, Node.js, FastAPI, PostgreSQL, Prisma, REST APIs, RAG, LLMs, Embeddings, OpenRouter, Semantic Search, Prompt Engineering, Document Processing, PDF/DOCX Parsing, Streaming APIs, Multi-tenant SaaS, Clerk, Supabase, Zod, OAuth, JWT, Tailwind CSS, Azure, AWS, Vercel, Playwright";
+  "TypeScript, JavaScript, Python, React, Next.js, Node.js, FastAPI, PostgreSQL, pgvector, Prisma, REST APIs, RAG, LLMs, Embeddings, OpenRouter, Semantic Search, Prompt Engineering, OCR, Document Processing, PDF/DOCX Parsing, Streaming APIs, Multi-tenant SaaS, Clerk, Supabase, Zod, OAuth, JWT, Tailwind CSS, Azure, AWS, Vercel, Railway, Neon, Docker, Playwright";
 
 export const engineeringHighlights = [
-  "Built 6+ production-quality AI applications",
-  "Developed end-to-end multi-tenant SaaS platforms with RAG and streaming chat",
-  "Integrated LLMs, embeddings, semantic search, and OCR into business workflows",
+  "Built 10+ production-ready AI full-stack features across frontend, API, and data layers",
+  "Shipped Debrief for OpenAI Build Week 2026 with cited Decision Briefs and streaming RAG Q&A",
+  "Delivered enterprise RAG with FastAPI, PostgreSQL, pgvector, and LLM APIs",
 ] as const;
 
 export const heroMetrics = [
-  { value: "6+", label: "AI applications shipped" },
-  { value: "2", label: "Live SaaS demos" },
-  { value: "4+", label: "Production domains" },
+  { value: "7+", label: "AI applications shipped" },
+  { value: "3", label: "Live demos" },
+  { value: "5+", label: "Production domains" },
   { value: "3", label: "Azure certifications" },
 ] as const;
 
@@ -110,6 +110,7 @@ export const skillCategories = [
       "RAG",
       "Embeddings",
       "Semantic Search",
+      "pgvector",
       "Prompt Engineering",
       "OCR",
       "OpenRouter",
@@ -121,18 +122,18 @@ export const skillCategories = [
   },
   {
     label: "Cloud",
-    skills: ["Microsoft Azure", "AWS", "Vercel"],
+    skills: ["Microsoft Azure", "AWS", "Vercel", "Railway", "Neon"],
   },
   {
     label: "Tools",
-    skills: ["Git", "GitHub", "Playwright", "Vitest", "Postman", "Linux", "Resend"],
+    skills: ["Git", "GitHub", "Docker", "Playwright", "Vitest", "Postman", "Linux", "Resend"],
   },
 ] as const;
 
 export const skillBuildingGroups = [
   {
     label: "AI infrastructure",
-    skills: ["Vector databases (pgvector)", "LLM eval tooling", "Docker"],
+    skills: ["Vector databases (pgvector)", "LLM eval tooling", "RAG evaluation"],
   },
   {
     label: "Document & ingestion",
@@ -172,7 +173,7 @@ export const sectionCopy = {
     title: "Production full-stack engineering with AI at the core",
     recruiterBullets: [
       "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Two live demos: Relay AI (RAG support + recruitment) and AI Sales Assistant CRM",
+      "Three live demos: Debrief, Relay AI, and AI Sales Assistant CRM",
       "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
@@ -183,7 +184,7 @@ export const sectionCopy = {
   portfolio: {
     title: "Flagship AI & full-stack builds",
     description:
-      "Two live SaaS demos plus commercial, enterprise, and open-source work — each with the problem, outcome, and stack recruiters care about.",
+      "Three live demos plus commercial, enterprise, and open-source work — each with the problem, outcome, and stack recruiters care about.",
     featuredLabel: "Live demos",
     moreBuildsLabel: "Additional projects",
   },
@@ -222,7 +223,7 @@ export const linkedInProfileSnapshot = {
   headline:
     "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
   about:
-    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Live demos: Relay AI (support + recruitment) and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
+    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Live demos: Debrief, Relay AI, and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...skillBuilding],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
@@ -305,9 +306,11 @@ export const education = [
 ];
 
 export const certifications = [
+  "OpenAI Build Week 2026 — Built and submitted Debrief (Work & Productivity)",
   "Microsoft Certified: Azure AI Fundamentals",
   "Microsoft Certified: Azure Fundamentals",
   "Microsoft Certified: Azure Data Fundamentals",
+  "TCS iON NQT – IT (Jun 2026): Overall 69.33%",
   "Udemy — Agentic Engineer",
   "AWS S3 Project (Coursera)",
   "Data Encryption using AWS KMS",
@@ -334,6 +337,21 @@ export type PortfolioLink = {
 };
 
 export const portfolioLinks: PortfolioLink[] = [
+  {
+    title: "Debrief — Decision Intelligence Workspace",
+    description:
+      "Decision-recovery RAG workspace that turns scattered PDFs, DOCX files, and notes into cited Decision Briefs with streaming Q&A.",
+    href: "https://github.com/YatharthSharma1309/debrief",
+    status: "Live",
+    external: true,
+    featured: true,
+    demoUrl: "https://debrief-psi.vercel.app",
+    problem:
+      "Teams lose context across meetings and documents, making it hard to recover decisions, owners, risks, and open questions later.",
+    result:
+      "Built Debrief for OpenAI Build Week 2026 — a live decision-intelligence workspace with cited Decision Briefs, streaming RAG Q&A, and production deployment on Vercel + Railway + Neon.",
+    stack: ["React", "TypeScript", "FastAPI", "PostgreSQL", "pgvector", "OpenRouter", "Vercel", "Railway", "Neon"],
+  },
   {
     title: "Relay AI — Support & Recruitment Platform",
     description:

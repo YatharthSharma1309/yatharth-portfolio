@@ -9,6 +9,7 @@
     "lint": "eslint",
     "generate:resume": "tsx scripts/generate-resume-pdf.ts",
     "package:resume": "tsx scripts/package-resume-download.ts",
+    "download:resume": "set COPY_RESUME_TO_DOWNLOADS=true&& tsx scripts/package-resume-download.ts",
     "build:github-pages": "node scripts/build-github-pages.mjs",
     "setup:contact": "start https://resend.com/api-keys",
     "test:resend": "tsx scripts/test-resend-email.ts",

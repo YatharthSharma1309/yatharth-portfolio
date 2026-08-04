@@ -106,7 +106,8 @@ function copyToDownloads(): void {
 function main(): void {
   ensureResumeAssets();
   createZip();
-  if (!process.env.VERCEL) {
+  const shouldCopyToDownloads = process.env.COPY_RESUME_TO_DOWNLOADS === "true";
+  if (shouldCopyToDownloads) {
     copyToDownloads();
   }
 
@@ -114,12 +115,10 @@ function main(): void {
   console.log(`  PDF:  ${join(RESUME_DIR, PDF_NAME)}`);
   console.log(`  DOCX: ${join(RESUME_DIR, DOCX_NAME)}`);
   console.log(`  ZIP:  ${join(RESUME_DIR, ZIP_NAME)}`);
-  if (!process.env.VERCEL) {
-    console.log(`\nSite paths (after deploy):`);
-    console.log(`  /resume/${PDF_NAME}`);
-    console.log(`  /resume/${DOCX_NAME}`);
-    console.log(`  /resume/${ZIP_NAME}`);
-  }
+  console.log(`\nSite paths (after deploy):`);
+  console.log(`  /resume/${PDF_NAME}`);
+  console.log(`  /resume/${DOCX_NAME}`);
+  console.log(`  /resume/${ZIP_NAME}`);
 }
 
 main();
