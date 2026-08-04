@@ -40,7 +40,7 @@ function statusBadgeClass(status: PortfolioLink["status"], hasDemo: boolean) {
 function statusLabel(status: PortfolioLink["status"], hasDemo: boolean): string {
   if (status === "In progress") return "Deploying";
   if (status === "Open source") return "Open source";
-  if (status === "Live" && !hasDemo) return "Open source";
+  if (status === "Live" && !hasDemo) return "Repo";
   return status;
 }
 
@@ -69,9 +69,13 @@ function ProjectActions({ item }: { item: PortfolioLink }) {
   if (item.status === "Private") {
     return (
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-        <span className="text-text-muted text-sm font-medium">Confidential · details via career twin</span>
+        <span className="text-text-muted text-sm font-medium">Confidential · ask for details</span>
         <Link href="#digital-twin" className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
           Ask career twin
+          <span aria-hidden>→</span>
+        </Link>
+        <Link href="#contact" className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
+          Contact
           <span aria-hidden>→</span>
         </Link>
       </div>
@@ -197,6 +201,16 @@ function SubsectionHeading({ children }: { children: string }) {
   );
 }
 
+/** Avoid odd-count orphan cards in a 2-column layout. */
+function projectGridClass(count: number): string {
+  const base = "mt-6 grid gap-5 sm:mt-8 sm:gap-6";
+  if (count <= 1) return base;
+  if (count === 2) return `${base} sm:grid-cols-2`;
+  if (count === 3) return `${base} lg:grid-cols-3`;
+  // 4+: two columns from sm, three from lg — even rows stay balanced
+  return `${base} sm:grid-cols-2 lg:grid-cols-3`;
+}
+
 export function PortfolioSection() {
   const { portfolio } = sectionCopy;
 
@@ -215,7 +229,7 @@ export function PortfolioSection() {
         {featuredPortfolioLinks.length > 0 ? (
           <div id="featured-work" className="mt-10 sm:mt-14">
             <SubsectionHeading>{portfolio.featuredLabel}</SubsectionHeading>
-            <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
+            <div className={projectGridClass(featuredPortfolioLinks.length)}>
               {featuredPortfolioLinks.map((item) => (
                 <ProjectCard key={item.title} item={item} variant="featured" />
               ))}
@@ -226,7 +240,7 @@ export function PortfolioSection() {
         {morePortfolioLinks.length > 0 ? (
           <div className="mt-14 sm:mt-16">
             <SubsectionHeading>{portfolio.moreBuildsLabel}</SubsectionHeading>
-            <div className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-6">
+            <div className={projectGridClass(morePortfolioLinks.length)}>
               {morePortfolioLinks.map((item) => (
                 <ProjectCard key={item.title} item={item} variant="standard" />
               ))}

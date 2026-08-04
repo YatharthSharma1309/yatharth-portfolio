@@ -1,16 +1,17 @@
+"use client";
+
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { ContactForm } from "@/components/ContactForm";
 import { btnSecondary } from "@/lib/ui-classes";
-import { sectionCopy, site } from "@/lib/content";
+import { sectionCopy } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 
 export function ContactSection() {
   const { contact } = sectionCopy;
 
   const email = connectLinks.find((item) => item.channel === "email");
-  const resume = connectLinks.find((item) => item.channel === "resume");
   const social = connectLinks.filter(
     (item) => item.channel !== "email" && item.channel !== "resume",
   );
@@ -38,38 +39,14 @@ export function ContactSection() {
             <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
             <div className="flex flex-col items-center gap-4">
               {email ? (
-                <a href={email.href} className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}>
+                <a
+                  href={email.href}
+                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
+                >
                   <ConnectIcon channel="email" size={17} />
                   {contact.emailLabel}
                 </a>
               ) : null}
-
-              {resume ? (
-                <a
-                  href={resume.href}
-                  download={resume.download}
-                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
-                >
-                  <ConnectIcon channel="resume" size={17} />
-                  {resume.label}
-                </a>
-              ) : null}
-              <a
-                href={site.resumePdf}
-                download="Yatharth-Sharma-Resume.pdf"
-                className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
-              >
-                <ConnectIcon channel="resume" size={17} />
-                Download resume (PDF)
-              </a>
-              <a
-                href={site.resumeDocx}
-                download="Yatharth_Sharma_Premium_Resume_V2.docx"
-                className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
-              >
-                <ConnectIcon channel="resume" size={17} />
-                Download resume (DOCX)
-              </a>
 
               {social.map((item) => (
                 <a
@@ -84,11 +61,6 @@ export function ContactSection() {
                 </a>
               ))}
             </div>
-
-            <p className="text-text-muted mt-6 text-center text-sm leading-relaxed">
-              Prefer email? Use the button above — it opens your mail client with a pre-filled
-              subject line.
-            </p>
           </div>
         </div>
       </div>

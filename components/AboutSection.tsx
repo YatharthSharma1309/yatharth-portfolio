@@ -1,11 +1,9 @@
-import type { ReactNode } from "react";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
 import {
   aboutParagraphs,
   languages,
   sectionCopy,
-  site,
   skillBuildingGroups,
   skillCategories,
 } from "@/lib/content";
@@ -13,29 +11,31 @@ import {
 const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border";
 
-function SkillTag({
-  children,
+const skillTagClass =
+  "border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium";
+
+const buildingTagClass =
+  "border-accent-warm/35 text-accent-warm/90 rounded-md border border-dashed bg-accent-warm/[0.06] px-2 py-0.5 text-[11px] font-medium";
+
+function SkillTags({
+  skills,
   variant = "core",
 }: {
-  children: ReactNode;
+  skills: readonly string[];
   variant?: "core" | "building";
 }) {
-  if (variant === "building") {
-    return (
-      <li className="border-accent-warm/30 text-accent-warm/95 rounded-lg border border-dashed bg-accent-warm/[0.07] px-2.5 py-1 text-[11px] font-medium sm:px-3 sm:py-1.5 sm:text-xs">
-        {children}
-      </li>
-    );
-  }
-
   return (
-    <li className="border-border-highlight text-text-primary/90 rounded-lg border bg-[var(--bg-card)] px-2.5 py-1 text-[11px] font-medium sm:px-3 sm:py-1.5 sm:text-xs">
-      {children}
-    </li>
+    <ul className="flex flex-wrap gap-1.5">
+      {skills.map((skill) => (
+        <li key={skill} className={variant === "building" ? buildingTagClass : skillTagClass}>
+          {skill}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function SkillGroupRow({
+function StackRow({
   label,
   skills,
   variant = "core",
@@ -45,22 +45,16 @@ function SkillGroupRow({
   variant?: "core" | "building";
 }) {
   return (
-    <li className="grid gap-3 py-4 first:pt-0 last:pb-0 sm:grid-cols-[minmax(6rem,7.25rem)_1fr] sm:items-start sm:gap-4 md:grid-cols-[7.25rem_1fr] md:gap-5 lg:grid-cols-[7.75rem_1fr]">
+    <div className="grid gap-3 py-5 first:pt-0 last:pb-0 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-start sm:gap-6 sm:py-6">
       <p
-        className={`text-sm font-semibold tracking-tight sm:pt-1 ${
-          variant === "building" ? "text-accent-warm/95" : "text-text-primary"
+        className={`font-mono text-[11px] font-semibold tracking-[0.16em] uppercase sm:pt-1 ${
+          variant === "building" ? "text-accent-warm" : "text-accent"
         }`}
       >
         {label}
       </p>
-      <ul className="flex flex-wrap gap-1.5 sm:gap-2">
-        {skills.map((skill) => (
-          <SkillTag key={skill} variant={variant}>
-            {skill}
-          </SkillTag>
-        ))}
-      </ul>
-    </li>
+      <SkillTags skills={skills} variant={variant} />
+    </div>
   );
 }
 
@@ -73,7 +67,7 @@ export function AboutSection() {
       className="border-border-subtle scroll-mt-[4.25rem] border-t py-16 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionIntro eyebrow="About" title={about.title} description={site.tagline} />
+        <SectionIntro eyebrow="About" title={about.title} description={about.description} />
 
         <ul className={`${content} mt-8 space-y-3 sm:mt-10`}>
           {about.recruiterBullets.map((bullet) => (
@@ -98,40 +92,37 @@ export function AboutSection() {
           ))}
         </div>
 
-        {/* Core stack — row-based layout for better scanability across breakpoints */}
-        <div className={`${card} mt-10 p-5 sm:mt-14 sm:p-7 lg:p-9`}>
-          <div className="mx-auto max-w-[56rem]">
-            <SectionEyebrow className="mb-3 sm:mb-4">Core stack</SectionEyebrow>
-            <p className="text-text-muted mx-auto mb-6 max-w-2xl text-center text-sm leading-relaxed sm:mb-8">
-              {about.stackHelper}
-            </p>
+        <div className={`${card} ${content} mt-10 p-5 sm:mt-14 sm:p-7 lg:p-8`}>
+          <SectionEyebrow className="mb-2 sm:mb-3">Core stack</SectionEyebrow>
+          <p className="text-text-muted mx-auto mb-6 max-w-xl text-center text-sm leading-relaxed sm:mb-8">
+            {about.stackHelper}
+          </p>
 
-            <ul className="divide-border-subtle divide-y rounded-xl border border-[var(--border-subtle)] bg-[rgba(0,0,0,0.18)] px-4 sm:px-5 md:px-6">
-              {skillCategories.map((category) => (
-                <SkillGroupRow
-                  key={category.label}
-                  label={category.label}
-                  skills={category.skills}
-                />
-              ))}
-            </ul>
+          <div className="border-border-subtle divide-border-subtle divide-y border-t">
+            {skillCategories.map((category) => (
+              <StackRow
+                key={category.label}
+                label={category.label}
+                skills={category.skills}
+              />
+            ))}
           </div>
 
-          <div className="border-border-subtle mx-auto mt-8 max-w-[56rem] border-t pt-6 sm:mt-10 sm:pt-8">
-            <SectionEyebrow className="mb-3 sm:mb-4">{about.buildingTitle}</SectionEyebrow>
-            <p className="text-text-muted mx-auto mb-5 max-w-2xl text-center text-sm leading-relaxed sm:mb-6">
+          <div className="border-border-subtle mt-8 border-t pt-8 sm:mt-10 sm:pt-10">
+            <SectionEyebrow className="mb-2 sm:mb-3">{about.buildingTitle}</SectionEyebrow>
+            <p className="text-text-muted mx-auto mb-5 max-w-md text-center text-sm leading-relaxed sm:mb-6">
               {about.buildingHelper}
             </p>
-            <ul className="divide-border-subtle divide-y rounded-xl border border-accent-warm/15 bg-accent-warm/[0.03] px-4 sm:px-5 md:px-6">
+            <div className="border-border-subtle divide-border-subtle divide-y border-t">
               {skillBuildingGroups.map((group) => (
-                <SkillGroupRow
+                <StackRow
                   key={group.label}
                   label={group.label}
                   skills={group.skills}
                   variant="building"
                 />
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 

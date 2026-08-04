@@ -2,6 +2,7 @@ import {
   aboutParagraphs,
   certifications,
   education,
+  engineeringHighlights,
   heroMetrics,
   journey,
   languages,
@@ -72,6 +73,9 @@ ${sectionCopy.about.recruiterBullets.map((b) => `- ${b}`).join("\n")}
 Key metrics:
 ${heroMetrics.map((m) => `- ${m.value} ${m.label}`).join("\n")}
 
+Engineering highlights:
+${engineeringHighlights.map((h) => `- ${h}`).join("\n")}
+
 About:
 ${aboutParagraphs.map((p) => `- ${p}`).join("\n")}
 
@@ -112,16 +116,17 @@ LinkedIn profile snapshot:
 `.trim();
 
 const SYSTEM_PROMPT = `
-You are Yatharth Sharma's "Digital Twin" for a portfolio website chat.
+You are Yatharth Sharma's Career Twin for a portfolio website chat.
 Answer questions about his career, skills, projects, learning journey, and background.
 Rules:
 - Be accurate and grounded in the provided context.
+- Official recent title at Whilter.AI was Software Engineer Trainee; he targets AI full-stack / software engineering roles — do not invent a different job title.
 - When asked about current role or employment, use the career journey and availability from context — do not invent companies, dates, or status.
-- If information is not available, clearly say that and suggest asking Yatharth directly.
+- If information is not available, clearly say that and suggest asking Yatharth directly via email/contact.
 - Do not invent companies, achievements, or timelines.
 - If an item is only a title (for example LinkedIn achievement names), do not expand it with guessed descriptions.
 - Keep responses concise, helpful, and professional.
-- Use first person ("I") because this is a digital twin persona.
+- Use first person ("I") because this is a career twin persona.
 `.trim();
 
 export async function GET() {

@@ -1,8 +1,9 @@
-import { heroFocus, site } from "@/lib/content";
-import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
+"use client";
 
-const focusPill =
-  "border-border-highlight text-text-muted inline-flex items-center rounded-full border bg-[var(--bg-card)] px-3 py-1.5 text-xs font-medium backdrop-blur-sm sm:px-3.5 sm:py-2 sm:text-[13px]";
+import Link from "next/link";
+import { site } from "@/lib/content";
+import { trackEvent } from "@/lib/analytics";
+import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
 
 export function Hero() {
   return (
@@ -37,14 +38,6 @@ export function Hero() {
           {site.tagline}
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:mt-7">
-          {heroFocus.map((item) => (
-            <span key={item} className={focusPill}>
-              {item}
-            </span>
-          ))}
-        </div>
-
         <ul className="text-text-muted mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:mt-7 sm:text-sm">
           <li>{site.location}</li>
           <li className="text-text-muted/35 hidden sm:list-item" aria-hidden>
@@ -72,23 +65,10 @@ export function Hero() {
           <a
             href={site.resumePdf}
             download="Yatharth-Sharma-Resume.pdf"
+            onClick={() => trackEvent("resume_download", { source: "hero_pdf" })}
             className={`${btnSecondary} w-full max-w-xs sm:w-auto`}
           >
-            Resume (PDF)
-          </a>
-          <a
-            href={site.resumeDocx}
-            download="Yatharth_Sharma_Premium_Resume_V2.docx"
-            className={`${btnSecondary} w-full max-w-xs sm:w-auto`}
-          >
-            Resume (DOCX)
-          </a>
-          <a
-            href={site.resumeZip}
-            download="Yatharth-Sharma-Resume-Package.zip"
-            className={`${btnSecondary} w-full max-w-xs sm:w-auto`}
-          >
-            Resume (ZIP)
+            Download resume
           </a>
         </div>
 
@@ -112,6 +92,12 @@ export function Hero() {
           >
             GitHub
           </a>
+          <span className="text-text-muted/35 hidden text-xs select-none sm:inline" aria-hidden>
+            ·
+          </span>
+          <Link href="/resume" className="text-accent text-sm font-semibold hover:underline">
+            Resume page
+          </Link>
           <span className="text-text-muted/35 hidden text-xs select-none sm:inline" aria-hidden>
             ·
           </span>

@@ -5,9 +5,9 @@ export const site = {
   name: "Yatharth Sharma",
   role: "AI Full-Stack Engineer",
   roleStack:
-    "React · Next.js · FastAPI · Node.js · TypeScript · RAG · LLMs · Clerk · PostgreSQL",
+    "React · Next.js · FastAPI · Node.js · TypeScript · RAG · pgvector · PostgreSQL",
   tagline:
-    "AI Full-Stack Engineer with hands-on experience developing production-grade AI applications — scalable SaaS platforms, RAG systems, semantic search, OCR pipelines, and enterprise REST APIs across recruitment, customer support, legal-tech, CRM, and document intelligence.",
+    "Hands-on experience shipping production AI applications — multi-tenant SaaS, RAG systems, semantic search, OCR pipelines, and enterprise REST APIs across recruitment, customer support, legal-tech, CRM, and document intelligence.",
   availability: "Open to full-time · India & remote",
   location: "Faridabad, Haryana, India",
   phone: "+91 8802518567",
@@ -44,19 +44,19 @@ export const resumeSummary =
 
 /** Flat keyword line for ATS parsers — mirrors common JD terminology. */
 export const resumeSkillKeywords =
-  "TypeScript, JavaScript, Python, React, Next.js, Node.js, FastAPI, PostgreSQL, pgvector, Prisma, REST APIs, RAG, LLMs, Embeddings, OpenRouter, Semantic Search, Prompt Engineering, OCR, Document Processing, PDF/DOCX Parsing, Streaming APIs, Multi-tenant SaaS, Clerk, Supabase, Zod, OAuth, JWT, Tailwind CSS, Azure, AWS, Vercel, Railway, Neon, Docker, Playwright";
+  "TypeScript, JavaScript, Python, React, Next.js, Node.js, FastAPI, PostgreSQL, pgvector, Prisma, REST APIs, RAG, LLMs, Embeddings, OpenRouter, Semantic Search, Prompt Engineering, OCR, Document Processing, PDF/DOCX Parsing, Streaming APIs, Multi-tenant SaaS, Clerk, OAuth, JWT, Tailwind CSS, Vercel, Railway, Neon, Docker, Playwright";
 
 export const engineeringHighlights = [
-  "Built 10+ production-ready AI full-stack features across frontend, API, and data layers",
-  "Shipped Debrief for OpenAI Build Week 2026 with cited Decision Briefs and streaming RAG Q&A",
+  "Shipped 8+ end-to-end AI features at Whilter.AI across frontend, API, and data layers",
+  "Built Debrief for OpenAI Build Week 2026 with cited Decision Briefs and streaming RAG Q&A",
   "Delivered enterprise RAG with FastAPI, PostgreSQL, pgvector, and LLM APIs",
 ] as const;
 
 export const heroMetrics = [
-  { value: "7+", label: "AI applications shipped" },
   { value: "3", label: "Live demos" },
-  { value: "5+", label: "Production domains" },
+  { value: "8+", label: "Whilter.AI features" },
   { value: "3", label: "Azure certifications" },
+  { value: "3", label: "Flagship builds" },
 ] as const;
 
 export const aboutParagraphs = [
@@ -67,81 +67,53 @@ export const aboutParagraphs = [
 
 export const skillCategories = [
   {
-    label: "Languages",
-    skills: ["JavaScript", "TypeScript", "Python", "SQL"],
+    label: "Frontend stack",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
-    label: "Frontend",
+    label: "Backend & APIs",
     skills: [
-      "React.js",
-      "Next.js",
-      "HTML5",
-      "CSS3",
-      "Tailwind CSS",
-      "Redux",
-      "Context API",
-      "Responsive UI",
-    ],
-  },
-  {
-    label: "Backend",
-    skills: [
-      "Node.js",
-      "Express.js",
       "FastAPI",
-      "REST APIs",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
       "Prisma",
-      "Clerk",
-      "Supabase",
-      "Zod",
+      "REST APIs",
       "JWT",
       "OAuth",
-      "Webhooks",
     ],
   },
   {
-    label: "Databases",
-    skills: ["PostgreSQL", "MySQL", "SQLite"],
-  },
-  {
-    label: "AI",
+    label: "AI / ML",
     skills: [
-      "LLMs",
       "RAG",
       "Embeddings",
       "Semantic Search",
       "pgvector",
+      "OpenRouter",
       "Prompt Engineering",
       "OCR",
-      "OpenRouter",
-      "Document Processing",
-      "PDF/DOCX Parsing",
       "Streaming APIs",
-      "Multi-tenant SaaS",
     ],
   },
   {
-    label: "Cloud",
-    skills: ["Microsoft Azure", "AWS", "Vercel", "Railway", "Neon"],
-  },
-  {
-    label: "Tools",
-    skills: ["Git", "GitHub", "Docker", "Playwright", "Vitest", "Postman", "Linux", "Resend"],
+    label: "Cloud & tooling",
+    skills: ["Vercel", "Railway", "Neon", "Docker", "Git", "Playwright"],
   },
 ] as const;
 
 export const skillBuildingGroups = [
   {
-    label: "AI infrastructure",
-    skills: ["Vector databases (pgvector)", "LLM eval tooling", "RAG evaluation"],
+    label: "RAG quality",
+    skills: ["LLM evals", "Hybrid search", "Citation grounding"],
   },
   {
-    label: "Document & ingestion",
-    skills: ["OCR", "PDF/DOCX parsing", "Chunking strategies"],
+    label: "Document AI",
+    skills: ["Chunking strategies", "Table extraction", "PDF/DOCX parsing"],
   },
   {
-    label: "Data & delivery",
-    skills: ["SQL optimization", "Schema design", "CI/CD"],
+    label: "Systems & delivery",
+    skills: ["SQL tuning", "Schema design", "CI/CD"],
   },
 ] as const;
 
@@ -151,8 +123,6 @@ export const skillGroups = {
   core: skillCategories.flatMap((category) => category.skills),
   deepening: [...skillBuilding],
 } as const;
-
-export const heroFocus = ["AI / LLMs", "React / TypeScript", "RAG & Multi-tenant SaaS"] as const;
 
 export const twinStarterQuestions = [
   "What did you work on at Whilter.AI?",
@@ -164,41 +134,38 @@ export const twinWelcome =
   "Hi — I'm Yatharth's career twin. Ask about my production experience, stack, projects, or hiring fit." as const;
 
 export const sectionCopy = {
-  highlights: {
-    title: "Engineering highlights",
-    description:
-      "Production-grade AI engineering across full-stack SaaS — from RAG and semantic search to enterprise APIs and commercial software.",
-  },
   about: {
     title: "Production full-stack engineering with AI at the core",
+    description:
+      "Production experience across React, FastAPI, RAG, and deployed full-stack AI products, with a focus on clear interfaces and reliable delivery.",
     recruiterBullets: [
       "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
       "Three live demos: Debrief, Relay AI, and AI Sales Assistant CRM",
       "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
-      "Core stack I ship in production — React/TypeScript UIs, REST APIs, and LLM integrations.",
-    buildingTitle: "Building depth in",
-    buildingHelper: "Focused growth areas — where I am actively leveling up.",
+      "Tools I actually ship with in production — not a buzzword list.",
+    buildingTitle: "Building depth",
+    buildingHelper: "Growth areas I am deliberately investing in beyond day-to-day shipping.",
   },
   portfolio: {
     title: "Flagship AI & full-stack builds",
     description:
-      "Three live demos plus commercial, enterprise, and open-source work — each with the problem, outcome, and stack recruiters care about.",
-    featuredLabel: "Live demos",
+      "Three live demos plus private commercial and enterprise work. Flagships include problem, outcome, and stack.",
+    featuredLabel: "Flagship projects",
     moreBuildsLabel: "Additional projects",
   },
   contact: {
     title: "Open to full-time engineering roles",
     description:
-      "Especially teams shipping React/TypeScript products with AI integrations — RAG, LLMs, and document ingestion. Email is fastest; resume and GitHub are one click below.",
+      "Especially teams shipping React/TypeScript products with AI integrations — RAG, LLMs, and document ingestion. Email is fastest.",
     responseTime: "I typically respond within 2 business days.",
     emailLabel: "Email Yatharth",
   },
   certifications: {
-    title: "Certifications that back the stack",
+    title: "Certifications & recognition",
     description:
-      "Azure AI/Data credentials and cloud architecture training — aligned with the LLM, RAG, and API work in my projects.",
+      "Azure fundamentals credentials plus OpenAI Build Week — the strongest signals alongside the live projects above.",
   },
   journey: {
     title: "From analytics to production full-stack AI engineering",
@@ -273,9 +240,7 @@ export const journey: JourneyItem[] = [
     location: "—",
     resume: false,
     description: [
-      "Analyzed customer feedback data to assess product and service performance — identifying recurring themes, pain points, and areas for improvement.",
-      "Supported cross-functional analytical work by helping shape dashboards, summaries, and research inputs used in product discussions.",
-      "Contributed to market and customer insight work connecting qualitative feedback with structured reporting.",
+      "Analyzed customer feedback to surface product and service themes for cross-functional discussions.",
     ],
   },
   {
@@ -285,9 +250,7 @@ export const journey: JourneyItem[] = [
     location: "—",
     resume: false,
     description: [
-      "Built and maintained responsive marketing and content pages with HTML, CSS, and JavaScript — focusing on layout, readability, and mobile-friendly presentation.",
-      "Improved page structure and UI flow so content was easier to scan, navigate, and interact with across screen sizes.",
-      "Gained hands-on experience translating design intent into front-end implementation, forming the base for later React and TypeScript work.",
+      "Built responsive marketing pages with HTML, CSS, and JavaScript — early front-end foundation before React.",
     ],
   },
 ];
@@ -310,13 +273,6 @@ export const certifications = [
   "Microsoft Certified: Azure AI Fundamentals",
   "Microsoft Certified: Azure Fundamentals",
   "Microsoft Certified: Azure Data Fundamentals",
-  "TCS iON NQT – IT (Jun 2026): Overall 69.33%",
-  "Udemy — Agentic Engineer",
-  "AWS S3 Project (Coursera)",
-  "Data Encryption using AWS KMS",
-  "Cloud Architecture — Core Concepts",
-  "Cloud Architecture — Advanced Concepts",
-  "Alibaba Cloud Excellent Contributor Award",
 ] as const;
 
 export const resumeJourney = journey.filter((item) => item.resume !== false);
@@ -349,7 +305,7 @@ export const portfolioLinks: PortfolioLink[] = [
     problem:
       "Teams lose context across meetings and documents, making it hard to recover decisions, owners, risks, and open questions later.",
     result:
-      "Built Debrief for OpenAI Build Week 2026 — a live decision-intelligence workspace with cited Decision Briefs, streaming RAG Q&A, and production deployment on Vercel + Railway + Neon.",
+      "Built Debrief for OpenAI Build Week 2026 — a live decision-intelligence workspace with cited Decision Briefs, streaming RAG Q&A, and deployment on Vercel + Railway + Neon.",
     stack: ["React", "TypeScript", "FastAPI", "PostgreSQL", "pgvector", "OpenRouter", "Vercel", "Railway", "Neon"],
   },
   {
@@ -392,7 +348,7 @@ export const portfolioLinks: PortfolioLink[] = [
     problem:
       "Users struggle to understand legal documents buried in dense Terms of Service and Privacy policies.",
     result:
-      "Architected commercial legal-tech SaaS with FastAPI backend, browser extension, desktop app, and Razorpay billing — private codebase.",
+      "Built commercial legal-tech SaaS with a FastAPI backend, browser extension, desktop app, and Razorpay billing — private codebase.",
     stack: ["FastAPI", "Browser extension", "Desktop app", "Razorpay", "LLM APIs"],
   },
   {
@@ -418,7 +374,7 @@ export const portfolioLinks: PortfolioLink[] = [
     problem:
       "B2B clients need org-isolated semantic search over proprietary documents with reliable retrieval quality and auditable, citation-backed answers.",
     result:
-      "Architected Whilter.AI's document-intelligence platform — org-isolated ingestion-to-retrieval pipeline with chunking, embedding storage, API contracts, and citation-backed LLM responses for multi-tenant enterprise B2B deployments.",
+      "Built core parts of Whilter.AI's document-intelligence platform — org-isolated ingestion-to-retrieval pipelines, chunking, embedding storage, API contracts, and citation-backed LLM responses for enterprise B2B deployments.",
     stack: [
       "RAG",
       "Embeddings",
@@ -427,15 +383,6 @@ export const portfolioLinks: PortfolioLink[] = [
       "FastAPI",
       "Semantic search",
     ],
-  },
-  {
-    title: "Arena Deathmatch",
-    description:
-      "Browser-based 3D first-person arena shooter — waves, dual weapons, minimap, difficulty tiers, and persistent high scores.",
-    href: "https://github.com/YatharthSharma1309/arena-deathmatch",
-    status: "Open source",
-    external: true,
-    stack: ["HTML5", "CSS3", "JavaScript", "Canvas", "WebGL"],
   },
 ];
 

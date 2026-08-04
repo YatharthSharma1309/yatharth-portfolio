@@ -224,7 +224,7 @@ export function DigitalTwinSection() {
       <div className="section-glow-twin pointer-events-none absolute inset-0 opacity-30" aria-hidden />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
-          eyebrow="AI Digital Twin"
+          eyebrow="Career Twin"
           title="Ask my career twin"
           description={`${sectionCopy.digitalTwin.description} Currently ${site.availability.toLowerCase()}.`}
         />

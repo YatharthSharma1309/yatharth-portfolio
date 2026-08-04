@@ -10,6 +10,7 @@ import { btnSecondary } from "@/lib/ui-classes";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinkClass =
   "font-sans text-text-muted hover:text-text-primary block rounded-lg px-2 py-2 text-xs font-medium tracking-normal transition-colors xl:px-3 xl:py-2.5 xl:text-sm";
@@ -165,7 +166,12 @@ export function Navigation() {
                     href={item.href}
                     download={item.download}
                     className={`${btnSecondary} gap-2 px-4 py-2.5`}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      if (item.channel === "resume") {
+                        trackEvent("resume_download", { source: "nav_mobile_pdf" });
+                      }
+                      setMenuOpen(false);
+                    }}
                   >
                     {content}
                   </a>

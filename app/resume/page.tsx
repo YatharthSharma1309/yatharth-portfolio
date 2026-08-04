@@ -3,7 +3,6 @@ import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
 import { ResumeActions } from "@/components/ResumeActions";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
-import { btnPrimary } from "@/lib/ui-classes";
 import { site } from "@/lib/content";
 import { formatExternalLabel } from "@/lib/format";
 
@@ -78,16 +77,9 @@ export default function ResumePage() {
             </div>
             <div className="surface-card border-border-subtle rounded-2xl border p-8 text-center md:hidden">
               <p className="text-text-muted text-sm leading-relaxed">
-                PDF preview works best on desktop. Use the buttons above to download or open the
-                resume on your device.
+                PDF preview works best on desktop. Use the download buttons above to get PDF, DOCX,
+                or ZIP on your device.
               </p>
-              <a
-                href={site.resumePdf}
-                download="Yatharth-Sharma-Resume.pdf"
-                className={`${btnPrimary} mt-6 px-6 py-3`}
-              >
-                Download PDF
-              </a>
             </div>
             <p className="text-text-muted mt-8 text-center text-xs leading-relaxed">
               Prefer the interactive portfolio?{" "}

@@ -32,14 +32,14 @@ const downloads = [
 export function ResumeActions() {
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex flex-wrap items-center justify-center gap-3">
+      <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
         {downloads.map((item) => (
           <a
             key={item.href}
             href={item.href}
             download={item.filename}
             onClick={() => trackEvent("resume_download", { source: item.source })}
-            className={`${item.primary ? btnPrimary : btnSecondary} gap-2 px-5 py-2.5`}
+            className={`${item.primary ? btnPrimary : btnSecondary} w-full max-w-xs gap-2 px-5 py-2.5 sm:w-auto`}
           >
             {item.label}
           </a>
@@ -48,14 +48,14 @@ export function ResumeActions() {
           href={site.resumePdf}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${btnSecondary} px-5 py-2.5`}
+          onClick={() => trackEvent("resume_download", { source: "resume_page_open" })}
+          className={`${btnSecondary} w-full max-w-xs px-5 py-2.5 sm:w-auto`}
         >
           Open PDF in tab
         </a>
       </div>
       <p className="text-text-muted max-w-md text-center text-xs leading-relaxed">
-        PDF is generated from this portfolio and stays in sync. DOCX is your Premium Resume V2.
-        ZIP includes both — attach to job applications or share with recruiters.
+        PDF matches this site and stays in sync. DOCX is for ATS uploads. ZIP includes both.
       </p>
       <Link
         href="/"

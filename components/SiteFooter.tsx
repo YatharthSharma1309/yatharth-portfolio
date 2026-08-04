@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { ConnectChannel } from "@/components/ConnectIcons";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
+import { trackEvent } from "@/lib/analytics";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
 
 const linkClass = "text-text-muted hover:text-accent text-sm font-medium transition-colors";
@@ -13,7 +14,7 @@ const connectShortLabel: Record<ConnectChannel, string> = {
   email: "Email",
   linkedin: "LinkedIn",
   github: "GitHub",
-  resume: "Resume",
+  resume: "Download PDF",
 };
 
 function FooterAnchor({
@@ -21,15 +22,26 @@ function FooterAnchor({
   label,
   external,
   download,
+  trackSource,
 }: {
   href: string;
   label: string;
   external?: boolean;
   download?: string;
+  trackSource?: string;
 }) {
   if (download) {
     return (
-      <a href={href} download={download} className={linkClass}>
+      <a
+        href={href}
+        download={download}
+        className={linkClass}
+        onClick={
+          trackSource
+            ? () => trackEvent("resume_download", { source: trackSource })
+            : undefined
+        }
+      >
         {label}
       </a>
     );
@@ -101,6 +113,7 @@ export function SiteFooter() {
                 label={connectShortLabel[item.channel]}
                 external={item.external}
                 download={item.download}
+                trackSource={item.channel === "resume" ? "footer_pdf" : undefined}
               />
             </span>
           ))}
