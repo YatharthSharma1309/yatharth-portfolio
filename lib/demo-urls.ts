@@ -1,6 +1,6 @@
 /** Canonical production demos — used when env vars are unset (keeps SSR/client in sync). */
 export const productionDemoUrls = {
-  relayAI: "https://support-ai-nine-mu.vercel.app",
+  opsConcierge: "https://support-ai-nine-mu.vercel.app",
   salesCRM: "https://ai-sales-assistant-crm.vercel.app",
 } as const;
 
@@ -29,11 +29,12 @@ export function formatRepoPath(url: string): string {
  * Portfolio shows "Live demo" when a URL resolves.
  */
 export function getDemoUrl(
-  key: "relayAI" | "salesCRM"
+  key: "opsConcierge" | "salesCRM"
 ): string | undefined {
   const map = {
-    relayAI:
-      process.env.NEXT_PUBLIC_DEMO_RELAY_AI_URL ?? productionDemoUrls.relayAI,
+    opsConcierge:
+      process.env.NEXT_PUBLIC_DEMO_OPSCONCIERGE_URL ??
+      productionDemoUrls.opsConcierge,
     salesCRM:
       process.env.NEXT_PUBLIC_DEMO_SALES_CRM_URL ?? productionDemoUrls.salesCRM,
   };

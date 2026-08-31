@@ -140,7 +140,7 @@ export const sectionCopy = {
       "Production experience across React, FastAPI, RAG, and deployed full-stack AI products, with a focus on clear interfaces and reliable delivery.",
     recruiterBullets: [
       "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Three live demos: Debrief, Relay AI, and AI Sales Assistant CRM",
+      "Three live demos: Debrief, OpsConcierge, and AI Sales Assistant CRM",
       "Open to full-time roles · India & remote-friendly",
     ],
     stackHelper:
@@ -190,7 +190,7 @@ export const linkedInProfileSnapshot = {
   headline:
     "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
   about:
-    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Live demos: Debrief, Relay AI, and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
+    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Live demos: Debrief, OpsConcierge, and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...skillBuilding],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
@@ -309,18 +309,18 @@ export const portfolioLinks: PortfolioLink[] = [
     stack: ["React", "TypeScript", "FastAPI", "PostgreSQL", "pgvector", "OpenRouter", "Vercel", "Railway", "Neon"],
   },
   {
-    title: "Relay AI — Support & Recruitment Platform",
+    title: "OpsConcierge — AI Ops Desk (Support + Hiring)",
     description:
-      "Unified multi-tenant SaaS: RAG customer support (KB, chat, tickets, widget) plus AI recruitment (resume parsing, JD scoring, hiring pipeline).",
-    href: "https://github.com/YatharthSharma1309/relay-ai",
-    status: demoStatus(getDemoUrl("relayAI")),
+      "Multi-tenant SaaS for small businesses: RAG support (KB, chat, tickets, widget), auditable execution logs, and AI hiring (resume parsing, JD scoring, pipeline).",
+    href: "https://github.com/YatharthSharma1309/opsconcierge",
+    status: demoStatus(getDemoUrl("opsConcierge")),
     external: true,
     featured: true,
-    demoUrl: getDemoUrl("relayAI"),
+    demoUrl: getDemoUrl("opsConcierge"),
     problem:
-      "Teams need both customer support AI and hiring automation — usually as separate tools with duplicate auth, document parsing, and LLM plumbing.",
+      "Small teams answer the same support questions at night and manually screen resumes with no rubric — usually across separate tools.",
     result:
-      "Built Relay AI: multi-tenant platform with RAG support module and recruitment module (resume screening, match scores, interview questions, hire-safety workflow).",
+      "Built OpsConcierge: widget intake → grounded FAQ answers → escalation with full transcript → execution log; plus recruitment shortlisting and pipeline in the same workspace.",
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
   },
   {
