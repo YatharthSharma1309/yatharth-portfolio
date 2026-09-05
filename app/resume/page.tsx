@@ -85,10 +85,14 @@ export default function ResumePage() {
               Prefer the interactive portfolio?{" "}
               <Link href="/#journey" className="text-accent hover:underline">
                 View career journey
-              </Link>{" "}
-              or{" "}
+              </Link>
+              {", "}
               <Link href="/#portfolio" className="text-accent hover:underline">
                 explore projects
+              </Link>
+              {", or "}
+              <Link href="/hire" className="text-accent hover:underline">
+                hire the AI desk
               </Link>
               .
             </p>

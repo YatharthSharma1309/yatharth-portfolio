@@ -299,7 +299,7 @@ export function HirePageContent() {
                 </a>
                 {email ? (
                   <a
-                    href={email.href}
+                    href={`mailto:${site.email}?subject=${encodeURIComponent(freelanceOffer.emailSubject)}`}
                     className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
                   >
                     <ConnectIcon channel="email" size={17} />

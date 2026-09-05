@@ -196,6 +196,7 @@ export const freelanceOffer = {
   whatsappLabel: "Chat on WhatsApp",
   whatsappText:
     "Hi Yatharth — I want a 10-minute walkthrough of the AI Hiring Desk.",
+  emailSubject: "AI Hiring Desk walkthrough",
   demoHiringPath: "/recruitment",
   demoWidgetPath: "/widget",
   proof: [

@@ -6,10 +6,17 @@ import { freelanceOffer, site } from "@/lib/content";
 export const metadata: Metadata = {
   title: `AI Hiring Desk — ${site.name}`,
   description: freelanceOffer.lede,
+  alternates: { canonical: `${site.url}/hire` },
   openGraph: {
     title: `AI Hiring Desk — ${site.name}`,
     description: freelanceOffer.lede,
     url: `${site.url}/hire`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `AI Hiring Desk — ${site.name}`,
+    description: freelanceOffer.lede,
   },
 };
 

@@ -2,10 +2,13 @@
 
 Personal portfolio and career hub: [yatharthsharma.vercel.app](https://yatharthsharma.vercel.app)
 
+Freelance offer (AI Hiring Desk): [yatharthsharma.vercel.app/hire](https://yatharthsharma.vercel.app/hire)
+
 ## Features
 
 - Featured AI/full-stack project cards with live demo links (defaults in `lib/demo-urls.ts`; override via env)
 - Career journey timeline and downloadable resume PDF
+- `/hire` conversion page for businesses (demo, pricing, FAQ, WhatsApp)
 - Digital Twin chat (OpenRouter) grounded in portfolio content
 - Contact form (Resend on Vercel)
 - Dual deploy: Vercel + GitHub Pages
@@ -36,10 +39,6 @@ Open [http://localhost:3000](http://localhost:3000).
 1. Demo URLs default to production (`lib/demo-urls.ts`) — override with env vars if needed
 2. Redeploy portfolio after changing env vars on Vercel
 3. Project cards show **Live demo** when a URL resolves
-
-## Career OS
-
-Job search trackers and templates: `../Career-OS/`
 
 ## Stack
 

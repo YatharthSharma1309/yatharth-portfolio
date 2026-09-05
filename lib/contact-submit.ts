@@ -25,9 +25,12 @@ export async function submitContactForm(payload: ContactPayload): Promise<Contac
     body.append("email", payload.email);
     body.append(
       "subject",
-      payload.companyRole
-        ? `Portfolio inquiry — ${payload.name} (${payload.companyRole})`
-        : `Portfolio inquiry — ${payload.name}`,
+      payload.message.startsWith("[AI Hiring Desk]") ||
+        payload.companyRole.startsWith("Hiring desk")
+        ? `AI Hiring Desk — ${payload.name}${payload.companyRole ? ` (${payload.companyRole})` : ""}`
+        : payload.companyRole
+          ? `Portfolio inquiry — ${payload.name} (${payload.companyRole})`
+          : `Portfolio inquiry — ${payload.name}`,
     );
     body.append(
       "message",

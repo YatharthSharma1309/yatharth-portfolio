@@ -17,11 +17,20 @@ export function getContactConfig() {
   };
 }
 
+function isHiringDeskEnquiry(payload: ContactPayload) {
+  return (
+    payload.message.startsWith("[AI Hiring Desk]") ||
+    payload.companyRole.startsWith("Hiring desk")
+  );
+}
+
 export function formatContactEmail(payload: ContactPayload) {
   const { name, email, companyRole, message } = payload;
-  const subject = companyRole
-    ? `Portfolio inquiry — ${name} (${companyRole})`
-    : `Portfolio inquiry — ${name}`;
+  const subject = isHiringDeskEnquiry(payload)
+    ? `AI Hiring Desk — ${name}${companyRole ? ` (${companyRole})` : ""}`
+    : companyRole
+      ? `Portfolio inquiry — ${name} (${companyRole})`
+      : `Portfolio inquiry — ${name}`;
 
   const text = [
     `Name: ${name}`,

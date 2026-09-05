@@ -11,6 +11,7 @@ import {
   sectionCopy,
   site,
   skillGroups,
+  freelanceOffer,
   type PortfolioLink,
 } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
@@ -113,6 +114,14 @@ LinkedIn profile snapshot:
 - About: ${linkedInProfileSnapshot.about}
 - Interests: ${linkedInProfileSnapshot.interests.join(", ")}
 - Achievements: ${linkedInProfileSnapshot.achievements.join(", ")}
+
+Freelance / businesses (secondary to the full-time job search):
+- Trades as ${site.name} — no studio or company name.
+- Lead offer: ${freelanceOffer.title}.
+- Page: ${site.url}/hire
+- Live demo (no sign-in): hiring lane on OpsConcierge.
+- Does not promise placements, interview volume, or revenue.
+- 50% deposit before customizing. Pilot band starts at ₹10,000.
 `.trim();
 
 const SYSTEM_PROMPT = `
@@ -127,6 +136,7 @@ Rules:
 - If an item is only a title (for example LinkedIn achievement names), do not expand it with guessed descriptions.
 - Keep responses concise, helpful, and professional.
 - Use first person ("I") because this is a career twin persona.
+- If asked about freelance, consulting, or hiring me for a business, point to ${site.url}/hire and the live OpsConcierge hiring demo. Full-time software engineering roles remain the primary goal.
 `.trim();
 
 export async function GET() {
