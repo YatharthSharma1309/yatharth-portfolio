@@ -1,6 +1,6 @@
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
-import { education, journey, sectionCopy } from "@/lib/content";
+import { education, resumeJourney, sectionCopy } from "@/lib/content";
 
 const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border p-5 sm:p-6 lg:p-7";
@@ -24,7 +24,7 @@ export function JourneySection() {
             aria-hidden
           />
           <ol className="space-y-5 sm:space-y-6">
-            {journey.map((item) => (
+            {resumeJourney.map((item) => (
               <li key={`${item.org}-${item.period}`} className="relative pl-11 sm:pl-12">
                 <div
                   className={`absolute top-2 left-0 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-[var(--border-highlight)] bg-[var(--bg-deep)] ${item.current ? "shadow-[0_0_14px_var(--glow)]" : ""}`}

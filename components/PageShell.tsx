@@ -8,7 +8,7 @@ import { StickyRecruiterBar } from "@/components/StickyRecruiterBar";
 type Props = {
   children: React.ReactNode;
   showFooter?: boolean;
-  showStickyBar?: boolean;
+  showStickyBar?: boolean | "hire";
 };
 
 export function PageShell({
@@ -29,7 +29,9 @@ export function PageShell({
         <Navigation />
         {children}
         {showFooter ? <SiteFooter /> : null}
-        {showStickyBar ? <StickyRecruiterBar /> : null}
+        {showStickyBar ? (
+          <StickyRecruiterBar variant={showStickyBar === "hire" ? "hire" : "job"} />
+        ) : null}
       </div>
     </MobileNavProvider>
   );

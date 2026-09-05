@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { freelanceOffer } from "@/lib/content";
 import { trackEvent } from "@/lib/analytics";
 import { submitContactForm } from "@/lib/contact-submit";
 import { alertError, btnPrimary } from "@/lib/ui-classes";
@@ -39,7 +40,11 @@ function FieldLabel({
   );
 }
 
-export function ContactForm() {
+export function ContactForm({
+  variant = "job",
+}: {
+  variant?: "job" | "client";
+}) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [successNote, setSuccessNote] = useState("");
@@ -57,8 +62,16 @@ export function ContactForm() {
     const payload = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
-      companyRole: String(data.get("companyRole") ?? ""),
-      message: String(data.get("message") ?? ""),
+      companyRole:
+        variant === "client"
+          ? ["Hiring desk", String(data.get("companyRole") ?? "").trim()]
+              .filter(Boolean)
+              .join(" · ")
+          : String(data.get("companyRole") ?? ""),
+      message:
+        variant === "client"
+          ? `[AI Hiring Desk]\n\n${String(data.get("message") ?? "")}`
+          : String(data.get("message") ?? ""),
     };
 
     try {
@@ -137,7 +150,9 @@ export function ContactForm() {
           Send a message
         </p>
         <p className="text-text-muted mt-2 text-sm leading-relaxed">
-          Share a role, team, or question — I&apos;ll get back to you by email.
+          {variant === "client"
+            ? freelanceOffer.formIntro
+            : "Share a role, team, or question — I'll get back to you by email."}
         </p>
       </div>
 
@@ -187,7 +202,11 @@ export function ContactForm() {
                 autoComplete="organization"
                 disabled={formState === "submitting"}
                 className={inputClass}
-                placeholder="Acme Corp · Hiring manager"
+                placeholder={
+                  variant === "client"
+                    ? freelanceOffer.companyPlaceholder
+                    : "Acme Corp · Hiring manager"
+                }
               />
             </div>
           </div>
@@ -203,7 +222,11 @@ export function ContactForm() {
                 minLength={10}
                 disabled={formState === "submitting"}
                 className={`${inputClass} resize-y min-h-[148px] leading-relaxed`}
-                placeholder="Tell me about the role, team, or what you'd like to discuss..."
+                placeholder={
+                  variant === "client"
+                    ? freelanceOffer.messagePlaceholder
+                    : "Tell me about the role, team, or what you'd like to discuss..."
+                }
               />
             </div>
           </div>

@@ -170,7 +170,7 @@ export const sectionCopy = {
   journey: {
     title: "From analytics to production full-stack AI engineering",
     description:
-      "Grounded in data work at EY and Honeywell, then into web development and production software — most recently full-stack AI features at Whilter.AI (through Jun 2026) with React, TypeScript, REST APIs, and LLM/RAG integrations.",
+      "Grounded in data work at EY, then into web development and production software — most recently full-stack AI features at Whilter.AI (through Jun 2026) with React, TypeScript, REST APIs, and LLM/RAG integrations.",
   },
   digitalTwin: {
     description:
@@ -178,6 +178,171 @@ export const sectionCopy = {
     chatTitle: "Career Twin",
     inputPlaceholder: "Ask about my experience, stack, or projects...",
   },
+} as const;
+
+/** Freelance page — trade as Yatharth Sharma, not a studio brand. */
+export const freelanceOffer = {
+  eyebrow: "For businesses",
+  kicker: "Stop screening every CV by hand.",
+  title: "AI Hiring Desk for recruiters and service businesses",
+  lede:
+    "I set up an AI assistant that answers common enquiries, captures the lead, scores resumes against a job, and hands off to a human when it cannot answer. You keep the decision.",
+  pitch:
+    "I can show a working version in 10 minutes. If it matches how you screen CVs or handle FAQs, I customize it for your firm — deposit before build.",
+  identityNote:
+    "You hire Yatharth Sharma, an AI full-stack engineer in Faridabad. There is no separate company name to remember.",
+  demoLabel: "Live demo — no sign-in",
+  walkthroughLabel: "Request a walkthrough",
+  whatsappLabel: "Chat on WhatsApp",
+  whatsappText:
+    "Hi Yatharth — I want a 10-minute walkthrough of the AI Hiring Desk.",
+  demoHiringPath: "/recruitment",
+  demoWidgetPath: "/widget",
+  proof: [
+    "Live demo you can click today",
+    "No sign-in on the hiring lane",
+    "Faridabad · India and remote",
+    "50% deposit before I build",
+  ],
+  problems: [
+    {
+      title: "The same FAQ every day",
+      body: "Staff repeat fees, slots, and documents on WhatsApp and email instead of doing the work that pays.",
+    },
+    {
+      title: "CVs with no rubric",
+      body: "Every PDF is opened by hand. There is no shared why / why-not, so shortlists change with whoever is tired.",
+    },
+    {
+      title: "Leads that vanish in chat",
+      body: "A name and phone sit in a thread. Nobody owns the follow-up, so the enquiry dies.",
+    },
+    {
+      title: "No record of what was promised",
+      body: "When a bot or intern answers, you cannot see the transcript if a client says they were told something else.",
+    },
+    {
+      title: "Tools that need a six-month build",
+      body: "Most firms do not need a new product. They need their FAQs and jobs on a desk that already works.",
+    },
+    {
+      title: "Vendors who sell placements",
+      body: "I do not promise hires, lead volume, or revenue. The desk answers, captures, and shortlists. You decide.",
+    },
+  ],
+  outcomes: [
+    {
+      title: "A desk you can try first",
+      body: "The hiring lane and widget are live. The walkthrough is the demo, not a slide deck.",
+    },
+    {
+      title: "Your FAQs and jobs, not a generic bot",
+      body: "Replies cite your documents. Resume scores use your job, not a one-size rubric.",
+    },
+    {
+      title: "A shortlist with reasons",
+      body: "Upload PDFs. You get ranked candidates and why / why-not. Hire or reject stays with you.",
+    },
+    {
+      title: "Handoff with the full thread",
+      body: "When it cannot answer, a ticket opens with the transcript so a human is not starting from zero.",
+    },
+  ],
+  faq: [
+    {
+      q: "Who is this for?",
+      a: "Owner-led recruitment firms, coaching institutes, clinics, CAs, and local professionals who can say yes on a call. Not enterprise RFPs, banks, or government tenders.",
+    },
+    {
+      q: "What happens after I write or WhatsApp?",
+      a: "I reply within two business days, usually with a 10-minute demo slot. I ask how you handle CVs or enquiries today. I do not quote a final price on that first call.",
+    },
+    {
+      q: "What is included in a setup?",
+      a: "Your FAQs or jobs on the live OpsConcierge desk, the widget or hiring lane, lead capture, and 30 days of bug fixes in scope. Monthly retain covers small changes and hosting coordination. AI API is billed at cost.",
+    },
+    {
+      q: "Do you guarantee interviews, placements, or leads?",
+      a: "No. The desk does not replace your judgement or your market. Anyone who sells a placement number is selling something I will not put in writing.",
+    },
+    {
+      q: "How do we pay?",
+      a: "Written proposal, then 50% deposit before I customize. Remaining payment before go-live. GST if a CA says it applies. UPI or bank transfer — details go in the proposal, not on this page.",
+    },
+    {
+      q: "How fast can this go live?",
+      a: "A typical customize-and-go-live is days to a few weeks after deposit, depending on how fast you send FAQs, jobs, and sample CVs. I do not start without the deposit.",
+    },
+  ],
+  closingTitle: "See the desk, then decide.",
+  closingBody:
+    "Ten minutes on the live hiring lane. If it fits, I write a proposal. I do not start work before a deposit.",
+  howItWorks: [
+    {
+      step: "01",
+      title: "Answer enquiries",
+      body: "Website widget trained on your FAQs. Replies cite your docs, not generic ChatGPT.",
+    },
+    {
+      step: "02",
+      title: "Capture the lead",
+      body: "Name, phone, and requirement land with you instead of disappearing in chat.",
+    },
+    {
+      step: "03",
+      title: "Shortlist resumes",
+      body: "Upload PDFs against a job. Ranked shortlist with why / why-not. You still hire or reject.",
+    },
+    {
+      step: "04",
+      title: "Human handoff",
+      body: "When the assistant cannot answer, it opens a ticket with the full transcript.",
+    },
+  ],
+  who: [
+    "Recruitment consultants still reading every CV by hand",
+    "Coaching institutes and consultants with the same FAQ every day",
+    "Clinics, CAs, and local professionals who live in WhatsApp and email",
+  ],
+  menu: [
+    {
+      name: "AI Hiring Desk",
+      when: "Lead offer — recruiters and agencies",
+      band: "Pilot ₹10,000 · typical setup ₹15,000–₹40,000",
+      retain: "Then ₹3,000–₹8,000/month + AI API at cost",
+    },
+    {
+      name: "AI enquiry assistant",
+      when: "FAQ-heavy sites without a hiring inbox",
+      band: "₹15,000–₹40,000 setup",
+      retain: "Maintenance ₹2,000–₹8,000/month + API at cost",
+    },
+    {
+      name: "Website + lead capture",
+      when: "Only if you ask — not a brochure site",
+      band: "₹8,000–₹20,000",
+      retain: "Form or WhatsApp capture included",
+    },
+  ],
+  notIncluded: [
+    "Guaranteed placements, lead volume, or revenue",
+    "Official WhatsApp Business API approval unless quoted separately",
+    "Native iOS/Android apps",
+    "A new product built from scratch when the live desk already fits",
+  ],
+  process: [
+    "10-minute demo on the live desk",
+    "Seven questions about how you work today — no price on that call",
+    "Written proposal · 50% deposit · then I customize",
+    "Go-live after remaining payment · 30 days of bug fixes in scope",
+  ],
+  contactTitle: "Book a 10-minute walkthrough",
+  contactDescription:
+    "Tell me how you handle CVs or enquiries today. I typically reply within 2 business days. I do not start work before a deposit.",
+  formIntro: "Business enquiry — I will reply by email.",
+  companyPlaceholder: "Firm name · city",
+  messagePlaceholder:
+    "How you screen resumes or handle enquiries today, and whether you want a 10-minute demo.",
 } as const;
 
 export const languages = [
@@ -190,7 +355,7 @@ export const linkedInProfileSnapshot = {
   headline:
     "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
   about:
-    "Full-stack developer with production experience at Whilter.AI — React/TypeScript UIs, REST APIs, and LLM integrations on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS dashboards, and polished interfaces. Live demos: Debrief, OpsConcierge, and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
+    "AI Full-Stack Engineer with production experience at Whilter.AI — React/TypeScript UIs, FastAPI and Node.js APIs, and LLM/RAG systems on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS, and polished interfaces. Flagships: OpsConcierge (support + hiring ops desk), Debrief (OpenAI Build Week 2026), and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...skillBuilding],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],

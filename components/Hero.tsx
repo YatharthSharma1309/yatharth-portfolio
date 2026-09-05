@@ -101,6 +101,12 @@ export function Hero() {
           <span className="text-text-muted/35 hidden text-xs select-none sm:inline" aria-hidden>
             ·
           </span>
+          <Link href="/hire" className="text-accent text-sm font-semibold hover:underline">
+            For businesses
+          </Link>
+          <span className="text-text-muted/35 hidden text-xs select-none sm:inline" aria-hidden>
+            ·
+          </span>
           <a href="#contact" className="text-accent text-sm font-semibold hover:underline">
             Get in touch
           </a>

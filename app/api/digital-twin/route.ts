@@ -4,7 +4,7 @@ import {
   education,
   engineeringHighlights,
   heroMetrics,
-  journey,
+  resumeJourney,
   languages,
   linkedInProfileSnapshot,
   portfolioLinks,
@@ -60,7 +60,7 @@ const CAREER_CONTEXT = `
 Name: ${site.name}
 Role: ${site.role}
 Availability: ${site.availability}
-Most recent role: ${journey[0].title} at ${journey[0].org} (${journey[0].period}).
+Most recent role: ${resumeJourney[0].title} at ${resumeJourney[0].org} (${resumeJourney[0].period}).
 Location: ${site.location}
 Email: ${site.email}
 LinkedIn: ${site.linkedin}
@@ -86,7 +86,7 @@ Currently deepening:
 ${skillGroups.deepening.map((s) => `- ${s}`).join("\n")}
 
 Career journey:
-${journey
+${resumeJourney
   .map(
     (item) =>
       `- ${item.period}: ${item.title} at ${item.org} (${item.location})` +

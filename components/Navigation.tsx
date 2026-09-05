@@ -81,7 +81,12 @@ export function Navigation() {
         <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0 overflow-x-auto lg:flex xl:gap-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {primaryNav.map((item) => (
             <li key={item.href}>
-              <Link href={resolveNavHref(item.href, pathname)} className={navLinkClass}>
+              <Link
+                href={resolveNavHref(item.href, pathname)}
+                className={`${navLinkClass} ${
+                  pathname === item.href ? "text-text-primary" : ""
+                }`}
+              >
                 {item.label}
               </Link>
             </li>

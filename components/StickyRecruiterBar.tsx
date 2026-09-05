@@ -6,14 +6,20 @@ import { useMobileNav } from "@/components/MobileNavContext";
 import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
 import { connectLinks } from "@/lib/connect";
 import { trackEvent } from "@/lib/analytics";
+import { freelanceOffer, site } from "@/lib/content";
 
-export function StickyRecruiterBar() {
+export function StickyRecruiterBar({
+  variant = "job",
+}: {
+  variant?: "job" | "hire";
+}) {
   const [pastHero, setPastHero] = useState(false);
   const [overlaySectionInView, setOverlaySectionInView] = useState(false);
   const { menuOpen } = useMobileNav();
 
   useEffect(() => {
-    const observedIds = ["contact", "digital-twin"] as const;
+    const observedIds =
+      variant === "hire" ? (["contact"] as const) : (["contact", "digital-twin"] as const);
     const observedSections = observedIds
       .map((id) => document.getElementById(id))
       .filter((element): element is HTMLElement => element !== null);
@@ -45,10 +51,11 @@ export function StickyRecruiterBar() {
       sectionObserver.disconnect();
       showObserver.disconnect();
     };
-  }, []);
+  }, [variant]);
 
   const resume = connectLinks.find((item) => item.channel === "resume");
   const showing = pastHero && !overlaySectionInView && !menuOpen;
+  const whatsapp = `https://wa.me/${site.phone.replace(/\D/g, "")}?text=${encodeURIComponent(freelanceOffer.whatsappText)}`;
 
   return (
     <>
@@ -70,7 +77,16 @@ export function StickyRecruiterBar() {
               <ConnectIcon channel="email" size={16} />
               Contact
             </a>
-            {resume ? (
+            {variant === "hire" ? (
+              <a
+                href={whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${btnPrimary} flex-1 gap-2 px-4 py-2.5`}
+              >
+                WhatsApp
+              </a>
+            ) : resume ? (
               <a
                 href={resume.href}
                 download={resume.download}
