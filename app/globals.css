@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --bg-deep: #F4F7F9;
-  --bg-elevated: #EEF2F5;
-  --bg-card: rgba(255,255,255,0.86);
+  --bg-deep: #F2F4FA;
+  --bg-elevated: #E8EBF4;
+  --bg-card: rgba(255,255,255,0.88);
   --border-subtle: rgba(15,23,42,0.08);
   --border-highlight: rgba(15,23,42,0.12);
   --text-primary: #0F172A;
@@ -11,7 +11,7 @@
   --accent: #4F46E5;
   --accent-dim: #4338CA;
   --accent-warm: #B45309;
-  --glow: rgba(79,70,229,0.14);
+  --glow: rgba(79,70,229,0.16);
   --shadow-card: 0 0 0 1px rgba(15,23,42,0.04), 0 12px 28px -18px rgba(15,23,42,0.18);
   --on-accent: #F8FAFC;
 }
@@ -45,15 +45,28 @@ html {
 }
 
 body {
-  background: var(--bg-deep);
+  background-color: var(--bg-deep);
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.65;
+  overflow-wrap: break-word;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.page-gutter {
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px))
+    max(1.25rem, env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 640px) {
+  .page-gutter {
+    padding-inline: max(2rem, env(safe-area-inset-left, 0px))
+      max(2rem, env(safe-area-inset-right, 0px));
+  }
 }
 
 :focus-visible {
@@ -70,28 +83,37 @@ body {
   color: var(--text-primary);
 }
 
-/* Technical grid + vignette */
+.bg-atmosphere {
+  background:
+    radial-gradient(ellipse 88% 52% at 50% -12%, rgba(79, 70, 229, 0.16), transparent 58%),
+    radial-gradient(ellipse 42% 34% at 96% 16%, rgba(99, 102, 241, 0.1), transparent 58%),
+    radial-gradient(ellipse 38% 30% at 2% 68%, rgba(67, 56, 202, 0.06), transparent 62%),
+    linear-gradient(180deg, #E9ECF6 0%, var(--bg-deep) 32%, #F5F6FB 100%);
+}
+
 .bg-grid {
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 85% 72% at 50% -5%, black 18%, transparent 72%);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.13) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.22) 46%,
+    transparent 82%
+  );
 }
 
 .noise {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  opacity: 0.035;
+  opacity: 0.045;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   z-index: 0;
 }
 
 .gradient-ring {
-  background: linear-gradient(135deg, var(--accent) 0%, #818CF8 45%, transparent 70%);
-  opacity: 0.24;
-  filter: blur(80px);
+  background: radial-gradient(circle at 40% 35%, rgba(79, 70, 229, 0.22), rgba(129, 140, 248, 0.08) 48%, transparent 70%);
+  filter: blur(72px);
 }
 
 .section-glow-top {

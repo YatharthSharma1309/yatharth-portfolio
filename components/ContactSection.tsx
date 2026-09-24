@@ -18,7 +18,7 @@ export function ContactSection() {
         className="section-glow-bottom pointer-events-none absolute inset-0 opacity-35"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="page-gutter relative mx-auto max-w-6xl">
         <SectionIntro
           eyebrow="Contact"
           title={contact.title}
@@ -28,7 +28,7 @@ export function ContactSection() {
           {contact.responseTime}
         </p>
 
-        <div className="mx-auto mt-10 max-w-2xl space-y-12 sm:mt-12">
+        <div className="mx-auto mt-10 grid max-w-2xl gap-10 sm:mt-12 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-8">
           <ContactForm />
 
           <div>

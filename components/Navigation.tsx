@@ -6,25 +6,39 @@ import { usePathname } from "next/navigation";
 import { Logo, MenuIcon } from "@/components/Logo";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { useMobileNav } from "@/components/MobileNavContext";
-import { btnSecondary, labelMono } from "@/lib/ui-classes";
-import { primaryNav, resolveNavHref } from "@/lib/navigation";
+import { iconButton, labelMono } from "@/lib/ui-classes";
+import { compactNav, primaryNav, resolveNavHref, type NavItem } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
+import { resumeDownloads } from "@/lib/resume-variants";
 import { trackEvent } from "@/lib/analytics";
 
 const navLinkClass =
-  "font-sans text-text-muted hover:text-accent block rounded-lg px-2 py-2 text-sm font-medium tracking-normal transition-colors xl:px-3 xl:py-2.5";
+  "text-text-muted hover:text-text-primary relative block rounded-lg px-2.5 py-2 text-[0.8125rem] font-medium tracking-[-0.01em] transition-colors xl:px-3 xl:text-sm";
 
-const mobileNavLinkClass =
-  "font-sans text-text-muted hover:text-accent block rounded-lg px-3 py-2.5 text-[0.9375rem] font-medium tracking-normal transition-colors";
+const navLinkActive =
+  "text-text-primary after:bg-accent after:absolute after:right-2.5 after:bottom-1 after:left-2.5 after:h-px after:content-['']";
+
+const socials = connectLinks.filter(
+  (item) => item.channel === "github" || item.channel === "linkedin",
+);
+
+function shortConnectLabel(channel: string, href: string): string {
+  if (channel === "github") return "GitHub";
+  if (channel === "linkedin") return "LinkedIn";
+  if (channel === "email") return "Email";
+  if (href === resumeDownloads.ai.href) return resumeDownloads.ai.compactLabel;
+  if (href === resumeDownloads.fullstack.href) return resumeDownloads.fullstack.compactLabel;
+  return "Resume";
+}
 
 export function Navigation() {
   const pathname = usePathname();
   const { menuOpen, setMenuOpen, toggleMenu } = useMobileNav();
   const [scrolled, setScrolled] = useState(false);
+  const [hash, setHash] = useState("");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLDivElement>(null);
-  const homeHref = "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -34,11 +48,28 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
+    const syncHash = () => setHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [pathname]);
+
+  useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMenuOpen(false);
+    };
+    closeOnDesktop();
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, [setMenuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -57,82 +88,86 @@ export function Navigation() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen, setMenuOpen]);
 
+  function isActive(href: string) {
+    if (href === "/hire") return pathname === "/hire";
+    if (href.startsWith("#")) return pathname === "/" && hash === href;
+    return pathname === href;
+  }
+
+  function renderNavItems(items: NavItem[]) {
+    return items.map((item) => {
+      const href = resolveNavHref(item.href);
+      const className = `${navLinkClass} ${isActive(item.href) ? navLinkActive : ""}`;
+      return (
+        <li key={item.href}>
+          {href.startsWith("/#") ? (
+            <a href={href} className={className}>
+              {item.label}
+            </a>
+          ) : (
+            <Link href={href} className={className}>
+              {item.label}
+            </Link>
+          )}
+        </li>
+      );
+    });
+  }
+
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-50 transition-[background,box-shadow,backdrop-filter] duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-[background,box-shadow,border-color] duration-300 ${
         scrolled || menuOpen
-          ? "border-border-subtle border-b bg-bg-deep/80 shadow-[0_8px_28px_rgba(15,23,42,0.08)] backdrop-blur-xl backdrop-saturate-150"
-          : "border-transparent border-b bg-bg-deep/55 backdrop-blur-md"
+          ? "border-border-subtle border-b bg-bg-deep/88 shadow-[0_8px_28px_rgba(15,23,42,0.07)] backdrop-blur-xl"
+          : "border-transparent border-b bg-bg-deep/40 backdrop-blur-md"
       }`}
     >
       <nav
-        className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8"
+        className="page-gutter mx-auto flex h-[4.25rem] max-w-6xl items-center gap-3"
         aria-label="Site"
       >
         <Link
-          href={homeHref}
-          className="text-text-primary hover:text-accent group transition-colors"
+          href="/"
+          className="shrink-0 transition-opacity hover:opacity-75"
           onClick={() => setMenuOpen(false)}
           aria-label={`${site.name} — home`}
         >
           <Logo />
         </Link>
 
-        <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0 overflow-x-auto lg:flex xl:gap-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {primaryNav.map((item) => {
-            const href = resolveNavHref(item.href);
-            const className = `${navLinkClass} ${
-              pathname === item.href ? "text-accent font-semibold" : ""
-            }`;
-            return (
-              <li key={item.href}>
-                {href.startsWith("/#") ? (
-                  <a href={href} className={className}>
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link href={href} className={className}>
-                    {item.label}
-                  </Link>
-                )}
-              </li>
-            );
-          })}
+        <ul className="hidden min-w-0 flex-1 items-center justify-center lg:flex xl:hidden">
+          {renderNavItems(compactNav)}
+        </ul>
+        <ul className="hidden min-w-0 flex-1 items-center justify-center xl:flex">
+          {renderNavItems(primaryNav)}
         </ul>
 
-        <div className="hidden shrink-0 items-center gap-2 lg:flex">
-          {connectLinks
-            .filter((item) => item.channel === "github" || item.channel === "linkedin")
-            .map((item) => (
-              <Link
-                key={item.channel}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={item.channel === "github" ? "GitHub" : "LinkedIn"}
-                className={`${btnSecondary} gap-2 px-2.5 py-2.5 text-sm font-medium xl:px-4`}
-              >
-                <ConnectIcon channel={item.channel} size={16} />
-                <span className="hidden xl:inline">
-                  {item.channel === "github" ? "GitHub" : "LinkedIn"}
-                </span>
-              </Link>
-            ))}
+        <div className="ml-auto hidden shrink-0 items-center gap-0.5 lg:flex">
+          <span className="bg-border-highlight mr-1.5 h-4 w-px" aria-hidden />
+          {socials.map((item) => (
+            <a
+              key={item.channel}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={item.channel === "github" ? "GitHub" : "LinkedIn"}
+              className={iconButton}
+            >
+              <ConnectIcon channel={item.channel} size={16} />
+            </a>
+          ))}
         </div>
 
         <button
           ref={menuButtonRef}
           type="button"
-          className={`${btnSecondary} gap-2 px-3 py-2.5 sm:px-4 lg:hidden`}
+          className={`${iconButton} ml-auto lg:hidden`}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           onClick={toggleMenu}
         >
           <MenuIcon open={menuOpen} />
-          <span className="hidden min-[420px]:inline">
-            {menuOpen ? "Close" : "Menu"}
-          </span>
         </button>
       </nav>
 
@@ -140,97 +175,82 @@ export function Navigation() {
         <div
           id="mobile-nav"
           ref={mobileNavRef}
-          className="border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/92 px-5 py-6 backdrop-blur-xl lg:hidden"
+          className="page-gutter border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/94 py-5 backdrop-blur-xl lg:hidden"
         >
-          <p className={`${labelMono} mb-4`}>Navigate</p>
-          <ul className="space-y-0.5">
+          <p className={`${labelMono} mb-3`}>Navigate</p>
+          <ul className="divide-border-subtle divide-y overflow-hidden rounded-2xl border border-border-subtle bg-white/70">
             {primaryNav.map((item) => {
               const href = resolveNavHref(item.href);
-              const className = `${mobileNavLinkClass} ${
-                pathname === item.href ? "text-accent font-semibold" : ""
+              const active = isActive(item.href);
+              const className = `flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors ${
+                active ? "text-accent" : "text-text-primary hover:bg-bg-elevated"
               }`;
+              const label = (
+                <>
+                  {item.label}
+                  {active ? (
+                    <span className="bg-accent h-1.5 w-1.5 rounded-full" aria-hidden />
+                  ) : null}
+                </>
+              );
               return (
                 <li key={item.href}>
                   {href.startsWith("/#") ? (
-                    <a
-                      href={href}
-                      className={className}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {item.label}
+                    <a href={href} className={className} onClick={() => setMenuOpen(false)}>
+                      {label}
                     </a>
                   ) : (
-                    <Link
-                      href={href}
-                      className={className}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {item.label}
+                    <Link href={href} className={className} onClick={() => setMenuOpen(false)}>
+                      {label}
                     </Link>
                   )}
                 </li>
               );
             })}
           </ul>
-          <div className="mt-6 flex flex-col gap-2 pb-[env(safe-area-inset-bottom)]">
+
+          <p className={`${labelMono} mt-6 mb-3`}>Connect</p>
+          <ul className="divide-border-subtle divide-y overflow-hidden rounded-2xl border border-border-subtle bg-white/70">
             {connectLinks.map((item) => {
-              const content = (
-                <>
-                  <ConnectIcon channel={item.channel} size={16} />
-                  {item.channel === "github"
-                    ? "GitHub"
-                    : item.channel === "linkedin"
-                      ? "LinkedIn"
-                      : item.label}
-                </>
-              );
+              const label = shortConnectLabel(item.channel, item.href);
+              const className =
+                "text-text-primary hover:bg-bg-elevated flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors";
 
               if (item.download) {
                 return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    download={item.download}
-                    className={`${btnSecondary} gap-2 px-4 py-2.5`}
-                    onClick={() => {
-                      if (item.channel === "resume") {
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      download={item.download}
+                      className={className}
+                      onClick={() => {
                         trackEvent("resume_download", { source: "nav_mobile_pdf" });
-                      }
-                      setMenuOpen(false);
-                    }}
-                  >
-                    {content}
-                  </a>
-                );
-              }
-
-              if (item.external) {
-                return (
-                  <Link
-                    key={item.channel}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${btnSecondary} gap-2 px-4 py-2.5`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {content}
-                  </Link>
+                        setMenuOpen(false);
+                      }}
+                    >
+                      <ConnectIcon channel="resume" size={16} />
+                      {label}
+                    </a>
+                  </li>
                 );
               }
 
               return (
-                <a
-                  key={item.channel}
-                  href={item.href}
-                  className={`${btnSecondary} gap-2 px-4 py-2.5`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {content}
-                </a>
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className={className}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <ConnectIcon channel={item.channel} size={16} />
+                    {label}
+                  </a>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       ) : null}
     </header>

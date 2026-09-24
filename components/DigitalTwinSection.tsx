@@ -222,7 +222,7 @@ export function DigitalTwinSection() {
       className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28"
     >
       <div className="section-glow-twin pointer-events-none absolute inset-0 opacity-30" aria-hidden />
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="page-gutter relative mx-auto max-w-6xl">
         <SectionIntro
           eyebrow="Career Twin"
           title="Ask my career twin"

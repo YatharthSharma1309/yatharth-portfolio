@@ -67,7 +67,7 @@ export function AboutSection() {
       id="about"
       className="border-border-subtle scroll-mt-[4.25rem] border-t py-16 sm:py-24 lg:py-28"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-6xl">
         <SectionIntro eyebrow="About" title={about.title} description={about.description} />
 
         <ul className={`${card} ${content} mt-8 divide-border-subtle divide-y sm:mt-10`}>
@@ -114,7 +114,7 @@ export function AboutSection() {
           <p className="text-text-muted mx-auto mb-6 max-w-md text-center text-sm leading-relaxed">
             {about.buildingHelper}
           </p>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {skillBuildingGroups.map((group) => (
               <StackGroup
                 key={group.label}

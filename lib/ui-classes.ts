@@ -13,6 +13,9 @@ export const linkMuted =
 export const linkAccent =
   "text-accent text-sm font-semibold underline-offset-[5px] transition-colors hover:underline";
 
+export const iconButton =
+  "text-text-muted hover:text-accent hover:bg-white/80 inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:outline-none";
+
 export const eyebrowMono =
   "font-mono text-accent text-[11px] font-semibold tracking-[0.18em] uppercase";
 
@@ -32,7 +35,7 @@ export const skillChipBuilding =
   "inline-flex items-center rounded-lg border border-dashed border-accent-warm/35 bg-accent-warm/[0.06] px-2.5 py-1 font-sans text-xs font-medium tracking-[0.01em] text-accent-warm/90";
 
 export const sectionHeading =
-  "font-display text-text-primary text-3xl font-bold leading-[1.12] tracking-[-0.02em] text-balance sm:text-4xl";
+  "font-display text-text-primary text-[1.75rem] font-bold leading-[1.15] tracking-[-0.02em] text-balance sm:text-3xl lg:text-4xl lg:leading-[1.12]";
 
 export const cardHeading =
   "font-display text-text-primary text-lg font-bold leading-snug tracking-[-0.02em] sm:text-xl";

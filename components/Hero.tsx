@@ -13,11 +13,11 @@ export function Hero() {
       className="relative flex flex-col justify-center pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 lg:min-h-[92svh] lg:pb-20 lg:pt-32"
     >
       <div
-        className="gradient-ring pointer-events-none absolute top-[6%] left-1/2 h-[min(380px,80vw)] w-[min(380px,80vw)] -translate-x-1/2 rounded-full opacity-80 sm:h-[min(480px,85vw)] sm:w-[min(480px,85vw)] lg:h-[500px] lg:w-[500px]"
+        className="gradient-ring pointer-events-none absolute top-[4%] left-1/2 h-[min(320px,72vw)] w-[min(320px,72vw)] -translate-x-1/2 rounded-full opacity-70 sm:h-[min(400px,70vw)] sm:w-[min(400px,70vw)] lg:h-[420px] lg:w-[420px]"
         aria-hidden
       />
 
-      <div className="relative z-[1] mx-auto w-full max-w-3xl px-5 text-center sm:px-8">
+      <div className="page-gutter relative z-[1] mx-auto w-full max-w-3xl text-center">
         <SectionEyebrow>{site.availability}</SectionEyebrow>
 
         <h1 className="font-display text-text-primary mt-4 text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-extrabold tracking-[-0.03em]">
@@ -40,7 +40,7 @@ export function Hero() {
           {site.tagline}
         </p>
 
-        <ul className="text-text-muted mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-medium">
+        <ul className="text-text-muted mt-5 flex flex-col items-center gap-2 text-sm font-medium sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-4 sm:gap-y-2">
           <li>{site.location}</li>
           <li className="text-text-muted/30 hidden sm:list-item" aria-hidden>
             ·
@@ -53,17 +53,20 @@ export function Hero() {
           <li className="text-text-muted/30 hidden sm:list-item" aria-hidden>
             ·
           </li>
-          <li>
-            <a href={`mailto:${site.email}`} className="hover:text-accent transition-colors">
+          <li className="max-w-full px-1">
+            <a
+              href={`mailto:${site.email}`}
+              className="hover:text-accent break-all transition-colors sm:break-normal"
+            >
               {site.email}
             </a>
           </li>
         </ul>
 
         <div className="mx-auto mt-8 w-full max-w-xl">
-          <a href="/#featured-work" className={`${btnPrimary} w-full`}>
+          <Link href="/#featured-work" className={`${btnPrimary} w-full`}>
             View flagship projects
-          </a>
+          </Link>
 
           <p className={`${labelMono} mt-6 mb-3`}>Resumes</p>
           <ResumeDownloadPair layout="grid" source="hero" />

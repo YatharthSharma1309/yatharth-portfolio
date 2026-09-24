@@ -18,7 +18,9 @@ export function StickyRecruiterBar({
 
   useEffect(() => {
     const observedIds =
-      variant === "hire" ? (["contact"] as const) : (["contact", "digital-twin"] as const);
+      variant === "hire"
+        ? (["contact", "site-footer"] as const)
+        : (["contact", "digital-twin", "site-footer"] as const);
     const observedSections = observedIds
       .map((id) => document.getElementById(id))
       .filter((element): element is HTMLElement => element !== null);
@@ -61,8 +63,8 @@ export function StickyRecruiterBar({
         className={`lg:hidden ${
           showing
             ? variant === "hire"
-              ? "h-[calc(4.5rem+env(safe-area-inset-bottom))]"
-              : "h-[calc(8.25rem+env(safe-area-inset-bottom))]"
+              ? "h-[calc(4.5rem+env(safe-area-inset-bottom,0px))]"
+              : "h-[calc(11.75rem+env(safe-area-inset-bottom,0px))] min-[420px]:h-[calc(8.25rem+env(safe-area-inset-bottom,0px))]"
             : "h-0"
         }`}
         aria-hidden
@@ -92,14 +94,17 @@ export function StickyRecruiterBar({
               ) : null}
             </div>
             {variant === "job" ? (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2">
                 <a
                   href={resumeDownloads.fullstack.href}
                   download={resumeDownloads.fullstack.download}
                   className={`${btnPrimary} gap-1.5 px-2 py-2.5 text-xs`}
                 >
                   <ConnectIcon channel="resume" size={14} className="text-on-accent" />
-                  {resumeDownloads.fullstack.compactLabel}
+                  <span className="min-[420px]:hidden">Full-Stack</span>
+                  <span className="hidden min-[420px]:inline">
+                    {resumeDownloads.fullstack.compactLabel}
+                  </span>
                 </a>
                 <a
                   href={resumeDownloads.ai.href}
@@ -107,7 +112,10 @@ export function StickyRecruiterBar({
                   className={`${btnSecondary} gap-1.5 px-2 py-2.5 text-xs`}
                 >
                   <ConnectIcon channel="resume" size={14} />
-                  {resumeDownloads.ai.compactLabel}
+                  <span className="min-[420px]:hidden">AI / GenAI</span>
+                  <span className="hidden min-[420px]:inline">
+                    {resumeDownloads.ai.compactLabel}
+                  </span>
                 </a>
               </div>
             ) : null}

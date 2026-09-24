@@ -102,8 +102,9 @@ const featuredProjectsJsonLd = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
   colorScheme: "light",
-  themeColor: "#F4F7F9",
+  themeColor: "#F2F4FA",
 };
 
 export default function RootLayout({

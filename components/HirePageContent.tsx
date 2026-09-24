@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { DirectContact } from "@/components/DirectContact";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -21,7 +22,7 @@ export function HirePageContent() {
     <>
       <section id="top" className="border-border-subtle relative border-b py-16 sm:py-20">
         <div className="section-glow-top pointer-events-none absolute inset-0 opacity-40" aria-hidden />
-        <div className="relative mx-auto max-w-3xl px-5 text-center sm:px-8">
+        <div className="page-gutter relative mx-auto max-w-3xl text-center">
           <SectionEyebrow className="mb-4">{freelanceOffer.eyebrow}</SectionEyebrow>
           <p className="text-text-primary/90 text-sm font-semibold tracking-tight sm:text-base">
             {freelanceOffer.kicker}
@@ -75,23 +76,23 @@ export function HirePageContent() {
               support widget
             </a>
             {" · "}
-            <a href="/#portfolio" className="text-accent hover:underline">
+            <Link href="/#portfolio" className="text-accent hover:underline">
               full portfolio
-            </a>
+            </Link>
           </p>
         </div>
       </section>
 
       <nav
-        className="border-border-subtle bg-bg-deep/85 sticky top-[4.25rem] z-30 hidden border-b shadow-[0_6px_20px_rgba(15,23,42,0.05)] backdrop-blur-xl md:block"
+        className="border-border-subtle bg-bg-deep/85 sticky top-[4.25rem] z-30 border-b shadow-[0_6px_20px_rgba(15,23,42,0.05)] backdrop-blur-xl"
         aria-label="On this page"
       >
-        <ul className="mx-auto flex max-w-6xl items-center justify-center gap-1 px-5 py-2 sm:px-8">
+        <ul className="page-gutter mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] md:justify-center md:overflow-visible [&::-webkit-scrollbar]:hidden">
           {hirePageNav.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className="shrink-0">
               <a
                 href={item.href}
-                className="text-text-muted hover:text-text-primary block rounded-lg px-3 py-2 text-xs font-medium tracking-normal transition-colors"
+                className="text-text-muted hover:text-text-primary block rounded-lg px-3 py-2 text-xs font-medium tracking-normal whitespace-nowrap transition-colors"
               >
                 {item.label}
               </a>
@@ -101,7 +102,7 @@ export function HirePageContent() {
       </nav>
 
       <section id="problems" className="border-border-subtle scroll-mt-32 border-b py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="Problems"
             title="Why enquiries and CVs stall"
@@ -122,7 +123,7 @@ export function HirePageContent() {
       </section>
 
       <section id="desk" className="border-border-subtle scroll-mt-32 border-b py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="What you get"
             title="Four things the desk does"
@@ -144,7 +145,7 @@ export function HirePageContent() {
       </section>
 
       <section id="fit" className="border-border-subtle scroll-mt-32 border-b py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="Fit"
             title="Who this is for"
@@ -164,7 +165,7 @@ export function HirePageContent() {
       </section>
 
       <section id="outcomes" className="border-border-subtle scroll-mt-32 border-b py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="Outcomes"
             title="What you should expect"
@@ -185,13 +186,13 @@ export function HirePageContent() {
       </section>
 
       <section id="pricing" className="border-border-subtle scroll-mt-32 border-b py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="Starting prices"
             title="What it costs to start"
             description="Bands to test, not a promise the market will pay. Final quote after discovery. GST if a CA says it applies."
           />
-          <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {freelanceOffer.menu.map((item) => (
               <li
                 key={item.name}
@@ -229,7 +230,7 @@ export function HirePageContent() {
       </section>
 
       <section id="faq" className="border-border-subtle scroll-mt-32 border-b py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8">
+        <div className="page-gutter mx-auto max-w-3xl">
           <SectionIntro
             eyebrow="FAQ"
             title="Before you book a walkthrough"
@@ -265,13 +266,13 @@ export function HirePageContent() {
 
       <section id="contact" className="relative scroll-mt-32 overflow-hidden py-16 sm:py-24">
         <div className="section-glow-bottom pointer-events-none absolute inset-0 opacity-35" aria-hidden />
-        <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="relative page-gutter mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="Next step"
             title={freelanceOffer.contactTitle}
             description={freelanceOffer.contactDescription}
           />
-          <div className="mx-auto mt-10 max-w-2xl space-y-12">
+          <div className="mx-auto mt-10 grid max-w-2xl gap-10 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-8">
             <ContactForm variant="client" />
             <div>
               <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
@@ -282,7 +283,7 @@ export function HirePageContent() {
       </section>
 
       <section className="border-border-subtle border-t py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
+        <div className="page-gutter mx-auto max-w-3xl text-center">
           <h2 className={sectionHeading}>{freelanceOffer.closingTitle}</h2>
           <p className="text-text-muted mx-auto mt-4 max-w-xl text-base leading-[1.65]">
             {freelanceOffer.closingBody}

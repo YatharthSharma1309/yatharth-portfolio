@@ -14,6 +14,14 @@ export const primaryNav: NavItem[] = [
   { href: "#contact", label: "Contact" },
 ];
 
+/** Laptop-width header: the four destinations people actually jump to. */
+export const compactNav: NavItem[] = primaryNav.filter((item) =>
+  item.href === "#portfolio" ||
+  item.href === "/hire" ||
+  item.href === "#about" ||
+  item.href === "#contact",
+);
+
 /** In-page jumps on /hire — conversion landing, not a second brand. */
 export const hirePageNav: NavItem[] = [
   { href: "#problems", label: "Problems" },

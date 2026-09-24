@@ -199,7 +199,7 @@ function projectGridClass(count: number): string {
   const base = "mt-6 grid gap-5 sm:mt-8 sm:gap-6";
   if (count <= 1) return base;
   if (count === 2) return `${base} sm:grid-cols-2`;
-  if (count === 3) return `${base} lg:grid-cols-3`;
+  if (count === 3) return `${base} sm:grid-cols-2 lg:grid-cols-3`;
   // 4+: two columns from sm, three from lg — even rows stay balanced
   return `${base} sm:grid-cols-2 lg:grid-cols-3`;
 }
@@ -212,7 +212,7 @@ export function PortfolioSection() {
       id="portfolio"
       className="border-border-subtle scroll-mt-[4.25rem] border-t py-16 sm:py-24 lg:py-28"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="page-gutter mx-auto max-w-6xl">
         <SectionIntro
           eyebrow="Portfolio"
           title={portfolio.title}

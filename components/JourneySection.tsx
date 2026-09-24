@@ -12,7 +12,7 @@ export function JourneySection() {
       id="journey"
       className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="page-gutter mx-auto max-w-6xl">
         <SectionIntro
           eyebrow="Career journey"
           title={sectionCopy.journey.title}

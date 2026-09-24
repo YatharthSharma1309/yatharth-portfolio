@@ -1,21 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import type { ConnectChannel } from "@/components/ConnectIcons";
+import { ConnectIcon, type ConnectChannel } from "@/components/ConnectIcons";
+import { Logo } from "@/components/Logo";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { trackEvent } from "@/lib/analytics";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
-import { cardHeading, linkMuted } from "@/lib/ui-classes";
+import { resumeDownloads } from "@/lib/resume-variants";
+import { labelMono, linkMuted } from "@/lib/ui-classes";
 
-const linkClass = linkMuted;
-
-const connectShortLabel: Record<ConnectChannel, string> = {
-  email: "Email",
-  linkedin: "LinkedIn",
-  github: "GitHub",
-  resume: "Resume",
-};
+function footerConnectLabel(channel: string, href: string): string {
+  if (channel === "email") return "Email";
+  if (channel === "linkedin") return "LinkedIn";
+  if (channel === "github") return "GitHub";
+  if (href === resumeDownloads.ai.href) return resumeDownloads.ai.compactLabel;
+  return resumeDownloads.fullstack.compactLabel;
+}
 
 function FooterAnchor({
   href,
@@ -23,108 +24,122 @@ function FooterAnchor({
   external,
   download,
   trackSource,
+  icon,
 }: {
   href: string;
   label: string;
   external?: boolean;
   download?: string;
   trackSource?: string;
+  icon?: ConnectChannel;
 }) {
+  const className = icon
+    ? `${linkMuted} inline-flex items-center gap-2.5 py-1.5`
+    : `${linkMuted} inline-flex py-1.5`;
+
+  const body = (
+    <>
+      {icon ? <ConnectIcon channel={icon} size={15} className="opacity-70" /> : null}
+      {label}
+    </>
+  );
+
   if (download) {
     return (
       <a
         href={href}
         download={download}
-        className={linkClass}
+        className={className}
         onClick={
           trackSource
             ? () => trackEvent("resume_download", { source: trackSource })
             : undefined
         }
       >
-        {label}
+        {body}
       </a>
     );
   }
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-        {label}
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        {body}
       </a>
     );
   }
 
-  if (href.startsWith("mailto:")) {
+  if (href.startsWith("mailto:") || href.startsWith("/#") || href.startsWith("#")) {
     return (
-      <a href={href} className={linkClass}>
-        {label}
-      </a>
-    );
-  }
-
-  if (href.startsWith("/#") || href.startsWith("#")) {
-    return (
-      <a href={href} className={linkClass}>
-        {label}
+      <a href={href} className={className}>
+        {body}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={linkClass}>
-      {label}
+    <Link href={href} className={className}>
+      {body}
     </Link>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="border-border-subtle border-t py-14 sm:py-16">
-      <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-        <p className={cardHeading}>{site.name}</p>
-        <p className="text-text-muted mt-1.5 text-sm">{site.role}</p>
+    <footer id="site-footer" className="border-border-subtle border-t bg-white/45">
+      <div className="page-gutter mx-auto grid max-w-6xl gap-10 py-12 sm:grid-cols-2 sm:py-14 lg:grid-cols-[minmax(0,1.35fr)_repeat(2,minmax(0,1fr))] lg:gap-12">
+        <div className="sm:col-span-2 lg:col-span-1">
+          <Link
+            href="/"
+            className="text-text-primary hover:text-accent inline-flex items-center gap-3 transition-colors"
+            aria-label={`${site.name} — home`}
+          >
+            <Logo />
+            <span className="font-display text-base font-bold tracking-[-0.02em]">
+              {site.name}
+            </span>
+          </Link>
+          <p className="text-text-muted mt-3 max-w-xs text-sm leading-relaxed">
+            {site.role}
+          </p>
+          <p className="text-text-muted mt-4 text-xs font-medium">{site.availability}</p>
+        </div>
 
-        <nav className="mt-8" aria-label="Footer">
-          <ul className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
-            {primaryNav.map((item, index) => (
-              <li key={item.href} className="inline-flex items-center">
-                {index > 0 ? (
-                  <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
-                    ·
-                  </span>
-                ) : null}
-                <FooterAnchor
-                  href={resolveNavHref(item.href)}
-                  label={item.label}
-                />
+        <nav aria-label="Footer">
+          <p className={`${labelMono} mb-4`}>Navigate</p>
+          <ul className="flex flex-col">
+            {primaryNav.map((item) => (
+              <li key={item.href}>
+                <FooterAnchor href={resolveNavHref(item.href)} label={item.label} />
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
-          {connectLinks.map((item, index) => (
-            <span key={item.href} className="inline-flex items-center">
-              {index > 0 ? (
-                <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
-                  ·
-                </span>
-              ) : null}
-              <FooterAnchor
-                href={item.href}
-                label={item.channel === "resume" ? item.label : connectShortLabel[item.channel]}
-                external={item.external}
-                download={item.download}
-                trackSource={item.channel === "resume" ? "footer_pdf" : undefined}
-              />
-            </span>
-          ))}
+        <div>
+          <p className={`${labelMono} mb-4`}>Connect</p>
+          <ul className="flex flex-col">
+            {connectLinks.map((item) => (
+              <li key={item.href}>
+                <FooterAnchor
+                  href={item.href}
+                  label={footerConnectLabel(item.channel, item.href)}
+                  external={item.external}
+                  download={item.download}
+                  trackSource={item.channel === "resume" ? "footer_pdf" : undefined}
+                  icon={item.channel}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
-        <p className="text-text-muted mt-10 text-sm">
-          © 2026 {site.name}. All rights reserved.
-        </p>
+      <div className="border-border-subtle border-t">
+        <div className="page-gutter text-text-muted mx-auto flex max-w-6xl flex-col gap-1 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {site.name}. All rights reserved.</p>
+          <p>{site.location}</p>
+        </div>
       </div>
     </footer>
   );
