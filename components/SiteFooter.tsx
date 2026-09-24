@@ -6,7 +6,7 @@ import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { trackEvent } from "@/lib/analytics";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
-import { linkMuted } from "@/lib/ui-classes";
+import { cardHeading, linkMuted } from "@/lib/ui-classes";
 
 const linkClass = linkMuted;
 
@@ -82,9 +82,7 @@ export function SiteFooter() {
   return (
     <footer className="border-border-subtle border-t py-14 sm:py-16">
       <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-        <p className="font-display text-text-primary text-lg font-bold tracking-tight">
-          {site.name}
-        </p>
+        <p className={cardHeading}>{site.name}</p>
         <p className="text-text-muted mt-1.5 text-sm">{site.role}</p>
 
         <nav className="mt-8" aria-label="Footer">

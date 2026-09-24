@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { SectionIntro } from "@/components/SectionIntro";
 import { TwinAnimatedAvatar } from "@/components/TwinAnimatedAvatar";
-import { alertError } from "@/lib/ui-classes";
+import { alertError, cardHeading, labelMono } from "@/lib/ui-classes";
 import { sectionCopy, site, twinStarterQuestions, twinWelcome } from "@/lib/content";
 import { isStaticExport } from "@/lib/contact-submit";
 
@@ -52,7 +52,7 @@ function MessageBubble({
     return (
       <div className="flex justify-end">
         <div className="max-w-[min(90%,32rem)] min-w-0">
-          <div className="text-text-muted mb-1.5 flex items-center justify-end gap-2 pr-1 text-[10px] font-semibold tracking-[0.14em] uppercase">
+          <div className="text-text-muted mb-1.5 flex items-center justify-end gap-2 pr-1 text-[11px] font-semibold tracking-[0.14em] uppercase">
             {time ? <span>{time}</span> : null}
             <span>You</span>
           </div>
@@ -68,7 +68,7 @@ function MessageBubble({
     <div className="flex items-start gap-3">
       <TwinAnimatedAvatar size="sm" className="mt-0.5" />
       <div className="max-w-[min(90%,32rem)] min-w-0 flex-1">
-        <div className="text-accent/90 mb-1.5 flex flex-wrap items-center gap-2 text-[10px] font-semibold tracking-[0.14em] uppercase">
+        <div className="text-accent/90 mb-1.5 flex flex-wrap items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase">
           <span>Career Twin</span>
           {time ? (
             <span className="text-text-muted/70 font-normal normal-case tracking-normal">
@@ -237,7 +237,7 @@ export function DigitalTwinSection() {
             <div className="flex items-center gap-3 sm:gap-4">
               <TwinAnimatedAvatar active={isLoading} />
               <div className="min-w-0 flex-1">
-                <p className="font-display text-text-primary truncate text-base font-bold tracking-tight">
+                <p className={`${cardHeading} truncate text-base sm:text-lg`}>
                   {sectionCopy.digitalTwin.chatTitle}
                 </p>
                 <p className="text-text-muted mt-0.5 text-xs leading-relaxed break-words">
@@ -339,7 +339,7 @@ export function DigitalTwinSection() {
 
             {!hasUserMessages ? (
               <div className="pt-1">
-                <p className="text-text-muted mb-2.5 text-[10px] font-semibold tracking-[0.16em] uppercase">
+                <p className={`${labelMono} mb-2.5 text-text-muted`}>
                   Try asking
                 </p>
                 <div className="flex flex-wrap gap-2">

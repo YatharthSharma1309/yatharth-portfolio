@@ -4,7 +4,7 @@ import { useState } from "react";
 import { freelanceOffer } from "@/lib/content";
 import { trackEvent } from "@/lib/analytics";
 import { submitContactForm } from "@/lib/contact-submit";
-import { alertError, btnPrimary } from "@/lib/ui-classes";
+import { alertError, btnPrimary, cardHeading, labelMono } from "@/lib/ui-classes";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -26,7 +26,7 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="text-text-primary mb-2 block text-xs font-semibold tracking-wide"
+      className="text-text-primary mb-2 block text-xs font-semibold tracking-[0.01em]"
     >
       {children}
       {optional ? (
@@ -125,7 +125,7 @@ export function ContactForm({
             />
           </svg>
         </span>
-        <p className="text-accent font-display text-xl font-bold">Message sent</p>
+        <p className={`${cardHeading} text-accent`}>Message sent</p>
         <p className="text-text-muted mx-auto mt-2 max-w-sm text-sm leading-relaxed">
           {successNote}
         </p>
@@ -146,9 +146,7 @@ export function ContactForm({
   return (
     <div className="surface-card border-border-subtle overflow-hidden rounded-2xl border">
       <div className="border-border-subtle border-b px-5 py-5 text-center sm:px-8 sm:py-6">
-        <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
-          Send a message
-        </p>
+        <p className={labelMono}>Send a message</p>
         <p className="text-text-muted mt-2 text-sm leading-relaxed">
           {variant === "client"
             ? freelanceOffer.formIntro

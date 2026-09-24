@@ -1,4 +1,5 @@
 import { SectionEyebrow } from "@/components/SectionEyebrow";
+import { sectionHeading } from "@/lib/ui-classes";
 
 type Props = {
   eyebrow: string;
@@ -16,11 +17,9 @@ export function SectionIntro({
   return (
     <div className={`mx-auto max-w-3xl text-center ${className}`}>
       <SectionEyebrow className="mb-4">{eyebrow}</SectionEyebrow>
-      <h2 className="font-display text-text-primary text-[1.75rem] leading-[1.15] font-bold tracking-tight text-balance sm:text-3xl lg:text-4xl">
-        {title}
-      </h2>
+      <h2 className={sectionHeading}>{title}</h2>
       {description ? (
-        <p className="text-text-muted mx-auto mt-4 max-w-2xl text-sm leading-relaxed sm:mt-5 sm:text-base lg:text-[1.0625rem]">
+        <p className="text-text-muted mx-auto mt-4 max-w-2xl text-base leading-[1.65]">
           {description}
         </p>
       ) : null}

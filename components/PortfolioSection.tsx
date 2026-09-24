@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SectionIntro } from "@/components/SectionIntro";
-import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
+import { btnPrimary, btnSecondary, cardHeading, labelMono, skillTag } from "@/lib/ui-classes";
 import { resolveNavHref } from "@/lib/navigation";
 import {
   featuredPortfolioLinks,
@@ -15,8 +15,7 @@ const cardBase =
 const cardInteractive =
   "hover:border-accent/30 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(79,70,229,0.14),0_14px_28px_-18px_rgba(15,23,42,0.16)]";
 
-const stackTagClass =
-  "border-border-highlight text-text-muted rounded-md border bg-bg-elevated px-2 py-0.5 text-[11px] font-medium";
+const stackTagClass = skillTag;
 
 function statusBadgeClass(status: PortfolioLink["status"], hasDemo: boolean) {
   if (status === "Open source") {
@@ -121,9 +120,7 @@ function ProjectActions({ item }: { item: PortfolioLink }) {
 function DetailBlock({ label, children }: { label: string; children: string }) {
   return (
     <div>
-      <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
-        {label}
-      </p>
+      <p className={labelMono}>{label}</p>
       <p className="text-text-muted mt-1.5 text-sm leading-relaxed">{children}</p>
     </div>
   );
@@ -144,27 +141,25 @@ function ProjectCard({
     <article className={`${cardBase} ${isInteractive ? cardInteractive : ""}`}>
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <span
-          className={`inline-flex rounded-md px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] uppercase ${statusBadgeClass(item.status, hasDemo)}`}
+          className={`inline-flex rounded-md px-2.5 py-1 text-[11px] font-semibold tracking-[0.14em] uppercase ${statusBadgeClass(item.status, hasDemo)}`}
         >
           {statusLabel(item.status, hasDemo)}
         </span>
         {variant === "featured" ? (
-          <span className="text-text-muted text-[10px] font-semibold tracking-[0.12em] uppercase">
+          <span className="text-text-muted text-[11px] font-semibold tracking-[0.14em] uppercase">
             Flagship
           </span>
         ) : null}
         {item.resumeTag ? (
-          <span className="text-text-muted/80 text-[10px] font-medium tracking-wide">
+          <span className="text-text-muted/80 text-[11px] font-medium tracking-[0.01em]">
             {item.resumeTag}
           </span>
         ) : null}
       </div>
 
-      <h3 className="font-display text-text-primary text-lg font-bold tracking-tight sm:text-xl">
-        {item.title}
-      </h3>
+      <h3 className={cardHeading}>{item.title}</h3>
 
-      <p className="text-text-muted mt-2.5 flex-1 text-sm leading-relaxed sm:text-[0.9375rem]">
+      <p className="text-text-muted mt-2.5 flex-1 text-sm leading-relaxed">
         {item.description}
       </p>
 
@@ -178,9 +173,7 @@ function ProjectCard({
       {stack.length > 0 ? (
         <div className={variant === "featured" ? "mt-4" : ""}>
           {variant === "featured" ? (
-            <p className="text-accent font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
-              Stack
-            </p>
+            <p className={labelMono}>Stack</p>
           ) : null}
           <StackTags tags={stack} />
         </div>
@@ -195,7 +188,7 @@ function ProjectCard({
 
 function SubsectionHeading({ children }: { children: string }) {
   return (
-    <h3 className="text-text-primary text-center text-base font-semibold tracking-tight sm:text-lg">
+    <h3 className={`${cardHeading} text-center font-semibold`}>
       {children}
     </h3>
   );
@@ -227,7 +220,7 @@ export function PortfolioSection() {
         />
 
         {featuredPortfolioLinks.length > 0 ? (
-          <div id="featured-work" className="mt-10 sm:mt-14">
+          <div id="featured-work" className="mt-10 sm:mt-12">
             <SubsectionHeading>{portfolio.featuredLabel}</SubsectionHeading>
             <div className={projectGridClass(featuredPortfolioLinks.length)}>
               {featuredPortfolioLinks.map((item) => (
@@ -238,7 +231,7 @@ export function PortfolioSection() {
         ) : null}
 
         {morePortfolioLinks.length > 0 ? (
-          <div className="mt-14 sm:mt-16">
+          <div className="mt-12 sm:mt-14">
             <SubsectionHeading>{portfolio.moreBuildsLabel}</SubsectionHeading>
             <div className={projectGridClass(morePortfolioLinks.length)}>
               {morePortfolioLinks.map((item) => (

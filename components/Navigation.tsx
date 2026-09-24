@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Logo, MenuIcon } from "@/components/Logo";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { useMobileNav } from "@/components/MobileNavContext";
-import { btnSecondary } from "@/lib/ui-classes";
+import { btnSecondary, labelMono } from "@/lib/ui-classes";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
@@ -142,9 +142,7 @@ export function Navigation() {
           ref={mobileNavRef}
           className="border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/92 px-5 py-6 backdrop-blur-xl lg:hidden"
         >
-          <p className="font-mono text-accent mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase">
-            Navigate
-          </p>
+          <p className={`${labelMono} mb-4`}>Navigate</p>
           <ul className="space-y-0.5">
             {primaryNav.map((item) => {
               const href = resolveNavHref(item.href);

@@ -15,7 +15,7 @@ export function CertificationsSection() {
           title={copy.title}
           description={copy.description}
         />
-        <ul className="mx-auto mt-10 flex max-w-3xl flex-col gap-3 sm:mt-14 sm:gap-4">
+        <ul className="mx-auto mt-10 flex max-w-3xl flex-col gap-3 sm:mt-12 sm:gap-4">
           {certifications.map((c) => (
             <li
               key={c}

@@ -20,15 +20,15 @@ export function Hero() {
       <div className="relative z-[1] mx-auto w-full max-w-3xl px-5 text-center sm:px-8">
         <SectionEyebrow>{site.availability}</SectionEyebrow>
 
-        <h1 className="font-display text-text-primary mt-4 text-[clamp(2rem,6.5vw,4rem)] leading-[1.08] font-extrabold tracking-[-0.025em] sm:mt-5 sm:leading-[1.06]">
+        <h1 className="font-display text-text-primary mt-4 text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05] font-extrabold tracking-[-0.03em]">
           {site.name}
         </h1>
 
-        <p className="font-display text-text-primary/95 mt-4 text-lg font-semibold tracking-tight sm:mt-5 sm:text-xl lg:text-2xl">
+        <p className="font-sans text-text-primary/95 mt-3 text-lg font-semibold tracking-[-0.01em] leading-snug sm:text-xl">
           {site.role}
         </p>
 
-        <ul className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:mt-5">
+        <ul className="mt-4 flex flex-wrap items-center justify-center gap-2">
           {site.roleStack.split("·").map((item) => (
             <li key={item.trim()} className={stackChip}>
               {item.trim()}
@@ -36,11 +36,11 @@ export function Hero() {
           ))}
         </ul>
 
-        <p className="text-text-muted mx-auto mt-5 max-w-2xl text-[0.9375rem] leading-[1.75] sm:mt-6 sm:text-base lg:text-[1.0625rem]">
+        <p className="text-text-muted mx-auto mt-5 max-w-2xl text-base leading-[1.7] sm:text-[1.0625rem]">
           {site.tagline}
         </p>
 
-        <ul className="text-text-muted mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:mt-7 sm:text-sm">
+        <ul className="text-text-muted mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-medium">
           <li>{site.location}</li>
           <li className="text-text-muted/30 hidden sm:list-item" aria-hidden>
             ·
@@ -60,7 +60,7 @@ export function Hero() {
           </li>
         </ul>
 
-        <div className="mt-8 flex flex-col items-center gap-4 sm:mt-10">
+        <div className="mt-8 flex flex-col items-center gap-4">
           <a href="/#featured-work" className={`${btnPrimary} w-full max-w-xs sm:w-auto sm:px-7`}>
             View flagship projects
           </a>

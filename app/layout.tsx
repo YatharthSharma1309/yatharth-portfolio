@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import { DM_Sans, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { featuredPortfolioLinks, site } from "@/lib/content";
 
@@ -11,8 +11,8 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
   display: "swap",
@@ -114,7 +114,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${dmSans.variable} ${sora.variable} ${jetbrainsMono.variable} h-full`}
       data-scroll-behavior="smooth"
       style={{ colorScheme: "light" }}
     >

@@ -67,6 +67,7 @@ Location: ${site.location}
 Email: ${site.email}
 LinkedIn: ${site.linkedin}
 GitHub: ${site.github}
+Portfolio (the one URL for LinkedIn and job applications): ${site.url}
 Tagline: ${site.tagline}
 
 Recruiter highlights:

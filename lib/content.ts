@@ -355,7 +355,7 @@ export const linkedInProfileSnapshot = {
   headline:
     `${defaultResume.role} — React/TypeScript, FastAPI, Node.js, PostgreSQL`,
   about:
-    "Software Engineer and Full-Stack Developer. As a Software Engineer Trainee at Whilter.AI I built production React/TypeScript interfaces, FastAPI and Node.js APIs, and PostgreSQL-backed RAG features. I also ship Debrief (streaming RAG Q&A), OpsConcierge — AI Ops Desk (Support + Hiring), and AI Sales Assistant CRM. Open to full-time Software Engineer and Full-Stack roles — India and remote-friendly.",
+    "Software Engineer and Full-Stack Developer. As a Software Engineer Trainee at Whilter.AI I built production React/TypeScript interfaces, FastAPI and Node.js APIs, and PostgreSQL-backed RAG features. I also ship Debrief (streaming RAG Q&A), OpsConcierge — AI Ops Desk (Support + Hiring), and AI Sales Assistant CRM. Portfolio and both resumes: https://yatharthsharma.vercel.app. Open to full-time Software Engineer and Full-Stack roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...skillBuilding],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],

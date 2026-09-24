@@ -7,15 +7,10 @@ import {
   skillBuildingGroups,
   skillCategories,
 } from "@/lib/content";
+import { labelMono, skillTag, skillTagBuilding } from "@/lib/ui-classes";
 
 const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border";
-
-const skillTagClass =
-  "border-border-highlight text-text-muted rounded-md border bg-bg-elevated px-2 py-0.5 text-[11px] font-medium";
-
-const buildingTagClass =
-  "border-accent-warm/35 text-accent-warm/90 rounded-md border border-dashed bg-accent-warm/[0.06] px-2 py-0.5 text-[11px] font-medium";
 
 function SkillTags({
   skills,
@@ -27,7 +22,7 @@ function SkillTags({
   return (
     <ul className="flex flex-wrap gap-1.5">
       {skills.map((skill) => (
-        <li key={skill} className={variant === "building" ? buildingTagClass : skillTagClass}>
+        <li key={skill} className={variant === "building" ? skillTagBuilding : skillTag}>
           {skill}
         </li>
       ))}
@@ -47,8 +42,8 @@ function StackRow({
   return (
     <div className="grid gap-3 py-5 first:pt-0 last:pb-0 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-start sm:gap-6 sm:py-6">
       <p
-        className={`font-mono text-[11px] font-semibold tracking-[0.16em] uppercase sm:pt-1 ${
-          variant === "building" ? "text-accent-warm" : "text-accent"
+        className={`${labelMono} sm:pt-1 ${
+          variant === "building" ? "text-accent-warm" : ""
         }`}
       >
         {label}
@@ -81,18 +76,18 @@ export function AboutSection() {
           ))}
         </ul>
 
-        <div className={`${content} mt-10 space-y-6 sm:mt-14`}>
+        <div className={`${content} mt-10 space-y-5 sm:mt-12`}>
           {aboutParagraphs.map((paragraph, index) => (
             <p
               key={index}
-              className="text-text-muted text-[0.9875rem] leading-[1.75] sm:text-[1.02rem]"
+              className="text-text-muted text-base leading-[1.7]"
             >
               {paragraph}
             </p>
           ))}
         </div>
 
-        <div className={`${card} ${content} mt-10 p-5 sm:mt-14 sm:p-7 lg:p-8`}>
+        <div className={`${card} ${content} mt-10 p-5 sm:mt-12 sm:p-7 lg:p-8`}>
           <SectionEyebrow className="mb-2 sm:mb-3">Core stack</SectionEyebrow>
           <p className="text-text-muted mx-auto mb-6 max-w-xl text-center text-sm leading-relaxed sm:mb-8">
             {about.stackHelper}
@@ -135,7 +130,7 @@ export function AboutSection() {
                 className="border-border-highlight flex w-full max-w-sm items-center justify-between gap-3 rounded-lg border bg-[var(--bg-card)] px-4 py-2.5"
               >
                 <span className="text-text-primary text-sm font-medium">{lang.name}</span>
-                <span className="text-text-muted font-mono text-[10px] tracking-wide uppercase">
+                <span className="text-text-muted font-mono text-[11px] font-semibold tracking-[0.14em] uppercase">
                   {lang.level}
                 </span>
               </li>
