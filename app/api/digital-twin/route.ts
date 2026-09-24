@@ -14,6 +14,7 @@ import {
   freelanceOffer,
   type PortfolioLink,
 } from "@/lib/content";
+import { resumeProfiles } from "@/lib/resume-variants";
 import { getSiteUrl } from "@/lib/site-url";
 
 type ChatMessage = {
@@ -122,6 +123,12 @@ Freelance / businesses (secondary to the full-time job search):
 - Live demo (no sign-in): hiring lane on OpsConcierge.
 - Does not promise placements, interview volume, or revenue.
 - 50% deposit before customizing. Pilot band starts at ₹10,000.
+
+Resume downloads (homepage + contact, not a separate /resume page):
+- Software Engineer / Full-Stack (default): ${site.url}${site.resumePdf}
+- Targeted second PDF headed: ${resumeProfiles.ai.role}
+- When to use that PDF: ${resumeProfiles.ai.whenToUse}
+- AI / GenAI download: ${site.url}${site.resumePdfAi}
 `.trim();
 
 const SYSTEM_PROMPT = `
@@ -129,7 +136,8 @@ You are Yatharth Sharma's Career Twin for a portfolio website chat.
 Answer questions about his career, skills, projects, learning journey, and background.
 Rules:
 - Be accurate and grounded in the provided context.
-- Official recent title at Whilter.AI was Software Engineer Trainee; he targets AI full-stack / software engineering roles — do not invent a different job title.
+- Official recent title at Whilter.AI was Software Engineer Trainee. Default job-search positioning is Software Engineer / Full-Stack Developer. The second resume is headed "${resumeProfiles.ai.role}" for Generative AI, LLM, and RAG postings — that is targeted resume positioning, not a Whilter job title. Do not invent a different official employment title.
+- Two resume PDFs are on the homepage and contact section: default Software Engineer / Full-Stack at ${site.url}${site.resumePdf}, and targeted AI / GenAI at ${site.url}${site.resumePdfAi}. There is no ZIP download and no /resume switcher page.
 - When asked about current role or employment, use the career journey and availability from context — do not invent companies, dates, or status.
 - If information is not available, clearly say that and suggest asking Yatharth directly via email/contact.
 - Do not invent companies, achievements, or timelines.

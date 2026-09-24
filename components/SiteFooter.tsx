@@ -1,20 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import type { ConnectChannel } from "@/components/ConnectIcons";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { trackEvent } from "@/lib/analytics";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
+import { linkMuted } from "@/lib/ui-classes";
 
-const linkClass = "text-text-muted hover:text-accent text-sm font-medium transition-colors";
+const linkClass = linkMuted;
 
 const connectShortLabel: Record<ConnectChannel, string> = {
   email: "Email",
   linkedin: "LinkedIn",
   github: "GitHub",
-  resume: "Download PDF",
+  resume: "Resume",
 };
 
 function FooterAnchor({
@@ -63,6 +63,14 @@ function FooterAnchor({
     );
   }
 
+  if (href.startsWith("/#") || href.startsWith("#")) {
+    return (
+      <a href={href} className={linkClass}>
+        {label}
+      </a>
+    );
+  }
+
   return (
     <Link href={href} className={linkClass}>
       {label}
@@ -71,9 +79,6 @@ function FooterAnchor({
 }
 
 export function SiteFooter() {
-  const pathname = usePathname();
-  const year = new Date().getFullYear();
-
   return (
     <footer className="border-border-subtle border-t py-14 sm:py-16">
       <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
@@ -92,7 +97,7 @@ export function SiteFooter() {
                   </span>
                 ) : null}
                 <FooterAnchor
-                  href={resolveNavHref(item.href, pathname)}
+                  href={resolveNavHref(item.href)}
                   label={item.label}
                 />
               </li>
@@ -102,7 +107,7 @@ export function SiteFooter() {
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
           {connectLinks.map((item, index) => (
-            <span key={item.channel} className="inline-flex items-center">
+            <span key={item.href} className="inline-flex items-center">
               {index > 0 ? (
                 <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
                   ·
@@ -110,7 +115,7 @@ export function SiteFooter() {
               ) : null}
               <FooterAnchor
                 href={item.href}
-                label={connectShortLabel[item.channel]}
+                label={item.channel === "resume" ? item.label : connectShortLabel[item.channel]}
                 external={item.external}
                 download={item.download}
                 trackSource={item.channel === "resume" ? "footer_pdf" : undefined}
@@ -119,8 +124,8 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <p className="text-text-muted mt-10 text-sm" suppressHydrationWarning>
-          © {year} {site.name}. All rights reserved.
+        <p className="text-text-muted mt-10 text-sm">
+          © 2026 {site.name}. All rights reserved.
         </p>
       </div>
     </footer>

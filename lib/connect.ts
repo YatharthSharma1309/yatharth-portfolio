@@ -1,4 +1,5 @@
 import { site } from "@/lib/content";
+import { resumeDownloads } from "@/lib/resume-variants";
 import { formatExternalLabel } from "@/lib/format";
 import type { ConnectChannel } from "@/components/ConnectIcons";
 
@@ -30,8 +31,14 @@ export const connectLinks: ConnectLinkItem[] = [
   },
   {
     channel: "resume",
-    href: site.resumePdf,
-    label: "Download resume (PDF)",
-    download: "Yatharth-Sharma-Resume.pdf",
+    href: resumeDownloads.fullstack.href,
+    label: resumeDownloads.fullstack.label,
+    download: resumeDownloads.fullstack.download,
+  },
+  {
+    channel: "resume",
+    href: resumeDownloads.ai.href,
+    label: resumeDownloads.ai.label,
+    download: resumeDownloads.ai.download,
   },
 ];

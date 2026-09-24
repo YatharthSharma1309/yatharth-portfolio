@@ -9,7 +9,7 @@ import { alertError, btnPrimary } from "@/lib/ui-classes";
 type FormState = "idle" | "submitting" | "success" | "error";
 
 const fieldWrap =
-  "border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(62,232,200,0.12)] rounded-xl border bg-[rgba(0,0,0,0.22)] transition-[border-color,box-shadow]";
+  "border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(79,70,229,0.14)] rounded-xl border bg-white/70 transition-[border-color,box-shadow]";
 
 const inputClass =
   "text-text-primary placeholder:text-text-muted/70 w-full bg-transparent px-4 py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-60";

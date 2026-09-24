@@ -41,7 +41,7 @@ export function TwinAnimatedAvatar({
       aria-label="Career twin avatar"
     >
       <div className="from-accent via-accent-warm to-accent absolute inset-0 rounded-full bg-gradient-to-br p-[2px]">
-        <div className="bg-bg-deep relative flex h-full w-full items-center justify-center overflow-hidden rounded-full shadow-[0_0_20px_-6px_rgba(62,232,200,0.45)]">
+        <div className="bg-bg-elevated relative flex h-full w-full items-center justify-center overflow-hidden rounded-full shadow-[0_0_16px_-6px_rgba(79,70,229,0.28)]">
           {imageFailed ? (
             <span
               className={`text-accent font-display font-bold tracking-tight ${size === "sm" ? "text-[10px]" : "text-sm"}`}

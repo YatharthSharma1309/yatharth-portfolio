@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { useMobileNav } from "@/components/MobileNavContext";
 import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
-import { connectLinks } from "@/lib/connect";
-import { trackEvent } from "@/lib/analytics";
 import { freelanceOffer, site } from "@/lib/content";
+import { resumeDownloads } from "@/lib/resume-variants";
 
 export function StickyRecruiterBar({
   variant = "job",
@@ -53,7 +52,6 @@ export function StickyRecruiterBar({
     };
   }, [variant]);
 
-  const resume = connectLinks.find((item) => item.channel === "resume");
   const showing = pastHero && !overlaySectionInView && !menuOpen;
   const whatsapp = `https://wa.me/${site.phone.replace(/\D/g, "")}?text=${encodeURIComponent(freelanceOffer.whatsappText)}`;
 
@@ -61,41 +59,57 @@ export function StickyRecruiterBar({
     <>
       <div
         className={`lg:hidden ${
-          showing ? "h-[calc(4.5rem+env(safe-area-inset-bottom))]" : "h-0"
+          showing
+            ? variant === "hire"
+              ? "h-[calc(4.5rem+env(safe-area-inset-bottom))]"
+              : "h-[calc(8.25rem+env(safe-area-inset-bottom))]"
+            : "h-0"
         }`}
         aria-hidden
       />
       {showing ? (
         <div
-          className="border-border-subtle bg-bg-deep/92 fixed right-0 bottom-0 left-0 z-40 border-t px-4 py-3 backdrop-blur-xl lg:hidden"
+          className="border-border-subtle bg-bg-deep/90 fixed right-0 bottom-0 left-0 z-40 border-t px-4 py-3 shadow-[0_-8px_28px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:hidden"
           style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
           role="region"
           aria-label="Quick contact"
         >
-          <div className="mx-auto flex max-w-6xl gap-3">
-            <a href="#contact" className={`${btnSecondary} flex-1 gap-2 px-4 py-2.5`}>
-              <ConnectIcon channel="email" size={16} />
-              Contact
-            </a>
-            {variant === "hire" ? (
-              <a
-                href={whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${btnPrimary} flex-1 gap-2 px-4 py-2.5`}
-              >
-                WhatsApp
+          <div className="mx-auto flex max-w-6xl flex-col gap-2">
+            <div className="flex gap-3">
+              <a href="#contact" className={`${btnSecondary} flex-1 gap-2 px-4 py-2.5`}>
+                <ConnectIcon channel="email" size={16} />
+                Contact
               </a>
-            ) : resume ? (
-              <a
-                href={resume.href}
-                download={resume.download}
-                onClick={() => trackEvent("resume_download", { source: "sticky_pdf" })}
-                className={`${btnPrimary} flex-1 gap-2 px-4 py-2.5`}
-              >
-                <ConnectIcon channel="resume" size={16} className="text-bg-deep" />
-                Resume
-              </a>
+              {variant === "hire" ? (
+                <a
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${btnPrimary} flex-1 gap-2 px-4 py-2.5`}
+                >
+                  WhatsApp
+                </a>
+              ) : null}
+            </div>
+            {variant === "job" ? (
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={resumeDownloads.fullstack.href}
+                  download={resumeDownloads.fullstack.download}
+                  className={`${btnPrimary} gap-1.5 px-2 py-2.5 text-xs`}
+                >
+                  <ConnectIcon channel="resume" size={14} className="text-on-accent" />
+                  {resumeDownloads.fullstack.compactLabel}
+                </a>
+                <a
+                  href={resumeDownloads.ai.href}
+                  download={resumeDownloads.ai.download}
+                  className={`${btnSecondary} gap-1.5 px-2 py-2.5 text-xs`}
+                >
+                  <ConnectIcon channel="resume" size={14} />
+                  {resumeDownloads.ai.compactLabel}
+                </a>
+              </div>
             ) : null}
           </div>
         </div>

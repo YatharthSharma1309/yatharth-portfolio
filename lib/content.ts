@@ -1,22 +1,27 @@
 import { getSiteUrl } from "@/lib/site-url";
 import { demoStatus, getDemoUrl } from "@/lib/demo-urls";
+import { resumeDownloads, resumeProfiles } from "@/lib/resume-variants";
+
+const defaultResume = resumeProfiles.fullstack;
+const targetedResume = resumeProfiles.ai;
 
 export const site = {
   name: "Yatharth Sharma",
-  role: "AI Full-Stack Engineer",
+  role: defaultResume.role,
+  targetedRole: targetedResume.role,
+  targetedRoleWhenToUse: targetedResume.whenToUse,
   roleStack:
-    "React · Next.js · FastAPI · Node.js · TypeScript · RAG · pgvector · PostgreSQL",
+    "React · Next.js · TypeScript · FastAPI · Node.js · PostgreSQL · RAG",
   tagline:
-    "Hands-on experience shipping production AI applications — multi-tenant SaaS, RAG systems, semantic search, OCR pipelines, and enterprise REST APIs across recruitment, customer support, legal-tech, CRM, and document intelligence.",
+    "Software Engineer and Full-Stack Developer with production React/TypeScript interfaces, FastAPI and Node.js APIs, and PostgreSQL-backed RAG features at Whilter.AI — plus deployed products with OpenRouter, embeddings, and document intelligence.",
   availability: "Open to full-time · India & remote",
   location: "Faridabad, Haryana, India",
   phone: "+91 8802518567",
   email: "yatharthsharma1309@gmail.com",
   linkedin: "https://www.linkedin.com/in/yatharthsharma-ai/",
   github: "https://github.com/YatharthSharma1309",
-  resumePdf: "/resume/yatharth-sharma-resume.pdf",
-  resumeDocx: "/resume/Yatharth_Sharma_Premium_Resume_V2.docx",
-  resumeZip: "/resume/Yatharth-Sharma-Resume-Package.zip",
+  resumePdf: resumeDownloads.fullstack.href,
+  resumePdfAi: resumeDownloads.ai.href,
   profileImage: "/profile-avatar.jpeg",
   url: getSiteUrl(),
 };
@@ -38,18 +43,13 @@ export const resumeContactLinks: ResumeContactItem[] = [
   { label: "GitHub", href: site.github },
 ];
 
-/** ATS-friendly summary for the downloadable resume PDF. */
-export const resumeSummary =
-  "AI Full-Stack Engineer with production experience shipping React/TypeScript UIs, FastAPI and Node.js APIs, and LLM/RAG systems at Whilter.AI. Delivered multi-tenant SaaS, semantic search, OCR, and document intelligence across recruitment, CRM, support, and LegalTech, and built Debrief for OpenAI Build Week 2026.";
-
-/** Flat keyword line for ATS parsers — mirrors common JD terminology. */
-export const resumeSkillKeywords =
-  "TypeScript, JavaScript, Python, React, Next.js, Node.js, FastAPI, PostgreSQL, pgvector, Prisma, REST APIs, RAG, LLMs, Embeddings, OpenRouter, Semantic Search, Prompt Engineering, OCR, Document Processing, PDF/DOCX Parsing, Streaming APIs, Multi-tenant SaaS, Clerk, OAuth, JWT, Tailwind CSS, Vercel, Railway, Neon, Docker, Playwright";
+/** Default (Software Engineer) resume summary — AI-targeted copy lives in resume-variants. */
+export const resumeSummary = defaultResume.summary;
 
 export const engineeringHighlights = [
-  "Shipped 8+ end-to-end AI features at Whilter.AI across frontend, API, and data layers",
+  "Delivered 8+ end-to-end features at Whilter.AI across frontend, backend, and PostgreSQL",
   "Built Debrief for OpenAI Build Week 2026 with cited Decision Briefs and streaming RAG Q&A",
-  "Delivered enterprise RAG with FastAPI, PostgreSQL, pgvector, and LLM APIs",
+  "Production React/TypeScript interfaces and FastAPI/Node.js APIs on IntelliRAG",
 ] as const;
 
 export const heroMetrics = [
@@ -60,9 +60,9 @@ export const heroMetrics = [
 ] as const;
 
 export const aboutParagraphs = [
-  "I ship intelligent web applications end to end — from RAG pipelines and semantic search to polished, accessible interfaces with strong attention to performance and craft.",
-  "I own full vertical slices: responsive UIs, REST endpoints, request validation, and LLM integrations — so features move from idea to production with fewer hand-offs between layers.",
-  "Recent production experience at Whilter.AI (Dec 2025 — Jun 2026) delivering React/TypeScript interfaces, FastAPI and Node.js APIs, and LLM-powered document intelligence workflows.",
+  "I build software end to end — React/TypeScript interfaces, FastAPI and Node.js APIs, PostgreSQL-backed systems, and the AI-integrated features those products need.",
+  "I own full vertical slices: responsive UIs, REST endpoints, request validation, and integrations — so features move from idea to production with fewer hand-offs between layers.",
+  "At Whilter.AI (Dec 2025 — Jun 2026) I worked as a Software Engineer Trainee and delivered production React/TypeScript interfaces, FastAPI and Node.js APIs, and RAG document-intelligence workflows for IntelliRAG.",
 ];
 
 export const skillCategories = [
@@ -98,7 +98,7 @@ export const skillCategories = [
   },
   {
     label: "Cloud & tooling",
-    skills: ["Vercel", "Railway", "Neon", "Docker", "Git", "Playwright"],
+    skills: ["Azure", "AWS", "Vercel", "Railway", "Neon", "Docker", "Git", "Playwright"],
   },
 ] as const;
 
@@ -109,7 +109,7 @@ export const skillBuildingGroups = [
   },
   {
     label: "Document AI",
-    skills: ["Chunking strategies", "Table extraction", "PDF/DOCX parsing"],
+    skills: ["Chunking strategies", "Table extraction", "PDF/DOCX ingestion"],
   },
   {
     label: "Systems & delivery",
@@ -135,13 +135,14 @@ export const twinWelcome =
 
 export const sectionCopy = {
   about: {
-    title: "Production full-stack engineering with AI at the core",
+    title: "Production full-stack engineering — with real AI product experience",
     description:
-      "Production experience across React, FastAPI, RAG, and deployed full-stack AI products, with a focus on clear interfaces and reliable delivery.",
+      "React, TypeScript, FastAPI, Node.js, and PostgreSQL in production, plus RAG and LLM integrations where the product needs them.",
     recruiterBullets: [
-      "Production React/TypeScript + FastAPI/Node.js APIs at Whilter.AI (Dec 2025 — Jun 2026)",
-      "Three live demos: Debrief, OpsConcierge, and AI Sales Assistant CRM",
-      "Open to full-time roles · India & remote-friendly",
+      "Software Engineer Trainee at Whilter.AI (Dec 2025 — Jun 2026) — 8+ production features across frontend, backend, and PostgreSQL",
+      "Three live demos: Debrief (streaming RAG Q&A), OpsConcierge — AI Ops Desk (Support + Hiring), and AI Sales Assistant CRM",
+      "Open to full-time Software Engineer and Full-Stack roles · India & remote",
+      `Second resume for GenAI / RAG postings: ${targetedResume.role}`,
     ],
     stackHelper:
       "Tools I actually ship with in production — not a buzzword list.",
@@ -149,32 +150,30 @@ export const sectionCopy = {
     buildingHelper: "Growth areas I am deliberately investing in beyond day-to-day shipping.",
   },
   portfolio: {
-    title: "Flagship AI & full-stack builds",
+    title: "Flagship full-stack & AI builds",
     description:
       "Three live demos plus private commercial and enterprise work. Flagships include problem, outcome, and stack.",
     featuredLabel: "Flagship projects",
     moreBuildsLabel: "Additional projects",
   },
   contact: {
-    title: "Open to full-time engineering roles",
-    description:
-      "Especially teams shipping React/TypeScript products with AI integrations — RAG, LLMs, and document ingestion. Email is fastest.",
+    title: "Open to full-time software engineering roles",
+    description: `Especially Software Engineer and Full-Stack teams shipping React/TypeScript products. For Generative AI, LLM, or RAG postings, download the ${targetedResume.role} resume. Email is fastest.`,
     responseTime: "I typically respond within 2 business days.",
     emailLabel: "Email Yatharth",
   },
   certifications: {
     title: "Certifications & recognition",
     description:
-      "Azure fundamentals credentials plus OpenAI Build Week — the strongest signals alongside the live projects above.",
+      "Azure fundamentals credentials, OpenAI Build Week, and the Alibaba Cloud contributor award — the strongest signals alongside the live projects above.",
   },
   journey: {
-    title: "From analytics to production full-stack AI engineering",
+    title: "From analytics into production software engineering",
     description:
-      "Grounded in data work at EY, then into web development and production software — most recently full-stack AI features at Whilter.AI (through Jun 2026) with React, TypeScript, REST APIs, and LLM/RAG integrations.",
+      "Data work at EY and Honeywell, early web development at Arctic Innovage, then production full-stack features at Whilter.AI — React, TypeScript, REST APIs, PostgreSQL, and RAG (retrieval-augmented generation) integrations.",
   },
   digitalTwin: {
-    description:
-      "A conversational way to explore my background — roles, stack, and projects. Answers are based on this portfolio's career data.",
+    description: `A conversational way to explore my background — roles, stack, projects, and which resume to use (default ${defaultResume.role} vs targeted ${targetedResume.role}). Answers are based on this portfolio's career data.`,
     chatTitle: "Career Twin",
     inputPlaceholder: "Ask about my experience, stack, or projects...",
   },
@@ -190,7 +189,7 @@ export const freelanceOffer = {
   pitch:
     "I can show a working version in 10 minutes. If it matches how you screen CVs or handle FAQs, I customize it for your firm — deposit before build.",
   identityNote:
-    "You hire Yatharth Sharma, an AI full-stack engineer in Faridabad. There is no separate company name to remember.",
+    "You hire Yatharth Sharma, a software engineer in Faridabad who builds AI hiring tools. There is no separate company name to remember.",
   demoLabel: "Live demo — no sign-in",
   walkthroughLabel: "Request a walkthrough",
   whatsappLabel: "Chat on WhatsApp",
@@ -354,9 +353,9 @@ export const languages = [
 
 export const linkedInProfileSnapshot = {
   headline:
-    "AI Full-Stack Engineer — React/Next.js, FastAPI, RAG, Embeddings, Multi-tenant SaaS",
+    `${defaultResume.role} — React/TypeScript, FastAPI, Node.js, PostgreSQL`,
   about:
-    "AI Full-Stack Engineer with production experience at Whilter.AI — React/TypeScript UIs, FastAPI and Node.js APIs, and LLM/RAG systems on a live AI product. I ship end-to-end: RAG pipelines, embeddings, document ingestion, streaming chat, multi-tenant SaaS, and polished interfaces. Flagships: OpsConcierge (support + hiring ops desk), Debrief (OpenAI Build Week 2026), and AI Sales Assistant CRM. Open to full-time roles — India and remote-friendly.",
+    "Software Engineer and Full-Stack Developer. As a Software Engineer Trainee at Whilter.AI I built production React/TypeScript interfaces, FastAPI and Node.js APIs, and PostgreSQL-backed RAG features. I also ship Debrief (streaming RAG Q&A), OpsConcierge — AI Ops Desk (Support + Hiring), and AI Sales Assistant CRM. Open to full-time Software Engineer and Full-Stack roles — India and remote-friendly.",
   interests: ["Web Development", "Full-Stack Engineering", "AI & LLM Integration", "React"],
   currentlyLearning: [...skillBuilding],
   achievements: ["Pull Shark x2", "Quickdraw", "YOLO"],
@@ -381,10 +380,10 @@ export const journey: JourneyItem[] = [
     location: "Gurugram, Haryana",
     current: false,
     description: [
-      "Shipped React/TypeScript UI and FastAPI/Node.js REST APIs for Whilter.AI document-intelligence product (IntelliRAG): ingestion, embeddings, semantic retrieval, and LLM responses.",
-      "Delivered 8+ end-to-end features across frontend, API, and PostgreSQL — document pipelines, admin dashboards, and streaming RAG chat with citation-backed answers.",
-      "Integrated OpenRouter/LLM APIs with prompt templates and validation; automated PDF/DOCX parsing and embedding workflows for production RAG.",
-      "Contributed to multi-tenant SaaS patterns (auth, org scoping, API contracts) for B2B AI deployments.",
+      "Built production React/TypeScript interfaces and FastAPI/Node.js APIs for IntelliRAG, a document-intelligence RAG platform used in enterprise workflows.",
+      "Delivered 8+ end-to-end features across frontend, backend, and PostgreSQL — application workflows, admin dashboards, document-processing pipelines, and REST API integrations.",
+      "Developed reusable UI components and backend modules reused across multi-tenant SaaS tenants.",
+      "Wired PDF/DOCX ingestion, semantic search, RAG retrieval, and streaming RAG Q&A into production application workflows.",
     ],
   },
   {
@@ -403,27 +402,26 @@ export const journey: JourneyItem[] = [
     title: "Data Analyst",
     org: "Honeywell",
     period: "Jan 2023",
-    location: "—",
-    resume: false,
+    location: "India",
     description: [
-      "Analyzed customer feedback to surface product and service themes for cross-functional discussions.",
+      "Summarized customer-feedback themes into dashboard inputs used in product and business review discussions.",
     ],
   },
   {
     title: "Web Development Intern",
     org: "Arctic Innovage Pvt. Ltd.",
     period: "Jul 2022 — Sep 2022",
-    location: "—",
-    resume: false,
+    location: "India",
     description: [
-      "Built responsive marketing pages with HTML, CSS, and JavaScript — early front-end foundation before React.",
+      "Built responsive marketing pages using HTML, CSS, and JavaScript.",
+      "Used analytics insights to improve UX on high-traffic site paths.",
     ],
   },
 ];
 
 export const education = [
   {
-    degree: "Master of Computer Applications (MCA), Data Analytics",
+    degree: "Master of Computer Applications (MCA)",
     school: "Birla Institute of Technology, Mesra",
     period: "Aug 2023 — Jul 2025",
   },
@@ -435,10 +433,11 @@ export const education = [
 ];
 
 export const certifications = [
-  "OpenAI Build Week 2026 — Built and submitted Debrief (Work & Productivity)",
+  "OpenAI Build Week 2026 — Debrief (decision-intelligence / RAG workspace)",
   "Microsoft Certified: Azure AI Fundamentals",
   "Microsoft Certified: Azure Fundamentals",
   "Microsoft Certified: Azure Data Fundamentals",
+  "Excellent Contributor Award — Alibaba Cloud Low Code Development Contest 2022",
 ] as const;
 
 export const resumeJourney = journey.filter((item) => item.resume !== false);
@@ -462,7 +461,7 @@ export const portfolioLinks: PortfolioLink[] = [
   {
     title: "Debrief — Decision Intelligence Workspace",
     description:
-      "Decision-recovery RAG workspace that turns scattered PDFs, DOCX files, and notes into cited Decision Briefs with streaming Q&A.",
+      "Decision-recovery RAG workspace that turns scattered PDFs, DOCX files, and notes into cited Decision Briefs with streaming RAG Q&A.",
     href: "https://github.com/YatharthSharma1309/debrief",
     status: "Live",
     external: true,
@@ -486,8 +485,8 @@ export const portfolioLinks: PortfolioLink[] = [
     problem:
       "Small teams answer the same support questions at night and manually screen resumes with no rubric — usually across separate tools.",
     result:
-      "Built OpsConcierge: widget intake → grounded FAQ answers → escalation with full transcript → execution log; plus recruitment shortlisting and pipeline in the same workspace.",
-    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG", "PDF parsing"],
+      "Built OpsConcierge: widget intake → RAG-grounded FAQ answers → escalation with full transcript → execution log; plus resume parsing, JD scoring, interview-question generation, and hiring pipeline.",
+    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Clerk", "OpenRouter", "RAG"],
   },
   {
     title: "AI Sales Assistant CRM",
@@ -514,8 +513,8 @@ export const portfolioLinks: PortfolioLink[] = [
     problem:
       "Users struggle to understand legal documents buried in dense Terms of Service and Privacy policies.",
     result:
-      "Built commercial legal-tech SaaS with a FastAPI backend, browser extension, desktop app, and Razorpay billing — private codebase.",
-    stack: ["FastAPI", "Browser extension", "Desktop app", "Razorpay", "LLM APIs"],
+      "Built commercial legal-tech SaaS with a FastAPI backend, browser extension, Tauri desktop app, and Razorpay billing — private codebase.",
+    stack: ["FastAPI", "Browser Extension", "Tauri", "Razorpay", "LLM APIs"],
   },
   {
     title: "EduTech — AI Document Processing",
@@ -540,11 +539,12 @@ export const portfolioLinks: PortfolioLink[] = [
     problem:
       "B2B clients need org-isolated semantic search over proprietary documents with reliable retrieval quality and auditable, citation-backed answers.",
     result:
-      "Built core parts of Whilter.AI's document-intelligence platform — org-isolated ingestion-to-retrieval pipelines, chunking, embedding storage, API contracts, and citation-backed LLM responses for enterprise B2B deployments.",
+      "Built core parts of Whilter.AI's document-intelligence RAG platform — org-isolated ingestion-to-retrieval pipelines, chunking, pgvector embedding storage, API contracts, and citation-backed RAG answers for enterprise B2B deployments.",
     stack: [
       "RAG",
       "Embeddings",
       "PostgreSQL",
+      "pgvector",
       "Multi-tenant SaaS",
       "FastAPI",
       "Semantic search",

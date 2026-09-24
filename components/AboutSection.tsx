@@ -12,7 +12,7 @@ const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border";
 
 const skillTagClass =
-  "border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium";
+  "border-border-highlight text-text-muted rounded-md border bg-bg-elevated px-2 py-0.5 text-[11px] font-medium";
 
 const buildingTagClass =
   "border-accent-warm/35 text-accent-warm/90 rounded-md border border-dashed bg-accent-warm/[0.06] px-2 py-0.5 text-[11px] font-medium";
@@ -69,9 +69,9 @@ export function AboutSection() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro eyebrow="About" title={about.title} description={about.description} />
 
-        <ul className={`${content} mt-8 space-y-3 sm:mt-10`}>
+        <ul className={`${card} ${content} mt-8 divide-border-subtle divide-y sm:mt-10`}>
           {about.recruiterBullets.map((bullet) => (
-            <li key={bullet} className={`${card} flex items-start gap-3 p-5 sm:p-6`}>
+            <li key={bullet} className="flex items-start gap-3 p-4 sm:p-5">
               <span
                 className="from-accent mt-1.5 h-px w-5 shrink-0 bg-gradient-to-r to-transparent"
                 aria-hidden
@@ -126,7 +126,7 @@ export function AboutSection() {
           </div>
         </div>
 
-        <div className={`${card} ${content} mt-4 p-5 sm:mt-6 sm:p-6 lg:p-7`}>
+        <div className={`${card} ${content} mt-8 p-5 sm:mt-10 sm:p-6 lg:p-7`}>
           <SectionEyebrow className="mb-3 sm:mb-4">Languages</SectionEyebrow>
           <ul className="flex flex-col items-center gap-2 sm:gap-3">
             {languages.map((lang) => (

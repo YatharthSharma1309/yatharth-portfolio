@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -78,15 +77,15 @@ export function HirePageContent() {
               support widget
             </a>
             {" · "}
-            <Link href="/#portfolio" className="text-accent hover:underline">
+            <a href="/#portfolio" className="text-accent hover:underline">
               full portfolio
-            </Link>
+            </a>
           </p>
         </div>
       </section>
 
       <nav
-        className="border-border-subtle bg-bg-deep/80 sticky top-[4.25rem] z-30 hidden border-b backdrop-blur-xl md:block"
+        className="border-border-subtle bg-bg-deep/85 sticky top-[4.25rem] z-30 hidden border-b shadow-[0_6px_20px_rgba(15,23,42,0.05)] backdrop-blur-xl md:block"
         aria-label="On this page"
       >
         <ul className="mx-auto flex max-w-6xl items-center justify-center gap-1 px-5 py-2 sm:px-8">

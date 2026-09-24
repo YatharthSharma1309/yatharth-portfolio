@@ -26,11 +26,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const seoDescription =
-  "AI Full-Stack Engineer shipping React/Next.js UIs and LLM/RAG backends. Production experience at Whilter.AI. Open to full-time software engineering roles.";
+  "Software Engineer and Full-Stack Developer. Built production React/TypeScript, FastAPI/Node.js, PostgreSQL, and RAG features at Whilter.AI. Open to full-time software engineering roles.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} · AI Full-Stack Engineer`,
+  title: `${site.name} · ${site.role}`,
   description: seoDescription,
   keywords: [
     "full-stack",
@@ -46,11 +46,13 @@ export const metadata: Metadata = {
     "Python",
     "LLM",
     "document ingestion",
+    "pgvector",
+    "OpenRouter",
     "OAuth",
     "India",
   ],
   openGraph: {
-    title: `${site.name} · AI Full-Stack Engineer`,
+    title: `${site.name} · ${site.role}`,
     description: seoDescription,
     type: "website",
     locale: "en_IN",
@@ -58,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} · AI Full-Stack Engineer`,
+    title: `${site.name} · ${site.role}`,
     description: seoDescription,
   },
 };
@@ -100,6 +102,8 @@ const featuredProjectsJsonLd = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  colorScheme: "light",
+  themeColor: "#F4F7F9",
 };
 
 export default function RootLayout({
@@ -111,7 +115,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${dmSans.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} h-full`}
-      style={{ colorScheme: "dark" }}
+      data-scroll-behavior="smooth"
+      style={{ colorScheme: "light" }}
     >
       <body className="font-sans relative min-h-full overflow-x-hidden antialiased">
         <script

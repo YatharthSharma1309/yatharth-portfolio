@@ -56,7 +56,7 @@ function MessageBubble({
             {time ? <span>{time}</span> : null}
             <span>You</span>
           </div>
-          <div className="bg-accent text-bg-deep break-words rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(62,232,200,0.55)] [overflow-wrap:anywhere]">
+          <div className="bg-accent text-on-accent break-words rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(79,70,229,0.35)] [overflow-wrap:anywhere]">
             {message.content}
           </div>
         </div>
@@ -76,7 +76,7 @@ function MessageBubble({
             </span>
           ) : null}
         </div>
-        <div className="border-border-subtle bg-bg-card text-text-primary break-words rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(62,232,200,0.45)] [overflow-wrap:anywhere]">
+        <div className="border-border-subtle bg-bg-card text-text-primary break-words rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(79,70,229,0.4)] [overflow-wrap:anywhere]">
           {message.content}
         </div>
       </div>
@@ -349,7 +349,7 @@ export function DigitalTwinSection() {
                       type="button"
                       onClick={() => void sendMessage(question)}
                       disabled={isLoading || apiReady === false}
-                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 rounded-full border bg-[rgba(0,0,0,0.18)] px-3 py-1.5 text-left text-xs leading-snug transition-colors"
+                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 rounded-full border bg-white/75 px-3 py-1.5 text-left text-xs leading-snug transition-colors"
                     >
                       {question}
                     </button>
@@ -369,7 +369,7 @@ export function DigitalTwinSection() {
             onSubmit={onSubmit}
             className="border-border-subtle border-t px-4 py-4 sm:px-6 sm:py-5"
           >
-            <div className="border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(62,232,200,0.12)] flex items-end gap-2 rounded-2xl border bg-[rgba(0,0,0,0.22)] p-2 sm:gap-3">
+            <div className="border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(79,70,229,0.14)] flex items-end gap-2 rounded-2xl border bg-white/75 p-2 sm:gap-3">
               <textarea
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
@@ -387,7 +387,7 @@ export function DigitalTwinSection() {
               <button
                 type="submit"
                 disabled={!canSend}
-                className="bg-accent text-bg-deep hover:shadow-[0_0_24px_var(--glow)] mb-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-[box-shadow,opacity] disabled:cursor-not-allowed disabled:opacity-45"
+                className="bg-accent text-on-accent hover:shadow-[0_8px_18px_-10px_rgba(15,23,42,0.28)] mb-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-[box-shadow,opacity] disabled:cursor-not-allowed disabled:opacity-45"
                 aria-label="Send message"
               >
                 <svg

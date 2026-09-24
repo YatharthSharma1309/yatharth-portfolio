@@ -18,7 +18,7 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "72px 80px",
-          background: "#050508",
+          background: "#F4F7F9",
           fontFamily: "system-ui, sans-serif",
         }}
       >
@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
             height: "480px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(62,232,200,0.18) 0%, rgba(62,232,200,0.04) 45%, transparent 70%)",
+              "radial-gradient(circle, rgba(79,70,229,0.16) 0%, rgba(79,70,229,0.04) 45%, transparent 70%)",
           }}
         />
         <p
@@ -41,10 +41,10 @@ export default function OpenGraphImage() {
             fontWeight: 600,
             letterSpacing: "0.22em",
             textTransform: "uppercase",
-            color: "#3ee8c8",
+            color: "#4F46E5",
           }}
         >
-          AI · React/TypeScript · RAG & APIs
+          {site.role}
         </p>
         <h1
           style={{
@@ -52,7 +52,7 @@ export default function OpenGraphImage() {
             fontSize: 64,
             fontWeight: 800,
             lineHeight: 1.05,
-            color: "#f4f4f5",
+            color: "#0F172A",
             maxWidth: 900,
           }}
         >
@@ -63,7 +63,7 @@ export default function OpenGraphImage() {
             margin: "24px 0 0",
             fontSize: 28,
             fontWeight: 600,
-            color: "#d4d4d8",
+            color: "#334155",
             maxWidth: 820,
           }}
         >
@@ -74,12 +74,12 @@ export default function OpenGraphImage() {
             margin: "20px 0 0",
             fontSize: 22,
             lineHeight: 1.45,
-            color: "#a1a1aa",
+            color: "#475569",
             maxWidth: 900,
           }}
         >
-          Full-stack SWE shipping React/TypeScript UIs and LLM/RAG backends. Open to full-time
-          roles.
+          Full-stack software engineer shipping React/TypeScript UIs, APIs, and PostgreSQL-backed
+          products. Open to full-time roles.
         </p>
         <div
           style={{
@@ -92,8 +92,8 @@ export default function OpenGraphImage() {
             style={{
               padding: "10px 18px",
               borderRadius: 999,
-              border: "1px solid rgba(62,232,200,0.35)",
-              color: "#3ee8c8",
+              border: "1px solid rgba(79,70,229,0.35)",
+              color: "#4F46E5",
               fontSize: 16,
               fontWeight: 600,
             }}
@@ -104,8 +104,8 @@ export default function OpenGraphImage() {
             style={{
               padding: "10px 18px",
               borderRadius: 999,
-              border: "1px dashed rgba(62,232,200,0.25)",
-              color: "#e4e4e7",
+              border: "1px dashed rgba(15,23,42,0.18)",
+              color: "#0F172A",
               fontSize: 16,
               fontWeight: 600,
             }}

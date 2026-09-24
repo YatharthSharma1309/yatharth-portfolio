@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SectionIntro } from "@/components/SectionIntro";
 import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
+import { resolveNavHref } from "@/lib/navigation";
 import {
   featuredPortfolioLinks,
   morePortfolioLinks,
@@ -12,10 +13,10 @@ const cardBase =
   "surface-card border-border-subtle group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gradient-to-b from-bg-elevated/40 to-transparent p-5 transition-[border-color,box-shadow,transform] duration-300 sm:p-6";
 
 const cardInteractive =
-  "hover:border-accent/30 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(62,232,200,0.12),0_16px_36px_-20px_rgba(0,0,0,0.5)]";
+  "hover:border-accent/30 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(79,70,229,0.14),0_14px_28px_-18px_rgba(15,23,42,0.16)]";
 
 const stackTagClass =
-  "border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium";
+  "border-border-highlight text-text-muted rounded-md border bg-bg-elevated px-2 py-0.5 text-[11px] font-medium";
 
 function statusBadgeClass(status: PortfolioLink["status"], hasDemo: boolean) {
   if (status === "Open source") {
@@ -29,11 +30,11 @@ function statusBadgeClass(status: PortfolioLink["status"], hasDemo: boolean) {
       return "bg-accent/[0.12] text-accent";
     case "Coming soon":
     case "In progress":
-      return "bg-[rgba(232,164,58,0.1)] text-accent-warm/95 border border-accent-warm/20";
+      return "bg-accent-warm/10 text-accent-warm/95 border border-accent-warm/20";
     case "Private":
       return "border-border-highlight text-text-muted border bg-transparent";
     default:
-      return "bg-[rgba(232,164,58,0.1)] text-accent-warm/95";
+      return "bg-accent-warm/10 text-accent-warm/95";
   }
 }
 
@@ -70,14 +71,13 @@ function ProjectActions({ item }: { item: PortfolioLink }) {
     return (
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <span className="text-text-muted text-sm font-medium">Confidential · ask for details</span>
-        <Link href="#digital-twin" className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
-          Ask career twin
-          <span aria-hidden>→</span>
-        </Link>
-        <Link href="#contact" className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
+        <a href={resolveNavHref("#contact")} className={`${btnPrimary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
           Contact
           <span aria-hidden>→</span>
-        </Link>
+        </a>
+        <a href={resolveNavHref("#digital-twin")} className="text-accent text-sm font-semibold hover:underline">
+          Ask career twin
+        </a>
       </div>
     );
   }

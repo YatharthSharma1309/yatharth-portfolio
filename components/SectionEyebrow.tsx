@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { eyebrowMono } from "@/lib/ui-classes";
 
 type Props = {
   children: ReactNode;
@@ -12,9 +13,7 @@ export function SectionEyebrow({ children, className = "" }: Props) {
         className="from-accent h-px w-10 shrink-0 bg-gradient-to-r to-transparent"
         aria-hidden
       />
-      <p className="font-mono text-accent text-[11px] font-semibold tracking-[0.22em] uppercase">
-        {children}
-      </p>
+      <p className={eyebrowMono}>{children}</p>
     </div>
   );
 }

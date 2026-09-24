@@ -23,20 +23,29 @@ export function JourneySection() {
             className="from-accent/45 via-border-highlight absolute top-3 bottom-3 left-[9px] w-px bg-gradient-to-b to-transparent"
             aria-hidden
           />
-          <ol className="space-y-5 sm:space-y-6">
-            {resumeJourney.map((item) => (
+          <ol className="space-y-6 sm:space-y-7">
+            {resumeJourney.map((item, index) => {
+              const latest = index === 0 || item.current;
+              return (
               <li key={`${item.org}-${item.period}`} className="relative pl-11 sm:pl-12">
                 <div
-                  className={`absolute top-2 left-0 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-[var(--border-highlight)] bg-[var(--bg-deep)] ${item.current ? "shadow-[0_0_14px_var(--glow)]" : ""}`}
+                  className={`absolute top-2.5 left-0 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-[var(--border-highlight)] bg-[var(--bg-deep)] ${latest ? "shadow-[0_0_0_3px_rgba(79,70,229,0.18)]" : ""}`}
                 >
                   <span
-                    className={`h-2 w-2 rounded-full ${item.current ? "bg-accent" : "bg-text-muted/80"}`}
+                    className={`h-2 w-2 rounded-full ${latest ? "bg-accent" : "bg-text-muted/80"}`}
                   />
                 </div>
-                <div className={card}>
-                  <p className="text-accent text-[11px] font-semibold tracking-[0.14em] uppercase">
-                    {item.period}
-                  </p>
+                <div className={`${card} ${latest ? "ring-accent/20 ring-1" : ""}`}>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-accent font-mono text-[11px] font-semibold tracking-[0.2em] uppercase">
+                      {item.period}
+                    </p>
+                    {latest ? (
+                      <span className="bg-accent/10 text-accent rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-[0.12em] uppercase">
+                        Latest
+                      </span>
+                    ) : null}
+                  </div>
                   <h3 className="font-display text-text-primary mt-2 text-lg font-bold tracking-tight sm:mt-2.5 sm:text-xl">
                     {item.title}
                   </h3>
@@ -59,11 +68,12 @@ export function JourneySection() {
                   ) : null}
                 </div>
               </li>
-            ))}
+              );
+            })}
           </ol>
         </div>
 
-        <div className={`surface-card border-border-subtle ${content} mt-10 rounded-2xl border p-5 sm:mt-14 sm:p-7 lg:p-8`}>
+        <div className={`surface-card border-border-subtle ${content} mt-12 rounded-2xl border p-5 sm:mt-16 sm:p-7 lg:p-8`}>
           <SectionEyebrow className="mb-6 sm:mb-8">Education</SectionEyebrow>
           <ul className="space-y-6 sm:space-y-8">
             {education.map((entry) => (
