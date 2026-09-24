@@ -10,7 +10,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex flex-col justify-center pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 lg:min-h-[92svh] lg:pb-20 lg:pt-32"
+      className="relative pb-14 pt-24 sm:pb-16 sm:pt-28 md:pb-20 md:pt-32"
     >
       <div
         className="gradient-ring pointer-events-none absolute top-[4%] left-1/2 h-[min(320px,72vw)] w-[min(320px,72vw)] -translate-x-1/2 rounded-full opacity-70 sm:h-[min(400px,70vw)] sm:w-[min(400px,70vw)] lg:h-[420px] lg:w-[420px]"

@@ -289,7 +289,7 @@ function Header({ profile }: { profile: ResumeProfile }) {
 
 function SkillsSection({ profile }: { profile: ResumeProfile }) {
   return (
-    <View style={styles.section}>
+    <View style={styles.section} wrap={false}>
       <SectionTitle>Technical Skills</SectionTitle>
       <View style={styles.skillsList}>
         {profile.skillCategories.map((category) => (
@@ -417,9 +417,7 @@ function ContinuationHeader({ profile }: { profile: ResumeProfile }) {
   return (
     <View style={styles.continuationHeader} fixed>
       <PdfText style={styles.continuationName}>{site.name}</PdfText>
-      <PdfText style={styles.continuationMeta}>
-        {profile.role} · {site.email}
-      </PdfText>
+      <PdfText style={styles.continuationMeta}>{profile.role}</PdfText>
     </View>
   );
 }
