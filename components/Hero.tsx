@@ -15,71 +15,67 @@ export function Hero() {
       />
 
       <div className="page-gutter relative z-[1] mx-auto w-full max-w-6xl">
-        <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1.25fr)_minmax(17rem,20rem)] lg:grid-rows-[auto_auto] lg:gap-x-14 lg:gap-y-0">
-          <div>
-            <SectionEyebrow align="start">{site.availability}</SectionEyebrow>
+        <SectionEyebrow align="start">{site.availability}</SectionEyebrow>
 
-            <h1 className="font-display text-text-primary mt-3 text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
-              {site.name}
-            </h1>
+        <h1 className="font-display text-text-primary mt-3 text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
+          {site.name}
+        </h1>
 
-            <p className="font-sans text-text-primary mt-2 text-lg font-semibold tracking-[-0.015em] sm:text-xl">
-              {site.role}
-            </p>
+        <p className="font-sans text-text-primary mt-2 text-lg font-semibold tracking-[-0.015em] sm:text-xl">
+          {site.role}
+        </p>
 
-            <p className="text-text-muted mt-3 max-w-xl text-pretty text-sm leading-relaxed sm:text-base">
-              {site.heroLead}
-            </p>
+        <p className="text-text-muted mt-3 max-w-2xl text-pretty text-sm leading-relaxed sm:text-base">
+          {site.heroLead}
+        </p>
 
-            <p className="text-text-muted mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium">
-              <span>{site.locationShort}</span>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-accent transition-colors">
-                {site.phone}
-              </a>
-              <a href={`mailto:${site.email}`} className="hover:text-accent transition-colors">
-                {site.email}
-              </a>
-            </p>
+        <p className="text-text-muted mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium">
+          <span>{site.locationShort}</span>
+          <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-accent transition-colors">
+            {site.phone}
+          </a>
+          <a href={`mailto:${site.email}`} className="hover:text-accent transition-colors">
+            {site.email}
+          </a>
+        </p>
 
-            <p className="text-text-muted/80 mt-3 text-xs leading-relaxed sm:text-sm">
-              {site.roleStack}
-            </p>
-          </div>
+        <p className="text-text-muted/80 mt-3 max-w-2xl text-xs leading-relaxed sm:text-sm">
+          {site.roleStack}
+        </p>
 
-          <div className="flex flex-col gap-3 lg:row-span-2 lg:pt-8">
-            <Link href="/#portfolio" className={`${btnPrimary} w-full`}>
-              View flagship projects
+        <dl className="border-border-subtle mt-6 grid max-w-2xl grid-cols-2 gap-3 border-t pt-5 sm:grid-cols-4">
+          {heroMetrics.map((item) => (
+            <div key={item.label}>
+              <dt className="text-text-muted text-[11px] leading-snug">{item.label}</dt>
+              <dd className="font-display text-text-primary mt-0.5 text-lg font-bold tracking-[-0.03em]">
+                {item.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className="mt-7 flex max-w-md flex-col gap-3">
+          <Link href="/#portfolio" className={`${btnPrimary} w-full`}>
+            View flagship projects
+          </Link>
+          <ResumeDownloadPair layout="compact" source="hero" />
+          <nav className="flex flex-wrap items-center gap-x-1 gap-y-2" aria-label="More">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className={linkAccent}>
+              LinkedIn
+            </a>
+            <span className="text-text-muted/30 mx-2 text-xs select-none" aria-hidden>
+              ·
+            </span>
+            <a href={site.github} target="_blank" rel="noopener noreferrer" className={linkAccent}>
+              GitHub
+            </a>
+            <span className="text-text-muted/30 mx-2 text-xs select-none" aria-hidden>
+              ·
+            </span>
+            <Link href="/hire" className={linkAccent}>
+              For businesses
             </Link>
-            <ResumeDownloadPair layout="compact" source="hero" />
-            <nav className="flex flex-wrap items-center gap-x-1 gap-y-2" aria-label="More">
-              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className={linkAccent}>
-                LinkedIn
-              </a>
-              <span className="text-text-muted/30 mx-2 text-xs select-none" aria-hidden>
-                ·
-              </span>
-              <a href={site.github} target="_blank" rel="noopener noreferrer" className={linkAccent}>
-                GitHub
-              </a>
-              <span className="text-text-muted/30 mx-2 text-xs select-none" aria-hidden>
-                ·
-              </span>
-              <Link href="/hire" className={linkAccent}>
-                For businesses
-              </Link>
-            </nav>
-          </div>
-
-          <dl className="border-border-subtle grid grid-cols-2 gap-3 border-t pt-5 sm:grid-cols-4">
-            {heroMetrics.map((item) => (
-              <div key={item.label}>
-                <dt className="text-text-muted text-[11px] leading-snug">{item.label}</dt>
-                <dd className="font-display text-text-primary mt-0.5 text-lg font-bold tracking-[-0.03em]">
-                  {item.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          </nav>
         </div>
       </div>
     </section>
