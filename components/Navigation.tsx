@@ -158,26 +158,17 @@ export function Navigation() {
           ))}
         </div>
 
-        <div className="ml-auto flex items-center gap-1 md:hidden">
-          <a
-            href={resolveNavHref("#contact")}
-            className="text-text-primary hover:text-accent px-2.5 py-2 text-sm font-semibold tracking-[-0.01em]"
-            onClick={() => setMenuOpen(false)}
-          >
-            Contact
-          </a>
-          <button
-            ref={menuButtonRef}
-            type="button"
-            className={iconButton}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={toggleMenu}
-          >
-            <MenuIcon open={menuOpen} />
-          </button>
-        </div>
+        <button
+          ref={menuButtonRef}
+          type="button"
+          className={`${iconButton} ml-auto md:hidden`}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          onClick={toggleMenu}
+        >
+          <MenuIcon open={menuOpen} />
+        </button>
       </nav>
 
       {menuOpen ? (
