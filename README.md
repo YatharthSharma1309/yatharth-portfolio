@@ -13,7 +13,7 @@ Freelance offer (AI Hiring Desk): [yatharthsharma.vercel.app/hire](https://yatha
 - `/hire` conversion page for businesses (demo, pricing, FAQ, WhatsApp)
 - Digital Twin chat (OpenRouter) grounded in portfolio content
 - Contact form (Resend on Vercel)
-- Dual deploy: Vercel + GitHub Pages
+- Hosted on one Vercel project: [yatharthsharma.vercel.app](https://yatharthsharma.vercel.app)
 
 ## Local development
 
