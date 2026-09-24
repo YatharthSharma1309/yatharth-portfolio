@@ -3,11 +3,12 @@
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { resumeDownloads, type ResumeVariantId } from "@/lib/resume-variants";
 import { trackEvent } from "@/lib/analytics";
+import { btnSecondary } from "@/lib/ui-classes";
 
 const variants: ResumeVariantId[] = ["fullstack", "ai"];
 
 type ResumeDownloadPairProps = {
-  layout?: "stack" | "grid";
+  layout?: "stack" | "grid" | "compact";
   source?: "site" | "hero";
 };
 
@@ -18,9 +19,11 @@ export function ResumeDownloadPair({
   return (
     <div
       className={
-        layout === "grid"
-          ? "grid w-full grid-cols-1 gap-2 sm:grid-cols-2"
-          : "flex w-full flex-col gap-2"
+        layout === "compact"
+          ? "grid w-full grid-cols-2 gap-2"
+          : layout === "grid"
+            ? "grid w-full grid-cols-1 gap-2 sm:grid-cols-2"
+            : "flex w-full flex-col gap-2"
       }
     >
       {variants.map((id) => {
@@ -34,6 +37,21 @@ export function ResumeDownloadPair({
             : isDefault
               ? "site_pdf"
               : "site_pdf_ai";
+        const compactName = isDefault ? "Full-Stack" : "AI / GenAI";
+
+        if (layout === "compact") {
+          return (
+            <a
+              key={id}
+              href={item.href}
+              download={item.download}
+              onClick={() => trackEvent("resume_download", { source: event })}
+              className={`${btnSecondary} px-3 py-2.5 text-xs sm:text-sm`}
+            >
+              {compactName}
+            </a>
+          );
+        }
 
         return (
           <a

@@ -123,7 +123,7 @@ export function Navigation() {
       }`}
     >
       <nav
-        className="page-gutter mx-auto flex h-[4.25rem] max-w-6xl items-center gap-3"
+        className="page-gutter mx-auto flex h-16 max-w-6xl items-center gap-2 sm:gap-3"
         aria-label="Site"
       >
         <Link
@@ -135,6 +135,35 @@ export function Navigation() {
           <Logo />
         </Link>
 
+        <ul className="flex min-w-0 items-center md:hidden">
+          <li>
+            <a
+              href={resolveNavHref("#portfolio")}
+              className="text-text-muted hover:text-text-primary block px-1.5 py-2 text-sm font-semibold tracking-[-0.01em]"
+              onClick={() => setMenuOpen(false)}
+            >
+              Work
+            </a>
+          </li>
+          <li>
+            <a
+              href={resolveNavHref("#about")}
+              className="text-text-muted hover:text-text-primary hidden px-1.5 py-2 text-sm font-semibold tracking-[-0.01em] min-[380px]:block"
+              onClick={() => setMenuOpen(false)}
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href={resolveNavHref("#contact")}
+              className="text-text-primary hover:text-accent block px-1.5 py-2 text-sm font-semibold tracking-[-0.01em]"
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
         <ul className="hidden min-w-0 items-center md:flex xl:hidden">
           {renderNavItems(compactNav)}
         </ul>
@@ -158,33 +187,17 @@ export function Navigation() {
           ))}
         </div>
 
-        <div className="ml-auto flex items-center gap-0.5 md:hidden">
-          <a
-            href={resolveNavHref("#portfolio")}
-            className="text-text-muted hover:text-accent px-2 py-2 text-sm font-semibold tracking-[-0.01em]"
-            onClick={() => setMenuOpen(false)}
-          >
-            Work
-          </a>
-          <a
-            href={resolveNavHref("#contact")}
-            className="text-text-primary hover:text-accent px-2 py-2 text-sm font-semibold tracking-[-0.01em]"
-            onClick={() => setMenuOpen(false)}
-          >
-            Contact
-          </a>
-          <button
-            ref={menuButtonRef}
-            type="button"
-            className={iconButton}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={toggleMenu}
-          >
-            <MenuIcon open={menuOpen} />
-          </button>
-        </div>
+        <button
+          ref={menuButtonRef}
+          type="button"
+          className={`${iconButton} ml-auto md:hidden`}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          onClick={toggleMenu}
+        >
+          <MenuIcon open={menuOpen} />
+        </button>
       </nav>
 
       {menuOpen ? (

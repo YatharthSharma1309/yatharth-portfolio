@@ -107,7 +107,7 @@ export function SiteFooter() {
 
         <nav aria-label="Footer">
           <p className={`${labelMono} mb-4`}>Navigate</p>
-          <ul className="flex flex-col">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 lg:flex-col lg:gap-0">
             {primaryNav.map((item) => (
               <li key={item.href}>
                 <FooterAnchor href={resolveNavHref(item.href)} label={item.label} />
@@ -118,7 +118,7 @@ export function SiteFooter() {
 
         <div>
           <p className={`${labelMono} mb-4`}>Connect</p>
-          <ul className="flex flex-col">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 lg:flex-col lg:gap-0">
             {connectLinks.map((item) => (
               <li key={item.href}>
                 <FooterAnchor

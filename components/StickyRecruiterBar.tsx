@@ -62,9 +62,7 @@ export function StickyRecruiterBar({
       <div
         className={`lg:hidden ${
           showing
-            ? variant === "hire"
-              ? "h-[calc(4.5rem+env(safe-area-inset-bottom,0px))]"
-              : "h-[calc(11.75rem+env(safe-area-inset-bottom,0px))] min-[420px]:h-[calc(8.25rem+env(safe-area-inset-bottom,0px))]"
+            ? "h-[calc(4.25rem+env(safe-area-inset-bottom,0px))]"
             : "h-0"
         }`}
         aria-hidden
@@ -76,49 +74,43 @@ export function StickyRecruiterBar({
           role="region"
           aria-label="Quick contact"
         >
-          <div className="mx-auto flex max-w-6xl flex-col gap-2">
-            <div className="flex gap-3">
-              <a href="#contact" className={`${btnSecondary} flex-1 gap-2 px-4 py-2.5`}>
-                <ConnectIcon channel="email" size={16} />
-                Contact
-              </a>
-              {variant === "hire" ? (
+          <div className="mx-auto flex max-w-6xl gap-2">
+            {variant === "hire" ? (
+              <>
+                <a href="#contact" className={`${btnSecondary} flex-1 gap-2 px-3 py-2.5 text-sm`}>
+                  <ConnectIcon channel="email" size={16} />
+                  Contact
+                </a>
                 <a
                   href={whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${btnPrimary} flex-1 gap-2 px-4 py-2.5`}
+                  className={`${btnPrimary} flex-1 gap-2 px-3 py-2.5 text-sm`}
                 >
                   WhatsApp
                 </a>
-              ) : null}
-            </div>
-            {variant === "job" ? (
-              <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2">
+              </>
+            ) : (
+              <>
+                <a href="#contact" className={`${btnSecondary} flex-1 px-2 py-2.5 text-xs`}>
+                  Contact
+                </a>
                 <a
                   href={resumeDownloads.fullstack.href}
                   download={resumeDownloads.fullstack.download}
-                  className={`${btnPrimary} gap-1.5 px-2 py-2.5 text-xs`}
+                  className={`${btnPrimary} flex-1 px-2 py-2.5 text-xs`}
                 >
-                  <ConnectIcon channel="resume" size={14} className="text-on-accent" />
-                  <span className="min-[420px]:hidden">Full-Stack</span>
-                  <span className="hidden min-[420px]:inline">
-                    {resumeDownloads.fullstack.compactLabel}
-                  </span>
+                  Full-Stack
                 </a>
                 <a
                   href={resumeDownloads.ai.href}
                   download={resumeDownloads.ai.download}
-                  className={`${btnSecondary} gap-1.5 px-2 py-2.5 text-xs`}
+                  className={`${btnSecondary} flex-1 px-2 py-2.5 text-xs`}
                 >
-                  <ConnectIcon channel="resume" size={14} />
-                  <span className="min-[420px]:hidden">AI / GenAI</span>
-                  <span className="hidden min-[420px]:inline">
-                    {resumeDownloads.ai.compactLabel}
-                  </span>
+                  AI / GenAI
                 </a>
-              </div>
-            ) : null}
+              </>
+            )}
           </div>
         </div>
       ) : null}

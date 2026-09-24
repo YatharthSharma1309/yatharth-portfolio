@@ -163,7 +163,7 @@ function ProjectCard({
         {item.description}
       </p>
 
-      {variant === "featured" ? (
+      {item.problem || item.result ? (
         <div className="mt-5 space-y-4">
           {item.problem ? <DetailBlock label="Problem">{item.problem}</DetailBlock> : null}
           {item.result ? <DetailBlock label="Outcome">{item.result}</DetailBlock> : null}

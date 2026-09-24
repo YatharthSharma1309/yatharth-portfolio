@@ -3,93 +3,83 @@
 import Link from "next/link";
 import { ResumeDownloadPair } from "@/components/ResumeDownloads";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
-import { site } from "@/lib/content";
-import { btnPrimary, labelMono, linkAccent, stackChip } from "@/lib/ui-classes";
+import { heroMetrics, site } from "@/lib/content";
+import { btnPrimary, linkAccent } from "@/lib/ui-classes";
 
 export function Hero() {
   return (
-    <section id="top" className="relative pb-10 pt-[4.75rem] sm:pb-14 sm:pt-28 md:pb-16">
+    <section id="top" className="relative pb-10 pt-[4.5rem] sm:pb-14 sm:pt-24 md:pb-16">
       <div
-        className="gradient-ring pointer-events-none absolute top-[2%] left-1/2 h-[min(240px,60vw)] w-[min(240px,60vw)] -translate-x-1/2 rounded-full opacity-70 sm:h-[min(360px,60vw)] sm:w-[min(360px,60vw)]"
+        className="gradient-ring pointer-events-none absolute top-[8%] left-[12%] h-[min(280px,50vw)] w-[min(280px,50vw)] rounded-full opacity-50"
         aria-hidden
       />
 
-      <div className="page-gutter relative z-[1] mx-auto w-full max-w-3xl text-center">
-        <SectionEyebrow>{site.availability}</SectionEyebrow>
+      <div className="page-gutter relative z-[1] mx-auto w-full max-w-6xl">
+        <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1.25fr)_minmax(17rem,20rem)] lg:grid-rows-[auto_auto] lg:gap-x-14 lg:gap-y-0">
+          <div>
+            <SectionEyebrow align="start">{site.availability}</SectionEyebrow>
 
-        <h1 className="font-display text-text-primary mt-3 text-[clamp(1.85rem,5vw,3.25rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
-          {site.name}
-        </h1>
+            <h1 className="font-display text-text-primary mt-3 text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
+              {site.name}
+            </h1>
 
-        <p className="font-sans text-text-primary/95 mt-2 text-base font-semibold tracking-[-0.01em] leading-snug sm:text-xl">
-          {site.role}
-        </p>
+            <p className="font-sans text-text-primary mt-2 text-lg font-semibold tracking-[-0.015em] sm:text-xl">
+              {site.role}
+            </p>
 
-        <ul className="mt-3 flex flex-wrap items-center justify-center gap-1.5">
-          {site.roleStack.split("·").map((item) => (
-            <li key={item.trim()} className={stackChip}>
-              {item.trim()}
-            </li>
-          ))}
-        </ul>
+            <p className="text-text-muted mt-3 max-w-xl text-pretty text-sm leading-relaxed sm:text-base">
+              {site.heroLead}
+            </p>
 
-        <p className="text-text-muted mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed sm:mt-4 sm:text-base">
-          {site.heroLead}
-        </p>
+            <p className="text-text-muted mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium">
+              <span>{site.locationShort}</span>
+              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-accent transition-colors">
+                {site.phone}
+              </a>
+              <a href={`mailto:${site.email}`} className="hover:text-accent transition-colors">
+                {site.email}
+              </a>
+            </p>
 
-        <p className="text-text-muted mt-3 px-1 text-xs font-medium sm:mt-4 sm:text-sm">
-          {site.locationShort}
-          <span className="text-text-muted/40" aria-hidden>
-            {" · "}
-          </span>
-          <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-accent transition-colors">
-            {site.phone}
-          </a>
-        </p>
-        <p className="mt-1">
-          <a
-            href={`mailto:${site.email}`}
-            className="text-text-muted hover:text-accent text-xs font-medium transition-colors sm:text-sm"
-          >
-            {site.email}
-          </a>
-        </p>
+            <p className="text-text-muted/80 mt-3 text-xs leading-relaxed sm:text-sm">
+              {site.roleStack}
+            </p>
+          </div>
 
-        <div className="mx-auto mt-5 w-full max-w-xl sm:mt-7">
-          <Link href="/#portfolio" className={`${btnPrimary} w-full`}>
-            View flagship projects
-          </Link>
-
-          <p className={`${labelMono} mt-6 mb-2.5`}>Resumes</p>
-          <ResumeDownloadPair layout="grid" source="hero" />
-
-          <nav className="mt-4 flex flex-wrap items-center justify-center gap-x-1 gap-y-2" aria-label="More">
-            <a
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkAccent}
-            >
-              LinkedIn
-            </a>
-            <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
-              ·
-            </span>
-            <a
-              href={site.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkAccent}
-            >
-              GitHub
-            </a>
-            <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
-              ·
-            </span>
-            <Link href="/hire" className={linkAccent}>
-              For businesses
+          <div className="flex flex-col gap-3 lg:row-span-2 lg:pt-8">
+            <Link href="/#portfolio" className={`${btnPrimary} w-full`}>
+              View flagship projects
             </Link>
-          </nav>
+            <ResumeDownloadPair layout="compact" source="hero" />
+            <nav className="flex flex-wrap items-center gap-x-1 gap-y-2" aria-label="More">
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className={linkAccent}>
+                LinkedIn
+              </a>
+              <span className="text-text-muted/30 mx-2 text-xs select-none" aria-hidden>
+                ·
+              </span>
+              <a href={site.github} target="_blank" rel="noopener noreferrer" className={linkAccent}>
+                GitHub
+              </a>
+              <span className="text-text-muted/30 mx-2 text-xs select-none" aria-hidden>
+                ·
+              </span>
+              <Link href="/hire" className={linkAccent}>
+                For businesses
+              </Link>
+            </nav>
+          </div>
+
+          <dl className="border-border-subtle grid grid-cols-2 gap-3 border-t pt-5 sm:grid-cols-4">
+            {heroMetrics.map((item) => (
+              <div key={item.label}>
+                <dt className="text-text-muted text-[11px] leading-snug">{item.label}</dt>
+                <dd className="font-display text-text-primary mt-0.5 text-lg font-bold tracking-[-0.03em]">
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
