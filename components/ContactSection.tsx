@@ -2,20 +2,12 @@
 
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
-import { ConnectIcon } from "@/components/ConnectIcons";
 import { ContactForm } from "@/components/ContactForm";
-import { ResumeDownloads } from "@/components/ResumeDownloads";
-import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
+import { DirectContact } from "@/components/DirectContact";
 import { sectionCopy } from "@/lib/content";
-import { connectLinks } from "@/lib/connect";
 
 export function ContactSection() {
   const { contact } = sectionCopy;
-
-  const email = connectLinks.find((item) => item.channel === "email");
-  const social = connectLinks.filter(
-    (item) => item.channel !== "email" && item.channel !== "resume",
-  );
 
   return (
     <section
@@ -41,33 +33,7 @@ export function ContactSection() {
 
           <div>
             <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
-            <div className="surface-card border-border-subtle mx-auto flex w-full max-w-md flex-col gap-3 rounded-2xl border p-5 sm:p-6">
-              {email ? (
-                <a
-                  href={email.href}
-                  className={`${btnPrimary} w-full gap-2.5 px-6 py-3.5 text-center break-words`}
-                >
-                  <ConnectIcon channel="email" size={17} />
-                  {contact.emailLabel}
-                </a>
-              ) : null}
-
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {social.map((item) => (
-                  <a
-                    key={item.channel}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${btnSecondary} w-full gap-2.5 px-4 py-3 text-center break-words`}
-                  >
-                    <ConnectIcon channel={item.channel} size={17} />
-                    <span className="min-w-0">{item.label}</span>
-                  </a>
-                ))}
-              </div>
-              <ResumeDownloads />
-            </div>
+            <DirectContact />
           </div>
         </div>
       </div>

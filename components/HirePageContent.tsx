@@ -1,8 +1,7 @@
 import { ContactForm } from "@/components/ContactForm";
-import { ConnectIcon } from "@/components/ConnectIcons";
+import { DirectContact } from "@/components/DirectContact";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
-import { connectLinks } from "@/lib/connect";
 import { freelanceOffer, site } from "@/lib/content";
 import { getDemoUrl } from "@/lib/demo-urls";
 import { hirePageNav } from "@/lib/navigation";
@@ -16,7 +15,6 @@ export function HirePageContent() {
   const demoBase = getDemoUrl("opsConcierge") ?? "https://support-ai-nine-mu.vercel.app";
   const hiringDemo = `${demoBase}${freelanceOffer.demoHiringPath}`;
   const widgetDemo = `${demoBase}${freelanceOffer.demoWidgetPath}`;
-  const email = connectLinks.find((item) => item.channel === "email");
   const whatsapp = whatsappHref(freelanceOffer.whatsappText);
 
   return (
@@ -277,31 +275,7 @@ export function HirePageContent() {
             <ContactForm variant="client" />
             <div>
               <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
-              <div className="flex flex-col items-center gap-4">
-                <a
-                  href={whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${btnPrimary} w-full max-w-md px-6 py-4 text-center`}
-                >
-                  {freelanceOffer.whatsappLabel}
-                </a>
-                {email ? (
-                  <a
-                    href={`mailto:${site.email}?subject=${encodeURIComponent(freelanceOffer.emailSubject)}`}
-                    className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
-                  >
-                    <ConnectIcon channel="email" size={17} />
-                    Email {site.name.split(" ")[0]}
-                  </a>
-                ) : null}
-                <a
-                  href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className={`${btnSecondary} w-full max-w-md px-6 py-4 text-center`}
-                >
-                  {site.phone}
-                </a>
-              </div>
+              <DirectContact variant="hire" />
             </div>
           </div>
         </div>

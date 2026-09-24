@@ -359,6 +359,7 @@ export type ResumeDownloadItem = {
   download: string;
   label: string;
   compactLabel: string;
+  shortHint: string;
   whenToUse: string;
 };
 
@@ -368,6 +369,7 @@ export const resumeDownloads: Record<ResumeVariantId, ResumeDownloadItem> = {
     download: resumeProfiles.fullstack.downloadName,
     label: `Resume · ${resumeProfiles.fullstack.label}`,
     compactLabel: "Resume · Full-Stack",
+    shortHint: "Default for Software Engineer and Full-Stack roles",
     whenToUse: resumeProfiles.fullstack.whenToUse,
   },
   ai: {
@@ -375,6 +377,7 @@ export const resumeDownloads: Record<ResumeVariantId, ResumeDownloadItem> = {
     download: resumeProfiles.ai.downloadName,
     label: "Resume · AI / GenAI · RAG & LLM",
     compactLabel: "Resume · AI / GenAI",
+    shortHint: "For RAG, LLM, and GenAI postings",
     whenToUse: resumeProfiles.ai.whenToUse,
   },
 };

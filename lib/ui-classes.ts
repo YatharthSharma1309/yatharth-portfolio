@@ -28,6 +28,9 @@ export const skillTag =
 export const skillTagBuilding =
   "inline-flex items-center rounded-md border border-dashed border-accent-warm/35 bg-accent-warm/[0.06] px-2 py-0.5 font-sans text-xs font-medium tracking-[0.01em] text-accent-warm/90";
 
+export const skillChipBuilding =
+  "inline-flex items-center rounded-lg border border-dashed border-accent-warm/35 bg-accent-warm/[0.06] px-2.5 py-1 font-sans text-xs font-medium tracking-[0.01em] text-accent-warm/90";
+
 export const sectionHeading =
   "font-display text-text-primary text-3xl font-bold leading-[1.12] tracking-[-0.02em] text-balance sm:text-4xl";
 

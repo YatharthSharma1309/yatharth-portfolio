@@ -7,7 +7,7 @@ import {
   skillBuildingGroups,
   skillCategories,
 } from "@/lib/content";
-import { labelMono, skillTag, skillTagBuilding } from "@/lib/ui-classes";
+import { skillChipBuilding, stackChip } from "@/lib/ui-classes";
 
 const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border";
@@ -20,9 +20,9 @@ function SkillTags({
   variant?: "core" | "building";
 }) {
   return (
-    <ul className="flex flex-wrap gap-1.5">
+    <ul className="flex flex-wrap gap-2">
       {skills.map((skill) => (
-        <li key={skill} className={variant === "building" ? skillTagBuilding : skillTag}>
+        <li key={skill} className={variant === "building" ? skillChipBuilding : stackChip}>
           {skill}
         </li>
       ))}
@@ -30,7 +30,7 @@ function SkillTags({
   );
 }
 
-function StackRow({
+function StackGroup({
   label,
   skills,
   variant = "core",
@@ -40,10 +40,16 @@ function StackRow({
   variant?: "core" | "building";
 }) {
   return (
-    <div className="grid gap-3 py-5 first:pt-0 last:pb-0 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-start sm:gap-6 sm:py-6">
+    <div
+      className={`rounded-xl border p-4 sm:p-5 ${
+        variant === "building"
+          ? "border-accent-warm/20 bg-accent-warm/[0.03]"
+          : "border-border-subtle bg-white/55"
+      }`}
+    >
       <p
-        className={`${labelMono} sm:pt-1 ${
-          variant === "building" ? "text-accent-warm" : ""
+        className={`mb-3 text-sm font-semibold tracking-[-0.01em] ${
+          variant === "building" ? "text-accent-warm" : "text-text-primary"
         }`}
       >
         {label}
@@ -89,35 +95,34 @@ export function AboutSection() {
 
         <div className={`${card} ${content} mt-10 p-5 sm:mt-12 sm:p-7 lg:p-8`}>
           <SectionEyebrow className="mb-2 sm:mb-3">Core stack</SectionEyebrow>
-          <p className="text-text-muted mx-auto mb-6 max-w-xl text-center text-sm leading-relaxed sm:mb-8">
+          <p className="text-text-muted mx-auto mb-6 max-w-xl text-center text-sm leading-relaxed">
             {about.stackHelper}
           </p>
-
-          <div className="border-border-subtle divide-border-subtle divide-y border-t">
+          <div className="grid gap-3 sm:grid-cols-2">
             {skillCategories.map((category) => (
-              <StackRow
+              <StackGroup
                 key={category.label}
                 label={category.label}
                 skills={category.skills}
               />
             ))}
           </div>
+        </div>
 
-          <div className="border-border-subtle mt-8 border-t pt-8 sm:mt-10 sm:pt-10">
-            <SectionEyebrow className="mb-2 sm:mb-3">{about.buildingTitle}</SectionEyebrow>
-            <p className="text-text-muted mx-auto mb-5 max-w-md text-center text-sm leading-relaxed sm:mb-6">
-              {about.buildingHelper}
-            </p>
-            <div className="border-border-subtle divide-border-subtle divide-y border-t">
-              {skillBuildingGroups.map((group) => (
-                <StackRow
-                  key={group.label}
-                  label={group.label}
-                  skills={group.skills}
-                  variant="building"
-                />
-              ))}
-            </div>
+        <div className={`${card} ${content} mt-6 p-5 sm:mt-8 sm:p-7 lg:p-8`}>
+          <SectionEyebrow className="mb-2 sm:mb-3">{about.buildingTitle}</SectionEyebrow>
+          <p className="text-text-muted mx-auto mb-6 max-w-md text-center text-sm leading-relaxed">
+            {about.buildingHelper}
+          </p>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {skillBuildingGroups.map((group) => (
+              <StackGroup
+                key={group.label}
+                label={group.label}
+                skills={group.skills}
+                variant="building"
+              />
+            ))}
           </div>
         </div>
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ResumeDownloadPair } from "@/components/ResumeDownloads";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { site } from "@/lib/content";
-import { btnPrimary, linkAccent, stackChip } from "@/lib/ui-classes";
+import { btnPrimary, labelMono, linkAccent, stackChip } from "@/lib/ui-classes";
 
 export function Hero() {
   return (
@@ -60,33 +60,41 @@ export function Hero() {
           </li>
         </ul>
 
-        <div className="mt-8 flex flex-col items-center gap-4">
-          <a href="/#featured-work" className={`${btnPrimary} w-full max-w-xs sm:w-auto sm:px-7`}>
+        <div className="mx-auto mt-8 w-full max-w-xl">
+          <a href="/#featured-work" className={`${btnPrimary} w-full`}>
             View flagship projects
           </a>
-          <ResumeDownloadPair layout="grid" source="hero" emphasizeDefault={false} />
-        </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:mt-7">
-          <a
-            href={site.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkAccent}
-          >
-            LinkedIn
-          </a>
-          <a
-            href={site.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkAccent}
-          >
-            GitHub
-          </a>
-          <Link href="/hire" className={linkAccent}>
-            For businesses
-          </Link>
+          <p className={`${labelMono} mt-6 mb-3`}>Resumes</p>
+          <ResumeDownloadPair layout="grid" source="hero" />
+
+          <nav className="mt-5 flex flex-wrap items-center justify-center gap-x-1 gap-y-2" aria-label="More">
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkAccent}
+            >
+              LinkedIn
+            </a>
+            <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
+              ·
+            </span>
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkAccent}
+            >
+              GitHub
+            </a>
+            <span className="text-text-muted/30 mx-3 text-xs select-none" aria-hidden>
+              ·
+            </span>
+            <Link href="/hire" className={linkAccent}>
+              For businesses
+            </Link>
+          </nav>
         </div>
       </div>
     </section>

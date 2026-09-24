@@ -1,28 +1,26 @@
 "use client";
 
+import { ConnectIcon } from "@/components/ConnectIcons";
 import { resumeDownloads, type ResumeVariantId } from "@/lib/resume-variants";
 import { trackEvent } from "@/lib/analytics";
-import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
 
 const variants: ResumeVariantId[] = ["fullstack", "ai"];
 
 type ResumeDownloadPairProps = {
   layout?: "stack" | "grid";
   source?: "site" | "hero";
-  emphasizeDefault?: boolean;
 };
 
 export function ResumeDownloadPair({
-  layout = "stack",
+  layout = "grid",
   source = "site",
-  emphasizeDefault = true,
 }: ResumeDownloadPairProps) {
   return (
     <div
       className={
         layout === "grid"
-          ? "grid w-full grid-cols-1 gap-3 sm:grid-cols-2"
-          : "flex w-full flex-col gap-3"
+          ? "grid w-full grid-cols-1 gap-2 sm:grid-cols-2"
+          : "flex w-full flex-col gap-2"
       }
     >
       {variants.map((id) => {
@@ -36,27 +34,27 @@ export function ResumeDownloadPair({
             : isDefault
               ? "site_pdf"
               : "site_pdf_ai";
-        const buttonClass =
-          emphasizeDefault && isDefault ? btnPrimary : btnSecondary;
 
         return (
-          <div key={id} className="flex min-w-0 flex-col gap-1.5">
-            <a
-              href={item.href}
-              download={item.download}
-              onClick={() => trackEvent("resume_download", { source: event })}
-              className={`${buttonClass} w-full px-4 py-3 text-center text-sm`}
-            >
-              {item.label}
-            </a>
-            <p
-              className={`text-text-muted px-1 text-xs leading-relaxed ${
-                layout === "grid" ? "text-center sm:text-left" : "text-left"
-              }`}
-            >
-              {item.whenToUse}
-            </p>
-          </div>
+          <a
+            key={id}
+            href={item.href}
+            download={item.download}
+            onClick={() => trackEvent("resume_download", { source: event })}
+            className="border-border-highlight hover:border-accent/40 group flex items-start gap-3 rounded-2xl border bg-white/80 px-3.5 py-3.5 text-left shadow-[0_1px_0_rgba(15,23,42,0.04)] transition-colors"
+          >
+            <span className="border-border-highlight text-text-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border bg-white">
+              <ConnectIcon channel="resume" size={15} />
+            </span>
+            <span className="min-w-0">
+              <span className="text-text-primary block text-sm font-semibold tracking-[-0.01em]">
+                {item.compactLabel}
+              </span>
+              <span className="text-text-muted mt-0.5 block text-xs leading-relaxed">
+                {item.shortHint}
+              </span>
+            </span>
+          </a>
         );
       })}
     </div>
