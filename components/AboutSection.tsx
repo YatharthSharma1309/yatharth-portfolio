@@ -65,12 +65,12 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="border-border-subtle scroll-mt-[4.25rem] border-t py-16 sm:py-24 lg:py-28"
+      className="border-border-subtle scroll-mt-[4.25rem] border-t py-12 sm:py-16 lg:py-20"
     >
         <div className="page-gutter mx-auto max-w-6xl">
         <SectionIntro eyebrow="About" title={about.title} description={about.description} />
 
-        <ul className={`${card} ${content} mt-8 divide-border-subtle divide-y sm:mt-10`}>
+        <ul className={`${card} ${content} mt-6 divide-border-subtle divide-y sm:mt-8`}>
           {about.recruiterBullets.map((bullet) => (
             <li key={bullet} className="flex items-start gap-3 p-4 sm:p-5">
               <span
@@ -82,7 +82,7 @@ export function AboutSection() {
           ))}
         </ul>
 
-        <div className={`${content} mt-10 space-y-5 sm:mt-12`}>
+        <div className={`${content} mt-6 space-y-4 sm:mt-8`}>
           {aboutParagraphs.map((paragraph, index) => (
             <p
               key={index}
@@ -93,7 +93,7 @@ export function AboutSection() {
           ))}
         </div>
 
-        <div className={`${card} ${content} mt-10 p-5 sm:mt-12 sm:p-7 lg:p-8`}>
+        <div className={`${card} ${content} mt-8 p-5 sm:mt-10 sm:p-7`}>
           <SectionEyebrow className="mb-2 sm:mb-3">Core stack</SectionEyebrow>
           <p className="text-text-muted mx-auto mb-6 max-w-xl text-center text-sm leading-relaxed">
             {about.stackHelper}
