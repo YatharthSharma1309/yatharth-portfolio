@@ -208,7 +208,7 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="border-border-subtle scroll-mt-[4.25rem] border-t py-12 sm:py-16 lg:py-20"
+      className="border-border-subtle scroll-mt-[4.25rem] border-t pt-12 pb-8 sm:pt-16 sm:pb-10 lg:pt-20 lg:pb-12"
     >
       <div className="page-gutter mx-auto max-w-6xl">
         <SectionIntro

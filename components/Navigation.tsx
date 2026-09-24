@@ -7,7 +7,7 @@ import { Logo, MenuIcon } from "@/components/Logo";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { useMobileNav } from "@/components/MobileNavContext";
 import { iconButton, labelMono } from "@/lib/ui-classes";
-import { primaryNav, resolveNavHref, type NavItem } from "@/lib/navigation";
+import { compactNav, primaryNav, resolveNavHref, type NavItem } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { resumeDownloads } from "@/lib/resume-variants";
@@ -164,7 +164,10 @@ export function Navigation() {
             </a>
           </li>
         </ul>
-        <ul className="hidden min-w-0 flex-1 flex-wrap items-center md:flex">
+        <ul className="hidden min-w-0 items-center md:flex xl:hidden">
+          {renderNavItems(compactNav)}
+        </ul>
+        <ul className="hidden min-w-0 items-center xl:flex">
           {renderNavItems(primaryNav)}
         </ul>
 

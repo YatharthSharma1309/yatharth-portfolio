@@ -14,11 +14,12 @@ export const primaryNav: NavItem[] = [
   { href: "#contact", label: "Contact" },
 ];
 
-/** Laptop-width header: the four destinations people actually jump to. */
+/** Laptop-width header: main jumps without wrapping into two rows. */
 export const compactNav: NavItem[] = primaryNav.filter((item) =>
   item.href === "#portfolio" ||
   item.href === "/hire" ||
   item.href === "#about" ||
+  item.href === "#journey" ||
   item.href === "#contact",
 );
 
