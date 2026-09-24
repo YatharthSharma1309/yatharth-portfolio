@@ -171,10 +171,8 @@ function ProjectCard({
       ) : null}
 
       {stack.length > 0 ? (
-        <div className={variant === "featured" ? "mt-4" : ""}>
-          {variant === "featured" ? (
-            <p className={labelMono}>Stack</p>
-          ) : null}
+        <div className="mt-4">
+          <p className={labelMono}>Stack</p>
           <StackTags tags={stack} />
         </div>
       ) : null}

@@ -226,7 +226,7 @@ export function DigitalTwinSection() {
         <SectionIntro
           eyebrow="Career Twin"
           title="Ask my career twin"
-          description={`${sectionCopy.digitalTwin.description} Currently ${site.availability.toLowerCase()}.`}
+          description={`${sectionCopy.digitalTwin.description} ${site.availability}.`}
         />
 
         <div className="surface-card border-border-highlight relative mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border sm:mt-12">
