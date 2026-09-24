@@ -10,7 +10,7 @@ import {
 } from "@/lib/content";
 
 const cardBase =
-  "surface-card border-border-subtle group relative flex flex-col overflow-hidden rounded-2xl border bg-bg-card p-5 transition-[border-color,box-shadow,transform] duration-300 sm:p-6";
+  "surface-card border-border-subtle group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-bg-card p-5 transition-[border-color,box-shadow,transform] duration-300 sm:p-6";
 
 const cardInteractive =
   "hover:border-accent/30 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(79,70,229,0.14),0_14px_28px_-18px_rgba(15,23,42,0.16)]";
@@ -177,8 +177,10 @@ function ProjectCard({
         </div>
       ) : null}
 
-      <div className="mt-5 border-border-subtle border-t pt-5 sm:mt-6">
-        <ProjectActions item={item} />
+      <div className="border-border-subtle mt-auto pt-5 sm:pt-6">
+        <div className="border-border-subtle border-t pt-5">
+          <ProjectActions item={item} />
+        </div>
       </div>
     </article>
   );
@@ -194,7 +196,7 @@ function SubsectionHeading({ children }: { children: string }) {
 
 /** Avoid odd-count orphan cards in a 2-column layout. */
 function projectGridClass(count: number): string {
-  const base = "mt-6 grid items-start gap-5 sm:mt-8 sm:gap-6";
+  const base = "mt-6 grid items-stretch gap-5 sm:mt-8 sm:gap-6";
   if (count <= 1) return base;
   if (count === 2) return `${base} sm:grid-cols-2`;
   if (count === 3) return `${base} sm:grid-cols-2 lg:grid-cols-3`;
