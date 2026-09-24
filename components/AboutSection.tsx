@@ -1,7 +1,6 @@
-import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
 import { languages, sectionCopy, skillBuildingGroups, skillCategories } from "@/lib/content";
-import { skillChipBuilding, stackChip } from "@/lib/ui-classes";
+import { cardHeading, skillChipBuilding, stackChip } from "@/lib/ui-classes";
 
 const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border bg-bg-card";
@@ -41,13 +40,13 @@ function StackGroup({
           : "border-border-subtle bg-white"
       }`}
     >
-      <p
+      <h4
         className={`mb-3 text-sm font-semibold tracking-[-0.01em] ${
           variant === "building" ? "text-accent-warm" : "text-text-primary"
         }`}
       >
         {label}
-      </p>
+      </h4>
       <SkillTags skills={skills} variant={variant} />
     </div>
   );
@@ -65,7 +64,7 @@ export function AboutSection() {
         <SectionIntro eyebrow="About" title={about.title} description={about.description} />
 
         <div className={`${card} ${content} mt-6 p-5 sm:mt-8 sm:p-6`}>
-          <SectionEyebrow className="mb-4">Core stack</SectionEyebrow>
+          <h3 className={`${cardHeading} mb-5 text-center`}>Core stack</h3>
           <div className="grid gap-3 sm:grid-cols-2">
             {skillCategories.map((category) => (
               <StackGroup
@@ -90,7 +89,7 @@ export function AboutSection() {
         </ul>
 
         <div className={`${card} ${content} mt-6 p-5 sm:p-6`}>
-          <SectionEyebrow className="mb-4">{about.buildingTitle}</SectionEyebrow>
+          <h3 className={`${cardHeading} mb-5 text-center`}>{about.buildingTitle}</h3>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {skillBuildingGroups.map((group) => (
               <StackGroup
@@ -104,7 +103,7 @@ export function AboutSection() {
         </div>
 
         <div className={`${card} ${content} mt-6 p-5 sm:p-6`}>
-          <SectionEyebrow className="mb-4">Languages</SectionEyebrow>
+          <h3 className={`${cardHeading} mb-5 text-center`}>Languages</h3>
           <ul className="flex flex-col items-center gap-2">
             {languages.map((lang) => (
               <li
