@@ -62,7 +62,7 @@ export function Navigation() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 1024px)");
+    const desktop = window.matchMedia("(min-width: 768px)");
     const closeOnDesktop = () => {
       if (desktop.matches) setMenuOpen(false);
     };
@@ -135,14 +135,14 @@ export function Navigation() {
           <Logo />
         </Link>
 
-        <ul className="hidden min-w-0 flex-1 items-center justify-center lg:flex xl:hidden">
+        <ul className="hidden min-w-0 items-center md:flex xl:hidden">
           {renderNavItems(compactNav)}
         </ul>
-        <ul className="hidden min-w-0 flex-1 items-center justify-center xl:flex">
+        <ul className="hidden min-w-0 items-center xl:flex">
           {renderNavItems(primaryNav)}
         </ul>
 
-        <div className="ml-auto hidden shrink-0 items-center gap-0.5 lg:flex">
+        <div className="ml-auto hidden shrink-0 items-center gap-0.5 md:flex">
           <span className="bg-border-highlight mr-1.5 h-4 w-px" aria-hidden />
           {socials.map((item) => (
             <a
@@ -158,24 +158,40 @@ export function Navigation() {
           ))}
         </div>
 
-        <button
-          ref={menuButtonRef}
-          type="button"
-          className={`${iconButton} ml-auto lg:hidden`}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-          onClick={toggleMenu}
-        >
-          <MenuIcon open={menuOpen} />
-        </button>
+        <div className="ml-auto flex items-center gap-0.5 md:hidden">
+          <a
+            href={resolveNavHref("#portfolio")}
+            className="text-text-muted hover:text-accent px-2 py-2 text-sm font-semibold tracking-[-0.01em]"
+            onClick={() => setMenuOpen(false)}
+          >
+            Work
+          </a>
+          <a
+            href={resolveNavHref("#contact")}
+            className="text-text-primary hover:text-accent px-2 py-2 text-sm font-semibold tracking-[-0.01em]"
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
+          </a>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className={iconButton}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={toggleMenu}
+          >
+            <MenuIcon open={menuOpen} />
+          </button>
+        </div>
       </nav>
 
       {menuOpen ? (
         <div
           id="mobile-nav"
           ref={mobileNavRef}
-          className="page-gutter border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/94 py-5 backdrop-blur-xl lg:hidden"
+          className="page-gutter border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/94 py-5 backdrop-blur-xl md:hidden"
         >
           <p className={`${labelMono} mb-3`}>Navigate</p>
           <ul className="divide-border-subtle divide-y overflow-hidden rounded-2xl border border-border-subtle bg-white/70">

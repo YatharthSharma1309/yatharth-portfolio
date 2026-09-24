@@ -14,8 +14,11 @@ export const site = {
     "React · Next.js · TypeScript · FastAPI · Node.js · PostgreSQL · RAG",
   tagline:
     "Software Engineer and Full-Stack Developer with production React/TypeScript interfaces, FastAPI and Node.js APIs, and PostgreSQL-backed RAG features at Whilter.AI — plus deployed products with OpenRouter, embeddings, and document intelligence.",
+  heroLead:
+    "At Whilter.AI I ship production interfaces, APIs, and RAG features that are actually in use.",
   availability: "Open to full-time · India & remote",
   location: "Faridabad, Haryana, India",
+  locationShort: "Faridabad, India",
   phone: "+91 8802518567",
   email: "yatharthsharma1309@gmail.com",
   linkedin: "https://www.linkedin.com/in/yatharthsharma-ai/",
