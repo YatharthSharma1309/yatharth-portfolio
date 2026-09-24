@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ResumeDownloadPair } from "@/components/ResumeDownloads";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
-import { heroMetrics, site } from "@/lib/content";
+import { site } from "@/lib/content";
 import { btnPrimary, labelMono, linkAccent, stackChip } from "@/lib/ui-classes";
 
 export function Hero() {
@@ -61,22 +61,6 @@ export function Hero() {
               {site.email}
             </a>
           </li>
-        </ul>
-
-        <ul className="mx-auto mt-6 grid w-full max-w-xl grid-cols-2 gap-2 sm:grid-cols-4">
-          {heroMetrics.map((metric) => (
-            <li
-              key={metric.label}
-              className="border-border-subtle rounded-xl border bg-white/70 px-3 py-2.5 text-center"
-            >
-              <p className="font-display text-text-primary text-lg font-bold tracking-[-0.02em] sm:text-xl">
-                {metric.value}
-              </p>
-              <p className="text-text-muted mt-0.5 text-[11px] leading-snug font-medium">
-                {metric.label}
-              </p>
-            </li>
-          ))}
         </ul>
 
         <div className="mx-auto mt-8 w-full max-w-xl">

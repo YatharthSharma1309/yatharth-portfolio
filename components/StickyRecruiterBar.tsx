@@ -19,7 +19,7 @@ export function StickyRecruiterBar({
   useEffect(() => {
     const observedIds =
       variant === "hire"
-        ? (["contact", "hire-close", "site-footer"] as const)
+        ? (["contact", "site-footer"] as const)
         : (["contact", "digital-twin", "site-footer"] as const);
     const observedSections = observedIds
       .map((id) => document.getElementById(id))

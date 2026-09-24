@@ -163,7 +163,7 @@ function ProjectCard({
         {item.description}
       </p>
 
-      {item.problem || item.result ? (
+      {variant === "featured" ? (
         <div className="mt-5 space-y-4">
           {item.problem ? <DetailBlock label="Problem">{item.problem}</DetailBlock> : null}
           {item.result ? <DetailBlock label="Outcome">{item.result}</DetailBlock> : null}
@@ -171,8 +171,10 @@ function ProjectCard({
       ) : null}
 
       {stack.length > 0 ? (
-        <div className="mt-4">
-          <p className={labelMono}>Stack</p>
+        <div className={variant === "featured" ? "mt-4" : ""}>
+          {variant === "featured" ? (
+            <p className={labelMono}>Stack</p>
+          ) : null}
           <StackTags tags={stack} />
         </div>
       ) : null}
@@ -197,7 +199,7 @@ function projectGridClass(count: number): string {
   const base = "mt-6 grid gap-5 sm:mt-8 sm:gap-6";
   if (count <= 1) return base;
   if (count === 2) return `${base} sm:grid-cols-2`;
-  if (count === 3) return `${base} lg:grid-cols-3`;
+  if (count === 3) return `${base} sm:grid-cols-2 lg:grid-cols-3`;
   // 4+: two columns from sm, three from lg — even rows stay balanced
   return `${base} sm:grid-cols-2 lg:grid-cols-3`;
 }

@@ -523,12 +523,11 @@ export const portfolioLinks: PortfolioLink[] = [
     href: "",
     status: "Private",
     featured: false,
-    resumeTag: "Private · Organisation",
     problem:
       "Educational institutions need automated document processing — OCR, classification, and structured data export.",
     result:
       "Built AI-powered OCR pipeline with document classification and Excel-ready structured export — private organisation repo.",
-    stack: ["OCR", "Document classification", "Structured export"],
+    stack: ["OCR", "Document classification", "AI processing"],
   },
   {
     title: "IntelliRAG",

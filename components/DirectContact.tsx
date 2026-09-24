@@ -123,7 +123,7 @@ function ContactRow({
         <span className="text-text-primary block text-sm font-semibold tracking-[-0.01em]">
           {title}
         </span>
-        <span className="text-text-muted mt-0.5 block break-all text-xs leading-relaxed">
+        <span className="text-text-muted mt-0.5 block truncate text-xs leading-relaxed">
           {detail}
         </span>
       </span>

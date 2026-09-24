@@ -202,7 +202,7 @@ export function HirePageContent() {
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">{item.when}</p>
                 <p className="text-text-primary mt-4 text-sm font-semibold">{item.band}</p>
                 <p className="text-text-muted mt-1 text-sm leading-relaxed">{item.retain}</p>
-                <a href="#contact" className={`${btnSecondary} mt-auto w-full pt-6`}>
+                <a href="#contact" className={`${btnSecondary} mt-6 w-full`}>
                   {freelanceOffer.walkthroughLabel}
                 </a>
               </li>
@@ -282,7 +282,7 @@ export function HirePageContent() {
         </div>
       </section>
 
-      <section id="hire-close" className="border-border-subtle border-t py-16 sm:py-20">
+      <section className="border-border-subtle border-t py-16 sm:py-20">
         <div className="page-gutter mx-auto max-w-3xl text-center">
           <h2 className={sectionHeading}>{freelanceOffer.closingTitle}</h2>
           <p className="text-text-muted mx-auto mt-4 max-w-xl text-base leading-[1.65]">
