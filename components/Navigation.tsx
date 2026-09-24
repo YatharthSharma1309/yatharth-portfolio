@@ -14,7 +14,7 @@ import { resumeDownloads } from "@/lib/resume-variants";
 import { trackEvent } from "@/lib/analytics";
 
 const navLinkClass =
-  "text-text-muted hover:text-text-primary relative block rounded-lg px-2 py-2 text-[0.8125rem] font-medium tracking-[-0.01em] transition-colors xl:px-2.5 xl:text-sm";
+  "text-text-muted hover:text-text-primary relative block rounded-lg px-2.5 py-2 text-[0.8125rem] font-medium tracking-[-0.01em] transition-colors xl:px-3 xl:text-sm";
 
 const navLinkActive =
   "text-text-primary after:bg-accent after:absolute after:right-2.5 after:bottom-1 after:left-2.5 after:h-px after:content-['']";
@@ -62,7 +62,7 @@ export function Navigation() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const closeOnDesktop = () => {
       if (desktop.matches) setMenuOpen(false);
     };
@@ -116,14 +116,14 @@ export function Navigation() {
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-50 border-b transition-[background,box-shadow] duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-[background,box-shadow,border-color] duration-300 ${
         scrolled || menuOpen
-          ? "border-border-subtle bg-bg-deep/92 shadow-[0_8px_28px_rgba(15,23,42,0.07)] backdrop-blur-xl"
-          : "border-border-subtle/80 bg-bg-deep/78 backdrop-blur-xl"
+          ? "border-border-subtle border-b bg-bg-deep/88 shadow-[0_8px_28px_rgba(15,23,42,0.07)] backdrop-blur-xl"
+          : "border-transparent border-b bg-bg-deep/40 backdrop-blur-md"
       }`}
     >
       <nav
-        className="page-gutter mx-auto flex h-[4.25rem] max-w-6xl items-center gap-2 sm:gap-3"
+        className="page-gutter mx-auto flex h-[4.25rem] max-w-6xl items-center gap-3"
         aria-label="Site"
       >
         <Link
@@ -135,14 +135,14 @@ export function Navigation() {
           <Logo />
         </Link>
 
-        <ul className="hidden min-w-0 items-center md:flex xl:hidden">
+        <ul className="hidden min-w-0 flex-1 items-center justify-center lg:flex xl:hidden">
           {renderNavItems(compactNav)}
         </ul>
-        <ul className="hidden min-w-0 items-center xl:flex">
+        <ul className="hidden min-w-0 flex-1 items-center justify-center xl:flex">
           {renderNavItems(primaryNav)}
         </ul>
 
-        <div className="ml-auto hidden shrink-0 items-center gap-0.5 md:flex">
+        <div className="ml-auto hidden shrink-0 items-center gap-0.5 lg:flex">
           <span className="bg-border-highlight mr-1.5 h-4 w-px" aria-hidden />
           {socials.map((item) => (
             <a
@@ -161,7 +161,7 @@ export function Navigation() {
         <button
           ref={menuButtonRef}
           type="button"
-          className={`${iconButton} ml-auto md:hidden`}
+          className={`${iconButton} ml-auto lg:hidden`}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -175,7 +175,7 @@ export function Navigation() {
         <div
           id="mobile-nav"
           ref={mobileNavRef}
-          className="page-gutter border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/94 py-5 backdrop-blur-xl md:hidden"
+          className="page-gutter border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/94 py-5 backdrop-blur-xl lg:hidden"
         >
           <p className={`${labelMono} mb-3`}>Navigate</p>
           <ul className="divide-border-subtle divide-y overflow-hidden rounded-2xl border border-border-subtle bg-white/70">

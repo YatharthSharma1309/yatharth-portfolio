@@ -348,7 +348,7 @@ export const resumeProfiles: Record<ResumeVariantId, ResumeProfile> = {
 export const defaultResumeVariant: ResumeVariantId = "fullstack";
 
 /** Bump when regenerating PDFs so browsers pick up the new file. */
-export const RESUME_ASSET_VERSION = "20260924d";
+export const RESUME_ASSET_VERSION = "20260924c";
 
 export function resumePublicHref(filename: string): string {
   return `/resume/${filename}?v=${RESUME_ASSET_VERSION}`;
