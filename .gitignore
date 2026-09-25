@@ -42,10 +42,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# local design references (not deployed)
-/_logo_reference/
-/_resume_preview/
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts

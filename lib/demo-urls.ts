@@ -28,23 +28,15 @@ export function formatRepoPath(url: string): string {
  * Live demo URLs — env overrides production defaults.
  * Portfolio shows "Live demo" when a URL resolves.
  */
-function resolveDemoUrl(envValue: string | undefined, fallback: string): string {
-  const trimmed = envValue?.trim();
-  return trimmed && trimmed.length > 0 ? trimmed : fallback;
-}
-
 export function getDemoUrl(
   key: "opsConcierge" | "salesCRM"
 ): string | undefined {
   const map = {
-    opsConcierge: resolveDemoUrl(
-      process.env.NEXT_PUBLIC_DEMO_OPSCONCIERGE_URL,
+    opsConcierge:
+      process.env.NEXT_PUBLIC_DEMO_OPSCONCIERGE_URL ??
       productionDemoUrls.opsConcierge,
-    ),
-    salesCRM: resolveDemoUrl(
-      process.env.NEXT_PUBLIC_DEMO_SALES_CRM_URL,
-      productionDemoUrls.salesCRM,
-    ),
+    salesCRM:
+      process.env.NEXT_PUBLIC_DEMO_SALES_CRM_URL ?? productionDemoUrls.salesCRM,
   };
   const url = map[key]?.trim();
   return url && url.length > 0 ? url : undefined;

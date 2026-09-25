@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import { DM_Sans, JetBrains_Mono, Sora } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { featuredPortfolioLinks, site } from "@/lib/content";
 
@@ -11,8 +11,8 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const sora = Sora({
-  variable: "--font-sora",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
   display: "swap",
@@ -26,11 +26,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const seoDescription =
-  "Software Engineer and Full-Stack Developer. Built production React/TypeScript, FastAPI/Node.js, PostgreSQL, and RAG features at Whilter.AI. Open to full-time software engineering roles.";
+  "AI Full-Stack Engineer shipping React/Next.js UIs and LLM/RAG backends. Production experience at Whilter.AI. Open to full-time software engineering roles.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} · ${site.role}`,
+  title: `${site.name} · AI Full-Stack Engineer`,
   description: seoDescription,
   keywords: [
     "full-stack",
@@ -46,13 +46,11 @@ export const metadata: Metadata = {
     "Python",
     "LLM",
     "document ingestion",
-    "pgvector",
-    "OpenRouter",
     "OAuth",
     "India",
   ],
   openGraph: {
-    title: `${site.name} · ${site.role}`,
+    title: `${site.name} · AI Full-Stack Engineer`,
     description: seoDescription,
     type: "website",
     locale: "en_IN",
@@ -60,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} · ${site.role}`,
+    title: `${site.name} · AI Full-Stack Engineer`,
     description: seoDescription,
   },
 };
@@ -102,9 +100,6 @@ const featuredProjectsJsonLd = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
-  colorScheme: "light",
-  themeColor: "#F2F4FA",
 };
 
 export default function RootLayout({
@@ -115,9 +110,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${sora.variable} ${jetbrainsMono.variable} h-full`}
-      data-scroll-behavior="smooth"
-      style={{ colorScheme: "light" }}
+      className={`${dmSans.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} h-full`}
+      style={{ colorScheme: "dark" }}
     >
       <body className="font-sans relative min-h-full overflow-x-hidden antialiased">
         <script

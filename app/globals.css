@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --bg-deep: #F2F4FA;
-  --bg-elevated: #E8EBF4;
-  --bg-card: rgba(255,255,255,0.88);
-  --border-subtle: rgba(15,23,42,0.08);
-  --border-highlight: rgba(15,23,42,0.12);
-  --text-primary: #0F172A;
-  --text-muted: #475569;
-  --accent: #4F46E5;
-  --accent-dim: #4338CA;
-  --accent-warm: #B45309;
-  --glow: rgba(79,70,229,0.16);
-  --shadow-card: 0 0 0 1px rgba(15,23,42,0.04), 0 12px 28px -18px rgba(15,23,42,0.18);
-  --on-accent: #F8FAFC;
+  --bg-deep: #06080d;
+  --bg-elevated: #0c1018;
+  --bg-card: rgba(12, 16, 24, 0.72);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-highlight: rgba(255, 255, 255, 0.11);
+  --text-primary: #f4f5f8;
+  --text-muted: #9aa3b5;
+  --accent: #2dd4bf;
+  --accent-dim: #0f766e;
+  --accent-warm: #d4a03a;
+  --glow: rgba(45, 212, 191, 0.28);
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 20px 44px -22px rgba(0, 0, 0, 0.7);
 }
 
 @theme inline {
   --font-sans: var(--font-dm), system-ui, sans-serif;
-  --font-display: var(--font-sora), var(--font-dm), system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta), var(--font-dm), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --color-bg-deep: var(--bg-deep);
   --color-bg-elevated: var(--bg-elevated);
@@ -30,7 +30,6 @@
   --color-accent-warm: var(--accent-warm);
   --color-bg-card: var(--bg-card);
   --color-border-highlight: var(--border-highlight);
-  --color-on-accent: var(--on-accent);
 }
 
 html {
@@ -45,28 +44,13 @@ html {
 }
 
 body {
-  background-color: var(--bg-deep);
+  background: var(--bg-deep);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.65;
-  overflow-wrap: break-word;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.page-gutter {
-  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px))
-    max(1.25rem, env(safe-area-inset-right, 0px));
-}
-
-@media (min-width: 640px) {
-  .page-gutter {
-    padding-inline: max(2rem, env(safe-area-inset-left, 0px))
-      max(2rem, env(safe-area-inset-right, 0px));
-  }
 }
 
 :focus-visible {
@@ -79,47 +63,38 @@ body {
 }
 
 ::selection {
-  background: rgba(79, 70, 229, 0.16);
+  background: rgba(45, 212, 191, 0.22);
   color: var(--text-primary);
 }
 
-.bg-atmosphere {
-  background:
-    radial-gradient(ellipse 88% 52% at 50% -12%, rgba(79, 70, 229, 0.16), transparent 58%),
-    radial-gradient(ellipse 42% 34% at 96% 16%, rgba(99, 102, 241, 0.1), transparent 58%),
-    radial-gradient(ellipse 38% 30% at 2% 68%, rgba(67, 56, 202, 0.06), transparent 62%),
-    linear-gradient(180deg, #E9ECF6 0%, var(--bg-deep) 32%, #F5F6FB 100%);
-}
-
+/* Technical grid + vignette */
 .bg-grid {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.13) 1px, transparent 1px);
-  background-size: 22px 22px;
-  mask-image: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.22) 46%,
-    transparent 82%
-  );
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 85% 72% at 50% -5%, black 18%, transparent 72%);
 }
 
 .noise {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  opacity: 0.045;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   z-index: 0;
 }
 
 .gradient-ring {
-  background: radial-gradient(circle at 40% 35%, rgba(79, 70, 229, 0.22), rgba(129, 140, 248, 0.08) 48%, transparent 70%);
-  filter: blur(72px);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 50%, transparent 70%);
+  opacity: 0.55;
+  filter: blur(80px);
 }
 
 .section-glow-top {
   background: radial-gradient(
     ellipse 70% 60% at 50% 0%,
-    rgba(79, 70, 229, 0.1),
+    rgba(45, 212, 191, 0.1),
     transparent 65%
   );
 }
@@ -127,7 +102,7 @@ body {
 .section-glow-bottom {
   background: radial-gradient(
     ellipse 75% 55% at 50% 100%,
-    rgba(79, 70, 229, 0.08),
+    rgba(45, 212, 191, 0.08),
     transparent 62%
   );
 }
@@ -135,16 +110,23 @@ body {
 .section-glow-twin {
   background: radial-gradient(
     ellipse 70% 50% at 50% 0%,
-    rgba(79, 70, 229, 0.08),
+    rgba(45, 212, 191, 0.08),
     transparent 70%
   );
 }
 
-/* Raised panels — soft highlight + light outer shadow */
+.text-gradient {
+  background: linear-gradient(120deg, var(--text-primary) 0%, var(--accent) 50%, #5eead4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Raised panels — single light top edge + soft outer shadow */
 .surface-card {
   background: linear-gradient(
       165deg,
-      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.04) 0%,
       transparent 42%
     ),
     var(--bg-card);
@@ -154,11 +136,11 @@ body {
 .chat-panel {
   background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.55) 0%,
-      rgba(238, 242, 245, 0.9) 100%
+      rgba(255, 255, 255, 0.02) 0%,
+      rgba(0, 0, 0, 0.22) 100%
     ),
-    rgba(255, 255, 255, 0.72);
-  scrollbar-color: rgba(79, 70, 229, 0.35) transparent;
+    rgba(0, 0, 0, 0.28);
+  scrollbar-color: rgba(62, 232, 200, 0.35) transparent;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
 }
@@ -168,7 +150,7 @@ body {
 }
 
 .chat-panel::-webkit-scrollbar-thumb {
-  background: rgba(79, 70, 229, 0.28);
+  background: rgba(62, 232, 200, 0.28);
   border-radius: 999px;
 }
 
@@ -213,7 +195,7 @@ body {
   position: absolute;
   inset: -3px;
   border-radius: 999px;
-  border: 1px solid rgba(79, 70, 229, 0.4);
+  border: 1px solid rgba(62, 232, 200, 0.4);
   animation: twin-pulse-ring 1.8s ease-out infinite;
   pointer-events: none;
 }

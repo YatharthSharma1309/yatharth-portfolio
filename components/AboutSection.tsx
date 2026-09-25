@@ -1,9 +1,21 @@
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
-import { languages, sectionCopy, skillBuildingGroups, skillCategories } from "@/lib/content";
-import { cardHeading, skillChipBuilding, stackChip } from "@/lib/ui-classes";
+import {
+  aboutParagraphs,
+  languages,
+  sectionCopy,
+  skillBuildingGroups,
+  skillCategories,
+} from "@/lib/content";
 
 const content = "mx-auto w-full max-w-3xl";
-const card = "surface-card border-border-subtle rounded-2xl border bg-bg-card";
+const card = "surface-card border-border-subtle rounded-2xl border";
+
+const skillTagClass =
+  "border-border-highlight text-text-muted rounded-md border bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium";
+
+const buildingTagClass =
+  "border-accent-warm/35 text-accent-warm/90 rounded-md border border-dashed bg-accent-warm/[0.06] px-2 py-0.5 text-[11px] font-medium";
 
 function SkillTags({
   skills,
@@ -13,9 +25,9 @@ function SkillTags({
   variant?: "core" | "building";
 }) {
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className="flex flex-wrap gap-1.5">
       {skills.map((skill) => (
-        <li key={skill} className={variant === "building" ? skillChipBuilding : stackChip}>
+        <li key={skill} className={variant === "building" ? buildingTagClass : skillTagClass}>
           {skill}
         </li>
       ))}
@@ -23,7 +35,7 @@ function SkillTags({
   );
 }
 
-function StackGroup({
+function StackRow({
   label,
   skills,
   variant = "core",
@@ -33,20 +45,14 @@ function StackGroup({
   variant?: "core" | "building";
 }) {
   return (
-    <div
-      className={`rounded-xl border p-4 ${
-        variant === "building"
-          ? "border-accent-warm/20 bg-accent-warm/[0.03]"
-          : "border-border-subtle bg-white"
-      }`}
-    >
-      <h4
-        className={`mb-3 text-sm font-semibold tracking-[-0.01em] ${
-          variant === "building" ? "text-accent-warm" : "text-text-primary"
+    <div className="grid gap-3 py-5 first:pt-0 last:pb-0 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-start sm:gap-6 sm:py-6">
+      <p
+        className={`font-mono text-[11px] font-semibold tracking-[0.16em] uppercase sm:pt-1 ${
+          variant === "building" ? "text-accent-warm" : "text-accent"
         }`}
       >
         {label}
-      </h4>
+      </p>
       <SkillTags skills={skills} variant={variant} />
     </div>
   );
@@ -58,60 +64,78 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="border-border-subtle scroll-mt-[4.25rem] border-t pt-8 pb-12 sm:pt-10 sm:pb-16 lg:pt-12 lg:pb-20"
+      className="border-border-subtle scroll-mt-[4.25rem] border-t py-16 sm:py-24 lg:py-28"
     >
-      <div className="page-gutter mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro eyebrow="About" title={about.title} description={about.description} />
 
-        <div className={`${card} ${content} mt-6 p-5 sm:mt-8 sm:p-6`}>
-          <h3 className={`${cardHeading} mb-5 text-center`}>Core stack</h3>
-          <div className="grid gap-3 sm:grid-cols-2">
+        <ul className={`${content} mt-8 space-y-3 sm:mt-10`}>
+          {about.recruiterBullets.map((bullet) => (
+            <li key={bullet} className={`${card} flex items-start gap-3 p-5 sm:p-6`}>
+              <span
+                className="from-accent mt-1.5 h-px w-5 shrink-0 bg-gradient-to-r to-transparent"
+                aria-hidden
+              />
+              <p className="text-text-muted text-sm leading-relaxed">{bullet}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className={`${content} mt-10 space-y-6 sm:mt-14`}>
+          {aboutParagraphs.map((paragraph, index) => (
+            <p
+              key={index}
+              className="text-text-muted text-[0.9875rem] leading-[1.75] sm:text-[1.02rem]"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div className={`${card} ${content} mt-10 p-5 sm:mt-14 sm:p-7 lg:p-8`}>
+          <SectionEyebrow className="mb-2 sm:mb-3">Core stack</SectionEyebrow>
+          <p className="text-text-muted mx-auto mb-6 max-w-xl text-center text-sm leading-relaxed sm:mb-8">
+            {about.stackHelper}
+          </p>
+
+          <div className="border-border-subtle divide-border-subtle divide-y border-t">
             {skillCategories.map((category) => (
-              <StackGroup
+              <StackRow
                 key={category.label}
                 label={category.label}
                 skills={category.skills}
               />
             ))}
           </div>
-        </div>
 
-        <ul className={`${card} ${content} mt-6 divide-border-subtle divide-y`}>
-          {about.recruiterBullets.map((bullet) => (
-            <li key={bullet} className="flex items-start gap-3 p-3.5 sm:p-4">
-              <span
-                className="from-accent mt-1.5 h-px w-5 shrink-0 bg-gradient-to-r to-transparent"
-                aria-hidden
-              />
-              <p className="text-text-primary text-sm leading-relaxed">{bullet}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div className={`${card} ${content} mt-6 p-5 sm:p-6`}>
-          <h3 className={`${cardHeading} mb-5 text-center`}>{about.buildingTitle}</h3>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {skillBuildingGroups.map((group) => (
-              <StackGroup
-                key={group.label}
-                label={group.label}
-                skills={group.skills}
-                variant="building"
-              />
-            ))}
+          <div className="border-border-subtle mt-8 border-t pt-8 sm:mt-10 sm:pt-10">
+            <SectionEyebrow className="mb-2 sm:mb-3">{about.buildingTitle}</SectionEyebrow>
+            <p className="text-text-muted mx-auto mb-5 max-w-md text-center text-sm leading-relaxed sm:mb-6">
+              {about.buildingHelper}
+            </p>
+            <div className="border-border-subtle divide-border-subtle divide-y border-t">
+              {skillBuildingGroups.map((group) => (
+                <StackRow
+                  key={group.label}
+                  label={group.label}
+                  skills={group.skills}
+                  variant="building"
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className={`${card} ${content} mt-6 p-5 sm:p-6`}>
-          <h3 className={`${cardHeading} mb-5 text-center`}>Languages</h3>
-          <ul className="flex flex-col items-center gap-2">
+        <div className={`${card} ${content} mt-4 p-5 sm:mt-6 sm:p-6 lg:p-7`}>
+          <SectionEyebrow className="mb-3 sm:mb-4">Languages</SectionEyebrow>
+          <ul className="flex flex-col items-center gap-2 sm:gap-3">
             {languages.map((lang) => (
               <li
                 key={lang.name}
-                className="border-border-highlight flex w-full max-w-sm items-center justify-between gap-3 rounded-lg border bg-white px-4 py-2.5"
+                className="border-border-highlight flex w-full max-w-sm items-center justify-between gap-3 rounded-lg border bg-[var(--bg-card)] px-4 py-2.5"
               >
                 <span className="text-text-primary text-sm font-medium">{lang.name}</span>
-                <span className="text-text-muted font-mono text-[11px] font-semibold tracking-[0.14em] uppercase">
+                <span className="text-text-muted font-mono text-[10px] tracking-wide uppercase">
                   {lang.level}
                 </span>
               </li>

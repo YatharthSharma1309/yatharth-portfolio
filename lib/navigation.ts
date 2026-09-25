@@ -12,16 +12,8 @@ export const primaryNav: NavItem[] = [
   { href: "#certifications", label: "Certifications" },
   { href: "#digital-twin", label: "Career Twin" },
   { href: "#contact", label: "Contact" },
+  { href: "/resume", label: "Resume" },
 ];
-
-/** Laptop-width header: main jumps without wrapping into two rows. */
-export const compactNav: NavItem[] = primaryNav.filter((item) =>
-  item.href === "#portfolio" ||
-  item.href === "/hire" ||
-  item.href === "#about" ||
-  item.href === "#journey" ||
-  item.href === "#contact",
-);
 
 /** In-page jumps on /hire — conversion landing, not a second brand. */
 export const hirePageNav: NavItem[] = [
@@ -32,8 +24,8 @@ export const hirePageNav: NavItem[] = [
   { href: "#contact", label: "Contact" },
 ];
 
-/** Hash links always use a rooted path so SSR and the client emit the same href. */
-export function resolveNavHref(href: string): string {
+/** Hash links need the home prefix when not on the homepage. */
+export function resolveNavHref(href: string, pathname: string): string {
   if (!href.startsWith("#")) return href;
-  return `/${href}`;
+  return pathname === "/" ? href : `/${href}`;
 }

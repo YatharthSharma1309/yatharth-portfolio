@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { SectionIntro } from "@/components/SectionIntro";
 import { TwinAnimatedAvatar } from "@/components/TwinAnimatedAvatar";
-import { alertError, cardHeading, labelMono } from "@/lib/ui-classes";
+import { alertError } from "@/lib/ui-classes";
 import { sectionCopy, site, twinStarterQuestions, twinWelcome } from "@/lib/content";
 import { isStaticExport } from "@/lib/contact-submit";
 
@@ -52,11 +52,11 @@ function MessageBubble({
     return (
       <div className="flex justify-end">
         <div className="max-w-[min(90%,32rem)] min-w-0">
-          <div className="text-text-muted mb-1.5 flex items-center justify-end gap-2 pr-1 text-[11px] font-semibold tracking-[0.14em] uppercase">
+          <div className="text-text-muted mb-1.5 flex items-center justify-end gap-2 pr-1 text-[10px] font-semibold tracking-[0.14em] uppercase">
             {time ? <span>{time}</span> : null}
             <span>You</span>
           </div>
-          <div className="bg-accent text-on-accent break-words rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(79,70,229,0.35)] [overflow-wrap:anywhere]">
+          <div className="bg-accent text-bg-deep break-words rounded-2xl rounded-tr-md px-4 py-3 text-sm leading-relaxed font-medium shadow-[0_8px_24px_-12px_rgba(62,232,200,0.55)] [overflow-wrap:anywhere]">
             {message.content}
           </div>
         </div>
@@ -68,7 +68,7 @@ function MessageBubble({
     <div className="flex items-start gap-3">
       <TwinAnimatedAvatar size="sm" className="mt-0.5" />
       <div className="max-w-[min(90%,32rem)] min-w-0 flex-1">
-        <div className="text-accent/90 mb-1.5 flex flex-wrap items-center gap-2 text-[11px] font-semibold tracking-[0.14em] uppercase">
+        <div className="text-accent/90 mb-1.5 flex flex-wrap items-center gap-2 text-[10px] font-semibold tracking-[0.14em] uppercase">
           <span>Career Twin</span>
           {time ? (
             <span className="text-text-muted/70 font-normal normal-case tracking-normal">
@@ -76,7 +76,7 @@ function MessageBubble({
             </span>
           ) : null}
         </div>
-        <div className="border-border-subtle bg-bg-card text-text-primary break-words rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(79,70,229,0.4)] [overflow-wrap:anywhere]">
+        <div className="border-border-subtle bg-bg-card text-text-primary break-words rounded-2xl rounded-tl-md border px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[inset_3px_0_0_rgba(62,232,200,0.45)] [overflow-wrap:anywhere]">
           {message.content}
         </div>
       </div>
@@ -222,11 +222,11 @@ export function DigitalTwinSection() {
       className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28"
     >
       <div className="section-glow-twin pointer-events-none absolute inset-0 opacity-30" aria-hidden />
-      <div className="page-gutter relative mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Career Twin"
           title="Ask my career twin"
-          description={`${sectionCopy.digitalTwin.description} ${site.availability}.`}
+          description={`${sectionCopy.digitalTwin.description} Currently ${site.availability.toLowerCase()}.`}
         />
 
         <div className="surface-card border-border-highlight relative mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border sm:mt-12">
@@ -237,7 +237,7 @@ export function DigitalTwinSection() {
             <div className="flex items-center gap-3 sm:gap-4">
               <TwinAnimatedAvatar active={isLoading} />
               <div className="min-w-0 flex-1">
-                <p className={`${cardHeading} truncate text-base sm:text-lg`}>
+                <p className="font-display text-text-primary truncate text-base font-bold tracking-tight">
                   {sectionCopy.digitalTwin.chatTitle}
                 </p>
                 <p className="text-text-muted mt-0.5 text-xs leading-relaxed break-words">
@@ -339,7 +339,7 @@ export function DigitalTwinSection() {
 
             {!hasUserMessages ? (
               <div className="pt-1">
-                <p className={`${labelMono} mb-2.5 text-text-muted`}>
+                <p className="text-text-muted mb-2.5 text-[10px] font-semibold tracking-[0.16em] uppercase">
                   Try asking
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -349,7 +349,7 @@ export function DigitalTwinSection() {
                       type="button"
                       onClick={() => void sendMessage(question)}
                       disabled={isLoading || apiReady === false}
-                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 rounded-full border bg-white/75 px-3 py-1.5 text-left text-xs leading-snug transition-colors"
+                      className="border-border-highlight text-text-muted hover:border-accent/35 hover:bg-accent/[0.05] hover:text-text-primary disabled:opacity-55 rounded-full border bg-[rgba(0,0,0,0.18)] px-3 py-1.5 text-left text-xs leading-snug transition-colors"
                     >
                       {question}
                     </button>
@@ -369,7 +369,7 @@ export function DigitalTwinSection() {
             onSubmit={onSubmit}
             className="border-border-subtle border-t px-4 py-4 sm:px-6 sm:py-5"
           >
-            <div className="border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(79,70,229,0.14)] flex items-end gap-2 rounded-2xl border bg-white/75 p-2 sm:gap-3">
+            <div className="border-border-highlight focus-within:border-accent/45 focus-within:shadow-[0_0_0_1px_rgba(62,232,200,0.12)] flex items-end gap-2 rounded-2xl border bg-[rgba(0,0,0,0.22)] p-2 sm:gap-3">
               <textarea
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
@@ -387,7 +387,7 @@ export function DigitalTwinSection() {
               <button
                 type="submit"
                 disabled={!canSend}
-                className="bg-accent text-on-accent hover:shadow-[0_8px_18px_-10px_rgba(15,23,42,0.28)] mb-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-[box-shadow,opacity] disabled:cursor-not-allowed disabled:opacity-45"
+                className="bg-accent text-bg-deep hover:shadow-[0_0_24px_var(--glow)] mb-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-[box-shadow,opacity] disabled:cursor-not-allowed disabled:opacity-45"
                 aria-label="Send message"
               >
                 <svg

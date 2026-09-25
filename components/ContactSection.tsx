@@ -2,12 +2,19 @@
 
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
+import { ConnectIcon } from "@/components/ConnectIcons";
 import { ContactForm } from "@/components/ContactForm";
-import { DirectContact } from "@/components/DirectContact";
+import { btnSecondary } from "@/lib/ui-classes";
 import { sectionCopy } from "@/lib/content";
+import { connectLinks } from "@/lib/connect";
 
 export function ContactSection() {
   const { contact } = sectionCopy;
+
+  const email = connectLinks.find((item) => item.channel === "email");
+  const social = connectLinks.filter(
+    (item) => item.channel !== "email" && item.channel !== "resume",
+  );
 
   return (
     <section
@@ -18,22 +25,42 @@ export function ContactSection() {
         className="section-glow-bottom pointer-events-none absolute inset-0 opacity-35"
         aria-hidden
       />
-      <div className="page-gutter relative mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Contact"
           title={contact.title}
-          description={contact.description}
+          description={`${contact.description} ${contact.responseTime}`}
         />
-        <p className="text-text-muted mx-auto mt-3 max-w-2xl text-center text-sm">
-          {contact.responseTime}
-        </p>
 
-        <div className="mx-auto mt-10 grid max-w-2xl gap-10 sm:mt-12 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-8">
+        <div className="mx-auto mt-10 max-w-2xl space-y-12 sm:mt-12">
           <ContactForm />
 
           <div>
             <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
-            <DirectContact />
+            <div className="flex flex-col items-center gap-4">
+              {email ? (
+                <a
+                  href={email.href}
+                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
+                >
+                  <ConnectIcon channel="email" size={17} />
+                  {contact.emailLabel}
+                </a>
+              ) : null}
+
+              {social.map((item) => (
+                <a
+                  key={item.channel}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
+                >
+                  <ConnectIcon channel={item.channel} size={17} />
+                  <span className="min-w-0">{item.label}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

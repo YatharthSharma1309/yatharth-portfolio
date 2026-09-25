@@ -2,13 +2,7 @@ import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import React from "react";
-import { renderToFile, type DocumentProps } from "@react-pdf/renderer";
-import {
-  defaultResumeVariant,
-  parseResumeVariant,
-  resumeProfiles,
-  type ResumeVariantId,
-} from "../lib/resume-variants";
+import { renderToFile } from "@react-pdf/renderer";
 
 function loadEnvLocal(): void {
   const envPath = join(process.cwd(), ".env.local");
@@ -28,31 +22,13 @@ function loadEnvLocal(): void {
 loadEnvLocal();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const RESUME_DIR = join(__dirname, "../public/resume");
-
-function outputPath(variant: ResumeVariantId): string {
-  return join(RESUME_DIR, resumeProfiles[variant].filename);
-}
-
-async function renderVariant(variant: ResumeVariantId): Promise<void> {
-  const { ResumeDocument } = await import("./ResumeDocument");
-  const destination = outputPath(variant);
-  mkdirSync(dirname(destination), { recursive: true });
-  await renderToFile(
-    React.createElement(ResumeDocument, { variant }) as unknown as React.ReactElement<DocumentProps>,
-    destination,
-  );
-  console.log(`Wrote ${destination}`);
-}
+const OUTPUT = join(__dirname, "../public/resume/yatharth-sharma-resume.pdf");
 
 async function main(): Promise<void> {
-  const requested = parseResumeVariant(process.argv[2]);
-  const variants: ResumeVariantId[] =
-    requested === "all" ? ["fullstack", "ai"] : [requested ?? defaultResumeVariant];
-
-  for (const variant of variants) {
-    await renderVariant(variant);
-  }
+  const { ResumeDocument } = await import("./ResumeDocument");
+  mkdirSync(dirname(OUTPUT), { recursive: true });
+  await renderToFile(React.createElement(ResumeDocument), OUTPUT);
+  console.log(`Wrote ${OUTPUT}`);
 }
 
 main().catch((error) => {

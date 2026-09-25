@@ -6,39 +6,25 @@ import { usePathname } from "next/navigation";
 import { Logo, MenuIcon } from "@/components/Logo";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { useMobileNav } from "@/components/MobileNavContext";
-import { iconButton, labelMono } from "@/lib/ui-classes";
-import { compactNav, primaryNav, resolveNavHref, type NavItem } from "@/lib/navigation";
+import { btnSecondary } from "@/lib/ui-classes";
+import { primaryNav, resolveNavHref } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
-import { resumeDownloads } from "@/lib/resume-variants";
 import { trackEvent } from "@/lib/analytics";
 
 const navLinkClass =
-  "text-text-muted hover:text-text-primary relative block rounded-lg px-2.5 py-2 text-[0.8125rem] font-medium tracking-[-0.01em] transition-colors xl:px-3 xl:text-sm";
+  "font-sans text-text-muted hover:text-text-primary block rounded-lg px-2 py-2 text-xs font-medium tracking-normal transition-colors xl:px-3 xl:py-2.5 xl:text-sm";
 
-const navLinkActive =
-  "text-text-primary after:bg-accent after:absolute after:right-2.5 after:bottom-1 after:left-2.5 after:h-px after:content-['']";
-
-const socials = connectLinks.filter(
-  (item) => item.channel === "github" || item.channel === "linkedin",
-);
-
-function shortConnectLabel(channel: string, href: string): string {
-  if (channel === "github") return "GitHub";
-  if (channel === "linkedin") return "LinkedIn";
-  if (channel === "email") return "Email";
-  if (href === resumeDownloads.ai.href) return resumeDownloads.ai.compactLabel;
-  if (href === resumeDownloads.fullstack.href) return resumeDownloads.fullstack.compactLabel;
-  return "Resume";
-}
+const mobileNavLinkClass =
+  "font-sans text-text-muted hover:text-text-primary block rounded-lg px-3 py-2.5 text-[0.9375rem] font-medium tracking-normal transition-colors";
 
 export function Navigation() {
   const pathname = usePathname();
   const { menuOpen, setMenuOpen, toggleMenu } = useMobileNav();
   const [scrolled, setScrolled] = useState(false);
-  const [hash, setHash] = useState("");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLDivElement>(null);
+  const homeHref = pathname === "/" ? "#top" : "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -48,28 +34,11 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
-    const syncHash = () => setHash(window.location.hash);
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, [pathname]);
-
-  useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
-
-  useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 768px)");
-    const closeOnDesktop = () => {
-      if (desktop.matches) setMenuOpen(false);
-    };
-    closeOnDesktop();
-    desktop.addEventListener("change", closeOnDesktop);
-    return () => desktop.removeEventListener("change", closeOnDesktop);
-  }, [setMenuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -88,115 +57,75 @@ export function Navigation() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen, setMenuOpen]);
 
-  function isActive(href: string) {
-    if (href === "/hire") return pathname === "/hire";
-    if (href.startsWith("#")) return pathname === "/" && hash === href;
-    return pathname === href;
-  }
-
-  function renderNavItems(items: NavItem[]) {
-    return items.map((item) => {
-      const href = resolveNavHref(item.href);
-      const className = `${navLinkClass} ${isActive(item.href) ? navLinkActive : ""}`;
-      return (
-        <li key={item.href}>
-          {href.startsWith("/#") ? (
-            <a href={href} className={className}>
-              {item.label}
-            </a>
-          ) : (
-            <Link href={href} className={className}>
-              {item.label}
-            </Link>
-          )}
-        </li>
-      );
-    });
-  }
-
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-50 transition-[background,box-shadow,border-color] duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-[background,box-shadow,backdrop-filter] duration-300 ${
         scrolled || menuOpen
-          ? "border-border-subtle border-b bg-bg-deep/88 shadow-[0_8px_28px_rgba(15,23,42,0.07)] backdrop-blur-xl"
-          : "border-transparent border-b bg-bg-deep/40 backdrop-blur-md"
+          ? "border-border-subtle border-b bg-bg-deep/78 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
+          : "bg-transparent"
       }`}
     >
       <nav
-        className="page-gutter mx-auto flex min-h-16 max-w-6xl items-center gap-2 py-1.5 sm:gap-3"
+        className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8"
         aria-label="Site"
       >
         <Link
-          href="/"
-          className="shrink-0 transition-opacity hover:opacity-75"
+          href={homeHref}
+          className="text-text-primary hover:text-accent group transition-colors"
           onClick={() => setMenuOpen(false)}
           aria-label={`${site.name} — home`}
         >
           <Logo />
         </Link>
 
-        <ul className="flex min-w-0 items-center md:hidden">
-          <li>
-            <a
-              href={resolveNavHref("#portfolio")}
-              className="text-text-muted hover:text-text-primary block px-1.5 py-2 text-sm font-semibold tracking-[-0.01em]"
-              onClick={() => setMenuOpen(false)}
-            >
-              Work
-            </a>
-          </li>
-          <li>
-            <a
-              href={resolveNavHref("#about")}
-              className="text-text-muted hover:text-text-primary hidden px-1.5 py-2 text-sm font-semibold tracking-[-0.01em] min-[380px]:block"
-              onClick={() => setMenuOpen(false)}
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a
-              href={resolveNavHref("#contact")}
-              className="text-text-primary hover:text-accent block px-1.5 py-2 text-sm font-semibold tracking-[-0.01em]"
-              onClick={() => setMenuOpen(false)}
-            >
-              Contact
-            </a>
-          </li>
-        </ul>
-        <ul className="hidden min-w-0 items-center md:flex xl:hidden">
-          {renderNavItems(compactNav)}
-        </ul>
-        <ul className="hidden min-w-0 items-center xl:flex">
-          {renderNavItems(primaryNav)}
+        <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0 overflow-x-auto lg:flex xl:gap-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {primaryNav.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={resolveNavHref(item.href, pathname)}
+                className={`${navLinkClass} ${
+                  pathname === item.href ? "text-text-primary" : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        <div className="ml-auto hidden shrink-0 items-center gap-0.5 md:flex">
-          <span className="bg-border-highlight mr-1.5 h-4 w-px" aria-hidden />
-          {socials.map((item) => (
-            <a
-              key={item.channel}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={item.channel === "github" ? "GitHub" : "LinkedIn"}
-              className={iconButton}
-            >
-              <ConnectIcon channel={item.channel} size={16} />
-            </a>
-          ))}
+        <div className="hidden shrink-0 items-center gap-2 lg:flex">
+          {connectLinks
+            .filter((item) => item.channel === "github" || item.channel === "linkedin")
+            .map((item) => (
+              <Link
+                key={item.channel}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.channel === "github" ? "GitHub" : "LinkedIn"}
+                className={`${btnSecondary} gap-2 px-2.5 py-2.5 text-sm font-medium xl:px-4`}
+              >
+                <ConnectIcon channel={item.channel} size={16} />
+                <span className="hidden xl:inline">
+                  {item.channel === "github" ? "GitHub" : "LinkedIn"}
+                </span>
+              </Link>
+            ))}
         </div>
 
         <button
           ref={menuButtonRef}
           type="button"
-          className={`${iconButton} ml-auto md:hidden`}
+          className={`${btnSecondary} gap-2 px-3 py-2.5 sm:px-4 lg:hidden`}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           onClick={toggleMenu}
         >
           <MenuIcon open={menuOpen} />
+          <span className="hidden min-[420px]:inline">
+            {menuOpen ? "Close" : "Menu"}
+          </span>
         </button>
       </nav>
 
@@ -204,82 +133,83 @@ export function Navigation() {
         <div
           id="mobile-nav"
           ref={mobileNavRef}
-          className="page-gutter border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/94 py-5 backdrop-blur-xl md:hidden"
+          className="border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/95 px-5 py-6 backdrop-blur-xl lg:hidden"
         >
-          <p className={`${labelMono} mb-3`}>Navigate</p>
-          <ul className="divide-border-subtle divide-y overflow-hidden rounded-2xl border border-border-subtle bg-white/70">
-            {primaryNav.map((item) => {
-              const href = resolveNavHref(item.href);
-              const active = isActive(item.href);
-              const className = `flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors ${
-                active ? "text-accent" : "text-text-primary hover:bg-bg-elevated"
-              }`;
-              const label = (
-                <>
+          <p className="font-mono text-accent mb-4 text-[11px] font-semibold tracking-[0.18em] uppercase">
+            Navigate
+          </p>
+          <ul className="space-y-0.5">
+            {primaryNav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={resolveNavHref(item.href, pathname)}
+                  className={mobileNavLinkClass}
+                  onClick={() => setMenuOpen(false)}
+                >
                   {item.label}
-                  {active ? (
-                    <span className="bg-accent h-1.5 w-1.5 rounded-full" aria-hidden />
-                  ) : null}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 flex flex-col gap-2 pb-[env(safe-area-inset-bottom)]">
+            {connectLinks.map((item) => {
+              const content = (
+                <>
+                  <ConnectIcon channel={item.channel} size={16} />
+                  {item.channel === "github"
+                    ? "GitHub"
+                    : item.channel === "linkedin"
+                      ? "LinkedIn"
+                      : item.label}
                 </>
               );
-              return (
-                <li key={item.href}>
-                  {href.startsWith("/#") ? (
-                    <a href={href} className={className} onClick={() => setMenuOpen(false)}>
-                      {label}
-                    </a>
-                  ) : (
-                    <Link href={href} className={className} onClick={() => setMenuOpen(false)}>
-                      {label}
-                    </Link>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-
-          <p className={`${labelMono} mt-6 mb-3`}>Connect</p>
-          <ul className="divide-border-subtle divide-y overflow-hidden rounded-2xl border border-border-subtle bg-white/70">
-            {connectLinks.map((item) => {
-              const label = shortConnectLabel(item.channel, item.href);
-              const className =
-                "text-text-primary hover:bg-bg-elevated flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors";
 
               if (item.download) {
                 return (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      download={item.download}
-                      className={className}
-                      onClick={() => {
+                  <a
+                    key={item.channel}
+                    href={item.href}
+                    download={item.download}
+                    className={`${btnSecondary} gap-2 px-4 py-2.5`}
+                    onClick={() => {
+                      if (item.channel === "resume") {
                         trackEvent("resume_download", { source: "nav_mobile_pdf" });
-                        setMenuOpen(false);
-                      }}
-                    >
-                      <ConnectIcon channel="resume" size={16} />
-                      {label}
-                    </a>
-                  </li>
+                      }
+                      setMenuOpen(false);
+                    }}
+                  >
+                    {content}
+                  </a>
+                );
+              }
+
+              if (item.external) {
+                return (
+                  <Link
+                    key={item.channel}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${btnSecondary} gap-2 px-4 py-2.5`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {content}
+                  </Link>
                 );
               }
 
               return (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noopener noreferrer" : undefined}
-                    className={className}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <ConnectIcon channel={item.channel} size={16} />
-                    {label}
-                  </a>
-                </li>
+                <a
+                  key={item.channel}
+                  href={item.href}
+                  className={`${btnSecondary} gap-2 px-4 py-2.5`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {content}
+                </a>
               );
             })}
-          </ul>
+          </div>
         </div>
       ) : null}
     </header>

@@ -1,57 +1,85 @@
 "use client";
 
+import { useId } from "react";
+
 type LogoMarkProps = {
   size?: number;
   className?: string;
 };
 
-/** Yatharth Sharma — geometric Y + S. */
-const yPath =
-  "M1.2 5.2h6.1l5.15 11.15L17.6 5.2h6.1L14.7 24.1V31H8.3v-6.9L1.2 5.2Z";
+/** SVG monogram — shared by nav logo and favicon. */
+export function LogoMark({ size = 38, className }: LogoMarkProps) {
+  const gradientId = useId();
 
-const sPath =
-  "M40.2 10.6c0-3.55-2.85-5.85-7.15-5.85-4.4 0-7.25 2.5-7.55 6.25h3.85c.35-1.6 1.7-2.65 3.65-2.65 1.8 0 3.05 1 3.05 2.5 0 1.75-1.35 2.7-4.5 3.7-4.05 1.25-6.6 3.2-6.6 6.85 0 3.9 3 6.45 7.55 6.45 4.7 0 7.7-2.7 8-6.7h-4c-.3 1.85-1.8 3.15-4 3.15-2.1 0-3.4-1.1-3.4-2.7 0-1.75 1.35-2.75 4.75-3.85 3.95-1.25 6.25-3.4 6.25-7.15Z";
-
-/** Square plate for the browser tab. */
-export function LogoMark({ size = 32, className }: LogoMarkProps) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 40 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-hidden
     >
-      <rect width="32" height="32" rx="9" fill="#EEF0FA" />
-      <g transform="translate(2.2 2.4) scale(0.58)">
-        <path d={yPath} fill="#0F172A" />
-        <path d={sPath} fill="#4F46E5" />
-      </g>
+      <defs>
+        <linearGradient id={gradientId} x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop stopColor="rgba(255,255,255,0.14)" />
+          <stop offset="1" stopColor="rgba(62,232,200,0.35)" />
+        </linearGradient>
+      </defs>
+      <rect
+        x="1"
+        y="1"
+        width="38"
+        height="38"
+        rx="10"
+        fill="var(--bg-elevated)"
+        stroke={`url(#${gradientId})`}
+        strokeWidth="1"
+      />
+      <path
+        d="M10.5 12.5L17.5 24.5L24.5 12.5"
+        stroke="var(--text-primary)"
+        strokeWidth="2.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.5 24.5V31"
+        stroke="var(--text-primary)"
+        strokeWidth="2.35"
+        strokeLinecap="round"
+      />
+      <path
+        d="M28.5 13.5C24.5 13.5 22.5 15.75 22.5 18.5C22.5 21.25 25.5 22.25 28 23.25C30.5 24.25 31 26.75 28.5 28.75C26.25 30.5 23.5 29.5 23.5 29.5"
+        stroke="var(--accent)"
+        strokeWidth="2.35"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="31.5" cy="31.5" r="1.75" fill="var(--accent)" />
     </svg>
   );
 }
 
 type LogoProps = {
   className?: string;
+  markSize?: number;
 };
 
-/** YS monogram used in the header and footer. */
-export function Logo({ className = "" }: LogoProps) {
+export function Logo({ className = "", markSize = 38 }: LogoProps) {
   return (
-    <span className={`inline-flex shrink-0 items-center ${className}`} aria-hidden>
-      <svg
-        width="54"
-        height="32"
-        viewBox="0 0 46 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-8 w-[3.35rem] sm:h-9 sm:w-[3.75rem]"
-      >
-        <path d={yPath} fill="currentColor" />
-        <path d={sPath} fill="#4F46E5" />
-      </svg>
+    <span className={`group/logo inline-flex items-center ${className}`}>
+      <span className="relative shrink-0 transition-transform duration-300 group-hover/logo:scale-[1.04]">
+        <span
+          className="bg-accent/25 pointer-events-none absolute -inset-1.5 rounded-xl opacity-0 blur-md transition-opacity duration-300 group-hover/logo:opacity-100"
+          aria-hidden
+        />
+        <LogoMark
+          size={markSize}
+          className="relative rounded-[10px] shadow-[0_0_0_1px_rgba(255,255,255,0.05)_inset,0_8px_24px_-12px_rgba(62,232,200,0.35)]"
+        />
+      </span>
     </span>
   );
 }

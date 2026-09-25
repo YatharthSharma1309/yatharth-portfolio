@@ -1,7 +1,6 @@
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
 import { education, resumeJourney, sectionCopy } from "@/lib/content";
-import { cardHeading, labelMono } from "@/lib/ui-classes";
 
 const content = "mx-auto w-full max-w-3xl";
 const card = "surface-card border-border-subtle rounded-2xl border p-5 sm:p-6 lg:p-7";
@@ -12,40 +11,33 @@ export function JourneySection() {
       id="journey"
       className="border-border-subtle scroll-mt-[4.25rem] relative border-t py-16 sm:py-24 lg:py-28"
     >
-      <div className="page-gutter mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Career journey"
           title={sectionCopy.journey.title}
           description={sectionCopy.journey.description}
         />
 
-        <div className={`${content} relative mt-10 sm:mt-12`}>
+        <div className={`${content} relative mt-10 sm:mt-14 lg:mt-16`}>
           <div
             className="from-accent/45 via-border-highlight absolute top-3 bottom-3 left-[9px] w-px bg-gradient-to-b to-transparent"
             aria-hidden
           />
-          <ol className="space-y-6 sm:space-y-7">
-            {resumeJourney.map((item, index) => {
-              const latest = index === 0 || item.current;
-              return (
+          <ol className="space-y-5 sm:space-y-6">
+            {resumeJourney.map((item) => (
               <li key={`${item.org}-${item.period}`} className="relative pl-11 sm:pl-12">
                 <div
-                  className={`absolute top-2.5 left-0 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-[var(--border-highlight)] bg-[var(--bg-deep)] ${latest ? "shadow-[0_0_0_3px_rgba(79,70,229,0.18)]" : ""}`}
+                  className={`absolute top-2 left-0 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-[var(--border-highlight)] bg-[var(--bg-deep)] ${item.current ? "shadow-[0_0_14px_var(--glow)]" : ""}`}
                 >
                   <span
-                    className={`h-2 w-2 rounded-full ${latest ? "bg-accent" : "bg-text-muted/80"}`}
+                    className={`h-2 w-2 rounded-full ${item.current ? "bg-accent" : "bg-text-muted/80"}`}
                   />
                 </div>
-                <div className={`${card} ${latest ? "ring-accent/20 ring-1" : ""}`}>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <p className={labelMono}>{item.period}</p>
-                    {latest ? (
-                      <span className="bg-accent/10 text-accent rounded-md px-2 py-0.5 text-[11px] font-semibold tracking-[0.14em] uppercase">
-                        Latest
-                      </span>
-                    ) : null}
-                  </div>
-                  <h3 className={`${cardHeading} mt-2 sm:mt-2.5`}>
+                <div className={card}>
+                  <p className="text-accent text-[11px] font-semibold tracking-[0.14em] uppercase">
+                    {item.period}
+                  </p>
+                  <h3 className="font-display text-text-primary mt-2 text-lg font-bold tracking-tight sm:mt-2.5 sm:text-xl">
                     {item.title}
                   </h3>
                   <p className="text-text-primary/95 mt-1 font-medium">{item.org}</p>
@@ -67,12 +59,11 @@ export function JourneySection() {
                   ) : null}
                 </div>
               </li>
-              );
-            })}
+            ))}
           </ol>
         </div>
 
-        <div className={`surface-card border-border-subtle ${content} mt-12 rounded-2xl border p-5 sm:mt-14 sm:p-7 lg:p-8`}>
+        <div className={`surface-card border-border-subtle ${content} mt-10 rounded-2xl border p-5 sm:mt-14 sm:p-7 lg:p-8`}>
           <SectionEyebrow className="mb-6 sm:mb-8">Education</SectionEyebrow>
           <ul className="space-y-6 sm:space-y-8">
             {education.map((entry) => (
@@ -82,7 +73,7 @@ export function JourneySection() {
               >
                 <p className="text-text-primary font-semibold leading-snug">{entry.degree}</p>
                 <p className="text-text-muted mt-1 text-sm">{entry.school}</p>
-                <p className="text-text-muted mt-2 font-mono text-[11px] font-semibold tracking-[0.14em]">
+                <p className="text-text-muted mt-2 font-mono text-xs tracking-wide">
                   {entry.period}
                 </p>
               </li>

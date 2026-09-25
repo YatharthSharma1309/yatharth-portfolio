@@ -26,7 +26,7 @@ try {
   }
 
   run("npm", ["run", "generate:resume"], {
-    NEXT_PUBLIC_SITE_URL: "https://yatharthsharma.vercel.app",
+    NEXT_PUBLIC_SITE_URL: "https://yatharthsharma1309.github.io",
   });
 
   const nextDir = path.join(root, ".next");
@@ -36,7 +36,7 @@ try {
 
   run("npx", ["next", "build"], {
     GITHUB_PAGES: "true",
-    NEXT_PUBLIC_SITE_URL: "https://yatharthsharma.vercel.app",
+    NEXT_PUBLIC_SITE_URL: "https://yatharthsharma1309.github.io",
     NEXT_PUBLIC_STATIC_EXPORT: "true",
   });
 
