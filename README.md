@@ -1,6 +1,8 @@
 # Yatharth Sharma — Portfolio Site
 
-Personal portfolio and career hub: [yatharthsharma.vercel.app](https://yatharthsharma.vercel.app)
+**Use this one URL** on LinkedIn, resumes, and job applications: [yatharthsharma.vercel.app](https://yatharthsharma.vercel.app)
+
+That page is the whole portfolio — both resume PDFs, projects, and `/hire`. GitHub is the source repo; Vercel hosts the live site. Do not submit extra Vercel or GitHub Pages URLs.
 
 Freelance offer (AI Hiring Desk): [yatharthsharma.vercel.app/hire](https://yatharthsharma.vercel.app/hire)
 

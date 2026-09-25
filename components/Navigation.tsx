@@ -6,17 +6,17 @@ import { usePathname } from "next/navigation";
 import { Logo, MenuIcon } from "@/components/Logo";
 import { ConnectIcon } from "@/components/ConnectIcons";
 import { useMobileNav } from "@/components/MobileNavContext";
-import { btnSecondary } from "@/lib/ui-classes";
+import { btnSecondary, labelMono } from "@/lib/ui-classes";
 import { primaryNav, resolveNavHref } from "@/lib/navigation";
 import { site } from "@/lib/content";
 import { connectLinks } from "@/lib/connect";
 import { trackEvent } from "@/lib/analytics";
 
 const navLinkClass =
-  "font-sans text-text-muted hover:text-text-primary block rounded-lg px-2 py-2 text-xs font-medium tracking-normal transition-colors xl:px-3 xl:py-2.5 xl:text-sm";
+  "font-sans text-text-muted hover:text-accent block rounded-lg px-2 py-2 text-sm font-medium tracking-normal transition-colors xl:px-3 xl:py-2.5";
 
 const mobileNavLinkClass =
-  "font-sans text-text-muted hover:text-text-primary block rounded-lg px-3 py-2.5 text-[0.9375rem] font-medium tracking-normal transition-colors";
+  "font-sans text-text-muted hover:text-accent block rounded-lg px-3 py-2.5 text-[0.9375rem] font-medium tracking-normal transition-colors";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -24,7 +24,7 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLDivElement>(null);
-  const homeHref = pathname === "/" ? "#top" : "/";
+  const homeHref = "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -61,8 +61,8 @@ export function Navigation() {
     <header
       className={`fixed top-0 right-0 left-0 z-50 transition-[background,box-shadow,backdrop-filter] duration-300 ${
         scrolled || menuOpen
-          ? "border-border-subtle border-b bg-bg-deep/78 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl backdrop-saturate-150"
-          : "bg-transparent"
+          ? "border-border-subtle border-b bg-bg-deep/80 shadow-[0_8px_28px_rgba(15,23,42,0.08)] backdrop-blur-xl backdrop-saturate-150"
+          : "border-transparent border-b bg-bg-deep/55 backdrop-blur-md"
       }`}
     >
       <nav
@@ -79,18 +79,25 @@ export function Navigation() {
         </Link>
 
         <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0 overflow-x-auto lg:flex xl:gap-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {primaryNav.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={resolveNavHref(item.href, pathname)}
-                className={`${navLinkClass} ${
-                  pathname === item.href ? "text-text-primary" : ""
-                }`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {primaryNav.map((item) => {
+            const href = resolveNavHref(item.href);
+            const className = `${navLinkClass} ${
+              pathname === item.href ? "text-accent font-semibold" : ""
+            }`;
+            return (
+              <li key={item.href}>
+                {href.startsWith("/#") ? (
+                  <a href={href} className={className}>
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link href={href} className={className}>
+                    {item.label}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden shrink-0 items-center gap-2 lg:flex">
@@ -133,23 +140,37 @@ export function Navigation() {
         <div
           id="mobile-nav"
           ref={mobileNavRef}
-          className="border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/95 px-5 py-6 backdrop-blur-xl lg:hidden"
+          className="border-border-subtle max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t bg-bg-deep/92 px-5 py-6 backdrop-blur-xl lg:hidden"
         >
-          <p className="font-mono text-accent mb-4 text-[11px] font-semibold tracking-[0.18em] uppercase">
-            Navigate
-          </p>
+          <p className={`${labelMono} mb-4`}>Navigate</p>
           <ul className="space-y-0.5">
-            {primaryNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={resolveNavHref(item.href, pathname)}
-                  className={mobileNavLinkClass}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {primaryNav.map((item) => {
+              const href = resolveNavHref(item.href);
+              const className = `${mobileNavLinkClass} ${
+                pathname === item.href ? "text-accent font-semibold" : ""
+              }`;
+              return (
+                <li key={item.href}>
+                  {href.startsWith("/#") ? (
+                    <a
+                      href={href}
+                      className={className}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={href}
+                      className={className}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
           <div className="mt-6 flex flex-col gap-2 pb-[env(safe-area-inset-bottom)]">
             {connectLinks.map((item) => {
@@ -167,7 +188,7 @@ export function Navigation() {
               if (item.download) {
                 return (
                   <a
-                    key={item.channel}
+                    key={item.href}
                     href={item.href}
                     download={item.download}
                     className={`${btnSecondary} gap-2 px-4 py-2.5`}

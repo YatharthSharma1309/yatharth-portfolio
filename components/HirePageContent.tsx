@@ -1,13 +1,11 @@
-import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
-import { ConnectIcon } from "@/components/ConnectIcons";
+import { DirectContact } from "@/components/DirectContact";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { SectionIntro } from "@/components/SectionIntro";
-import { connectLinks } from "@/lib/connect";
 import { freelanceOffer, site } from "@/lib/content";
 import { getDemoUrl } from "@/lib/demo-urls";
 import { hirePageNav } from "@/lib/navigation";
-import { btnPrimary, btnSecondary } from "@/lib/ui-classes";
+import { btnPrimary, btnSecondary, cardHeading, labelMono, sectionHeading } from "@/lib/ui-classes";
 
 function whatsappHref(text: string) {
   return `https://wa.me/${site.phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
@@ -17,7 +15,6 @@ export function HirePageContent() {
   const demoBase = getDemoUrl("opsConcierge") ?? "https://support-ai-nine-mu.vercel.app";
   const hiringDemo = `${demoBase}${freelanceOffer.demoHiringPath}`;
   const widgetDemo = `${demoBase}${freelanceOffer.demoWidgetPath}`;
-  const email = connectLinks.find((item) => item.channel === "email");
   const whatsapp = whatsappHref(freelanceOffer.whatsappText);
 
   return (
@@ -29,10 +26,10 @@ export function HirePageContent() {
           <p className="text-text-primary/90 text-sm font-semibold tracking-tight sm:text-base">
             {freelanceOffer.kicker}
           </p>
-          <h1 className="font-display text-text-primary mt-3 text-[1.75rem] leading-[1.15] font-bold tracking-tight text-balance sm:text-3xl lg:text-4xl">
+          <h1 className={`${sectionHeading} mt-3`}>
             {freelanceOffer.title}
           </h1>
-          <p className="text-text-muted mx-auto mt-5 max-w-2xl text-sm leading-relaxed sm:text-base">
+          <p className="text-text-muted mx-auto mt-5 max-w-2xl text-base leading-[1.65]">
             {freelanceOffer.lede}
           </p>
           <p className="text-text-primary/90 mx-auto mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
@@ -78,15 +75,15 @@ export function HirePageContent() {
               support widget
             </a>
             {" · "}
-            <Link href="/#portfolio" className="text-accent hover:underline">
+            <a href="/#portfolio" className="text-accent hover:underline">
               full portfolio
-            </Link>
+            </a>
           </p>
         </div>
       </section>
 
       <nav
-        className="border-border-subtle bg-bg-deep/80 sticky top-[4.25rem] z-30 hidden border-b backdrop-blur-xl md:block"
+        className="border-border-subtle bg-bg-deep/85 sticky top-[4.25rem] z-30 hidden border-b shadow-[0_6px_20px_rgba(15,23,42,0.05)] backdrop-blur-xl md:block"
         aria-label="On this page"
       >
         <ul className="mx-auto flex max-w-6xl items-center justify-center gap-1 px-5 py-2 sm:px-8">
@@ -116,9 +113,7 @@ export function HirePageContent() {
                 key={item.title}
                 className="surface-card border-border-subtle rounded-2xl border p-5 sm:p-6"
               >
-                <h2 className="font-display text-text-primary text-lg font-bold tracking-tight">
-                  {item.title}
-                </h2>
+                <h2 className={cardHeading}>{item.title}</h2>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">{item.body}</p>
               </li>
             ))}
@@ -139,12 +134,8 @@ export function HirePageContent() {
                 key={item.step}
                 className="surface-card border-border-subtle rounded-2xl border p-5 sm:p-6"
               >
-                <p className="font-mono text-accent text-[11px] font-semibold tracking-[0.18em] uppercase">
-                  {item.step}
-                </p>
-                <h2 className="font-display text-text-primary mt-2 text-lg font-bold tracking-tight">
-                  {item.title}
-                </h2>
+                <p className={labelMono}>{item.step}</p>
+                <h2 className={`${cardHeading} mt-2`}>{item.title}</h2>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">{item.body}</p>
               </li>
             ))}
@@ -185,9 +176,7 @@ export function HirePageContent() {
                 key={item.title}
                 className="surface-card border-border-subtle rounded-2xl border p-5 sm:p-6"
               >
-                <h2 className="font-display text-text-primary text-lg font-bold tracking-tight">
-                  {item.title}
-                </h2>
+                <h2 className={cardHeading}>{item.title}</h2>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">{item.body}</p>
               </li>
             ))}
@@ -208,9 +197,7 @@ export function HirePageContent() {
                 key={item.name}
                 className="surface-card border-border-subtle flex flex-col rounded-2xl border p-5 sm:p-6"
               >
-                <h2 className="font-display text-text-primary text-lg font-bold tracking-tight">
-                  {item.name}
-                </h2>
+                <h2 className={cardHeading}>{item.name}</h2>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">{item.when}</p>
                 <p className="text-text-primary mt-4 text-sm font-semibold">{item.band}</p>
                 <p className="text-text-muted mt-1 text-sm leading-relaxed">{item.retain}</p>
@@ -222,7 +209,7 @@ export function HirePageContent() {
           </ul>
           <div className="mx-auto mt-10 grid max-w-4xl gap-8 sm:grid-cols-2">
             <div>
-              <h3 className="font-display text-text-primary text-base font-bold">How we work</h3>
+              <h3 className={`${cardHeading} text-base sm:text-base`}>How we work</h3>
               <ol className="text-text-muted mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
                 {freelanceOffer.process.map((step) => (
                   <li key={step}>{step}</li>
@@ -230,7 +217,7 @@ export function HirePageContent() {
               </ol>
             </div>
             <div>
-              <h3 className="font-display text-text-primary text-base font-bold">Not included</h3>
+              <h3 className={`${cardHeading} text-base sm:text-base`}>Not included</h3>
               <ul className="text-text-muted mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">
                 {freelanceOffer.notIncluded.map((item) => (
                   <li key={item}>{item}</li>
@@ -288,31 +275,7 @@ export function HirePageContent() {
             <ContactForm variant="client" />
             <div>
               <SectionEyebrow className="mb-5">Or reach me directly</SectionEyebrow>
-              <div className="flex flex-col items-center gap-4">
-                <a
-                  href={whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${btnPrimary} w-full max-w-md px-6 py-4 text-center`}
-                >
-                  {freelanceOffer.whatsappLabel}
-                </a>
-                {email ? (
-                  <a
-                    href={`mailto:${site.email}?subject=${encodeURIComponent(freelanceOffer.emailSubject)}`}
-                    className={`${btnSecondary} w-full max-w-md gap-2.5 px-6 py-4 text-center break-words`}
-                  >
-                    <ConnectIcon channel="email" size={17} />
-                    Email {site.name.split(" ")[0]}
-                  </a>
-                ) : null}
-                <a
-                  href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className={`${btnSecondary} w-full max-w-md px-6 py-4 text-center`}
-                >
-                  {site.phone}
-                </a>
-              </div>
+              <DirectContact variant="hire" />
             </div>
           </div>
         </div>
@@ -320,10 +283,8 @@ export function HirePageContent() {
 
       <section className="border-border-subtle border-t py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-          <h2 className="font-display text-text-primary text-[1.75rem] leading-[1.15] font-bold tracking-tight text-balance sm:text-3xl">
-            {freelanceOffer.closingTitle}
-          </h2>
-          <p className="text-text-muted mx-auto mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
+          <h2 className={sectionHeading}>{freelanceOffer.closingTitle}</h2>
+          <p className="text-text-muted mx-auto mt-4 max-w-xl text-base leading-[1.65]">
             {freelanceOffer.closingBody}
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">

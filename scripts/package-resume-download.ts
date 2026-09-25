@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,8 +9,8 @@ const ROOT = join(__dirname, "..");
 const RESUME_DIR = join(ROOT, "public", "resume");
 
 const PDF_NAME = "yatharth-sharma-resume.pdf";
+const PDF_AI_NAME = "yatharth-sharma-resume-ai.pdf";
 const DOCX_NAME = "Yatharth_Sharma_Premium_Resume_V2.docx";
-const ZIP_NAME = "Yatharth-Sharma-Resume-Package.zip";
 
 const DOCX_SOURCES = [
   join(RESUME_DIR, DOCX_NAME),
@@ -22,8 +22,8 @@ const DOWNLOADS = join(homedir(), "Downloads");
 function ensureResumeAssets(): void {
   mkdirSync(RESUME_DIR, { recursive: true });
 
-  console.log("Generating PDF from portfolio content...");
-  execSync("npm run generate:resume", {
+  console.log("Generating Software Engineer and AI/GenAI resume PDFs...");
+  execSync("npx tsx scripts/generate-resume-pdf.ts all", {
     cwd: ROOT,
     stdio: "inherit",
     env: {
@@ -33,8 +33,10 @@ function ensureResumeAssets(): void {
     },
   });
 
-  if (!existsSync(join(RESUME_DIR, PDF_NAME))) {
-    throw new Error(`PDF not found after generation: ${PDF_NAME}`);
+  for (const name of [PDF_NAME, PDF_AI_NAME]) {
+    if (!existsSync(join(RESUME_DIR, name))) {
+      throw new Error(`PDF not found after generation: ${name}`);
+    }
   }
 
   if (!existsSync(join(RESUME_DIR, DOCX_NAME))) {
@@ -49,38 +51,10 @@ function ensureResumeAssets(): void {
   }
 }
 
-function createZip(): void {
-  const zipPath = join(RESUME_DIR, ZIP_NAME);
-  const staging = join(RESUME_DIR, "_package-staging");
-  if (existsSync(staging)) rmSync(staging, { recursive: true, force: true });
-  mkdirSync(staging, { recursive: true });
-
-  const stagedPdf = join(staging, PDF_NAME);
-  const stagedDocx = join(staging, DOCX_NAME);
-  writeFileSync(stagedPdf, readFileSync(join(RESUME_DIR, PDF_NAME)));
-  writeFileSync(stagedDocx, readFileSync(join(RESUME_DIR, DOCX_NAME)));
-
-  if (existsSync(zipPath)) rmSync(zipPath, { force: true });
-
-  if (process.platform === "win32") {
-    execSync(
-      `powershell -NoProfile -Command "Compress-Archive -Path '${stagedPdf}','${stagedDocx}' -DestinationPath '${zipPath}' -Force"`,
-      { stdio: "inherit" },
-    );
-  } else {
-    execSync(`zip -j "${zipPath}" "${stagedPdf}" "${stagedDocx}"`, {
-      stdio: "inherit",
-    });
-  }
-
-  rmSync(staging, { recursive: true, force: true });
-  console.log(`Created ${zipPath}`);
-}
-
 function copyToDownloads(): void {
   mkdirSync(DOWNLOADS, { recursive: true });
 
-  const files = [PDF_NAME, DOCX_NAME, ZIP_NAME];
+  const files = [PDF_NAME, PDF_AI_NAME];
   for (const file of files) {
     const from = join(RESUME_DIR, file);
     const to = join(DOWNLOADS, file);
@@ -105,20 +79,17 @@ function copyToDownloads(): void {
 
 function main(): void {
   ensureResumeAssets();
-  createZip();
   const shouldCopyToDownloads = process.env.COPY_RESUME_TO_DOWNLOADS === "true";
   if (shouldCopyToDownloads) {
     copyToDownloads();
   }
 
   console.log("\nDownloadable resume files ready:");
-  console.log(`  PDF:  ${join(RESUME_DIR, PDF_NAME)}`);
-  console.log(`  DOCX: ${join(RESUME_DIR, DOCX_NAME)}`);
-  console.log(`  ZIP:  ${join(RESUME_DIR, ZIP_NAME)}`);
+  console.log(`  PDF (SWE): ${join(RESUME_DIR, PDF_NAME)}`);
+  console.log(`  PDF (AI):  ${join(RESUME_DIR, PDF_AI_NAME)}`);
   console.log(`\nSite paths (after deploy):`);
   console.log(`  /resume/${PDF_NAME}`);
-  console.log(`  /resume/${DOCX_NAME}`);
-  console.log(`  /resume/${ZIP_NAME}`);
+  console.log(`  /resume/${PDF_AI_NAME}`);
 }
 
 main();
