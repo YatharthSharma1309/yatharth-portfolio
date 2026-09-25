@@ -185,9 +185,9 @@ export const resumeProfiles: Record<ResumeVariantId, ResumeProfile> = {
       {
         title: "AI Sales Assistant CRM",
         live: true,
-        stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth", "HubSpot", "Salesforce"],
+        stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth", "OpenRouter", "HubSpot", "Salesforce"],
         bullets: [
-          "Built a multi-tenant CRM with pipeline management, AI lead scoring, and OAuth sync to HubSpot, Salesforce, Calendar, and Gmail.",
+          "Built a multi-tenant CRM with a drag-and-drop pipeline, AI email drafts, meeting summaries, AI lead scoring, and OAuth sync for HubSpot, Salesforce, Calendar, and Gmail.",
         ],
       },
     ],
@@ -319,9 +319,9 @@ export const resumeProfiles: Record<ResumeVariantId, ResumeProfile> = {
       {
         title: "AI Sales Assistant CRM",
         live: true,
-        stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth", "HubSpot", "Salesforce"],
+        stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth", "OpenRouter", "HubSpot", "Salesforce"],
         bullets: [
-          "Built an AI-assisted CRM with pipeline management, lead scoring, and OAuth sync for HubSpot, Salesforce, Calendar, and Gmail.",
+          "Built a multi-tenant CRM with a drag-and-drop pipeline, AI email drafts, meeting summaries, AI lead scoring, and OAuth sync for HubSpot, Salesforce, Calendar, and Gmail.",
         ],
       },
       {
@@ -348,7 +348,7 @@ export const resumeProfiles: Record<ResumeVariantId, ResumeProfile> = {
 export const defaultResumeVariant: ResumeVariantId = "fullstack";
 
 /** Bump when regenerating PDFs so browsers pick up the new file. */
-export const RESUME_ASSET_VERSION = "20260925a";
+export const RESUME_ASSET_VERSION = "20260925b";
 
 export function resumePublicHref(filename: string): string {
   return `/resume/${filename}?v=${RESUME_ASSET_VERSION}`;

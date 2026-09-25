@@ -490,17 +490,18 @@ export const portfolioLinks: PortfolioLink[] = [
   },
   {
     title: "AI Sales Assistant CRM",
-    description: "Multi-tenant CRM with OAuth, AI lead scoring, and HubSpot/Salesforce integrations.",
+    description:
+      "Multi-tenant CRM for small sales teams: drag-and-drop pipeline, AI follow-up email drafts, meeting summaries, and AI lead scoring, with HubSpot and Salesforce sync.",
     href: "https://github.com/YatharthSharma1309/ai-sales-assistant-crm",
     status: demoStatus(getDemoUrl("salesCRM")),
     external: true,
     featured: true,
     demoUrl: getDemoUrl("salesCRM"),
     problem:
-      "Sales teams juggle leads across tools without a unified pipeline or AI-assisted follow-up workflow.",
+      "Sales teams juggle leads across tools without one pipeline or AI follow-up drafts and meeting notes.",
     result:
-      "Shipped a multi-tenant CRM with drag-and-drop pipeline, activity timelines, lead scoring, and OAuth sync for HubSpot, Salesforce, Google Calendar, and Gmail.",
-    stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth", "HubSpot", "Salesforce"],
+      "Shipped a multi-tenant CRM with a drag-and-drop pipeline, activity timelines, AI email drafts, meeting summaries, AI lead scoring, and OAuth sync for HubSpot, Salesforce, Google Calendar, and Gmail.",
+    stack: ["React", "Express", "Prisma", "PostgreSQL", "JWT", "OAuth", "OpenRouter", "HubSpot", "Salesforce"],
   },
   {
     title: "TermLens — LegalTech SaaS",
