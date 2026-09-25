@@ -417,9 +417,7 @@ function ContinuationHeader({ profile }: { profile: ResumeProfile }) {
   return (
     <View style={styles.continuationHeader} fixed>
       <PdfText style={styles.continuationName}>{site.name}</PdfText>
-      <PdfText style={styles.continuationMeta}>
-        {profile.role} · {site.email}
-      </PdfText>
+      <PdfText style={styles.continuationMeta}>{profile.role}</PdfText>
     </View>
   );
 }
