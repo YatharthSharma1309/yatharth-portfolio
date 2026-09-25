@@ -68,15 +68,23 @@ function ProjectActions({ item }: { item: PortfolioLink }) {
 
   if (item.status === "Private") {
     return (
-      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <div className="flex flex-col gap-2.5">
         <span className="text-text-muted text-sm font-medium">Confidential · ask for details</span>
-        <a href={resolveNavHref("#contact")} className={`${btnPrimary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}>
-          Contact
-          <span aria-hidden>→</span>
-        </a>
-        <a href={resolveNavHref("#digital-twin")} className="text-accent text-sm font-semibold hover:underline">
-          Ask career twin
-        </a>
+        <div className="flex flex-row flex-nowrap items-stretch gap-2.5">
+          <a
+            href={resolveNavHref("#contact")}
+            className={`${btnPrimary} min-w-0 flex-1 gap-1.5 px-2.5 py-2.5 text-sm whitespace-nowrap sm:px-3`}
+          >
+            Contact
+            <span aria-hidden>→</span>
+          </a>
+          <a
+            href={resolveNavHref("#digital-twin")}
+            className={`${btnSecondary} min-w-0 flex-1 gap-1.5 px-2.5 py-2.5 text-sm whitespace-nowrap sm:px-3`}
+          >
+            Ask career twin
+          </a>
+        </div>
       </div>
     );
   }
@@ -90,13 +98,13 @@ function ProjectActions({ item }: { item: PortfolioLink }) {
   }
 
   return (
-    <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+    <div className="flex flex-row flex-nowrap items-stretch gap-2.5">
       {demo ? (
         <Link
           href={item.demoUrl!}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${btnPrimary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}
+          className={`${btnPrimary} min-w-0 flex-1 gap-2 px-3 py-2.5 text-sm whitespace-nowrap`}
         >
           Live demo
           <span aria-hidden>↗</span>
@@ -107,7 +115,7 @@ function ProjectActions({ item }: { item: PortfolioLink }) {
           href={item.href}
           target={item.external ? "_blank" : undefined}
           rel={item.external ? "noopener noreferrer" : undefined}
-          className={`${btnSecondary} w-full gap-2 px-4 py-2.5 text-sm sm:w-auto`}
+          className={`${btnSecondary} min-w-0 flex-1 gap-2 px-3 py-2.5 text-sm whitespace-nowrap`}
         >
           Source code
           <span aria-hidden>↗</span>
